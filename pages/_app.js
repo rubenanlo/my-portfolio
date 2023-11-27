@@ -4,6 +4,7 @@ import { DefaultSeo } from "next-seo";
 import "styles/globals.css";
 import { useEffect } from "react";
 import { Router } from "next/router";
+import { AppLayout } from "components/AppLayout";
 import * as gtag from "helpers/gtag";
 
 const App = ({ Component, pageProps }) => {
@@ -30,7 +31,9 @@ const App = ({ Component, pageProps }) => {
         openGraph={{ url: URL, images: [{ url: META_IMAGE }] }}
         twitter={{ cardType: "summary_large_image" }}
       />
-      <Component {...pageProps} />
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
     </>
   );
 };
