@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* This targets the scrollbar track */
+  .scrollbar::-webkit-scrollbar {
+    width: 5px; /* Adjust width of the vertical scrollbar */
+  }
+
+  /* This targets the scrollbar handle/thumb */
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #17839a;
+    border-radius: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    margin-top: 35px;
+  }
+
+  /* This changes the thumb color on hover */
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #00a675;
+  }
+
+  /* Firefox scrollbar styling */
+  .scrollbar {
+    scrollbar-width: thin; /* This sets the width of the scrollbar on Firefox */
+    scrollbar-color: #17839a transparent; /* This sets the thumb and track color */
+  }
+
+  .scrollbar:hover {
+    scrollbar-color: #00a675 transparent; /* This changes the thumb color on hover for Firefox */
+  }
+}
