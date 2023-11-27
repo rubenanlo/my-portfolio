@@ -1,5 +1,5 @@
 import { Header } from "components/Header";
-import StarsCanvas from "../components/Stars";
+import StarsCanvas from "components/Stars";
 
 const Index = () => {
   return (
