@@ -30,10 +30,10 @@ const Stars = (props) => {
 
 const StarsCanvas = () => {
   const { resolvedTheme } = useTheme();
-  const pointColor = resolvedTheme === "dark" ? "white" : "black";
+  const pointColor = resolvedTheme === "dark" ? "white" : "gray";
 
   return (
-    <div className=" w-full h-96 rounded-full">
+    <div className="w-[30rem] h-[30rem] border border-gray-600 dark:border-slate-600 rounded-full z-10">
       <Canvas camera={{ position: [0, 1.5, 1] }}>
         <Suspense fallback={null}>
           <Stars color={pointColor} />

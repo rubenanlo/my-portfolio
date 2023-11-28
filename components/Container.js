@@ -39,7 +39,7 @@ Container.CustomColumns2 = function ContainerColumns2Custom({
 
 Container.Flex = function ContainerFlex({ children, className }) {
   return (
-    <div className={clsx(className, "flex justify-center")}>{children}</div>
+    <div className={clsx(className, "lg:flex justify-start")}>{children}</div>
   );
 };
 
@@ -66,19 +66,23 @@ Container.Logo = function ContainerLogo({ className, logo, alt }) {
 
 Container.Link = function ContainerLink({
   children,
+  text,
   className,
   href,
   onClick,
+  Component,
 }) {
   return (
     <Link
       href={href}
       className={clsx(
         className,
-        "flex h-16 shrink-0 items-center  cursor-pointer"
+        "flex h-16 shrink-0 items-center cursor-pointer text-gray-400"
       )}
       onClick={onClick}
     >
+      {Component && <Component className="w-7 h-7 fill-zinc-500" />}
+      {text}
       {children}
     </Link>
   );
@@ -136,10 +140,6 @@ Container.Table = function ContainerTable({ table, className }) {
       </tbody>
     </table>
   );
-};
-
-Container.Paragraph = function ContainerParagraph({ children, className }) {
-  return <p className={clsx(className, "mb-5")}>{children}</p>;
 };
 
 Container.Animated = forwardRef(function AnimatedContainer(
