@@ -21,7 +21,7 @@ export const AppLayout = ({ children }) => {
         </div>
       )}
       <Header />
-      <div className="bg-white h-full dark:bg-gray-900 font-lato text-gray-200 max-w-xl lg:max-w-6xl mx-auto mt-14 rounded-2xl">
+      <div className="bg-white h-full dark:bg-gray-900 font-lato text-gray-200 max-w-xl lg:max-w-4xl desktop-sm:max-w-6xl mx-auto mt-14 rounded-2xl">
         {children}
       </div>
     </div>

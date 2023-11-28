@@ -33,7 +33,7 @@ const StarsCanvas = () => {
   const pointColor = resolvedTheme === "dark" ? "white" : "gray";
 
   return (
-    <div className="w-[30rem] h-[30rem] border border-gray-600 dark:border-slate-600 rounded-full z-10">
+    <div className="absolute -top-10 -right-24 lg:top-0 lg:right-0 lg:relative w-[10rem] h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] self-center lg:self-start mr-10 desktop-sm:mr-0 desktop-sm:self-center flex-shrink-0 border border-gray-600 dark:border-slate-600 rounded-full">
       <Canvas camera={{ position: [0, 1.5, 1] }}>
         <Suspense fallback={null}>
           <Stars color={pointColor} />

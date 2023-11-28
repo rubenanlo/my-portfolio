@@ -31,7 +31,7 @@ const text = {
       href: "https://www.instagram.com/benjiebao/",
     },
     {
-      text: "Check my other site",
+      text: "Check my other site →",
       href: "https://www.rawdev.io/",
     },
   ],
@@ -40,7 +40,7 @@ const text = {
 const Hero = () => {
   return (
     <Container className="relative isolate">
-      <Container.Flex className="mx-auto max-w-7xl justify-center gap-x-10 px-6 pb-24 pt-10 sm:pb-32 lg:px-8 lg:py-40">
+      <Container.Flex className="mx-auto max-w-4xl desktop-sm:max-w-6xl justify-center gap-x-10 px-6 pb-24 pt-10 sm:pb-32 lg:px-8 lg:py-40">
         <Container className="mt-10 pl-20 mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
           <Image
             className="h-16 w-16 rounded-full dark:sepia"
@@ -59,12 +59,13 @@ const Hero = () => {
                   target="_blank"
                   Component={social}
                   text={text}
+                  className="text-sm"
                 />
               ))}
             </Container.Flex>
           </TextLayout>
         </Container>
-        <StarsCanvas triggerRotation />
+        <StarsCanvas />
       </Container.Flex>
     </Container>
   );
