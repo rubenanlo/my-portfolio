@@ -1,5 +1,4 @@
-import { Header } from "components/Header";
-import StarsCanvas from "components/Stars";
+import Hero from "components/Hero";
 
 const Index = () => {
   return (
@@ -8,8 +7,7 @@ const Index = () => {
       <div>BlogPost</div>
       <div>Experience + CV</div>
       <div>aaa</div> */}
-      <Header />
-      <StarsCanvas />
+      <Hero />
     </div>
   );
 };

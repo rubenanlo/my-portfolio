@@ -32,11 +32,11 @@ const App = ({ Component, pageProps }) => {
         openGraph={{ url: URL, images: [{ url: META_IMAGE }] }}
         twitter={{ cardType: "summary_large_image" }}
       />
-      <AppLayout>
-        <Providers>
+      <Providers>
+        <AppLayout>
           <Component {...pageProps} />
-        </Providers>
-      </AppLayout>
+        </AppLayout>
+      </Providers>
     </>
   );
 };
