@@ -1,10 +1,10 @@
 // !variables in the lookout for updates:
 
 // The app title
-export const TITLE = "FABLE Mitigation Option Catalogue";
+export const TITLE = "Ruben Andino rawDev";
 
 // The favicon
-export const ICON = "static/assets/logo.svg";
+export const ICON = "static/assets/favicon.ico";
 
 // The URL of the deployed page (used in meta tags for SMO)
 // Example: https://www.domain.com/

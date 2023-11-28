@@ -4,10 +4,10 @@ import StarsCanvas from "components/Stars";
 const Index = () => {
   return (
     <div>
-      <div>HeroSection</div>
+      {/* <div>HeroSection</div>
       <div>BlogPost</div>
       <div>Experience + CV</div>
-      <div>aaa</div>
+      <div>aaa</div> */}
       <Header />
       <StarsCanvas />
     </div>

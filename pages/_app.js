@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Router } from "next/router";
 import { AppLayout } from "components/AppLayout";
 import * as gtag from "helpers/gtag";
+import { Providers } from "providers/providers";
 
 const App = ({ Component, pageProps }) => {
   // Track pages with google analytics
@@ -32,7 +33,9 @@ const App = ({ Component, pageProps }) => {
         twitter={{ cardType: "summary_large_image" }}
       />
       <AppLayout>
-        <Component {...pageProps} />
+        <Providers>
+          <Component {...pageProps} />
+        </Providers>
       </AppLayout>
     </>
   );

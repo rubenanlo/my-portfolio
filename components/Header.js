@@ -1,4 +1,4 @@
-const { useState, useEffect } = require("react");
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
 function SunIcon(props) {
@@ -55,4 +55,8 @@ function ThemeToggle() {
   );
 }
 
-export const Header = () => <ThemeToggle />;
+export const Header = () => (
+  <div className="w-full border border-white">
+    <ThemeToggle />
+  </div>
+);
