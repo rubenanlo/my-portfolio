@@ -8,7 +8,7 @@
           "root": "./",
           "components": "./components",
           "pages": "./pages",
-          "static": "./public/static",
+          "assets": "./public/assets",
           "content": "./public/content",
           "styles": "./styles",
           "layouts": "./layouts",
