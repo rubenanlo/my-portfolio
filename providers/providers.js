@@ -2,7 +2,7 @@ import { createContext, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ThemeProvider, useTheme } from "next-themes";
 
-function usePrevious(value) {
+const usePrevious = (value) => {
   let ref = useRef();
 
   useEffect(() => {
@@ -10,9 +10,9 @@ function usePrevious(value) {
   }, [value]);
 
   return ref.current;
-}
+};
 
-function ThemeWatcher() {
+const ThemeWatcher = () => {
   let { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -34,11 +34,11 @@ function ThemeWatcher() {
   }, [resolvedTheme, setTheme]);
 
   return null;
-}
+};
 
 export const AppContext = createContext({});
 
-export function Providers({ children }) {
+export const Providers = ({ children }) => {
   let pathname = usePathname();
   let previousPathname = usePrevious(pathname);
 
@@ -50,4 +50,4 @@ export function Providers({ children }) {
       </ThemeProvider>
     </AppContext.Provider>
   );
-}
+};

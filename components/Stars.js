@@ -27,17 +27,15 @@ const Stars = (props) => {
   );
 };
 
-const StarsCanvas = () => {
-  return (
-    <div className=" w-full h-96 rounded-full">
-      <Canvas camera={{ position: [0, 1.5, 1] }}>
-        <Suspense fallback={null}>
-          <Stars />
-        </Suspense>
-        <Preload all />
-      </Canvas>
-    </div>
-  );
-};
+const StarsCanvas = () => (
+  <div className=" w-full h-96 rounded-full">
+    <Canvas camera={{ position: [0, 1.5, 1] }}>
+      <Suspense fallback={null}>
+        <Stars />
+      </Suspense>
+      <Preload all />
+    </Canvas>
+  </div>
+);
 
 export default StarsCanvas;
