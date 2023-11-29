@@ -39,7 +39,7 @@ const text = {
 
 const Hero = () => {
   return (
-    <Container className="relative isolate">
+    <Container className="relative isolate h-full">
       <Container.Flex className="mx-auto max-w-4xl desktop-sm:max-w-6xl justify-center gap-x-10 px-6 pb-24 pt-10 sm:pb-32 lg:px-8 lg:py-40">
         <Container className="mt-10 lg:pl-20 mx-auto max-w-md flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
           <Image

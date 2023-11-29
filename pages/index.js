@@ -1,4 +1,5 @@
 import Hero from "components/Hero";
+import Footer from "components/Footer";
 
 const Index = () => {
   return (
@@ -8,6 +9,7 @@ const Index = () => {
       <div>Experience + CV</div>
       <div>aaa</div> */}
       <Hero />
+      <Footer />
     </>
   );
 };
