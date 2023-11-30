@@ -75,10 +75,14 @@ Container.Link = function ContainerLink({
   return (
     <Link
       href={href}
-      className={clsx(className, "cursor-pointer")}
+      className={clsx(className.text, "cursor-pointer")}
       onClick={onClick}
     >
-      {Component && <Component className="w-7 h-7 fill-zinc-500" />}
+      {Component && (
+        <Component
+          className={clsx(className.component, "w-7 h-7 fill-zinc-500")}
+        />
+      )}
       {text}
       {children}
     </Link>
