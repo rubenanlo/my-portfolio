@@ -17,6 +17,11 @@ const Document = () => (
         href="https://fonts.googleapis.com/css2?family=Lato:wght@400"
         rel="stylesheet"
       />
+      <link
+        href="https://blogfonts.com/css/aWQ9MTc1MjA1JnN1Yj0yMDUmYz1jJnR0Zj1DaGFsa0JvYXJkLWpFUmQ3LnR0ZiZuPWNoYWxrLWJvYXJk/Chalk Board.ttf"
+        rel="stylesheet"
+        type="text/css"
+      />
 
       {/* Global Site Tag - Google Analytics */}
       <Script

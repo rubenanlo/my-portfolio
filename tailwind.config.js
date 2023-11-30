@@ -12,6 +12,7 @@ module.exports = {
   theme: {
     fontFamily: {
       lato: ["Lato", "sans-serif"],
+      chalk: ["Chalk Board", "sans-serif"],
     },
     fontSize: {
       xs: ["0.8125rem", { lineHeight: "1.5rem" }],
@@ -37,6 +38,12 @@ module.exports = {
         "desktop-md": "1351px",
       },
       colors: {
+        orange: {
+          primary: "#934C0D",
+          secondary: "#ed872d",
+          tertiary: "#F3B177",
+          quaternary: "#FBE5D2",
+        },
         blue: {
           primary: "#133457",
           secondary: "#c7e7f3",

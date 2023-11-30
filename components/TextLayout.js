@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 export const TextLayout = ({ className, children }) => (
-  <div className={clsx(className, "w-full text-zinc-500 dark:text-gray-200")}>
+  <div className={clsx(className, "text-zinc-500 dark:text-gray-200")}>
     {children}
   </div>
 );

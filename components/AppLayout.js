@@ -6,7 +6,7 @@ export const AppLayout = ({ children }) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <div className="relative bg-slate-300 dark:bg-black antialiased overflow-x-hidden sm:overflow-x-auto">
+    <div className="relative bg-slate-300 dark:bg-black h-screen antialiased overflow-x-hidden sm:overflow-x-auto">
       {resolvedTheme === "dark" && (
         <div
           className="fixed left-[calc(50%-4rem)] top-10 overflow-x-hidden transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"
@@ -22,7 +22,7 @@ export const AppLayout = ({ children }) => {
         </div>
       )}
       <Header />
-      <div className="flex flex-col justify-between font-lato bg-slate-50 h-screen dark:bg-gray-900  text-gray-200 max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl mx-auto mt-14 rounded-t-2xl ">
+      <div className="flex flex-col justify-between font-lato bg-slate-50 dark:bg-gray-900 text-gray-200 max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl mx-auto mt-14 rounded-t-2xl ">
         {children}
         <Footer />
       </div>

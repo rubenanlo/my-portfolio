@@ -6,7 +6,7 @@ import { inSphere } from "maath/random";
 
 const Stars = (props) => {
   const ref = useRef();
-  const sphere = inSphere(new Float32Array(5000), { radius: 1.2 });
+  const sphere = inSphere(new Float32Array(5000), { radius: 1.15 });
 
   useFrame((state, delta) => {
     ref.current.rotation.x -= delta / 10;
@@ -30,7 +30,7 @@ const Stars = (props) => {
 
 const StarsCanvas = () => {
   const { resolvedTheme } = useTheme();
-  const pointColor = resolvedTheme === "dark" ? "white" : "black";
+  const pointColor = resolvedTheme === "dark" ? "white" : "#111827";
 
   return (
     <div className="fixed bottom-5 left-5 sm:left-auto sm:absolute sm:-top-10 sm:-right-24 lg:top-0 lg:right-0 lg:relative w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] self-center lg:self-start mr-10 desktop-sm:mr-0 desktop-sm:self-center flex-shrink-0 sm:border sm:border-gray-600 sm:dark:border-slate-600 rounded-full">
