@@ -47,15 +47,15 @@ const Hero = () => {
   const arrow = resolvedTheme === "dark" ? arrowLight : arrowDark;
 
   return (
-    <Container className="relative isolate h-[85vh]">
+    <Container.Section className="lg:py-40 w-full">
       <TextLayout className="hidden lg:absolute lg:flex items-start right-20 desktop-sm:right-32 top-20">
         <p className="font-chalk tracking-widest text-2xl text-black dark:text-white -rotate-45 -mr-5">
           navbar
         </p>
         <Image src={arrow} alt={"arrow"} className="h-14 w-14 mt-2 rotate-0" />
       </TextLayout>
-      <Container className="lg:flex mx-auto max-w-4xl desktop-sm:max-w-6xl justify-center gap-x-10 px-6 pb-24 pt-10 sm:pb-32 lg:px-8 lg:py-40">
-        <Container className="mt-10 lg:pl-20 mx-auto max-w-md flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
+      <Container className="lg:flex w-full">
+        <Container className="mt-10 lg:pl-12 max-w-md flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 lg:pr-5">
           <Image
             className="h-16 w-16 rounded-full dark:sepia"
             src={profilePic}
@@ -76,7 +76,7 @@ const Hero = () => {
                   className={{
                     component:
                       "hover:fill-orange-primary dark:hover:fill-orange-tertiary",
-                    text: "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary",
+                    text: "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary z-10",
                   }}
                 />
               ))}
@@ -85,7 +85,7 @@ const Hero = () => {
         </Container>
         <StarsCanvas />
       </Container>
-    </Container>
+    </Container.Section>
   );
 };
 

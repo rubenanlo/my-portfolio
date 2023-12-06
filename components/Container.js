@@ -9,6 +9,21 @@ export const Container = ({ children, as, className }) => {
   return <Component className={clsx(className)}>{children}</Component>;
 };
 
+Container.Section = function ContainerSection({ children, className, as }) {
+  let Component = as ?? "section";
+
+  return (
+    <Component
+      className={clsx(
+        className,
+        "relative isolate mx-auto max-w-4xl desktop-sm:max-w-5xl px-6 pb-24 pt-10 sm:pb-32 lg:px-8"
+      )}
+    >
+      {children}
+    </Component>
+  );
+};
+
 Container.Columns3 = function ContainerColumns3({ children, className }) {
   return <div className={clsx(className, "grid grid-cols-3")}>{children}</div>;
 };
