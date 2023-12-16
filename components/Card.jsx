@@ -1,18 +1,16 @@
 import Link from "next/link";
 import clsx from "clsx";
 
-function ChevronRightIcon(props) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M6.75 5.75 9.25 8l-2.5 2.25"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const ChevronRightIcon = (props) => (
+  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
+    <path
+      d="M6.75 5.75 9.25 8l-2.5 2.25"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export function Card({ as, className, children }) {
   let Component = as ?? "div";
@@ -26,6 +24,14 @@ export function Card({ as, className, children }) {
   );
 }
 
+Card.Icon = function CardIcon({ Icon, className, ...props }) {
+  return (
+    <span className={clsx(className.span)}>
+      <Icon {...props} className={clsx(className.component)} />
+    </span>
+  );
+};
+
 Card.Link = function CardLink({ children, ...props }) {
   return (
     <>
@@ -38,19 +44,29 @@ Card.Link = function CardLink({ children, ...props }) {
   );
 };
 
-Card.Title = function CardTitle({ as, href, children }) {
+Card.Title = function CardTitle({ as, href, children, className }) {
   let Component = as ?? "h2";
 
   return (
-    <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+    <Component
+      className={clsx(
+        className,
+        "text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100"
+      )}
+    >
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
   );
 };
 
-Card.Description = function CardDescription({ children }) {
+Card.Description = function CardDescription({ children, className }) {
   return (
-    <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+    <p
+      className={clsx(
+        className,
+        "relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400"
+      )}
+    >
       {children}
     </p>
   );
