@@ -63,11 +63,14 @@ const NavbarItem = ({ navLink, navLinkIdx }) => (
 );
 
 // Basic Modal Component
-const NavbarGridModal = ({ isVisible }) => {
+const NavbarGridModal = forwardRef(({ isVisible }, ref) => {
   if (!isVisible) return null;
 
   return (
-    <nav className="modal absolute -top-40 sm:top-[50%] left-[20%] desktop-sm:left-[30%] scale-50 shadow-2xl">
+    <nav
+      className="modal absolute -top-40 sm:top-[50%] left-[20%] desktop-sm:left-[30%] scale-50 shadow-2xl"
+      ref={ref}
+    >
       <Container.Flex className="modal-content flex-col bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs">
         <Container.Columns2 className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75">
           {navLinks.map((navLink, navLinkIdx) => (
@@ -81,10 +84,13 @@ const NavbarGridModal = ({ isVisible }) => {
       </Container.Flex>
     </nav>
   );
-};
+});
+
+NavbarGridModal.displayName = "NavbarGridModal";
 
 const NavbarListModal = forwardRef(({ isVisible }, ref) => {
   const [isIndex, setIndex] = useState(null);
+
   if (!isVisible) return null;
 
   return (
@@ -92,7 +98,7 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
       <motion.nav
         animate={{ opacity: [0, 1], y: [200, 0] }}
         transition={{ duration: 0.7 }}
-        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 py-5 px-5"
+        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 pt-5 px-5 pb-36"
         aria-label="Sidebar"
         ref={ref}
       >
@@ -214,9 +220,33 @@ const Navbar = () => {
     : setGridModalVisible;
   const modalRef = useRef(null);
   const buttonRef = useRef(null);
+
   useEffect(() => {
     handleOutsideClick(modalRef, setIsVisible, buttonRef);
   }, [setIsVisible]);
+
+  useEffect(() => {
+    function adjustHeight() {
+      if (buttonRef.current) {
+        const viewportHeight = window.innerHeight;
+        buttonRef.current.style.height = `${viewportHeight}px`;
+      }
+    }
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", adjustHeight);
+
+      // Set initial height
+      adjustHeight();
+    }
+
+    // Cleanup function
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", adjustHeight);
+      }
+    };
+  }, [buttonRef]);
 
   return (
     <div className="absolute w-full">
