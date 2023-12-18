@@ -6,7 +6,7 @@ export const AppLayout = ({ children }) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <div className="relative bg-slate-300 dark:bg-black h-screen antialiased overflow-x-hidden">
+    <div className="relative bg-slate-300 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar">
       {resolvedTheme === "dark" && (
         <div
           className="fixed left-[calc(50%-4rem)] top-10 overflow-x-hidden transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"

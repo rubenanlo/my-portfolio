@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
-import StarsCanvas from "components/Stars";
+import Navbar from "components/Navbar";
 import {
   GitHubIcon,
   InstagramIcon,
@@ -47,7 +47,7 @@ const Hero = () => {
   const arrow = resolvedTheme === "dark" ? arrowLight : arrowDark;
 
   return (
-    <Container.Section className="lg:py-40 w-full">
+    <Container.Section className="lg:py-40 w-full z-10">
       <TextLayout className="hidden lg:absolute lg:flex items-start right-20 desktop-sm:right-32 top-20">
         <p className="font-chalk tracking-widest text-2xl text-black dark:text-white -rotate-45 -mr-5">
           navbar
@@ -83,7 +83,7 @@ const Hero = () => {
             </Container.Flex>
           </TextLayout>
         </Container>
-        <StarsCanvas />
+        <Navbar />
       </Container>
     </Container.Section>
   );
