@@ -1,9 +1,12 @@
 import { useTheme } from "next-themes";
 import { Header } from "components/Header";
 import Footer from "components/Footer";
+import { useRouter } from "next/router";
 
 export const AppLayout = ({ children }) => {
   const { resolvedTheme } = useTheme();
+  const { asPath } = useRouter();
+  const isAdmin = asPath === "/admin";
 
   return (
     <div className="relative bg-slate-300 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar">
@@ -24,7 +27,7 @@ export const AppLayout = ({ children }) => {
       <Header />
       <div className="flex flex-col justify-between font-lato bg-slate-50 dark:bg-gray-900 text-gray-200 max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl mx-auto mt-14 rounded-t-2xl">
         {children}
-        <Footer />
+        {!isAdmin && <Footer />}
       </div>
     </div>
   );
