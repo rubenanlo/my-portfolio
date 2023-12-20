@@ -38,3 +38,37 @@ Form.Field = function FormField({ field, ...props }) {
     </div>
   );
 };
+
+Form.Checkbox = function FormCheckbox({ field, text, ...props }) {
+  return (
+    <div className="flex items-center">
+      <input
+        id={field}
+        name={field}
+        type="checkbox"
+        className="h-4 w-4 rounded border-gray-30"
+        {...props}
+      />
+      <label
+        htmlFor={field}
+        className="ml-3 block text-sm leading-6 text-zinc-500 dark:text-orange-tertiary"
+      >
+        {text}
+      </label>
+    </div>
+  );
+};
+
+Form.Button = function FormButton({ className, text }) {
+  return (
+    <button
+      type="submit"
+      className={clsx(
+        className,
+        "flex w-full justify-center rounded-md text-zinc-800 dark:text-orange-primary bg-orange-secondary dark:bg-orange-tertiary hover:bg-orange-quaternary dark:hover:bg-orange-quaternary px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-secondary"
+      )}
+    >
+      {text}
+    </button>
+  );
+};

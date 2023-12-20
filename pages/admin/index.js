@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 import Image from "next/image";
@@ -44,8 +43,8 @@ const Admin = () => {
             </Card.Title>
           </Container.Flex>
 
-          <div className="mt-5">
-            <div>
+          <Container className="mt-5">
+            <Container>
               <Form
                 className="space-y-6"
                 onSubmit={(e) => {
@@ -69,44 +68,28 @@ const Admin = () => {
                   />
                 ))}
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="rememberMe"
-                      name="rememberMe"
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-30"
-                      onClick={() => setRememberMe(!rememberMe)}
-                    />
-                    <label
-                      htmlFor="rememberMe"
-                      className="ml-3 block text-sm leading-6 text-zinc-500 dark:text-orange-tertiary"
-                    >
-                      Remember me for 30 days
-                    </label>
-                  </div>
+                <Container.Flex className="items-center justify-between">
+                  <Form.Checkbox
+                    field="rememberMe"
+                    text="Remember me for 30 days"
+                    onClick={() => setRememberMe(!rememberMe)}
+                  />
 
-                  <div className="text-sm leading-6">
-                    <Link
+                  <Container className="text-sm leading-6">
+                    <Container.Link
                       href="#"
-                      className="dark:font-semibold cursor-pointer text-zinc-500 hover:text-zinc-400 dark:text-orange-tertiary dark:hover:text-orange-quaternary"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                </div>
+                      className={{
+                        text: "dark:font-semibold cursor-pointer text-zinc-500 hover:text-zinc-400 dark:text-orange-tertiary dark:hover:text-orange-quaternary",
+                      }}
+                      text="Forgot your password?"
+                    />
+                  </Container>
+                </Container.Flex>
 
-                <div>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md text-zinc-800 dark:text-orange-primary bg-orange-secondary dark:bg-orange-tertiary hover:bg-orange-quaternary px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-secondary"
-                  >
-                    Sign in
-                  </button>
-                </div>
+                <Form.Button text="Sign in" />
               </Form>
-            </div>
-          </div>
+            </Container>
+          </Container>
         </Container>
       </Container>
     </Container>
