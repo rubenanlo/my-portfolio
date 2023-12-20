@@ -10,6 +10,8 @@ export function Form({ as, className, children, ...props }) {
   );
 }
 
+// Please ensure that the fields used here are valid HTML input types
+
 Form.Field = function FormField({ field, ...props }) {
   return (
     <div>
