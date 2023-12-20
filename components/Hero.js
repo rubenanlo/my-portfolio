@@ -66,13 +66,12 @@ const Hero = () => {
             <TextLayout.Subtitle subtitle={text.title} />
             <TextLayout.Paragraph paragraph="As an economist with experience in consulting, I offer a distinct viewpoint. My specialty is in connecting business requirements with efficient web applications. With a passion for learning and improving everyday, I deliver customized solutions to generate the right brand awareness." />
             <Container.Flex className="items-center gap-x-6 mt-10">
-              {text.social.map(({ social, href, text }) => (
+              {text.social.map(({ social, href }) => (
                 <Container.Link
                   key={social || text}
                   href={href}
                   target="_blank"
                   Component={social}
-                  text={text}
                   className={{
                     component:
                       "hover:fill-orange-primary dark:hover:fill-orange-tertiary",

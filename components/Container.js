@@ -86,6 +86,7 @@ Container.Link = function ContainerLink({
   href,
   onClick,
   Component,
+  componentProps,
 }) {
   return (
     <Link
@@ -96,6 +97,7 @@ Container.Link = function ContainerLink({
       {Component && (
         <Component
           className={clsx(className.component, "w-7 h-7 fill-zinc-500")}
+          {...componentProps}
         />
       )}
       {text}

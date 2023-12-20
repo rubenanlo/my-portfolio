@@ -54,5 +54,5 @@ export const NAVLINKS = [
   { name: "About", href: "/about", icon: AboutIcon },
   { name: "Projects", href: "/projects", icon: ProjectIcon },
   { name: "Blog", href: "/blog", icon: BlogIcon },
-  { name: "Admin", href: "/admin", icon: AdminIcon },
+  { name: "Admin", href: "/admin/dashboard", icon: AdminIcon },
 ];

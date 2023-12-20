@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
-import { Card } from "../components/Card";
-import { Button } from "../components/Button";
-import Image from "next/image";
+import { Card } from "components/Card";
+import { Button } from "components/Button";
 import {
   EY_LOGO as eyLogo,
   DELOITTE_LOGO as deloitteLogo,
@@ -10,7 +10,7 @@ import {
   PWC_LOGO as pwcLogo,
   UNSDSN_LOGO as sdsnLogo,
   BAKER_MCKENZIE_LOGO as bakerLogo,
-} from "../helpers/exportImages";
+} from "helpers/exportImages";
 
 const articles = [
   {

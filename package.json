@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
@@ -27,6 +28,7 @@
     "mobx": "^6.10.0",
     "mobx-react-lite": "^3.4.3",
     "next": "^14.0.3",
+    "next-auth": "^4.24.5",
     "next-seo": "^5.15.0",
     "next-themes": "^0.2.1",
     "patch-package": "^8.0.0",
