@@ -12,7 +12,7 @@ const ChevronRightIcon = (props) => (
   </svg>
 );
 
-export function Card({ as, className, children }) {
+export function Post({ as, className, children }) {
   let Component = as ?? "div";
 
   return (
@@ -24,7 +24,7 @@ export function Card({ as, className, children }) {
   );
 }
 
-Card.Icon = function CardIcon({ Icon, className, ...props }) {
+Post.Icon = function PostIcon({ Icon, className, ...props }) {
   return (
     <span className={clsx(className.span)}>
       <Icon {...props} className={clsx(className.component)} />
@@ -32,7 +32,7 @@ Card.Icon = function CardIcon({ Icon, className, ...props }) {
   );
 };
 
-Card.Link = function CardLink({ children, ...props }) {
+Post.Link = function PostLink({ children, ...props }) {
   return (
     <>
       <div className="absolute -inset-x-4 -inset-y-6 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
@@ -44,7 +44,7 @@ Card.Link = function CardLink({ children, ...props }) {
   );
 };
 
-Card.Title = function CardTitle({ as, href, children, className }) {
+Post.Title = function PostTitle({ as, href, children, className }) {
   let Component = as ?? "h2";
 
   return (
@@ -54,12 +54,12 @@ Card.Title = function CardTitle({ as, href, children, className }) {
         "text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100"
       )}
     >
-      {href ? <Card.Link href={href}>{children}</Card.Link> : children}
+      {href ? <Post.Link href={href}>{children}</Post.Link> : children}
     </Component>
   );
 };
 
-Card.Description = function CardDescription({ children, className }) {
+Post.Description = function PostDescription({ children, className }) {
   return (
     <p
       className={clsx(
@@ -72,7 +72,7 @@ Card.Description = function CardDescription({ children, className }) {
   );
 };
 
-Card.Cta = function CardCta({ children }) {
+Post.Cta = function PostCta({ children }) {
   return (
     <div
       aria-hidden="true"
@@ -84,7 +84,7 @@ Card.Cta = function CardCta({ children }) {
   );
 };
 
-Card.Eyebrow = function CardEyebrow({
+Post.Eyebrow = function PostEyebrow({
   as,
   decorate = false,
   className,

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
-import { Card } from "components/Card";
+import { Post } from "components/Post";
 import { Button } from "components/Button";
 import {
   EY_LOGO as eyLogo,
@@ -32,14 +32,14 @@ function formatDate(dateString) {
 }
 
 const Article = ({ article }) => (
-  <Card as="article">
-    <Card.Title href={`/articles/${article.slug}`}>{article.title}</Card.Title>
-    <Card.Eyebrow as="time" dateTime={article.date} decorate>
+  <Post as="article">
+    <Post.Title href={`/articles/${article.slug}`}>{article.title}</Post.Title>
+    <Post.Eyebrow as="time" dateTime={article.date} decorate>
       {formatDate(article.date)}
-    </Card.Eyebrow>
-    <Card.Description>{article.description}</Card.Description>
-    <Card.Cta>Read article</Card.Cta>
-  </Card>
+    </Post.Eyebrow>
+    <Post.Description>{article.description}</Post.Description>
+    <Post.Cta>Read article</Post.Cta>
+  </Post>
 );
 
 const MailIcon = (props) => (
@@ -238,7 +238,7 @@ const Index = () => {
       <Hero />
       <Container.Section className="lg:pb-32">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-16 px-2">
             {articles.map((article) => (
               <Article key={article.slug} article={article} />
             ))}

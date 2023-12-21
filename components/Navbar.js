@@ -5,11 +5,11 @@ import { useTheme } from "next-themes";
 import { inSphere } from "maath/random";
 import { motion } from "framer-motion";
 import clsx from "clsx";
-import { Card } from "components/Card";
+import { Post } from "components/Post";
 import { Container } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
-import { NAVLINKS as navLinks } from "library/NavLinks";
+import { NAVLINKS as navLinks } from "library/navlinks";
 
 const ArrowDiagonal = (props) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -18,7 +18,7 @@ const ArrowDiagonal = (props) => (
 );
 
 const NavbarItem = ({ navLink, navLinkIdx }) => (
-  <Card
+  <Post
     className={clsx(
       navLinkIdx === 0 ? "rounded-tl-lg rounded-tr-lg sm:rounded-tr-none" : "",
       navLinkIdx === 1 ? "sm:rounded-tr-lg" : "",
@@ -30,7 +30,7 @@ const NavbarItem = ({ navLink, navLinkIdx }) => (
     )}
   >
     <Container>
-      <Card.Icon
+      <Post.Icon
         className={{
           span: "inline-flex rounded-lg p-3",
           component:
@@ -39,17 +39,17 @@ const NavbarItem = ({ navLink, navLinkIdx }) => (
         Icon={navLink.icon}
         aria-hidden="true"
       />
-      <Card.Icon
+      <Post.Icon
         className={{
           span: "pointer-events-none absolute right-6 top-6 text-zinc-100 group-hover:text-orange-primary dark:group-hover:text-zinc-800",
           component: "h-4 w-4",
         }}
         Icon={ArrowDiagonal}
         aria-hidden="true"
-      ></Card.Icon>
+      ></Post.Icon>
     </Container>
     <Container className="mt-8">
-      <Card.Title
+      <Post.Title
         as="h3"
         className="text-xl font-semibold leading-6 text-zinc-100 dark:text-zinc-100 group-hover:text-zinc-800"
       >
@@ -57,9 +57,9 @@ const NavbarItem = ({ navLink, navLinkIdx }) => (
           <span className="absolute inset-0" aria-hidden="true" />
           {navLink.name}
         </Container.Link>
-      </Card.Title>
+      </Post.Title>
     </Container>
-  </Card>
+  </Post>
 );
 
 // Basic Modal Component

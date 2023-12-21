@@ -9,14 +9,22 @@ export const Container = ({ children, as, className }) => {
   return <Component className={clsx(className)}>{children}</Component>;
 };
 
-Container.Section = function ContainerSection({ children, className, as }) {
+Container.Section = function ContainerSection({
+  children,
+  className,
+  as,
+  bottomDiv,
+  fullScreen,
+}) {
   let Component = as ?? "section";
 
   return (
     <Component
       className={clsx(
         className,
-        "relative isolate mx-auto max-w-4xl desktop-sm:max-w-5xl px-6 pb-24 pt-10 sm:pb-32 lg:px-8"
+        bottomDiv ? "pb-14" : "pb-24 sm:pb-32",
+        fullScreen ? "h-screen" : "h-auto",
+        "relative isolate mx-auto max-w-4xl desktop-sm:max-w-5xl px-6 pt-10 lg:px-8"
       )}
     >
       {children}

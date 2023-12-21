@@ -55,7 +55,7 @@ const Hero = () => {
         <Image src={arrow} alt={"arrow"} className="h-14 w-14 mt-2 rotate-0" />
       </TextLayout>
       <Container className="lg:flex w-full">
-        <Container className="mt-10 lg:pl-12 max-w-md flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 lg:pr-5">
+        <Container className="mt-10 max-w-md flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 lg:pr-5">
           <Image
             className="h-16 w-16 rounded-full dark:sepia"
             src={profilePic}

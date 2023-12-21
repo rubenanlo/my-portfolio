@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 import Image from "next/image";
 import { Container } from "components/Container";
-import { Card } from "components/Card";
+import { Post } from "components/Post";
 import { Form } from "components/Form";
 
 const Admin = () => {
@@ -38,9 +38,9 @@ const Admin = () => {
                 component: "h-[3rem] w-auto rounded-full",
               }}
             />
-            <Card.Title className="text-3xl font-bold leading-9 tracking-tight text-light">
+            <Post.Title className="text-3xl font-bold leading-9 tracking-tight text-light">
               Sign in to your account
-            </Card.Title>
+            </Post.Title>
           </Container.Flex>
 
           <Container className="mt-5">
