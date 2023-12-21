@@ -64,8 +64,11 @@ const Hero = () => {
           <TextLayout className="mt-5 w-full">
             <TextLayout.Title title={text.name} />
             <TextLayout.Subtitle subtitle={text.title} />
-            <TextLayout.Paragraph paragraph="As an economist with experience in consulting, I offer a distinct viewpoint. My specialty is in connecting business requirements with efficient web applications. With a passion for learning and improving everyday, I deliver customized solutions to generate the right brand awareness." />
-            <Container.Flex className="items-center gap-x-6 mt-10">
+            <TextLayout.Paragraph
+              className="mt-6"
+              paragraph="As an economist with experience in consulting, I offer a distinct viewpoint. My specialty is in connecting business requirements with efficient web applications. With a passion for learning and improving everyday, I deliver customized solutions to generate the right brand awareness."
+            />
+            <Container.Flex className="gap-x-6 mt-10" items="items-center">
               {text.social.map(({ social, href }) => (
                 <Container.Link
                   key={social || text}
@@ -82,7 +85,7 @@ const Hero = () => {
             </Container.Flex>
           </TextLayout>
         </Container>
-        <Navbar />
+        <Navbar type="stars" />
       </Container>
     </Container.Section>
   );

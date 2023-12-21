@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
-import { showUpAnimation } from "library/animations";
+
+const bgColorCard = "bg-gradient-to-br from-slate-50 dark:from-slate-700";
 
 export const Card = ({ children, className, style }) => (
   <div
-    className={clsx(className, "rounded-xl bg-white shadow-xl mb-5")}
+    className={clsx(
+      className,
+      bgColorCard,
+      "rounded-xl shadow-xl mb-5 h-52 w-52"
+    )}
     style={style}
   >
     <div className="p-6 h-full">{children}</div>
@@ -16,14 +21,18 @@ Card.Stack = function CardStack({ children, as, className }) {
   return <Component className={clsx(className, "mt-7")}>{children}</Component>;
 };
 
-export function AnimatedCardHeader({ children, className }) {
+export function AnimatedCard({ children, className, ...props }) {
   return (
-    <motion.dl
-      {...{ ...showUpAnimation, transition: { duration: 1 } }}
-      className={clsx(className)}
+    <motion.div
+      {...props.animate}
+      className={clsx(
+        className,
+        bgColorCard,
+        "rounded-xl  shadow-xl mb-5 h-52 w-52"
+      )}
     >
-      {children}
-    </motion.dl>
+      <div className="p-6">{children}</div>
+    </motion.div>
   );
 }
 

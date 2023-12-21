@@ -19,5 +19,5 @@ TextLayout.Subtitle = function TextLayoutSubtitle({ subtitle, className }) {
 };
 
 TextLayout.Paragraph = function TextLayoutParagraph({ paragraph, className }) {
-  return <p className={clsx(className, "mt-6 text-gray-400")}>{paragraph}</p>;
+  return <p className={clsx(className, " text-gray-400")}>{paragraph}</p>;
 };

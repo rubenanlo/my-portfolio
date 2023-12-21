@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Header } from "components/Header";
 import Footer from "components/Footer";
 import { Container } from "components/Container";
+import Navbar from "components/Navbar";
 
 const WaterMark = () => (
   <Container
@@ -27,10 +28,11 @@ export const AppLayout = ({ children }) => {
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
 
   return (
-    <Container className="relative bg-slate-300 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar pt-14 ">
+    <Container className="relative bg-slate-200 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar pt-14 ">
       {resolvedTheme === "dark" && <WaterMark />}
       <Header />
-      <div className="flex flex-col justify-between font-lato bg-slate-50 dark:bg-gray-900 text-gray-200 max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl mx-auto rounded-t-2xl">
+      <Navbar type="blended" />
+      <div className="flex flex-col justify-between font-lato bg-gray-100 dark:bg-gray-900 text-gray-200 max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl mx-auto rounded-t-2xl">
         {children}
         {hasFooter && <Footer />}
       </div>

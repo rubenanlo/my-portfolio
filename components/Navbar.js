@@ -71,7 +71,10 @@ const NavbarGridModal = forwardRef(({ isVisible }, ref) => {
       className="modal absolute -top-40 sm:top-[50%] left-[20%] desktop-sm:left-[30%] scale-50 shadow-2xl"
       ref={ref}
     >
-      <Container.Flex className="modal-content flex-col bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs">
+      <Container.Flex
+        className="modal-content bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs"
+        column
+      >
         <Container.Columns2 className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75">
           {navLinks.map((navLink, navLinkIdx) => (
             <NavbarItem
