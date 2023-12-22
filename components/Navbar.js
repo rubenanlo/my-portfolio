@@ -1,7 +1,8 @@
 import { useRef, useState, Suspense, useEffect, forwardRef } from "react";
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
-import { useTheme } from "next-themes";
 import { inSphere } from "maath/random";
 import { motion } from "framer-motion";
 import clsx from "clsx";
@@ -9,6 +10,7 @@ import { Post } from "components/Post";
 import { Container } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
+import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 import { NAVLINKS as navLinks } from "library/navlinks";
 
 const ArrowDiagonal = (props) => (
@@ -17,7 +19,7 @@ const ArrowDiagonal = (props) => (
   </svg>
 );
 
-const NavbarItem = ({ navLink, navLinkIdx }) => (
+const NavbarStarsItem = ({ navLink, navLinkIdx }) => (
   <Post
     className={clsx(
       navLinkIdx === 0 ? "rounded-tl-lg rounded-tr-lg sm:rounded-tr-none" : "",
@@ -75,15 +77,18 @@ const NavbarGridModal = forwardRef(({ isVisible }, ref) => {
         className="modal-content bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs"
         column
       >
-        <Container.Columns2 className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75">
+        <Container.Columns
+          className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75"
+          columns="grid-cols-2"
+        >
           {navLinks.map((navLink, navLinkIdx) => (
-            <NavbarItem
+            <NavbarStarsItem
               key={navLink.name}
               navLink={navLink}
               navLinkIdx={navLinkIdx}
             />
           ))}
-        </Container.Columns2>
+        </Container.Columns>
       </Container.Flex>
     </nav>
   );
@@ -211,7 +216,7 @@ const StarsCanvas = forwardRef(({ isHovered }, ref) => {
 
 StarsCanvas.displayName = "StarsCanvas";
 
-const Navbar = () => {
+const NavbarStars = () => {
   const isSmallerScreen = useResponsive(1024);
   const [isGridModalVisible, setGridModalVisible] = useState(false);
   const [isListModalVisible, setListModalVisible] = useState(false);
@@ -278,6 +283,64 @@ const Navbar = () => {
       </motion.div>
     </div>
   );
+};
+
+const NavbarIslandItem = () => {
+  const router = useRouter();
+  const isActive = (name) => router.pathname.includes(name.toLowerCase());
+
+  return navLinks.map(({ name, href }) => (
+    <Container as="li" key={name}>
+      <Container.Link
+        href={href}
+        className={{
+          text: clsx(
+            "relative block px-3 py-1 transition text-xs font-light",
+            isActive(name)
+              ? "text-orange-secondary dark:text-orange-testiary"
+              : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
+          ),
+        }}
+      >
+        {name}
+      </Container.Link>
+    </Container>
+  ));
+};
+
+const NavbarIsland = () => (
+  <Container
+    as="nav"
+    className="absolute left-0 right-0 max-w-sm mx-auto top-5 z-10"
+  >
+    <Container.Flex
+      as="ul"
+      justify="justify-center"
+      items="items-center"
+      className="list-none rounded-full bg-gray-50 px-3 py-1 text-sm font-medium text-zinc-800  dark:bg-transparent dark:text-zinc-200"
+    >
+      <Container.Link
+        href="/"
+        className={{
+          text: "mr-5",
+        }}
+        Component={Container.Logo}
+        componentProps={{
+          src: rawDevLogo,
+          alt: "my-logo",
+        }}
+      />
+      <NavbarIslandItem />
+    </Container.Flex>
+  </Container>
+);
+
+const Navbar = ({ type }) => {
+  const isSmallerScreen = useResponsive(640);
+
+  if (type === "stars") return <NavbarStars />;
+  if (type === "blended" && isSmallerScreen) return <NavbarStars />;
+  if (type === "blended" && !isSmallerScreen) return <NavbarIsland />;
 };
 
 export default Navbar;

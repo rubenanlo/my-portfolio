@@ -83,7 +83,13 @@ Container.AppHeader = function ContainerAppHeader({ children }) {
 };
 
 Container.Logo = function ContainerLogo({ className, ...props }) {
-  return <Image className={clsx(className)} src={props.src} alt={props.alt} />;
+  return (
+    <Image
+      className={clsx(className, "rounded-full")}
+      src={props.src}
+      alt={props.alt}
+    />
+  );
 };
 
 Container.Link = function ContainerLink({

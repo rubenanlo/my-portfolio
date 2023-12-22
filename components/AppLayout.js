@@ -25,13 +25,15 @@ export const AppLayout = ({ children }) => {
   const { asPath } = useRouter();
 
   const noFooterPaths = ["/admin"];
+  const noBlendedNavbarPaths = ["/"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
+  const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
 
   return (
-    <Container className="relative bg-slate-200 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar pt-14 ">
+    <Container className="relative bg-slate-200 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar pt-20 ">
+      {hasBlendedNavbar && <Navbar type="blended" />}
       {resolvedTheme === "dark" && <WaterMark />}
       <Header />
-      <Navbar type="blended" />
       <div className="flex flex-col justify-between font-lato bg-gray-100 dark:bg-gray-900 text-gray-200 max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl mx-auto rounded-t-2xl">
         {children}
         {hasFooter && <Footer />}
