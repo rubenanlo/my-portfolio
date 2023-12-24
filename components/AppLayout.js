@@ -25,7 +25,7 @@ export const AppLayout = ({ children }) => {
   const { asPath } = useRouter();
 
   const noFooterPaths = ["/admin"];
-  const noBlendedNavbarPaths = ["/"];
+  const noBlendedNavbarPaths = ["/", "/#"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
 
