@@ -11,8 +11,30 @@ import {
   UNSDSN_LOGO as sdsnLogo,
   BAKER_MCKENZIE_LOGO as bakerLogo,
 } from "helpers/exportImages";
+import { useResponsive } from "helpers/useResponsive";
 
 const articles = [
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021-03-16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021-03-16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021-03-16",
+    readingTime: 5,
+  },
   {
     title: "How to use Tailwind CSS with Next.js",
     description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
@@ -40,6 +62,14 @@ const Article = ({ article }) => (
     <Post.Description>{article.description}</Post.Description>
     <Post.Cta>Read article</Post.Cta>
   </Post>
+);
+
+const ArticleList = () => (
+  <div className="flex flex-col gap-16 px-2">
+    {articles.map((article) => (
+      <Article key={article.slug} article={article} />
+    ))}
+  </div>
 );
 
 const MailIcon = (props) => (
@@ -232,17 +262,29 @@ function Resume() {
   );
 }
 
+const Carousel = () => (
+  <Container.Flex
+    className="snap-mandatory snap-x max-w-sm overflow-x-auto p-5"
+    gapX="gap-x-20"
+  >
+    {articles.map((article) => (
+      <div key={article.slug} className="snap-center w-full shrink-0">
+        <Article article={article} />
+      </div>
+    ))}
+  </Container.Flex>
+);
+
 const Index = () => {
+  const isSmallScreen = useResponsive(1024);
+  const ResponsiveComponent = isSmallScreen ? Carousel : ArticleList;
+
   return (
     <>
       <Hero />
       <Container.Section className="lg:pb-32">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16 px-2">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div>
+          <ResponsiveComponent />
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />
             <Resume />
