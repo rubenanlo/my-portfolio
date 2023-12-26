@@ -1,6 +1,6 @@
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
-import { NAVLINKS as navLinks } from "library/navlinks";
+import { NAVLINKS as navLinks } from "../library/navlinks";
 
 const Footer = () => (
   <Container.Section
