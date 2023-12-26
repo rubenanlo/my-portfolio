@@ -6,5 +6,10 @@ export const showUpAnimation = {
 
 export const zoomIn = {
   whileHover: { scale: 1.1 },
-  transition: { duration: 0.5 },
+  transition: { duration: 0.2 },
+};
+
+export const popUp = {
+  whileTap: { scale: 1.4 },
+  transition: { duration: 0.3 },
 };

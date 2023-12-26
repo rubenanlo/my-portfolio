@@ -21,14 +21,15 @@ Card.Stack = function CardStack({ children, as, className }) {
   return <Component className={clsx(className, "mt-7")}>{children}</Component>;
 };
 
-export function AnimatedCard({ children, className, ...props }) {
+export function AnimatedCard({ children, className, dimensions, ...props }) {
   return (
     <motion.div
       {...props.animate}
       className={clsx(
         className,
         bgColorCard,
-        "rounded-xl  shadow-xl mb-5 h-52 w-52"
+        dimensions,
+        "rounded-xl  shadow-xl mb-5"
       )}
     >
       <div className="p-6">{children}</div>
@@ -37,7 +38,7 @@ export function AnimatedCard({ children, className, ...props }) {
 }
 
 Card.Header = function CardHeader({ children, className }) {
-  return <dl className={clsx(className)}>{children}</dl>;
+  return <div className={clsx(className)}>{children}</div>;
 };
 
 Card.Paragraph = function CardParagraph({ children, className }) {
