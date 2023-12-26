@@ -1,8 +1,12 @@
+import { useState } from "react";
 import Image from "next/image";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
 import { Post } from "components/Post";
 import { Button } from "components/Button";
+import Pagination from "components/Pagination";
+import { useResponsive } from "helpers/useResponsive";
+import { setCurrentItems } from "helpers/setupPagination";
 import {
   EY_LOGO as eyLogo,
   DELOITTE_LOGO as deloitteLogo,
@@ -11,7 +15,6 @@ import {
   UNSDSN_LOGO as sdsnLogo,
   BAKER_MCKENZIE_LOGO as bakerLogo,
 } from "helpers/exportImages";
-import { useResponsive } from "helpers/useResponsive";
 
 const articles = [
   {
@@ -53,8 +56,8 @@ function formatDate(dateString) {
   });
 }
 
-const Article = ({ article }) => (
-  <Post as="article">
+const Article = ({ article, className }) => (
+  <Post as="article" className={className}>
     <Post.Title href={`/articles/${article.slug}`}>{article.title}</Post.Title>
     <Post.Eyebrow as="time" dateTime={article.date} decorate>
       {formatDate(article.date)}
@@ -64,13 +67,30 @@ const Article = ({ article }) => (
   </Post>
 );
 
-const ArticleList = () => (
-  <div className="flex flex-col gap-16 px-2">
-    {articles.map((article) => (
-      <Article key={article.slug} article={article} />
-    ))}
-  </div>
-);
+const ArticleList = ({ articles }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 3;
+  const totalPosts = articles.length;
+  const currentPosts = setCurrentItems(currentPage, postsPerPage, articles);
+
+  return (
+    <Container.Flex column className="px-2" justify="justify-between">
+      <Container.Flex column className="gap-16 h-full">
+        {currentPosts.map((article) => (
+          <Article key={article.slug} article={article} />
+        ))}
+      </Container.Flex>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={totalPosts}
+        paginate={(page) => {
+          setCurrentPage(page);
+        }}
+        currentPage={currentPage}
+      />
+    </Container.Flex>
+  );
+};
 
 const MailIcon = (props) => (
   <svg
@@ -262,15 +282,17 @@ function Resume() {
   );
 }
 
-const Carousel = () => (
+const Carousel = ({ articles }) => (
   <Container.Flex
-    className="snap-mandatory snap-x max-w-sm overflow-x-auto p-5"
+    className="snap-mandatory snap-x max-w-sm overflow-x-auto"
     gapX="gap-x-20"
   >
     {articles.map((article) => (
-      <div key={article.slug} className="snap-center w-full shrink-0">
-        <Article article={article} />
-      </div>
+      <Article
+        key={article.slug}
+        article={article}
+        className="snap-center w-full shrink-0"
+      />
     ))}
   </Container.Flex>
 );
@@ -284,7 +306,7 @@ const Index = () => {
       <Hero />
       <Container.Section className="lg:pb-32">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <ResponsiveComponent />
+          <ResponsiveComponent articles={articles} />
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />
             <Resume />
