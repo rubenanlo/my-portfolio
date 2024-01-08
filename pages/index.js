@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Image from "next/image";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
@@ -6,7 +5,7 @@ import { Post } from "components/Post";
 import { Button } from "components/Button";
 import Pagination from "components/Pagination";
 import { useResponsive } from "helpers/useResponsive";
-import { setCurrentItems } from "helpers/setupPagination";
+import { usePagination } from "helpers/usePagination";
 import {
   EY_LOGO as eyLogo,
   DELOITTE_LOGO as deloitteLogo,
@@ -68,10 +67,11 @@ const Article = ({ article, className }) => (
 );
 
 const ArticleList = ({ articles }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 3;
-  const totalPosts = articles.length;
-  const currentPosts = setCurrentItems(currentPage, postsPerPage, articles);
+  const { currentPosts, ...pagination } = usePagination({
+    initialNumberOfPages: 1,
+    itemsPerPage: 3,
+    items: articles,
+  });
 
   return (
     <Container.Flex column className="px-2" justify="justify-between">
@@ -80,14 +80,7 @@ const ArticleList = ({ articles }) => {
           <Article key={article.slug} article={article} />
         ))}
       </Container.Flex>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={totalPosts}
-        paginate={(page) => {
-          setCurrentPage(page);
-        }}
-        currentPage={currentPage}
-      />
+      <Pagination pagination={pagination} />
     </Container.Flex>
   );
 };

@@ -106,7 +106,7 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
       <motion.nav
         animate={{ opacity: [0, 1], y: [200, 0] }}
         transition={{ duration: 0.7 }}
-        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 pt-5 px-5 pb-36"
+        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 pt-5 px-5 pb-36 border"
         aria-label="Sidebar"
         ref={ref}
       >
@@ -205,7 +205,7 @@ const StarsCanvas = forwardRef(({ isHovered }, ref) => {
   const sphere = inSphere(new Float32Array(3000), { radius: 1.15 });
 
   return (
-    <Canvas className="rounded-full" ref={ref}>
+    <Canvas className="rounded-full opacity-40 dark:opacity-50" ref={ref}>
       <CameraAnimator isHovered={isHovered} />
       <Suspense fallback={null}>
         <Stars color={pointColor} positions={sphere} />

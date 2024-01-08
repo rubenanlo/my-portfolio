@@ -23,6 +23,55 @@ const cards = [
     color: "bg-green-600 dark:bg-orange-quaternary",
     tag: "JobHunt",
   },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
+  {
+    name: "My CV",
+    href: "/admin/cv",
+    description: "Create, edit, and delete CV entries",
+    color: "bg-green-600 dark:bg-orange-quaternary",
+    tag: "JobHunt",
+  },
 ];
 
 const Circle = ({ name, className }) => {
@@ -61,18 +110,23 @@ const Dashboard = () => {
     <Container.Section fullScreen className="w-full">
       <ResponsiveComponent
         column
-        className="w-full mt-24 h-full"
-        columns="grid-cols-1 lg:grid-cols-3"
+        className="w-full mt-24 h-full gap-x-3 overflow-y-auto"
+        columns="grid-cols-1 lg:grid-cols-4"
         content="content-start"
         justify="justify-items-center"
       >
-        {cards.map(({ name, href, description, tag }) => (
+        {cards.map(({ name, href, description, tag }, index) => (
           <>
             <AnimatedCard
               key={name}
               animate={{ ...zoomIn, ...popUp }}
-              className="cursor-pointer"
-              dimensions="h-52 w-full lg:w-52"
+              className={clsx(
+                index % 2 ? "row-span-2" : "",
+                index === 3 ? "col-span-2" : "",
+                "cursor-pointer"
+              )}
+              dimensions="h-auto w-full"
+              rounded="rounded-md"
             >
               <Container.Link href={href}>
                 <Container.Flex

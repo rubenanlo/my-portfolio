@@ -21,7 +21,13 @@ Card.Stack = function CardStack({ children, as, className }) {
   return <Component className={clsx(className, "mt-7")}>{children}</Component>;
 };
 
-export function AnimatedCard({ children, className, dimensions, ...props }) {
+export function AnimatedCard({
+  children,
+  className,
+  dimensions,
+  rounded,
+  ...props
+}) {
   return (
     <motion.div
       {...props.animate}
@@ -29,7 +35,8 @@ export function AnimatedCard({ children, className, dimensions, ...props }) {
         className,
         bgColorCard,
         dimensions,
-        "rounded-xl  shadow-xl mb-5"
+        rounded ? rounded : "rounded-xl",
+        "shadow-xl mb-5"
       )}
     >
       <div className="p-6">{children}</div>
