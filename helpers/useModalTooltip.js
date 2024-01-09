@@ -29,8 +29,8 @@ export const useModalTooltip = () => {
   return {
     modalVisibility,
     fullText,
-    mousePosition,
     truncatedKey,
+    mousePosition,
     handleMouseEnter,
     handleMouseMove,
     handleMouseLeave,

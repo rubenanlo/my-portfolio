@@ -4,8 +4,13 @@ export const showUpAnimation = {
   transition: { delay: 1 },
 };
 
-export const zoomIn = {
-  whileHover: { scale: 1.1 },
+export const zoomIn = (bgColor) => ({
+  whileHover: { scale: 1.3, zIndex: 1, backgroundColor: bgColor },
+  transition: { duration: 0.2 },
+});
+
+export const zoomInAlt = {
+  whileHover: { scale: 1.3, zIndex: 1 },
   transition: { duration: 0.2 },
 };
 

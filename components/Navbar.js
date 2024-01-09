@@ -11,7 +11,7 @@ import { Container } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
-import { NAVLINKS as navLinks } from "../library/navlinks";
+import { NAVLINKS as navLinks } from "library/navlinks";
 
 const ArrowDiagonal = (props) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>

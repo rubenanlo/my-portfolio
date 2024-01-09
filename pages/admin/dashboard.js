@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import { truncate } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
@@ -24,53 +25,46 @@ const cards = [
     tag: "JobHunt",
   },
   {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
+    name: "Future feature",
+    href: "#",
+    description: "Stay tuned, Stay tuned, Stay tuned, Stay tuned",
+    color: "bg-green-600 dark:bg-green-primary",
+    tag: "StayTuned",
   },
   {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
+    name: "Future feature",
+    href: "#",
+    description: "Stay tuned",
+    color: "bg-green-600 dark:bg-green-primary",
+    tag: "StayTuned",
   },
   {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
+    name: "Future feature",
+    href: "#",
+    description: "Stay tuned",
+    color: "bg-green-600 dark:bg-green-primary",
+    tag: "StayTuned",
   },
   {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
+    name: "Future feature",
+    href: "#",
+    description: "Stay tuned",
+    color: "bg-green-600 dark:bg-green-primary",
+    tag: "StayTuned",
   },
   {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
+    name: "Future feature",
+    href: "#",
+    description: "Stay tuned",
+    color: "bg-green-600 dark:bg-green-primary",
+    tag: "StayTuned",
   },
   {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
-  },
-  {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
+    name: "Future feature",
+    href: "#",
+    description: "Stay tuned",
+    color: "bg-green-600 dark:bg-green-primary",
+    tag: "StayTuned",
   },
 ];
 
@@ -88,6 +82,7 @@ const Circle = ({ name, className }) => {
 const Dashboard = () => {
   const isSmallScreen = useResponsive(1024);
   const {
+    fullText,
     modalVisibility,
     mousePosition,
     handleMouseEnter,
@@ -106,11 +101,14 @@ const Dashboard = () => {
     ? Container.Flex
     : Container.Columns;
 
+  const { resolvedTheme } = useTheme();
+  const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
+
   return (
-    <Container.Section fullScreen className="w-full">
+    <Container.Section fullScreen className="w-auto">
       <ResponsiveComponent
         column
-        className="w-full mt-24 h-full gap-x-3 overflow-y-auto"
+        className="w-full lg:mt-24 h-full lg:h-auto gap-x-3 overflow-y-auto lg:overflow-y-visible"
         columns="grid-cols-1 lg:grid-cols-4"
         content="content-start"
         justify="justify-items-center"
@@ -119,12 +117,8 @@ const Dashboard = () => {
           <>
             <AnimatedCard
               key={name}
-              animate={{ ...zoomIn, ...popUp }}
-              className={clsx(
-                index % 2 ? "row-span-2" : "",
-                index === 3 ? "col-span-2" : "",
-                "cursor-pointer"
-              )}
+              animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
+              className={clsx(index % 2 ? "row-span-2" : "", "cursor-pointer")}
               dimensions="h-auto w-full"
               rounded="rounded-md"
             >
@@ -141,8 +135,10 @@ const Dashboard = () => {
                       className="text-zinc-500 text-xl"
                     />
                     <TextLayout.Paragraph
-                      paragraph={setTruncatedText(description)}
-                      className="border-l-4 border-gray-400/50 pl-3 text-sm dark:border-gray-400 mt-3, z-50"
+                      paragraph={
+                        index % 2 ? description : setTruncatedText(description)
+                      }
+                      className=" text-sm mt-3"
                       onMouseEnter={(e) => {
                         handleMouseEnter(
                           description,
@@ -159,7 +155,7 @@ const Dashboard = () => {
               </Container.Link>
             </AnimatedCard>
             <ShowTruncated
-              value={description.length > maxCharacters && description}
+              value={fullText}
               isVisible={modalVisibility}
               mousePosition={mousePosition}
             />

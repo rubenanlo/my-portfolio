@@ -59,7 +59,7 @@ const Pagination = ({
               onClick={() => setShowAllPages(!showAllPages)}
               className={clsx(
                 showAllPages || currentPage === totalPages ? "hidden" : "block",
-                "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-zinc-700/20 focus:outline-offset-0"
+                "relative inline-flex items-center px-4 text-sm font-semibold text-gray-700 hover:bg-zinc-700/20 focus:outline-offset-0"
               )}
             >
               ...
@@ -69,7 +69,6 @@ const Pagination = ({
             onClick={() => {
               movePage("right", currentPage, setCurrentPage, totalPages);
             }}
-            href="#"
             className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 hover:bg-zinc-700/20 focus:z-20 focus:outline-offset-0"
           >
             <span className="sr-only">Next</span>

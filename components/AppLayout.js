@@ -30,7 +30,7 @@ export const AppLayout = ({ children }) => {
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
 
   return (
-    <Container className="relative bg-slate-200 dark:bg-black h-screen antialiased overflow-x-hidden scrollbar pt-20 ">
+    <Container className="relative bg-slate-200 dark:bg-black h-screen antialiased overflow-x-hidden lg:scrollbar pt-20 ">
       {hasBlendedNavbar && <Navbar type="blended" />}
       {resolvedTheme === "dark" && <WaterMark />}
       <Header />
