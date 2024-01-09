@@ -24,6 +24,7 @@ Card.Stack = function CardStack({ children, as, className }) {
 export function AnimatedCard({
   children,
   className,
+  classNameText,
   dimensions,
   rounded,
   ...props
@@ -39,7 +40,7 @@ export function AnimatedCard({
         "shadow-xl mb-5"
       )}
     >
-      <div className="p-6">{children}</div>
+      <div className={classNameText}>{children}</div>
     </motion.div>
   );
 }

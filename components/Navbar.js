@@ -7,11 +7,13 @@ import { inSphere } from "maath/random";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { Post } from "components/Post";
+import { AnimatedCard } from "components/Card";
 import { Container } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 import { NAVLINKS as navLinks } from "library/navlinks";
+import { zoomIn, popUp } from "library/animations";
 
 const ArrowDiagonal = (props) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -19,18 +21,8 @@ const ArrowDiagonal = (props) => (
   </svg>
 );
 
-const NavbarStarsItem = ({ navLink, navLinkIdx }) => (
-  <Post
-    className={clsx(
-      navLinkIdx === 0 ? "rounded-tl-lg rounded-tr-lg sm:rounded-tr-none" : "",
-      navLinkIdx === 1 ? "sm:rounded-tr-lg" : "",
-      navLinkIdx === navLinks.length - 2 ? "sm:rounded-bl-lg" : "",
-      navLinkIdx === navLinks.length - 1
-        ? "rounded-bl-lg rounded-br-lg sm:rounded-bl-none"
-        : "",
-      "group relative bg-gray-200/90 dark:bg-zinc-500/90 hover:bg-gray-300/90 dark:hover:bg-orange-tertiary p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-    )}
-  >
+const NavbarGridItem = ({ navLink }) => (
+  <Post className={clsx("group relative")}>
     <Container>
       <Post.Icon
         className={{
@@ -43,7 +35,7 @@ const NavbarStarsItem = ({ navLink, navLinkIdx }) => (
       />
       <Post.Icon
         className={{
-          span: "pointer-events-none absolute right-6 top-6 text-zinc-100 group-hover:text-orange-primary dark:group-hover:text-zinc-800",
+          span: "pointer-events-none absolute right-6 top-6 text-zinc-100 group-hover:text-semibold",
           component: "h-4 w-4",
         }}
         Icon={ArrowDiagonal}
@@ -53,7 +45,7 @@ const NavbarStarsItem = ({ navLink, navLinkIdx }) => (
     <Container className="mt-8">
       <Post.Title
         as="h3"
-        className="text-xl font-semibold leading-6 text-zinc-100 dark:text-zinc-100 group-hover:text-zinc-800"
+        className="text-base text-zinc-100  group-hover:text-semibold"
       >
         <Container.Link href={navLink.href} className="focus:outline-none">
           <span className="absolute inset-0" aria-hidden="true" />
@@ -64,37 +56,62 @@ const NavbarStarsItem = ({ navLink, navLinkIdx }) => (
   </Post>
 );
 
-// Basic Modal Component
-const NavbarGridModal = forwardRef(({ isVisible }, ref) => {
-  if (!isVisible) return null;
+// // Basic Modal Component
+// const NavbarGridModal = forwardRef(({ isVisible }, ref) => {
+//   if (!isVisible) return null;
+
+//   return (
+//     <nav
+//       className="modal absolute -top-40 sm:top-[50%] left-[20%] desktop-sm:left-[30%] scale-50 shadow-2xl"
+//       ref={ref}
+//     >
+//       <Container.Flex
+//         className="modal-content bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs"
+//         column
+//       >
+//         <Container.Columns
+//           className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75"
+//           columns="grid-cols-2"
+//         >
+//           {navLinks.map((navLink) => (
+//             <NavbarGridItem key={navLink.name} navLink={navLink} />
+//           ))}
+//         </Container.Columns>
+//       </Container.Flex>
+//     </nav>
+//   );
+// });
+
+// NavbarGridModal.displayName = "NavbarGridModal";
+
+const NavbarGrid = () => {
+  const { resolvedTheme } = useTheme();
+  const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
 
   return (
-    <nav
-      className="modal absolute -top-40 sm:top-[50%] left-[20%] desktop-sm:left-[30%] scale-50 shadow-2xl"
-      ref={ref}
-    >
-      <Container.Flex
-        className="modal-content bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs"
-        column
+    <nav className="relative w-full scale-90">
+      <Container.Columns
+        className="w-full"
+        columns="grid-cols-2"
+        gapX="gap-x-10"
       >
-        <Container.Columns
-          className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75"
-          columns="grid-cols-2"
-        >
-          {navLinks.map((navLink, navLinkIdx) => (
-            <NavbarStarsItem
-              key={navLink.name}
-              navLink={navLink}
-              navLinkIdx={navLinkIdx}
-            />
-          ))}
-        </Container.Columns>
-      </Container.Flex>
+        {navLinks.map((navLink) => (
+          <AnimatedCard
+            key={navLink.name}
+            animate={{ ...zoomIn(bgColor), ...popUp }}
+            className={"cursor-pointer"}
+            dimensions="h-auto w-full"
+            rounded="rounded-md"
+          >
+            <NavbarGridItem navLink={navLink} />
+          </AnimatedCard>
+        ))}
+      </Container.Columns>
     </nav>
   );
-});
+};
 
-NavbarGridModal.displayName = "NavbarGridModal";
+NavbarGrid.displayName = "NavbarGrid";
 
 const NavbarListModal = forwardRef(({ isVisible }, ref) => {
   const [isIndex, setIndex] = useState(null);
@@ -106,7 +123,7 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
       <motion.nav
         animate={{ opacity: [0, 1], y: [200, 0] }}
         transition={{ duration: 0.7 }}
-        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 pt-5 px-5 pb-36 border"
+        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 pt-5 px-5 pb-36"
         aria-label="Sidebar"
         ref={ref}
       >
@@ -221,7 +238,7 @@ const NavbarStars = () => {
   const [isGridModalVisible, setGridModalVisible] = useState(false);
   const [isListModalVisible, setListModalVisible] = useState(false);
   const [isHovered, setHovered] = useState(false);
-  const Component = isSmallerScreen ? NavbarListModal : NavbarGridModal;
+  const Component = NavbarListModal;
   const isVisible = isSmallerScreen ? isListModalVisible : isGridModalVisible;
   const setIsVisible = isSmallerScreen
     ? setListModalVisible
@@ -262,11 +279,9 @@ const NavbarStars = () => {
         whileHover={!isSmallerScreen && { scale: 2 }}
         transition={{ duration: 1 }}
         onMouseEnter={() => {
-          !isSmallerScreen && setGridModalVisible(true);
           !isSmallerScreen && setHovered(true);
         }}
         onMouseLeave={() => {
-          !isSmallerScreen && setGridModalVisible(false);
           !isSmallerScreen && setHovered(false);
         }}
         onClick={() => {
@@ -338,6 +353,7 @@ const NavbarIsland = () => (
 const Navbar = ({ type }) => {
   const isSmallerScreen = useResponsive(640);
 
+  if (type === "grid") return <NavbarGrid />;
   if (type === "stars") return <NavbarStars />;
   if (type === "blended" && isSmallerScreen) return <NavbarStars />;
   if (type === "blended" && !isSmallerScreen) return <NavbarIsland />;

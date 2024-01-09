@@ -119,6 +119,7 @@ const Dashboard = () => {
               key={name}
               animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
               className={clsx(index % 2 ? "row-span-2" : "", "cursor-pointer")}
+              classNameText="p-6"
               dimensions="h-auto w-full"
               rounded="rounded-md"
             >

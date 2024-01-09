@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import Navbar from "components/Navbar";
@@ -9,11 +8,8 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from "components/SocialIcons";
-import {
-  RUBEN_HEADSHOT as profilePic,
-  ARROW_CURVE_LIGHT as arrowLight,
-  ARROW_CURVE_DARK as arrowDark,
-} from "helpers/exportImages";
+import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
+import { useResponsive } from "helpers/useResponsive";
 
 const text = {
   name: "Ruben Andino",
@@ -43,24 +39,18 @@ const text = {
 };
 
 const Hero = () => {
-  const { resolvedTheme } = useTheme();
-  const arrow = resolvedTheme === "dark" ? arrowLight : arrowDark;
+  const isSmallerScreen = useResponsive(1024);
+  const narvbarType = isSmallerScreen ? "stars" : "grid";
 
   return (
-    <Container.Section className="lg:py-40 w-full z-10">
-      <TextLayout className="hidden lg:absolute lg:flex items-start right-20 desktop-sm:right-32 top-20">
-        <p className="font-chalk tracking-widest text-2xl text-black dark:text-white -rotate-45 -mr-5">
-          navbar
-        </p>
-        <Image src={arrow} alt={"arrow"} className="h-14 w-14 mt-2 rotate-0" />
-      </TextLayout>
-      <Container className="lg:flex w-full">
-        <Container className="mt-10 max-w-md flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 lg:pr-5">
-          <Image
-            className="h-16 w-16 rounded-full dark:sepia"
-            src={profilePic}
-            alt="My Pic"
-          />
+    <Container.Section className="lg:py-40 w-full z-10 ">
+      <Container className="mt-10 max-w-md lg:max-w-none lg:mx-0 lg:pt-8 lg:pr-5 w-full ">
+        <Image
+          className="h-16 w-16 rounded-full dark:sepia"
+          src={profilePic}
+          alt="My Pic"
+        />
+        <Container.Flex>
           <TextLayout className="mt-5 w-full">
             <TextLayout.Title title={text.name} />
             <TextLayout.Subtitle subtitle={text.title} />
@@ -84,8 +74,8 @@ const Hero = () => {
               ))}
             </Container.Flex>
           </TextLayout>
-        </Container>
-        <Navbar type="stars" />
+          <Navbar type={narvbarType} />
+        </Container.Flex>
       </Container>
     </Container.Section>
   );
