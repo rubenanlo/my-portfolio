@@ -99,7 +99,7 @@ const NavbarGrid = () => {
           <AnimatedCard
             key={navLink.name}
             animate={{ ...zoomIn(bgColor), ...popUp }}
-            className={"cursor-pointer"}
+            className={"cursor-pointer opacity-60"}
             dimensions="h-auto w-full"
             rounded="rounded-md"
           >
