@@ -1,4 +1,5 @@
 import Image from "next/image";
+import dayjs from "dayjs";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
 import { Post } from "components/Post";
@@ -20,46 +21,37 @@ const articles = [
     title: "How to use Tailwind CSS with Next.js",
     description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
     slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021-03-16",
+    date: "2021/03/16",
     readingTime: 5,
   },
   {
     title: "How to use Tailwind CSS with Next.js",
     description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
     slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021-03-16",
+    date: "2021/03/16",
     readingTime: 5,
   },
   {
     title: "How to use Tailwind CSS with Next.js",
     description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
     slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021-03-16",
+    date: "2021/03/16",
     readingTime: 5,
   },
   {
     title: "How to use Tailwind CSS with Next.js",
     description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
     slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021-03-16",
+    date: "2021/03/16",
     readingTime: 5,
   },
 ];
-
-function formatDate(dateString) {
-  return new Date(`${dateString}T00:00:00Z`).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
 
 const Article = ({ article, className }) => (
   <Post as="article" className={className}>
     <Post.Title href={`/articles/${article.slug}`}>{article.title}</Post.Title>
     <Post.Eyebrow as="time" dateTime={article.date} decorate>
-      {formatDate(article.date)}
+      {dayjs(article.date).format("MMMM D, YYYY")}
     </Post.Eyebrow>
     <Post.Description>{article.description}</Post.Description>
     <Post.Cta>Read article</Post.Cta>
