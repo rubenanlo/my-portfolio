@@ -6,8 +6,8 @@ const bgColorCard = "bg-gradient-to-br from-slate-50 dark:from-slate-700";
 export const Card = ({ children, className, style }) => (
   <div
     className={clsx(
-      className,
       bgColorCard,
+      className,
       "rounded-xl shadow-xl mb-5 h-52 w-52"
     )}
     style={style}
