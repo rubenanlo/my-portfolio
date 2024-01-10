@@ -20,6 +20,7 @@ import TICK_TOCK from "assets/tick_tock.png";
 import TOWARDS_DEV from "assets/towards_dev.png";
 import UNSDSN_LOGO from "assets/unsdsn_logo.jpeg";
 import WARP from "assets/warp.png";
+import WORK from "assets/work.png";
 
 export { ARROW_CURVE_DARK };
 export { ARROW_CURVE_LIGHT };
@@ -43,3 +44,4 @@ export { TICK_TOCK };
 export { TOWARDS_DEV };
 export { UNSDSN_LOGO };
 export { WARP };
+export { WORK };
