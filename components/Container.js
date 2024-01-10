@@ -1,12 +1,16 @@
-import { forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
-export const Container = ({ children, as, className }) => {
+export const Container = ({ children, as, className, ...props }) => {
   let Component = as ?? "div";
-  return <Component className={clsx(className)}>{children}</Component>;
+  const classNameProp = turnObjectIntoString(className);
+  return (
+    <Component className={clsx(classNameProp)} {...props}>
+      {children}
+    </Component>
+  );
 };
 
 Container.Section = function ContainerSection({
@@ -32,7 +36,7 @@ Container.Section = function ContainerSection({
   );
 };
 
-Container.Columns = function ContainerColumns3({
+Container.Columns = function ContainerColumns({
   children,
   className,
   ...props
@@ -53,31 +57,18 @@ Container.Columns = function ContainerColumns3({
 };
 
 Container.Flex = function ContainerFlex({ children, className, ...props }) {
+  const classNameProp = turnObjectIntoString(className);
   return (
     <div
       className={clsx(
-        className,
-        props.column && "flex-col",
-        props.wrap && "flex-wrap",
-        props.justify,
-        props.items,
-        props.gapX,
-        props.gapY,
-        "flex"
+        "flex",
+        className?.flex === undefined &&
+          "flex-row justify-between items-center",
+        classNameProp
       )}
+      {...props}
     >
       {children}
-    </div>
-  );
-};
-
-Container.AppHeader = function ContainerAppHeader({ children }) {
-  return (
-    <div>
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-6">
-        {children}
-      </div>
-      <div className=" border-b border-b-gray-500/50" />
     </div>
   );
 };
@@ -170,67 +161,4 @@ Container.Table = function ContainerTable({ table, className }) {
       </tbody>
     </table>
   );
-};
-
-Container.Animated = forwardRef(function AnimatedContainer(
-  { children, className, animation },
-  ref
-) {
-  return (
-    <motion.div
-      ref={(node) => {
-        if (ref) ref.current = node;
-      }}
-      className={clsx(className)}
-      {...animation}
-    >
-      {children}
-    </motion.div>
-  );
-});
-
-Container.Animated.displayName = "AnimatedContainer";
-
-Container.AnimatedParagraph = function AnimatedParagraph({
-  children,
-  className,
-  animation,
-  style,
-}) {
-  return (
-    <motion.p className={className} {...animation} style={style}>
-      {children}
-    </motion.p>
-  );
-};
-
-Container.Switch = function SwitchContainer({
-  isVisible,
-  animationVariants,
-  Component,
-  className,
-}) {
-  return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          key="animatedContent"
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          variants={animationVariants}
-          className={clsx(
-            className,
-            "grid grid-rows-2 grid-cols-2 gap-x-5 desktop-sm:flex desktop-sm:flex-col desktop-sm:justify-start desktop-sm:gap-x-0 w-full h-full"
-          )}
-        >
-          <Component />
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
-
-Container.Wrapper = function ContainerWrapper({ children, filter, href }) {
-  return filter ? <div>{children}</div> : <Link href={href}>{children}</Link>;
 };
