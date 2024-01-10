@@ -9,14 +9,22 @@ export const Container = ({ children, as, className }) => {
   return <Component className={clsx(className)}>{children}</Component>;
 };
 
-Container.Section = function ContainerSection({ children, className, as }) {
+Container.Section = function ContainerSection({
+  children,
+  className,
+  as,
+  bottomDiv,
+  fullScreen,
+}) {
   let Component = as ?? "section";
 
   return (
     <Component
       className={clsx(
         className,
-        "relative isolate mx-auto max-w-4xl desktop-sm:max-w-5xl px-6 pb-24 pt-10 sm:pb-32 lg:px-8"
+        bottomDiv ? "pb-14" : "pb-24 sm:pb-32",
+        fullScreen ? "h-screen" : "h-auto",
+        "relative isolate mx-auto max-w-4xl desktop-sm:max-w-5xl px-6 pt-10 lg:px-8"
       )}
     >
       {children}
@@ -24,37 +32,42 @@ Container.Section = function ContainerSection({ children, className, as }) {
   );
 };
 
-Container.Columns3 = function ContainerColumns3({ children, className }) {
-  return <div className={clsx(className, "grid grid-cols-3")}>{children}</div>;
-};
-
-Container.Columns2 = function ContainerColumns3({ children, className }) {
-  return <div className={clsx(className, "grid grid-cols-2")}>{children}</div>;
-};
-
-Container.Columns2Desktop = function ContainerColumns2({
+Container.Columns = function ContainerColumns3({
   children,
   className,
+  ...props
 }) {
   return (
-    <div className={clsx(className, "desktop-sm:grid desktop-sm:grid-cols-2")}>
+    <div
+      className={clsx(
+        className,
+        props.columns,
+        props.justify,
+        props.gapX,
+        "grid"
+      )}
+    >
       {children}
     </div>
   );
 };
 
-Container.CustomColumns2 = function ContainerColumns2Custom({
-  children,
-  className,
-}) {
+Container.Flex = function ContainerFlex({ children, className, ...props }) {
   return (
-    <div className={clsx(className, "relative mt-8 grid")}>{children}</div>
-  );
-};
-
-Container.Flex = function ContainerFlex({ children, className }) {
-  return (
-    <div className={clsx(className, "flex justify-start")}>{children}</div>
+    <div
+      className={clsx(
+        className,
+        props.column && "flex-col",
+        props.wrap && "flex-wrap",
+        props.justify,
+        props.items,
+        props.gapX,
+        props.gapY,
+        "flex"
+      )}
+    >
+      {children}
+    </div>
   );
 };
 
@@ -69,12 +82,12 @@ Container.AppHeader = function ContainerAppHeader({ children }) {
   );
 };
 
-Container.Logo = function ContainerLogo({ className, logo, alt }) {
+Container.Logo = function ContainerLogo({ className, ...props }) {
   return (
     <Image
-      className={clsx(className, "h-7 w-auto mr-3")}
-      src={logo}
-      alt={alt}
+      className={clsx(className, "rounded-full")}
+      src={props.src}
+      alt={props.alt}
     />
   );
 };
@@ -91,17 +104,16 @@ Container.Link = function ContainerLink({
   return (
     <Link
       href={href}
-      className={clsx(className.text, "cursor-pointer")}
+      className={clsx(className?.text, "cursor-pointer")}
       onClick={onClick}
     >
       {Component && (
         <Component
-          className={clsx(className.component, "w-7 h-7 fill-zinc-500")}
+          className={clsx(className?.component, "w-auto h-7 fill-zinc-500")}
           {...componentProps}
         />
       )}
-      {text}
-      {children}
+      {text || children}
     </Link>
   );
 };

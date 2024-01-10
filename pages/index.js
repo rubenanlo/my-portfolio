@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
-import { Card } from "components/Card";
+import { Post } from "components/Post";
 import { Button } from "components/Button";
+import Pagination from "components/Pagination";
+import { useResponsive } from "helpers/useResponsive";
+import { usePagination } from "helpers/usePagination";
 import {
   EY_LOGO as eyLogo,
   DELOITTE_LOGO as deloitteLogo,
@@ -13,6 +16,27 @@ import {
 } from "helpers/exportImages";
 
 const articles = [
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021-03-16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021-03-16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021-03-16",
+    readingTime: 5,
+  },
   {
     title: "How to use Tailwind CSS with Next.js",
     description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
@@ -31,16 +55,35 @@ function formatDate(dateString) {
   });
 }
 
-const Article = ({ article }) => (
-  <Card as="article">
-    <Card.Title href={`/articles/${article.slug}`}>{article.title}</Card.Title>
-    <Card.Eyebrow as="time" dateTime={article.date} decorate>
+const Article = ({ article, className }) => (
+  <Post as="article" className={className}>
+    <Post.Title href={`/articles/${article.slug}`}>{article.title}</Post.Title>
+    <Post.Eyebrow as="time" dateTime={article.date} decorate>
       {formatDate(article.date)}
-    </Card.Eyebrow>
-    <Card.Description>{article.description}</Card.Description>
-    <Card.Cta>Read article</Card.Cta>
-  </Card>
+    </Post.Eyebrow>
+    <Post.Description>{article.description}</Post.Description>
+    <Post.Cta>Read article</Post.Cta>
+  </Post>
 );
+
+const ArticleList = ({ articles }) => {
+  const { currentPosts, ...pagination } = usePagination({
+    initialNumberOfPages: 1,
+    itemsPerPage: 3,
+    items: articles,
+  });
+
+  return (
+    <Container.Flex column className="px-2" justify="justify-between">
+      <Container.Flex column className="gap-16 h-full">
+        {currentPosts.map((article) => (
+          <Article key={article.slug} article={article} />
+        ))}
+      </Container.Flex>
+      <Pagination pagination={pagination} />
+    </Container.Flex>
+  );
+};
 
 const MailIcon = (props) => (
   <svg
@@ -232,17 +275,31 @@ function Resume() {
   );
 }
 
+const Carousel = ({ articles }) => (
+  <Container.Flex
+    className="snap-mandatory snap-x max-w-sm overflow-x-auto"
+    gapX="gap-x-20"
+  >
+    {articles.map((article) => (
+      <Article
+        key={article.slug}
+        article={article}
+        className="snap-center w-full shrink-0"
+      />
+    ))}
+  </Container.Flex>
+);
+
 const Index = () => {
+  const isSmallScreen = useResponsive(1024);
+  const ResponsiveComponent = isSmallScreen ? Carousel : ArticleList;
+
   return (
     <>
       <Hero />
       <Container.Section className="lg:pb-32">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div>
+          <ResponsiveComponent articles={articles} />
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />
             <Resume />
