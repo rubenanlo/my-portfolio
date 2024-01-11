@@ -1,6 +1,6 @@
 import Link from "next/link";
 import clsx from "clsx";
-import { turnObjectIntoString } from "../helpers/manipulateText";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
 const commonStyle = {
   flex: "inline-flex items-center gap-2 justify-center",
@@ -45,12 +45,25 @@ const variantStyles = (currentPage) => ({
         background: "hover:bg-zinc-700/20",
         outline: "focus:outline-offset-0",
       },
+  login: {
+    flex: "flex justify-center",
+    typography:
+      "text-sm font-semibold leading-6 text-zinc-800 dark:text-orange-primary",
+    background:
+      "bg-orange-secondary dark:bg-orange-tertiary hover:bg-orange-quaternary dark:hover:bg-orange-quaternary",
+    dimension: "w-full px-3 py-1.5",
+    focus:
+      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-secondary",
+    otherStyles: "rounded-md shadow-sm",
+  },
 });
 
 export const Button = ({
   variant = "primary",
   className,
   currentPage,
+  text,
+  children,
   ...props
 }) => {
   className = clsx(
@@ -60,8 +73,13 @@ export const Button = ({
   );
 
   return typeof props.href === "undefined" ? (
-    <button className={className} {...props} />
+    <button className={className} {...props}>
+      {text || children}
+    </button>
   ) : (
-    <Link className={className} {...props} />
+    <Link className={className} {...props}>
+      {children}
+      {text}
+    </Link>
   );
 };

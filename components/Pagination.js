@@ -54,17 +54,15 @@ const Pagination = ({
               aria-current="page"
               currentPage={currentPage == page}
               onClick={() => setCurrentPage(page)}
-            >
-              {page}
-            </Button>
+              text={page}
+            />
           ))}
           {!hideElipses && (
             <Button
               variant="pagination"
               onClick={() => setShowAllPages(!showAllPages)}
-            >
-              ...
-            </Button>
+              text="..."
+            />
           )}
           <Button
             variant="arrow"

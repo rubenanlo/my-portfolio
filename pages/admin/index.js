@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { Container } from "components/Container";
-import { Post } from "components/Post";
 import { Form } from "components/Form";
+import { Button } from "components/Button";
+import { TextLayout } from "components/TextLayout";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 
 const Admin = () => {
@@ -25,7 +26,7 @@ const Admin = () => {
     <Container className="absolute top-0 left-0 h-full w-full flex justify-center ">
       <Container className="flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <Container className="mx-auto w-full max-w-sm lg:w-96">
-          <Container.Flex className="gap-x-7" items="items-center">
+          <Container.Flex className="gap-x-7 items-center justify-center">
             <Container.Link
               href={"/"}
               Component={Container.Logo}
@@ -37,9 +38,11 @@ const Admin = () => {
                 component: "h-[3rem] w-auto rounded-full",
               }}
             />
-            <Post.Title className="text-3xl font-bold leading-9 tracking-tight text-light">
-              Sign in to your account
-            </Post.Title>
+            <TextLayout.Title
+              as="h4"
+              className="tracking-tight text-zinc-800 dark:text-zinc-100"
+              title="Sign in to your account"
+            />
           </Container.Flex>
 
           <Container className="mt-5">
@@ -59,6 +62,8 @@ const Admin = () => {
               >
                 {fields.map(({ field, setField }) => (
                   <Form.Field
+                    variant="secondary"
+                    required
                     key={field}
                     field={field}
                     onChange={(e) => {
@@ -87,8 +92,7 @@ const Admin = () => {
                     />
                   </Container>
                 </Container.Flex>
-
-                <Form.Button text="Sign in" />
+                <Button variant="login" text="Sign in" />
               </Form>
             </Container>
           </Container>

@@ -6,6 +6,7 @@ import { Post } from "components/Post";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import Pagination from "components/Pagination";
+import { TextLayout } from "components/TextLayout";
 import { useResponsive } from "helpers/useResponsive";
 import { usePagination } from "helpers/usePagination";
 import {
@@ -16,7 +17,6 @@ import {
   UNSDSN_LOGO as sdsnLogo,
   BAKER_MCKENZIE_LOGO as bakerLogo,
 } from "helpers/exportImages";
-import { TextLayout } from "../components/TextLayout";
 
 const articles = [
   {
@@ -234,8 +234,10 @@ const Contact = () => (
       className={{ dimension: "mt-2", typography: "text-sm" }}
       paragraph="Get notified when I publish something new, and unsubscribe at any time."
     />
-    <div className="mt-6 flex">
-      <input
+    <Container.Flex className="mt-6">
+      <Form.Field
+        variant="primary"
+        field="email"
         type="email"
         placeholder="Email address"
         aria-label="Email address"
@@ -245,7 +247,7 @@ const Contact = () => (
       <Button variant="primary" type="submit" className="ml-4 flex-none">
         Join
       </Button>
-    </div>
+    </Container.Flex>
   </Form>
 );
 
@@ -352,8 +354,8 @@ const Index = () => {
         <Container.Columns
           className={{
             position: "mx-auto",
-            dimension: "max-w-xl lg:max-w-none w-full",
-            grid: "grid-cols-1 lg:grid-cols-2 gap-y-20",
+            dimension: "max-w-xl lg:max-w-4xl w-full",
+            grid: "grid-cols-1 lg:grid-cols-2 gap-y-20 gap-x-32",
           }}
         >
           <ResponsiveComponent articles={articles} />
