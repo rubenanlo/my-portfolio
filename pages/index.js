@@ -4,6 +4,7 @@ import { Container } from "components/Container";
 import Hero from "components/Hero";
 import { Post } from "components/Post";
 import { Button } from "components/Button";
+import { Form } from "components/Form";
 import Pagination from "components/Pagination";
 import { useResponsive } from "helpers/useResponsive";
 import { usePagination } from "helpers/usePagination";
@@ -15,6 +16,7 @@ import {
   UNSDSN_LOGO as sdsnLogo,
   BAKER_MCKENZIE_LOGO as bakerLogo,
 } from "helpers/exportImages";
+import { TextLayout } from "../components/TextLayout";
 
 const articles = [
   {
@@ -45,29 +47,127 @@ const articles = [
     date: "2021/03/16",
     readingTime: 5,
   },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021/03/16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021/03/16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021/03/16",
+    readingTime: 5,
+  },
+  {
+    title: "How to use Tailwind CSS with Next.js",
+    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
+    slug: "how-to-use-tailwind-css-with-next-js",
+    date: "2021/03/16",
+    readingTime: 5,
+  },
 ];
 
-const Article = ({ article, className }) => (
-  <Post as="article" className={className}>
-    <Post.Title href={`/articles/${article.slug}`}>{article.title}</Post.Title>
-    <Post.Eyebrow as="time" dateTime={article.date} decorate>
-      {dayjs(article.date).format("MMMM D, YYYY")}
-    </Post.Eyebrow>
-    <Post.Description>{article.description}</Post.Description>
-    <Post.Cta>Read article</Post.Cta>
+let resume = [
+  {
+    company: "UNSDSN",
+    title: "Fullstack Web Developer",
+    logo: sdsnLogo,
+    start: "2022",
+    end: {
+      label: "Present",
+      dateTime: new Date().getFullYear().toString(),
+    },
+  },
+  {
+    company: "rawDev",
+    title: "Fullstack Web Developer",
+    logo: rawDevLogo,
+    start: "2022",
+    end: "Present",
+  },
+  {
+    company: "Baker McKenzie",
+    title: "Economist, Data visualizations",
+    logo: bakerLogo,
+    start: "2021",
+    end: "2022",
+  },
+  {
+    company: "PWC",
+    title: "Economist, Data visualizations",
+    logo: pwcLogo,
+    start: "2019",
+    end: "2021",
+  },
+  {
+    company: "EY",
+    title: "Economist, Data visualizations",
+    logo: eyLogo,
+    start: "2011",
+    end: "2019",
+  },
+  {
+    company: "Deloitte",
+    title: "Economist, Data visualizations",
+    logo: deloitteLogo,
+    start: "2008",
+    end: "2010",
+  },
+];
+
+const Article = ({ article }) => (
+  <Post
+    as="article"
+    className={{
+      dimension:
+        "w-3/4 lg:w-full shrink-0 p-5 lg:p-0 overflow-x-visible lg:overflow-x-hidden",
+      otherStyles: "snap-center",
+    }}
+  >
+    <Post.Title href={`/articles/${article.slug}`} title={article.title} />
+    <Post.Eyebrow
+      as="time"
+      dateTime={article.date}
+      decorate
+      date={dayjs(article.date).format("MMMM D, YYYY")}
+    />
+    <Post.Description text={article.description} />
+    <Post.Cta text="Read article" />
   </Post>
 );
 
 const ArticleList = ({ articles }) => {
   const { currentPosts, ...pagination } = usePagination({
     initialNumberOfPages: 1,
-    itemsPerPage: 3,
+    itemsPerPage: 4,
     items: articles,
   });
 
   return (
-    <Container.Flex column className="px-2" justify="justify-between">
-      <Container.Flex column className="gap-16 h-full">
+    <Container.Flex
+      className={{
+        dimension: "mt-2 w-full",
+        position: "mx-auto",
+        flex: "flex-col gap-y-5",
+      }}
+      justify="justify-between"
+    >
+      <Container.Flex
+        className={{
+          flex: "gap-y-12 flex-col",
+          dimension: "h-full",
+        }}
+      >
         {currentPosts.map((article) => (
           <Article key={article.slug} article={article} />
         ))}
@@ -76,6 +176,20 @@ const ArticleList = ({ articles }) => {
     </Container.Flex>
   );
 };
+
+const Carousel = ({ articles }) => (
+  <Container.Flex
+    className={{
+      flex: "gap-x-5",
+      dimension: "max-w-sm",
+      otherStyles: "snap-mandatory snap-x overflow-x-auto scrollbar pb-2",
+    }}
+  >
+    {articles.map((article) => (
+      <Article key={article.slug} article={article} />
+    ))}
+  </Container.Flex>
+);
 
 const MailIcon = (props) => (
   <svg
@@ -98,18 +212,28 @@ const MailIcon = (props) => (
   </svg>
 );
 
-const Newsletter = () => (
-  <form
+// !Create backend to control this section
+const Contact = () => (
+  <Form
     action="/thank-you"
-    className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+    className={{
+      border: "border border-zinc-100 p-6 dark:border-zinc-700/40",
+      otherStyles: "rounded-2xl",
+    }}
   >
-    <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-      <MailIcon className="h-6 w-6 flex-none" />
-      <span className="ml-3">Stay up to date</span>
-    </h2>
-    <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-      Get notified when I publish something new, and unsubscribe at any time.
-    </p>
+    <TextLayout.Title
+      as="h6"
+      className={{
+        flex: "flex",
+        typography: "text-zinc-900 dark:text-zinc-100",
+      }}
+      AdditionalComponent={<MailIcon className="h-6 w-6 flex-none mr-3" />}
+      title={"Stay up to date"}
+    />
+    <TextLayout.Paragraph
+      className={{ dimension: "mt-2", typography: "text-sm" }}
+      paragraph="Get notified when I publish something new, and unsubscribe at any time."
+    />
     <div className="mt-6 flex">
       <input
         type="email"
@@ -118,11 +242,11 @@ const Newsletter = () => (
         required
         className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
       />
-      <Button type="submit" className="ml-4 flex-none">
+      <Button variant="primary" type="submit" className="ml-4 flex-none">
         Join
       </Button>
     </div>
-  </form>
+  </Form>
 );
 
 const BriefcaseIcon = (props) => (
@@ -199,87 +323,22 @@ const Role = ({ role }) => {
   );
 };
 
-function Resume() {
-  let resume = [
-    {
-      company: "UNSDSN",
-      title: "Fullstack Web Developer",
-      logo: sdsnLogo,
-      start: "2022",
-      end: {
-        label: "Present",
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: "rawDev",
-      title: "Fullstack Web Developer",
-      logo: rawDevLogo,
-      start: "2022",
-      end: "Present",
-    },
-    {
-      company: "Baker McKenzie",
-      title: "Economist, Data visualizations",
-      logo: bakerLogo,
-      start: "2021",
-      end: "2022",
-    },
-    {
-      company: "PWC",
-      title: "Economist, Data visualizations",
-      logo: pwcLogo,
-      start: "2019",
-      end: "2021",
-    },
-    {
-      company: "EY",
-      title: "Economist, Data visualizations",
-      logo: eyLogo,
-      start: "2011",
-      end: "2019",
-    },
-    {
-      company: "Deloitte",
-      title: "Economist, Data visualizations",
-      logo: deloitteLogo,
-      start: "2008",
-      end: "2010",
-    },
-  ];
-
-  return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
-        ))}
-      </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
-        Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-      </Button>
-    </div>
-  );
-}
-
-const Carousel = ({ articles }) => (
-  <Container.Flex
-    className="snap-mandatory snap-x max-w-sm overflow-x-auto"
-    gapX="gap-x-20"
-  >
-    {articles.map((article) => (
-      <Article
-        key={article.slug}
-        article={article}
-        className="snap-center w-full shrink-0"
-      />
-    ))}
-  </Container.Flex>
+const Resume = () => (
+  <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <BriefcaseIcon className="h-6 w-6 flex-none" />
+      <span className="ml-3">Work</span>
+    </h2>
+    <ol className="mt-6 space-y-4">
+      {resume.map((role, roleIndex) => (
+        <Role key={roleIndex} role={role} />
+      ))}
+    </ol>
+    <Button href="#" variant="secondary" className="group mt-6 w-full">
+      Download CV
+      <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+    </Button>
+  </div>
 );
 
 const Index = () => {
@@ -289,14 +348,20 @@ const Index = () => {
   return (
     <>
       <Hero />
-      <Container.Section className="lg:pb-32">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+      <Container.Section>
+        <Container.Columns
+          className={{
+            position: "mx-auto",
+            dimension: "max-w-xl lg:max-w-none w-full",
+            grid: "grid-cols-1 lg:grid-cols-2 gap-y-20",
+          }}
+        >
           <ResponsiveComponent articles={articles} />
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
+          <Container className="place-items-start space-y-10">
+            <Contact />
             <Resume />
-          </div>
-        </div>
+          </Container>
+        </Container.Columns>
       </Container.Section>
     </>
   );

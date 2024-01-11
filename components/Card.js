@@ -16,11 +16,6 @@ export const Card = ({ children, className, style }) => (
   </div>
 );
 
-Card.Stack = function CardStack({ children, as, className }) {
-  let Component = as ?? "div";
-  return <Component className={clsx(className, "mt-7")}>{children}</Component>;
-};
-
 export function AnimatedCard({
   children,
   className,

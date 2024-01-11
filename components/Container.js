@@ -18,18 +18,19 @@ Container.Section = function ContainerSection({
   className,
   as,
   bottomDiv,
-  fullScreen,
+  ...props
 }) {
   let Component = as ?? "section";
+  const classNameProp = turnObjectIntoString(className);
 
   return (
     <Component
       className={clsx(
-        className,
+        classNameProp,
         bottomDiv ? "pb-14" : "pb-24 sm:pb-32",
-        fullScreen ? "h-screen" : "h-auto",
         "relative isolate mx-auto max-w-4xl desktop-sm:max-w-5xl px-6 pt-10 lg:px-8"
       )}
+      {...props}
     >
       {children}
     </Component>
@@ -41,16 +42,9 @@ Container.Columns = function ContainerColumns({
   className,
   ...props
 }) {
+  const classNameProp = turnObjectIntoString(className);
   return (
-    <div
-      className={clsx(
-        className,
-        props.columns,
-        props.justify,
-        props.gapX,
-        "grid"
-      )}
-    >
+    <div className={clsx(classNameProp, "grid")} {...props}>
       {children}
     </div>
   );
@@ -61,10 +55,9 @@ Container.Flex = function ContainerFlex({ children, className, ...props }) {
   return (
     <div
       className={clsx(
+        classNameProp,
         "flex",
-        className?.flex === undefined &&
-          "flex-row justify-between items-center",
-        classNameProp
+        className?.flex === undefined && "flex-row justify-between items-center"
       )}
       {...props}
     >
@@ -111,7 +104,7 @@ Container.Link = function ContainerLink({
 
 Container.List = function ContainerList({ list, className, Component }) {
   return (
-    <ul role="list" className={clsx(className.ul, "list-disc  leading-6")}>
+    <ul role="list" className={clsx(className.ul, "leading-6")}>
       {list.map((item) => (
         <li key={item} className={clsx(className.li)}>
           {Component(item)}

@@ -1,26 +1,19 @@
 import Link from "next/link";
 import clsx from "clsx";
+import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
-const ChevronRightIcon = (props) => (
-  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-    <path
-      d="M6.75 5.75 9.25 8l-2.5 2.25"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-export function Post({ as, className, children }) {
+export function Post({ as, className, children, ...props }) {
   let Component = as ?? "div";
+  const classNameProp = turnObjectIntoString(className);
 
   return (
     <Component
       className={clsx(
-        className,
-        "group relative flex flex-col items-start rounded-2xl border lg:border-none border-zinc-100 dark:border-zinc-700/40 p-5 cursor-pointer"
+        classNameProp,
+        "group relative flex flex-col items-start rounded-2xl lg:rounded-none border lg:border-none border-zinc-100 dark:border-zinc-700/40 cursor-pointer"
       )}
+      {...props}
     >
       {children}
     </Component>
@@ -43,41 +36,45 @@ Post.Link = function PostLink({ children, ...props }) {
   );
 };
 
-Post.Title = function PostTitle({ as, href, children, className }) {
+Post.Title = function PostTitle({ as, href, title, className }) {
   let Component = as ?? "h2";
+  const classNameProp = turnObjectIntoString(className);
 
   return (
     <Component
       className={clsx(
-        className,
+        classNameProp,
         "text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100"
       )}
     >
-      {href ? <Post.Link href={href}>{children}</Post.Link> : children}
+      {href ? <Post.Link href={href}>{title}</Post.Link> : title}
     </Component>
   );
 };
 
-Post.Description = function PostDescription({ children, className }) {
+Post.Description = function PostDescription({ className, text, ...props }) {
+  const classNameProp = turnObjectIntoString(className);
+
   return (
     <p
       className={clsx(
-        className,
+        classNameProp,
         "relative mt-2 text-sm text-zinc-600 dark:text-zinc-400"
       )}
+      {...props}
     >
-      {children}
+      {text}
     </p>
   );
 };
 
-Post.Cta = function PostCta({ children }) {
+Post.Cta = function PostCta({ text }) {
   return (
     <div
       aria-hidden="true"
       className="relative mt-4 flex items-center text-sm font-medium text-teal-500"
     >
-      {children}
+      {text}
       <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
     </div>
   );
@@ -87,7 +84,7 @@ Post.Eyebrow = function PostEyebrow({
   as,
   decorate = false,
   className,
-  children,
+  date,
   ...props
 }) {
   let Component = as ?? "p";
@@ -95,7 +92,7 @@ Post.Eyebrow = function PostEyebrow({
   return (
     <Component
       className={clsx(
-        className,
+        turnObjectIntoString(className),
         "relative order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500",
         decorate && "pl-3.5"
       )}
@@ -109,7 +106,7 @@ Post.Eyebrow = function PostEyebrow({
           <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
         </span>
       )}
-      {children}
+      {date}
     </Component>
   );
 };

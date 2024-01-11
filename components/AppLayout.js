@@ -41,17 +41,17 @@ export const AppLayout = ({ children }) => {
     <Container
       className={{
         position: "relative",
-        background: "bg-slate-200 dark:bg-black",
         dimension: "min-h-screen",
+        background: "bg-slate-200 dark:bg-black",
         overflow: "overflow-x-hidden",
         otherStyles: "antialiased lg:scrollbar",
       }}
     >
       <Container
         className={{
-          typography: "font-lato text-gray-200",
-          dimension: "max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl",
           position: "mx-auto",
+          dimension: "max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl",
+          typography: "font-lato text-gray-200",
         }}
       >
         {resolvedTheme === "dark" && <WaterMark />}
@@ -60,8 +60,8 @@ export const AppLayout = ({ children }) => {
         <Container.Flex
           className={{
             flex: "flex-col justify-between",
-            background: "bg-gray-100 dark:bg-gray-900",
             dimension: "mt-[10vh] rounded-t-2xl  min-h-[90vh]",
+            background: "bg-gray-100 dark:bg-gray-900",
           }}
         >
           {children}

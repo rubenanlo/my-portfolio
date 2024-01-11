@@ -1,10 +1,12 @@
 import clsx from "clsx";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
 export function Form({ as, className, children, ...props }) {
   let Component = as ?? "form";
+  const classNameProp = turnObjectIntoString(className);
 
   return (
-    <Component className={clsx(className, "space-y-6")} {...props}>
+    <Component className={clsx(classNameProp, "space-y-6")} {...props}>
       {children}
     </Component>
   );
