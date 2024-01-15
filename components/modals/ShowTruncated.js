@@ -1,15 +1,23 @@
+import { Container } from "components/Container";
+
 const ShowTruncated = ({ value, isVisible, mousePosition = 0 }) => (
   <>
     {value && isVisible && (
-      <div
-        className="fixed text-xs text-gray-600 rounded-md shadow-md bg-white p-2 z-10"
+      <Container
+        className={{
+          position: "fixed z-10",
+          dimension: "p-2",
+          typography: "text-xs text-gray-600",
+          background: "bg-white",
+          otherStyles: "rounded-md shadow-md",
+        }}
         style={{
           left: `${mousePosition.x + 8}px`,
           top: `${mousePosition.y + 30}px`,
         }}
       >
         <>{value}</>
-      </div>
+      </Container>
     )}
   </>
 );
