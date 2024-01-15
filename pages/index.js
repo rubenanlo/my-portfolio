@@ -212,7 +212,7 @@ const MailIcon = (props) => (
   </svg>
 );
 
-// !Create backend to control this section
+// !Create backend for this section (modal confirming email and sending email)
 const Contact = () => (
   <Form
     action="/thank-you"
@@ -222,13 +222,10 @@ const Contact = () => (
     }}
   >
     <TextLayout.Title
-      as="h6"
-      className={{
-        flex: "flex",
-        typography: "text-zinc-900 dark:text-zinc-100",
-      }}
+      as="h4"
+      className={"flex"}
       AdditionalComponent={<MailIcon className="h-6 w-6 flex-none mr-3" />}
-      title={"Stay up to date"}
+      title={"Let's connect"}
     />
     <TextLayout.Paragraph
       className={{ dimension: "mt-2", typography: "text-sm" }}
@@ -244,9 +241,12 @@ const Contact = () => (
         required
         className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
       />
-      <Button variant="primary" type="submit" className="ml-4 flex-none">
-        Join
-      </Button>
+      <Button
+        variant="primary"
+        type="submit"
+        className="ml-4 flex-none"
+        text="Join"
+      />
     </Container.Flex>
   </Form>
 );
@@ -283,17 +283,17 @@ const ArrowDownIcon = (props) => (
   </svg>
 );
 
-const Role = ({ role }) => {
-  let startLabel =
+const Role = ({ item: role }) => {
+  const startLabel =
     typeof role.start === "string" ? role.start : role.start.label;
-  let startDate =
+  const startDate =
     typeof role.start === "string" ? role.start : role.start.dateTime;
 
-  let endLabel = typeof role.end === "string" ? role.end : role.end.label;
-  let endDate = typeof role.end === "string" ? role.end : role.end.dateTime;
+  const endLabel = typeof role.end === "string" ? role.end : role.end.label;
+  const endDate = typeof role.end === "string" ? role.end : role.end.dateTime;
 
   return (
-    <li className="flex gap-4">
+    <>
       <div className="relative mt-1 flex h-10 w-10 shrink-0 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
         <Image
           src={role.logo}
@@ -321,26 +321,43 @@ const Role = ({ role }) => {
           <time dateTime={endDate}>{endLabel}</time>
         </dd>
       </dl>
-    </li>
+    </>
   );
 };
 
 const Resume = () => (
-  <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-    <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-      <BriefcaseIcon className="h-6 w-6 flex-none" />
-      <span className="ml-3">Work</span>
-    </h2>
-    <ol className="mt-6 space-y-4">
-      {resume.map((role, roleIndex) => (
-        <Role key={roleIndex} role={role} />
-      ))}
-    </ol>
-    <Button href="#" variant="secondary" className="group mt-6 w-full">
+  <Container className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+    <TextLayout.Title
+      as="h4"
+      className="flex"
+      AdditionalComponent={<BriefcaseIcon className="h-6 w-6 flex-none mr-3" />}
+      title="Work"
+    />
+    <Container.List
+      list={resume}
+      as={{
+        parent: "ul",
+        child: "li",
+      }}
+      className={{
+        parent: {
+          dimension: "mt-6 space-y-4",
+        },
+        child: {
+          flex: "flex gap-4",
+        },
+      }}
+      AdditionalComponent={Role}
+    />
+    <Button
+      href="#"
+      variant="secondary"
+      className={{ dimension: "mt-6 w-full", otherStyles: "group" }}
+    >
       Download CV
       <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
     </Button>
-  </div>
+  </Container>
 );
 
 const Index = () => {

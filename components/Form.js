@@ -28,28 +28,73 @@ Form.Field = function FormField({
         aria-label={field}
         autoComplete={field}
         required={required}
-        className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
+        className={{
+          flex: "flex-auto",
+          dimension: "min-w-0 py-[calc(theme(spacing.2)-1px)] px-3",
+          background: "bg-white dark:bg-zinc-700/[0.15]",
+          typography:
+            "sm:text-sm placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-500",
+          border:
+            "border border-zinc-900/10 focus:border-teal-500 dark:border-zinc-700 dark:focus:border-teal-400",
+          ring: "dark:focus:ring-teal-400/10 focus:ring-4 focus:ring-teal-500/10",
+          otherStyles:
+            "appearance-none rounded-md shadow-md shadow-zinc-800/5 focus:outline-none",
+        }}
       />
     ),
     secondary: (
       <div>
-        <div className="flex items-center relative top-[1.27rem]">
-          <div className="border-b border-zinc-800 dark:border-zinc-400 w-3" />
+        <div
+          className={{
+            flex: "flex items-center",
+            position: "relative top-[1.27rem]",
+          }}
+        >
+          <div
+            className={{
+              dimension: "w-3",
+              border: "border-b border-zinc-800 dark:border-zinc-400",
+            }}
+          />
           <label
             htmlFor={field}
-            className="block shrink-0 text-sm font-medium leading-6 text-zinc-800 dark:text-zinc-400 px-2"
+            className={{
+              position: "block",
+              dimension: "shrink-0  px-2",
+              typography:
+                "text-sm font-medium leading-6 text-zinc-800 dark:text-zinc-400",
+            }}
           >
             {field}
           </label>
-          <div className="border-b w-full border-zinc-800 dark:border-zinc-400" />
+          <div
+            className={{
+              dimension: "w-full",
+              border: "border-b border-zinc-800 dark:border-zinc-400",
+            }}
+          />
         </div>
-        <div className="mt-2 rounded-b-sm border-b border-x border-zinc-800 dark:border-zinc-400">
+        <div
+          className={{
+            dimension: "mt-2",
+            border:
+              "rounded-b-sm border-b border-x border-zinc-800 dark:border-zinc-400",
+          }}
+        >
           <input
             id={field}
             name={field}
             type={field}
             autoComplete={field}
-            className="block border-none w-full py-1.5 px-3 shadow-sm bg-transparent placeholder:text-gray-400 focus:ring-0 focus:outline-none  sm:text-sm sm:leading-6 text-gray-50"
+            className={{
+              position: "block",
+              border: "border-none",
+              dimension: "w-full py-1.5 px-3",
+              background: "bg-transparent",
+              typography:
+                "placeholder:text-gray-400 sm:text-sm sm:leading-6 text-gray-50",
+              otherStyles: "shadow-sm focus:ring-0 focus:outline-none",
+            }}
           />
         </div>
       </div>

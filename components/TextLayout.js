@@ -21,7 +21,7 @@ TextLayout.Title = function TextLayoutTitle({
     h1: "text-4xl font-bold sm:text-5xl",
     h2: "text-2xl sm:text-3xl",
     h3: "text-xl sm:text-2xl",
-    h4: "text-sm font-semibold",
+    h4: "text-sm font-semibold text-zinc-900 dark:text-zinc-100",
   };
 
   return (

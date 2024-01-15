@@ -21,6 +21,7 @@ const ArrowDiagonal = (props) => (
   </svg>
 );
 
+// !Change the Post component to a Card
 const NavbarGridItem = ({ navLink }) => (
   <Post className={clsx("group relative")}>
     <Container>
@@ -55,34 +56,6 @@ const NavbarGridItem = ({ navLink }) => (
     </Container>
   </Post>
 );
-
-// // Basic Modal Component
-// const NavbarGridModal = forwardRef(({ isVisible }, ref) => {
-//   if (!isVisible) return null;
-
-//   return (
-//     <nav
-//       className="modal absolute -top-40 sm:top-[50%] left-[20%] desktop-sm:left-[30%] scale-50 shadow-2xl"
-//       ref={ref}
-//     >
-//       <Container.Flex
-//         className="modal-content bg-zinc-800/50 rounded-2xl max-w-5xl w-[10rem] text-xs"
-//         column
-//       >
-//         <Container.Columns
-//           className="absolute -top-40 -left-28 w-[25rem] divide-y  overflow-hidden rounded-lg shadow sm:gap-px sm:divide-y-0 scale-75"
-//           columns="grid-cols-2"
-//         >
-//           {navLinks.map((navLink) => (
-//             <NavbarGridItem key={navLink.name} navLink={navLink} />
-//           ))}
-//         </Container.Columns>
-//       </Container.Flex>
-//     </nav>
-//   );
-// });
-
-// NavbarGridModal.displayName = "NavbarGridModal";
 
 const NavbarGrid = () => {
   const { resolvedTheme } = useTheme();
@@ -235,14 +208,9 @@ StarsCanvas.displayName = "StarsCanvas";
 
 const NavbarStars = () => {
   const isSmallerScreen = useResponsive(1024);
-  const [isGridModalVisible, setGridModalVisible] = useState(false);
-  const [isListModalVisible, setListModalVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setHovered] = useState(false);
   const Component = NavbarListModal;
-  const isVisible = isSmallerScreen ? isListModalVisible : isGridModalVisible;
-  const setIsVisible = isSmallerScreen
-    ? setListModalVisible
-    : setGridModalVisible;
   const modalRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -285,7 +253,7 @@ const NavbarStars = () => {
           !isSmallerScreen && setHovered(false);
         }}
         onClick={() => {
-          isSmallerScreen && setListModalVisible(!isListModalVisible);
+          isSmallerScreen && setIsVisible(!isVisible);
         }}
         className="fixed bottom-5 left-5 sm:left-auto sm:fixed sm:-top-10 sm:right-[15%] lg:top-0 lg:right-0 lg:relative w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] self-center lg:self-start mr-10 desktop-sm:mr-0 desktop-sm:self-center flex-shrink-0 cursor-pointer mx-auto"
       >

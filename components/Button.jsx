@@ -66,18 +66,18 @@ export const Button = ({
   children,
   ...props
 }) => {
-  className = clsx(
+  const classNameProps = clsx(
     turnObjectIntoString(variantStyles(currentPage)[variant]),
     turnObjectIntoString(commonStyle),
-    className
+    turnObjectIntoString(className)
   );
 
   return typeof props.href === "undefined" ? (
-    <button className={className} {...props}>
+    <button className={classNameProps} {...props}>
       {text || children}
     </button>
   ) : (
-    <Link className={className} {...props}>
+    <Link className={classNameProps} {...props}>
       {children}
       {text}
     </Link>

@@ -102,16 +102,29 @@ Container.Link = function ContainerLink({
   );
 };
 
-Container.List = function ContainerList({ list, className, Component }) {
+Container.List = function ContainerList({
+  as,
+  list,
+  className,
+  AdditionalComponent,
+}) {
+  const ParentComponent = as.parent ?? "ul";
+  const classNamePropParent = turnObjectIntoString(className.parent);
+
+  const ChildComponent = as.child ?? "li";
+  const classNamePropChild = turnObjectIntoString(className.child);
+
   return (
-    <ul role="list" className={clsx(className.ul, "leading-6")}>
+    <ParentComponent
+      role="list"
+      className={clsx(classNamePropParent, "leading-6")}
+    >
       {list.map((item) => (
-        <li key={item} className={clsx(className.li)}>
-          {Component(item)}
-          {item}
-        </li>
+        <ChildComponent key={item} className={clsx(classNamePropChild)}>
+          {AdditionalComponent ? <AdditionalComponent item={item} /> : { item }}
+        </ChildComponent>
       ))}
-    </ul>
+    </ParentComponent>
   );
 };
 
