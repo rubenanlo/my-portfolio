@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 import { Post } from "components/Post";
 import { AnimatedCard } from "components/Card";
-import { Container } from "components/Container";
+import { Container, AnimatedContainer } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
@@ -23,38 +23,44 @@ const ArrowDiagonal = (props) => (
 
 // !Change the Post component to a Card
 const NavbarGridItem = ({ navLink }) => (
-  <Post className={clsx("group relative")}>
-    <Container>
-      <Post.Icon
-        className={{
-          span: "inline-flex rounded-lg p-3",
-          component:
-            "h-6 w-6 text-zinc-800 dark:text-zinc-100  group-hover:text-orange-primary ",
-        }}
-        Icon={navLink.icon}
-        aria-hidden="true"
-      />
-      <Post.Icon
-        className={{
-          span: "pointer-events-none absolute right-6 top-6 text-zinc-100 group-hover:text-semibold",
-          component: "h-4 w-4",
-        }}
-        Icon={ArrowDiagonal}
-        aria-hidden="true"
-      ></Post.Icon>
-    </Container>
-    <Container className="mt-8">
-      <Post.Title
-        as="h3"
-        className="text-base text-zinc-100  group-hover:text-semibold"
-      >
-        <Container.Link href={navLink.href} className="focus:outline-none">
-          <span className="absolute inset-0" aria-hidden="true" />
-          {navLink.name}
-        </Container.Link>
-      </Post.Title>
-    </Container>
-  </Post>
+  <Container.Link href={navLink.href} className="focus:outline-none">
+    <Post className="group relative">
+      <Container>
+        <Post.Icon
+          className={{
+            parent: "inline-flex rounded-lg p-3",
+            child: {
+              dimension: "h-6 w-6",
+              typography:
+                "text-zinc-800 dark:text-zinc-100  group-hover:text-orange-primary ",
+            },
+          }}
+          Icon={navLink.icon}
+          aria-hidden="true"
+        />
+        <Post.Icon
+          className={{
+            parent: {
+              position: "absolute right-6 top-6",
+              typography:
+                "text-zinc-800 dark:text-zinc-100 group-hover:text-semibold",
+              otherStyles: "pointer-events-none ",
+            },
+            child: "h-4 w-4",
+          }}
+          Icon={ArrowDiagonal}
+          aria-hidden="true"
+        ></Post.Icon>
+      </Container>
+      <Container className="mt-8">
+        <Post.Title
+          as="h3"
+          className="text-base text-zinc-100  group-hover:text-semibold"
+          title={navLink.name}
+        ></Post.Title>
+      </Container>
+    </Post>
+  </Container.Link>
 );
 
 const NavbarGrid = () => {
@@ -62,25 +68,27 @@ const NavbarGrid = () => {
   const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
 
   return (
-    <nav className="relative w-full scale-90">
+    <Container
+      as="nav"
+      className={{ position: "relative", dimension: "w-full scale-90" }}
+    >
       <Container.Columns
-        className="w-full"
-        columns="grid-cols-2"
-        gapX="gap-x-10"
+        className={{ dimension: "w-full", grid: "grid-cols-2 gap-x-10" }}
       >
         {navLinks.map((navLink) => (
           <AnimatedCard
             key={navLink.name}
             animate={{ ...zoomIn(bgColor), ...popUp }}
-            className={"cursor-pointer opacity-60"}
-            dimensions="h-auto w-full"
-            rounded="rounded-md"
+            className={{
+              dimensions: "h-auto w-full",
+              otherStyles: "cursor-pointer opacity-60 rounded-md",
+            }}
           >
             <NavbarGridItem navLink={navLink} />
           </AnimatedCard>
         ))}
       </Container.Columns>
-    </nav>
+    </Container>
   );
 };
 
@@ -92,11 +100,22 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed top-0 left-0 h-screen w-screen bg-zinc-800/70">
-      <motion.nav
+    <Container
+      className={{
+        position: "fixed top-0 left-0",
+        dimension: "h-screen w-screen",
+        background: "bg-zinc-800/70",
+      }}
+    >
+      <AnimatedContainer
         animate={{ opacity: [0, 1], y: [200, 0] }}
         transition={{ duration: 0.7 }}
-        className="absolute left-0 right-0 bottom-0 mx-auto max-w-xl rounded-t-xl bg-zinc-800 pt-5 px-5 pb-36"
+        className={{
+          position: "absolute left-0 right-0 bottom-0",
+          dimension: "mx-auto max-w-xl pt-5 px-5 pb-36",
+          background: "bg-zinc-800",
+          otherStyles: "rounded-t-xl",
+        }}
         aria-label="Sidebar"
         ref={ref}
       >
@@ -140,8 +159,8 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
             </li>
           ))}
         </ul>
-      </motion.nav>
-    </div>
+      </AnimatedContainer>
+    </Container>
   );
 });
 
@@ -242,7 +261,7 @@ const NavbarStars = () => {
   }, [buttonRef]);
 
   return (
-    <div className="absolute w-full">
+    <Container className="absolute w-full">
       <motion.div
         whileHover={!isSmallerScreen && { scale: 2 }}
         transition={{ duration: 1 }}
@@ -264,7 +283,7 @@ const NavbarStars = () => {
         />
         <Component isVisible={isVisible} ref={modalRef} />
       </motion.div>
-    </div>
+    </Container>
   );
 };
 

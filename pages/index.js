@@ -361,14 +361,14 @@ const Index = () => {
   const ResponsiveComponent = isSmallScreen ? Carousel : ArticleList;
 
   return (
-    <>
+    <Container
+      className={{ dimension: "max-w-xl lg:max-w-4xl w-full mx-auto" }}
+    >
       <Hero />
       <Container.Section>
         <Container.Columns
           className={{
-            position: "mx-auto",
             grid: "grid-cols-1 lg:grid-cols-2 gap-y-20 gap-x-32",
-            dimension: "max-w-xl lg:max-w-4xl w-full",
           }}
         >
           <ResponsiveComponent articles={articles} />
@@ -378,7 +378,7 @@ const Index = () => {
           </Container>
         </Container.Columns>
       </Container.Section>
-    </>
+    </Container>
   );
 };
 

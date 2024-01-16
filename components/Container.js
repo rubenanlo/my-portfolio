@@ -1,17 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import clsx from "clsx";
 import { turnObjectIntoString } from "helpers/manipulateText";
 
 export const Container = ({ children, as, className, ...props }) => {
   let Component = as ?? "div";
   const classNameProp = turnObjectIntoString(className);
+
   return (
     <Component className={clsx(classNameProp)} {...props}>
       {children}
     </Component>
   );
 };
+
+export function AnimatedContainer({ children, className, ...props }) {
+  const classNameProps = turnObjectIntoString(className);
+  return (
+    <motion.div {...props} className={clsx(classNameProps)}>
+      {children}
+    </motion.div>
+  );
+}
 
 Container.Section = function ContainerSection({
   children,
@@ -85,15 +96,18 @@ Container.Link = function ContainerLink({
   Component,
   componentProps,
 }) {
+  const classNameParent = turnObjectIntoString(className?.parent);
+  const classNameChild = turnObjectIntoString(className?.child);
+
   return (
     <Link
       href={href}
-      className={clsx(className?.text, "cursor-pointer")}
+      className={clsx(classNameParent, "cursor-pointer")}
       onClick={onClick}
     >
       {Component && (
         <Component
-          className={clsx(className?.component, "w-auto h-7 fill-zinc-500")}
+          className={clsx(classNameChild, "w-auto h-7 fill-zinc-500")}
           {...componentProps}
         />
       )}
