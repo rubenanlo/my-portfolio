@@ -16,19 +16,19 @@ const text = {
   title: "Fullstack Web Developer, Economist",
   social: [
     {
-      social: GitHubIcon,
+      Social: GitHubIcon,
       href: "https://github.com/rubenanlo",
     },
     {
-      social: LinkedInIcon,
+      Social: LinkedInIcon,
       href: "https://www.linkedin.com/in/ruben-andino/",
     },
     {
-      social: TwitterIcon,
+      Social: TwitterIcon,
       href: "https://twitter.com/rubenanlo",
     },
     {
-      social: InstagramIcon,
+      Social: InstagramIcon,
       href: "https://www.instagram.com/benjiebao/",
     },
     {
@@ -40,11 +40,11 @@ const text = {
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);
-  const narvbarType = isSmallerScreen ? "stars" : "grid";
+  const navbarType = isSmallerScreen ? "stars" : "grid";
 
   return (
-    <Container.Section className="lg:py-40 w-full z-10 ">
-      <Container className="mt-10 max-w-md lg:max-w-none lg:mx-0 lg:pt-8 lg:pr-5 w-full ">
+    <Container.Section className="lg:py-40 w-full z-10">
+      <Container className="mt-10 lg:pt-8 w-full">
         <Image
           className="h-16 w-16 rounded-full dark:sepia"
           src={profilePic}
@@ -56,25 +56,32 @@ const Hero = () => {
             <TextLayout.Subtitle subtitle={text.title} />
             <TextLayout.Paragraph
               className="mt-6"
-              paragraph="As an economist with experience in consulting, I offer a distinct viewpoint. My specialty is in connecting business requirements with efficient web applications. With a passion for learning and improving everyday, I deliver customized solutions to generate the right brand awareness."
+              paragraph="I am a Full Stack Web Developer with a background in economics. My primarily focus is to build simple web applications based on complex data, by understanding and addressing business needs, automating processes to minimize human error, and allowing code reusability, and seamless code maintenance."
             />
-            <Container.Flex className="gap-x-6 mt-10" items="items-center">
-              {text.social.map(({ social, href }) => (
+            <Container.Flex
+              className={{
+                flex: "gap-x-6 items-center justify-start",
+                dimension: "mt-10",
+              }}
+            >
+              {text.social.map(({ Social, text, href }) => (
                 <Container.Link
-                  key={social || text}
+                  key={Social || text}
                   href={href}
                   target="_blank"
-                  Component={social}
+                  Component={Social}
+                  text={text}
                   className={{
-                    component:
+                    child:
                       "hover:fill-orange-primary dark:hover:fill-orange-tertiary",
-                    text: "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary sm:z-10",
+                    parent:
+                      "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary lg:z-10",
                   }}
                 />
               ))}
             </Container.Flex>
           </TextLayout>
-          <Navbar type={narvbarType} />
+          <Navbar type={navbarType} />
         </Container.Flex>
       </Container>
     </Container.Section>

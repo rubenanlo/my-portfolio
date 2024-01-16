@@ -56,6 +56,14 @@ const variantStyles = (currentPage) => ({
       "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-secondary",
     otherStyles: "rounded-md shadow-sm",
   },
+  theme: {
+    position: "fixed bottom-0 right-0 sm:top-0 sm:bottom-auto z-20",
+    dimension: "mr-5 mt-3 px-3 py-3 sm:px-2 sm:py-2 mb-5 sm:mb-0",
+    background: "bg-white/90 dark:bg-zinc-800/90 ",
+    ring: "ring-1 ring-zinc-900/5 dark:ring-white/10 dark:hover:ring-white/20",
+    otherStyles:
+      "group rounded-full shadow-lg shadow-zinc-800/5 backdrop-blur transition",
+  },
 });
 
 export const Button = ({
