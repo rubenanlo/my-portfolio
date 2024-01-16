@@ -83,10 +83,7 @@ let resume = [
     title: "Fullstack Web Developer",
     logo: sdsnLogo,
     start: "2022",
-    end: {
-      label: "Present",
-      dateTime: new Date().getFullYear().toString(),
-    },
+    end: "Present",
   },
   {
     company: "rawDev",
@@ -156,11 +153,10 @@ const ArticleList = ({ articles }) => {
   return (
     <Container.Flex
       className={{
-        dimension: "mt-2 w-full",
         position: "mx-auto",
         flex: "flex-col gap-y-5",
+        dimension: "mt-2 w-full",
       }}
-      justify="justify-between"
     >
       <Container.Flex
         className={{
@@ -223,7 +219,7 @@ const Contact = () => (
   >
     <TextLayout.Title
       as="h4"
-      className={"flex"}
+      className="flex"
       AdditionalComponent={<MailIcon className="h-6 w-6 flex-none mr-3" />}
       title={"Let's connect"}
     />
@@ -239,7 +235,6 @@ const Contact = () => (
         placeholder="Email address"
         aria-label="Email address"
         required
-        className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
       />
       <Button
         variant="primary"
@@ -284,24 +279,26 @@ const ArrowDownIcon = (props) => (
 );
 
 const Role = ({ item: role }) => {
-  const startLabel =
-    typeof role.start === "string" ? role.start : role.start.label;
-  const startDate =
-    typeof role.start === "string" ? role.start : role.start.dateTime;
-
-  const endLabel = typeof role.end === "string" ? role.end : role.end.label;
-  const endDate = typeof role.end === "string" ? role.end : role.end.dateTime;
-
   return (
     <>
-      <div className="relative mt-1 flex h-10 w-10 shrink-0 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+      <Container.Flex
+        className={{
+          position: "relative",
+          flex: "shrink-0 flex-none items-center justify-center",
+          dimension: "mt-1 h-10 w-10",
+          background: "dark:bg-zinc-800",
+          border: "dark:border dark:border-zinc-700/50",
+          ring: "ring-1 ring-zinc-900/5 dark:ring-0",
+          otherStyles: "rounded-full shadow-md shadow-zinc-800/5",
+        }}
+      >
         <Image
           src={role.logo}
           alt=""
           className="h-10 w-10 rounded-full"
           unoptimized
         />
-      </div>
+      </Container.Flex>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
         <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
@@ -314,11 +311,9 @@ const Role = ({ item: role }) => {
         <dt className="sr-only">Date</dt>
         <dd
           className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-          aria-label={`${startLabel} until ${endLabel}`}
+          aria-label={`${role.start} until ${role.end}`}
         >
-          <time dateTime={startDate}>{startLabel}</time>{" "}
-          <span aria-hidden="true">—</span>{" "}
-          <time dateTime={endDate}>{endLabel}</time>
+          {`${role.start} - ${role.end}`}
         </dd>
       </dl>
     </>
@@ -348,6 +343,7 @@ const Resume = () => (
         },
       }}
       AdditionalComponent={Role}
+      variant="array"
     />
     <Button
       href="#"
@@ -371,8 +367,8 @@ const Index = () => {
         <Container.Columns
           className={{
             position: "mx-auto",
-            dimension: "max-w-xl lg:max-w-4xl w-full",
             grid: "grid-cols-1 lg:grid-cols-2 gap-y-20 gap-x-32",
+            dimension: "max-w-xl lg:max-w-4xl w-full",
           }}
         >
           <ResponsiveComponent articles={articles} />

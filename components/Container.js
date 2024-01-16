@@ -109,10 +109,10 @@ Container.List = function ContainerList({
   AdditionalComponent,
 }) {
   const ParentComponent = as.parent ?? "ul";
-  const classNamePropParent = turnObjectIntoString(className.parent);
+  const classNamePropParent = turnObjectIntoString(className?.parent);
 
   const ChildComponent = as.child ?? "li";
-  const classNamePropChild = turnObjectIntoString(className.child);
+  const classNamePropChild = turnObjectIntoString(className?.child);
 
   return (
     <ParentComponent
