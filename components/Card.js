@@ -1,52 +1,39 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
-const bgColorCard = "bg-gradient-to-br from-slate-50 dark:from-slate-700";
+export const Card = ({ children, className, variant, style, ...props }) => {
+  const commonStyle = {
+    background: "bg-gradient-to-br from-slate-50 dark:from-slate-700",
+    dimension: "mb-5 w-full",
+    otherStyles: "rounded-xl shadow-xl mb-5",
+  };
+  const variants = {
+    fixedHeight: {
+      dimension: "h-52 w-52",
+    },
+  };
 
-export const Card = ({ children, className, style }) => (
-  <div
-    className={clsx(
-      bgColorCard,
-      className,
-      "rounded-xl shadow-xl mb-5 h-52 w-52"
-    )}
-    style={style}
-  >
-    <div className="p-6 h-full">{children}</div>
-  </div>
-);
+  const classNameProp = clsx(
+    turnObjectIntoString(className),
+    turnObjectIntoString(commonStyle),
+    turnObjectIntoString(variants[variant])
+  );
 
-Card.Stack = function CardStack({ children, as, className }) {
-  let Component = as ?? "div";
-  return <Component className={clsx(className, "mt-7")}>{children}</Component>;
-};
-
-export function AnimatedCard({
-  children,
-  className,
-  classNameText,
-  dimensions,
-  rounded,
-  ...props
-}) {
   return (
     <motion.div
+      className={clsx(classNameProp)}
+      style={style}
       {...props.animate}
-      className={clsx(
-        className,
-        bgColorCard,
-        dimensions,
-        rounded ? rounded : "rounded-xl",
-        "shadow-xl mb-5"
-      )}
     >
-      <div className={classNameText}>{children}</div>
+      <div className="p-6 h-full">{children}</div>
     </motion.div>
   );
-}
+};
 
-Card.Header = function CardHeader({ children, className }) {
-  return <div className={clsx(className)}>{children}</div>;
+Card.Header = function CardHeader({ as, children, title, className }) {
+  let Component = as ?? "div";
+  return <Component className={clsx(className)}>{children || title}</Component>;
 };
 
 Card.Paragraph = function CardParagraph({ children, className }) {

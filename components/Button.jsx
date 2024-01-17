@@ -1,23 +1,93 @@
 import Link from "next/link";
 import clsx from "clsx";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
-const variantStyles = {
-  primary:
-    "bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70",
-  secondary:
-    "bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70",
+const commonStyle = {
+  flex: "inline-flex items-center gap-2 justify-center",
+  dimension: "py-2 px-5",
+  typography: "text-sm",
+  outline: "outline-offset-2",
+  otherStyles: "rounded-md transition active:transition-none",
 };
 
-export function Button({ variant = "primary", className, ...props }) {
-  className = clsx(
-    "inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none",
-    variantStyles[variant],
-    className
+const variantStyles = (currentPage) => ({
+  primary: {
+    background: "bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-800",
+    typography:
+      "font-semibold text-zinc-100 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70",
+  },
+  secondary: {
+    background:
+      "bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 dark:active:bg-zinc-800/50",
+    typography:
+      "font-medium text-zinc-900 active:text-zinc-900/60 dark:text-zinc-300 dark:hover:text-zinc-50 dark:active:text-zinc-50/70",
+  },
+  arrow: {
+    position: "relative focus:z-20",
+    dimension: "px-1",
+    typography: "text-gray-400",
+    otherStyles: "rounded-r-md focus:outline-offset-0",
+  },
+  pagination: currentPage
+    ? {
+        position: "z-10 focus:z-20",
+        dimension: "w-8",
+        background: "bg-neutral-main bg-orange-tertiary/20",
+        typography: "text-zinc-400 font-bold",
+        outline:
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600",
+      }
+    : {
+        position: "hidden focus:z-20",
+        dimension: "w-8",
+        flex: "items-center md:inline-flex",
+        typography: "text-neutral-darkest",
+        background: "hover:bg-zinc-700/20",
+        outline: "focus:outline-offset-0",
+      },
+  login: {
+    flex: "flex justify-center",
+    typography:
+      "text-sm font-semibold leading-6 text-zinc-800 dark:text-orange-primary",
+    background:
+      "bg-orange-secondary dark:bg-orange-tertiary hover:bg-orange-quaternary dark:hover:bg-orange-quaternary",
+    dimension: "w-full px-3 py-1.5",
+    focus:
+      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-secondary",
+    otherStyles: "rounded-md shadow-sm",
+  },
+  theme: {
+    position: "fixed bottom-0 right-0 sm:top-0 sm:bottom-auto z-20",
+    dimension: "mr-5 mt-3 px-3 py-3 sm:px-2 sm:py-2 mb-5 sm:mb-0",
+    background: "bg-white/90 dark:bg-zinc-800/90 ",
+    ring: "ring-1 ring-zinc-900/5 dark:ring-white/10 dark:hover:ring-white/20",
+    otherStyles:
+      "group rounded-full shadow-lg shadow-zinc-800/5 backdrop-blur transition",
+  },
+});
+
+export const Button = ({
+  variant = "primary",
+  className,
+  currentPage,
+  text,
+  children,
+  ...props
+}) => {
+  const classNameProps = clsx(
+    turnObjectIntoString(variantStyles(currentPage)[variant]),
+    turnObjectIntoString(commonStyle),
+    turnObjectIntoString(className)
   );
 
   return typeof props.href === "undefined" ? (
-    <button className={className} {...props} />
+    <button className={classNameProps} {...props}>
+      {text || children}
+    </button>
   ) : (
-    <Link className={className} {...props} />
+    <Link className={classNameProps} {...props}>
+      {children}
+      {text}
+    </Link>
   );
-}
+};

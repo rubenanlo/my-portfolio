@@ -1,42 +1,105 @@
 import clsx from "clsx";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
 export function Form({ as, className, children, ...props }) {
   let Component = as ?? "form";
+  const classNameProp = turnObjectIntoString(className);
 
   return (
-    <Component className={clsx(className, "space-y-6")} {...props}>
+    <Component className={clsx(classNameProp, "space-y-6")} {...props}>
       {children}
     </Component>
   );
 }
 
 // Please ensure that the fields used here are valid HTML input types
-
-Form.Field = function FormField({ field, ...props }) {
-  return (
-    <div>
-      <div className="flex items-center relative top-[1.27rem]">
-        <div className="border-b border-zinc-800 dark:border-zinc-400 w-3" />
-        <label
-          htmlFor={field}
-          className="block shrink-0 text-sm font-medium leading-6 text-zinc-800 dark:text-zinc-400 px-2"
+Form.Field = function FormField({
+  field,
+  variant = "primary",
+  placeholder = field,
+  required = false,
+}) {
+  const variantComponents = {
+    primary: (
+      <input
+        type={field}
+        placeholder={placeholder}
+        aria-label={field}
+        autoComplete={field}
+        required={required}
+        className={turnObjectIntoString({
+          flex: "flex-auto",
+          dimension: "min-w-0 py-[calc(theme(spacing.2)-1px)] px-3",
+          background: "bg-white dark:bg-zinc-700/[0.15]",
+          typography:
+            "sm:text-sm placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-500",
+          border:
+            "border border-zinc-900/10 focus:border-teal-500 dark:border-zinc-700 dark:focus:border-teal-400",
+          ring: "dark:focus:ring-teal-400/10 focus:ring-4 focus:ring-teal-500/10",
+          otherStyles:
+            "appearance-none rounded-md shadow-md shadow-zinc-800/5 focus:outline-none",
+        })}
+      />
+    ),
+    secondary: (
+      <div>
+        <div
+          className={turnObjectIntoString({
+            flex: "flex items-center",
+            position: "relative top-[1.27rem]",
+          })}
         >
-          {field}
-        </label>
-        <div className="border-b w-full border-zinc-800 dark:border-zinc-400" />
+          <div
+            className={turnObjectIntoString({
+              dimension: "w-3",
+              border: "border-b border-zinc-800 dark:border-zinc-400",
+            })}
+          />
+          <label
+            htmlFor={field}
+            className={turnObjectIntoString({
+              position: "block",
+              dimension: "shrink-0  px-2",
+              typography:
+                "text-sm font-medium leading-6 text-zinc-800 dark:text-zinc-400",
+            })}
+          >
+            {field}
+          </label>
+          <div
+            className={turnObjectIntoString({
+              dimension: "w-full",
+              border: "border-b border-zinc-800 dark:border-zinc-400",
+            })}
+          />
+        </div>
+        <div
+          className={turnObjectIntoString({
+            dimension: "mt-2",
+            border:
+              "rounded-b-sm border-b border-x border-zinc-800 dark:border-zinc-400",
+          })}
+        >
+          <input
+            id={field}
+            name={field}
+            type={field}
+            autoComplete={field}
+            className={turnObjectIntoString({
+              position: "block",
+              dimension: "w-full py-1.5 px-3",
+              background: "bg-transparent",
+              border: "border-none",
+              typography:
+                "placeholder:text-gray-400 sm:text-sm sm:leading-6 text-gray-50",
+              otherStyles: "shadow-sm focus:ring-0 focus:outline-none",
+            })}
+          />
+        </div>
       </div>
-      <div className="mt-2 rounded-b-sm border-b border-x border-zinc-800 dark:border-zinc-400">
-        <input
-          {...props}
-          id={field}
-          name={field}
-          type={field}
-          autoComplete={field}
-          className="block border-none w-full py-1.5 px-3 shadow-sm bg-transparent placeholder:text-gray-400 focus:ring-0 focus:outline-none  sm:text-sm sm:leading-6 text-gray-50"
-        />
-      </div>
-    </div>
-  );
+    ),
+  };
+  return variantComponents[variant];
 };
 
 Form.Checkbox = function FormCheckbox({ field, text, ...props }) {
@@ -56,19 +119,5 @@ Form.Checkbox = function FormCheckbox({ field, text, ...props }) {
         {text}
       </label>
     </div>
-  );
-};
-
-Form.Button = function FormButton({ className, text }) {
-  return (
-    <button
-      type="submit"
-      className={clsx(
-        className,
-        "flex w-full justify-center rounded-md text-zinc-800 dark:text-orange-primary bg-orange-secondary dark:bg-orange-tertiary hover:bg-orange-quaternary dark:hover:bg-orange-quaternary px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-secondary"
-      )}
-    >
-      {text}
-    </button>
   );
 };

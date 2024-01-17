@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { truncate } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
-import { AnimatedCard } from "components/Card";
+import { Card } from "components/Card";
 import { TextLayout } from "components/TextLayout";
 import ShowTruncated from "components/modals/ShowTruncated";
 import { useModalTooltip } from "helpers/useModalTooltip";
@@ -105,17 +105,17 @@ const Dashboard = () => {
   const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
 
   return (
-    <Container.Section fullScreen className="w-auto">
+    <Container.Section className="w-auto">
       <ResponsiveComponent
         column
-        className="w-full lg:mt-24 h-full lg:h-auto gap-x-3 overflow-y-auto lg:overflow-y-visible"
-        columns="grid-cols-1 lg:grid-cols-4"
+        className="w-full lg:mt-24 lg:h-auto gap-x-10 gap-y-5"
+        columns="grid-cols-1 lg:grid-cols-3"
         content="content-start"
         justify="justify-items-center"
       >
         {cards.map(({ name, href, description, tag }, index) => (
           <>
-            <AnimatedCard
+            <Card
               key={name}
               animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
               className={clsx(index % 2 ? "row-span-2" : "", "cursor-pointer")}
@@ -154,7 +154,7 @@ const Dashboard = () => {
                   </Container.Flex>
                 </Container.Flex>
               </Container.Link>
-            </AnimatedCard>
+            </Card>
             <ShowTruncated
               value={fullText}
               isVisible={modalVisibility}

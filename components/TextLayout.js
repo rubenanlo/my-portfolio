@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { turnObjectIntoString } from "helpers/manipulateText";
 
 export const TextLayout = ({ className, children }) => (
   <div className={clsx(className, "text-zinc-500 dark:text-gray-200")}>
@@ -6,14 +7,28 @@ export const TextLayout = ({ className, children }) => (
   </div>
 );
 
-TextLayout.Title = function TextLayoutTitle({ title, className, props }) {
+TextLayout.Title = function TextLayoutTitle({
+  as,
+  title,
+  AdditionalComponent,
+  className,
+  props,
+}) {
+  const Component = as ?? "h1";
+  const classNameProp = turnObjectIntoString(className);
+
+  const variants = {
+    h1: "text-4xl font-bold sm:text-5xl",
+    h2: "text-2xl sm:text-3xl",
+    h3: "text-xl sm:text-2xl",
+    h4: "text-sm font-semibold text-zinc-900 dark:text-zinc-100",
+  };
+
   return (
-    <h1
-      className={clsx(className, "text-4xl font-bold sm:text-5xl")}
-      {...props}
-    >
+    <Component className={clsx(classNameProp, variants[as])} {...props}>
+      {AdditionalComponent}
       {title}
-    </h1>
+    </Component>
   );
 };
 
@@ -34,8 +49,13 @@ TextLayout.Paragraph = function TextLayoutParagraph({
   className,
   ...props
 }) {
+  const classNameProp = turnObjectIntoString(className);
+
   return (
-    <p className={clsx(className, " text-gray-400")} {...props}>
+    <p
+      className={clsx(classNameProp, "text-zinc-600 dark:text-zinc-400")}
+      {...props}
+    >
       {paragraph}
     </p>
   );
