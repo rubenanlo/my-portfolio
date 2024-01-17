@@ -21,9 +21,15 @@ export function Post({ as, className, children, ...props }) {
 }
 
 Post.Icon = function PostIcon({ Icon, className, ...props }) {
+  const classNameParent = turnObjectIntoString(className.parent);
+  const classNameChild = turnObjectIntoString(className.child);
+
   return (
-    <span className={clsx(className.span)}>
-      <Icon {...props} className={clsx(className.component)} />
+    <span className={clsx(classNameParent)}>
+      <Icon
+        {...props}
+        className={clsx(classNameChild, "text-zinc-800 dark:text-zinc-400")}
+      />
     </span>
   );
 };

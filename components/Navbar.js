@@ -7,7 +7,7 @@ import { inSphere } from "maath/random";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { Post } from "components/Post";
-import { AnimatedCard } from "components/Card";
+import { Card } from "components/Card";
 import { Container, AnimatedContainer } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
@@ -21,76 +21,67 @@ const ArrowDiagonal = (props) => (
   </svg>
 );
 
-// !Change the Post component to a Card
-const NavbarGridItem = ({ navLink }) => (
-  <Container.Link href={navLink.href} className="focus:outline-none">
-    <Post className="group relative">
-      <Container>
-        <Post.Icon
-          className={{
-            parent: "inline-flex rounded-lg p-3",
-            child: {
-              dimension: "h-6 w-6",
-              typography:
-                "text-zinc-800 dark:text-zinc-100  group-hover:text-orange-primary ",
-            },
-          }}
-          Icon={navLink.icon}
-          aria-hidden="true"
-        />
-        <Post.Icon
-          className={{
-            parent: {
-              position: "absolute right-6 top-6",
-              typography:
-                "text-zinc-800 dark:text-zinc-100 group-hover:text-semibold",
-              otherStyles: "pointer-events-none ",
-            },
-            child: "h-4 w-4",
-          }}
-          Icon={ArrowDiagonal}
-          aria-hidden="true"
-        ></Post.Icon>
-      </Container>
-      <Container className="mt-8">
-        <Post.Title
-          as="h3"
-          className="text-base text-zinc-100  group-hover:text-semibold"
-          title={navLink.name}
-        ></Post.Title>
-      </Container>
-    </Post>
-  </Container.Link>
-);
-
-const NavbarGrid = () => {
+const NavbarGridItem = ({ navLink }) => {
   const { resolvedTheme } = useTheme();
   const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
-
   return (
-    <Container
-      as="nav"
-      className={{ position: "relative", dimension: "w-full scale-90" }}
+    <Card
+      animate={{ ...zoomIn(bgColor), ...popUp }}
+      className={{
+        dimension: "h-auto w-full",
+        otherStyles: "cursor-pointer opacity-60 rounded-md",
+      }}
     >
-      <Container.Columns
-        className={{ dimension: "w-full", grid: "grid-cols-2 gap-x-10" }}
-      >
-        {navLinks.map((navLink) => (
-          <AnimatedCard
-            key={navLink.name}
-            animate={{ ...zoomIn(bgColor), ...popUp }}
+      <Container.Link href={navLink.href} className="focus:outline-none">
+        <Container className="group relative">
+          <Post.Icon
             className={{
-              dimensions: "h-auto w-full",
-              otherStyles: "cursor-pointer opacity-60 rounded-md",
+              parent: "inline-flex rounded-lg",
+              child: {
+                dimension: "h-6 w-6",
+                typography: "group-hover:text-orange-primary ",
+              },
             }}
-          >
-            <NavbarGridItem navLink={navLink} />
-          </AnimatedCard>
-        ))}
-      </Container.Columns>
-    </Container>
+            Icon={navLink.icon}
+            aria-hidden="true"
+          />
+          <Post.Icon
+            className={{
+              parent: {
+                position: "absolute right-0 top-0",
+                typography: "group-hover:text-semibold",
+                otherStyles: "pointer-events-none ",
+              },
+              child: "h-4 w-4",
+            }}
+            Icon={ArrowDiagonal}
+            aria-hidden="true"
+          />
+          <Card.Header
+            as="h3"
+            className="mt-8 text-base text-zinc-100  group-hover:text-semibold"
+            title={navLink.name}
+          />
+        </Container>
+      </Container.Link>
+    </Card>
   );
 };
+
+const NavbarGrid = () => (
+  <Container
+    as="nav"
+    className={{ position: "relative", dimension: "w-full scale-90" }}
+  >
+    <Container.Columns
+      className={{ dimension: "w-full", grid: "grid-cols-2 gap-x-10" }}
+    >
+      {navLinks.map((navLink) => (
+        <NavbarGridItem key={navLink.name} navLink={navLink} />
+      ))}
+    </Container.Columns>
+  </Container>
+);
 
 NavbarGrid.displayName = "NavbarGrid";
 
