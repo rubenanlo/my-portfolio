@@ -1,6 +1,7 @@
 import ARROW_CURVE_DARK from "assets/arrow-curve-dark.png";
 import ARROW_CURVE_LIGHT from "assets/arrow-curve-light.png";
 import BAKER_MCKENZIE_LOGO from "assets/baker_mckenzie_logo.jpeg";
+import BURGER from "assets/burger.svg";
 import DELOITTE_LOGO from "assets/deloitte_logo.jpeg";
 import EY_LOGO from "assets/ey_logo.jpeg";
 import HTML from "assets/html.svg";
@@ -12,6 +13,7 @@ import UNSDSN_LOGO from "assets/unsdsn_logo.jpeg";
 export { ARROW_CURVE_DARK };
 export { ARROW_CURVE_LIGHT };
 export { BAKER_MCKENZIE_LOGO };
+export { BURGER };
 export { DELOITTE_LOGO };
 export { EY_LOGO };
 export { HTML };

@@ -1,9 +1,6 @@
-import { useRef, useState, Suspense, useEffect, forwardRef } from "react";
+import { useRef, useState, useEffect, forwardRef } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
-import { inSphere } from "maath/random";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { Post } from "components/Post";
@@ -11,9 +8,13 @@ import { Card } from "components/Card";
 import { Container, AnimatedContainer } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
-import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
+import {
+  LOGO_LINKEDIN_1 as rawDevLogo,
+  BURGER as burger,
+} from "helpers/exportImages";
 import { NAVLINKS as navLinks } from "library/navlinks";
 import { zoomIn, popUp } from "library/animations";
+import Image from "next/image";
 
 const ArrowDiagonal = (props) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -157,66 +158,7 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
 
 NavbarListModal.displayName = "NavbarListModal";
 
-const Stars = (props) => {
-  const ref = useRef();
-
-  useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
-  });
-
-  return (
-    <group rotation={[0, 0, Math.PI / 3]}>
-      <Points
-        ref={ref}
-        positions={props.positions}
-        stride={3}
-        frustumCulled
-        {...props}
-      >
-        <PointMaterial
-          transparent
-          color={props.color}
-          size={0.03}
-          sizeAttenuation={true}
-          depthWrite={false}
-        />
-      </Points>
-    </group>
-  );
-};
-
-const CameraAnimator = ({ isHovered }) => {
-  useFrame(({ camera }) => {
-    if (isHovered) {
-      camera.position.lerp({ x: 0, y: 0, z: 0.5 }, 0.1);
-    } else {
-      camera.position.lerp({ x: 0, y: 0, z: 1.8 }, 0.1);
-    }
-  });
-
-  return null; // This component does not render anything itself
-};
-
-const StarsCanvas = forwardRef(({ isHovered }, ref) => {
-  const { resolvedTheme } = useTheme();
-  const pointColor = resolvedTheme === "dark" ? "white" : "#111827";
-
-  const sphere = inSphere(new Float32Array(3000), { radius: 1.15 });
-
-  return (
-    <Canvas className="rounded-full opacity-40 dark:opacity-50" ref={ref}>
-      <CameraAnimator isHovered={isHovered} />
-      <Suspense fallback={null}>
-        <Stars color={pointColor} positions={sphere} />
-      </Suspense>
-    </Canvas>
-  );
-});
-
-StarsCanvas.displayName = "StarsCanvas";
-
-const NavbarStars = () => {
+const NavbarMobile = () => {
   const isSmallerScreen = useResponsive(1024);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setHovered] = useState(false);
@@ -227,29 +169,6 @@ const NavbarStars = () => {
   useEffect(() => {
     handleOutsideClick(modalRef, setIsVisible, buttonRef);
   }, [setIsVisible]);
-
-  useEffect(() => {
-    function adjustHeight() {
-      if (buttonRef.current) {
-        const viewportHeight = window.innerHeight;
-        buttonRef.current.style.height = `${viewportHeight}px`;
-      }
-    }
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", adjustHeight);
-
-      // Set initial height
-      adjustHeight();
-    }
-
-    // Cleanup function
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", adjustHeight);
-      }
-    };
-  }, [buttonRef]);
 
   return (
     <Container className="absolute w-full">
@@ -267,10 +186,13 @@ const NavbarStars = () => {
         }}
         className="fixed bottom-5 left-5 sm:left-auto sm:fixed sm:-top-10 sm:right-[15%] lg:top-0 lg:right-0 lg:relative w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] self-center lg:self-start mr-10 desktop-sm:mr-0 desktop-sm:self-center flex-shrink-0 cursor-pointer mx-auto"
       >
-        <StarsCanvas
+        <Image
           isHovered={isHovered}
           setHovered={setHovered}
           ref={buttonRef}
+          src={burger}
+          alt="burger"
+          className="h-10 w-auto mt-1"
         />
         <Component isVisible={isVisible} ref={modalRef} />
       </motion.div>
@@ -332,8 +254,8 @@ const Navbar = ({ type }) => {
   const isSmallerScreen = useResponsive(640);
 
   if (type === "grid") return <NavbarGrid />;
-  if (type === "stars") return <NavbarStars />;
-  if (type === "blended" && isSmallerScreen) return <NavbarStars />;
+  if (type === "list") return <NavbarMobile />;
+  if (type === "blended" && isSmallerScreen) return <NavbarMobile />;
   if (type === "blended" && !isSmallerScreen) return <NavbarIsland />;
 };
 

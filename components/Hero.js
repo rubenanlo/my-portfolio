@@ -40,7 +40,7 @@ const text = {
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);
-  const navbarType = isSmallerScreen ? "stars" : "grid";
+  const navbarType = isSmallerScreen ? "list" : "grid";
 
   return (
     <Container.Section className="lg:py-40 w-full z-10">
