@@ -68,7 +68,7 @@ export const AppLayout = ({ children }) => {
             className={{
               flex: "flex-col justify-between",
               dimension: "mt-[10vh] rounded-t-2xl  min-h-[90vh]",
-              background: "bg-gray-100/90 dark:bg-gray-900/90",
+              background: "bg-gray-100 dark:bg-gray-900/80",
             }}
           >
             {children}
