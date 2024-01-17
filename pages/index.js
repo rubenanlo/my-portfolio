@@ -17,7 +17,6 @@ import {
   UNSDSN_LOGO as sdsnLogo,
   BAKER_MCKENZIE_LOGO as bakerLogo,
 } from "helpers/exportImages";
-import AmbientCanvasBackground from "../components/AmbientBackground";
 
 const articles = [
   {
@@ -365,7 +364,6 @@ const Index = () => {
     <Container
       className={{ dimension: "max-w-xl lg:max-w-4xl w-full mx-auto" }}
     >
-      <AmbientCanvasBackground />
       <Hero />
       <Container.Section>
         <Container.Columns

@@ -4,6 +4,7 @@ import { Header } from "components/Header";
 import Footer from "components/Footer";
 import { Container } from "components/Container";
 import Navbar from "components/Navbar";
+import AmbientCanvasBackground from "components/AmbientBackground";
 
 const WaterMark = () => (
   <Container
@@ -34,40 +35,47 @@ export const AppLayout = ({ children }) => {
 
   const noFooterPaths = ["/admin"];
   const noBlendedNavbarPaths = ["/", "/#", "/admin"];
+  const twirlPaths = ["/"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
+  const hasTwirlPaths = twirlPaths.includes(asPath);
 
   return (
-    <Container
-      className={{
-        position: "relative",
-        dimension: "min-h-screen",
-        background: "bg-slate-200 dark:bg-black",
-        overflow: "overflow-x-hidden",
-        otherStyles: "antialiased lg:scrollbar",
-      }}
-    >
+    <>
+      {hasTwirlPaths && resolvedTheme === "dark" && <AmbientCanvasBackground />}
       <Container
         className={{
-          position: "mx-auto",
-          dimension: "max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl",
-          typography: "font-lato text-gray-200",
+          position: hasTwirlPaths
+            ? "absolute top-0 left-0 w-full h-full"
+            : "relative",
+          dimension: "min-h-screen",
+          background: "bg-slate-200 dark:bg-black/50",
+          overflow: "overflow-x-hidden",
+          otherStyles: "antialiased lg:scrollbar",
         }}
       >
-        {resolvedTheme === "dark" && <WaterMark />}
-        {hasBlendedNavbar && <Navbar type="blended" />}
-        <Header />
-        <Container.Flex
+        <Container
           className={{
-            flex: "flex-col justify-between",
-            dimension: "mt-[10vh] rounded-t-2xl  min-h-[90vh]",
-            background: "bg-gray-100 dark:bg-gray-900",
+            position: "mx-auto",
+            dimension: "max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl",
+            typography: "font-lato text-gray-200",
           }}
         >
-          {children}
-          {hasFooter && <Footer />}
-        </Container.Flex>
+          {resolvedTheme === "dark" && <WaterMark />}
+          {hasBlendedNavbar && <Navbar type="blended" />}
+          <Header />
+          <Container.Flex
+            className={{
+              flex: "flex-col justify-between",
+              dimension: "mt-[10vh] rounded-t-2xl  min-h-[90vh]",
+              background: "bg-gray-100/90 dark:bg-gray-900/90",
+            }}
+          >
+            {children}
+            {hasFooter && <Footer />}
+          </Container.Flex>
+        </Container>
       </Container>
-    </Container>
+    </>
   );
 };

@@ -16,7 +16,7 @@ const AmbientCanvasBackground = () => {
   }, []);
 
   return (
-    <Container className="content content--canvas bg-transparent">
+    <Container className="content--canvas">
       <canvas ref={canvasRef}></canvas>
     </Container>
   );

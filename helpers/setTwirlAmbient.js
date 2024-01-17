@@ -16,7 +16,7 @@ const noiseSteps = 8;
 const xOff = 0.00125;
 const yOff = 0.00125;
 const zOff = 0.0005;
-//   const backgroundColor = "hsla(260,40%,5%,1)";
+const backgroundColor = "hsla(260,40%,5%,1)";
 
 let container;
 let canvas;
@@ -36,14 +36,14 @@ const fadeInOut = (t, m) => {
 };
 const lerp = (n1, n2, speed) => (1 - speed) * n1 + speed * n2;
 
-export function setupTwirl() {
+export const setupTwirl = () => {
   createCanvas();
   resize();
   initParticles();
   draw();
-}
+};
 
-function initParticles() {
+const initParticles = () => {
   tick = 0;
   noise3D = createNoise3D();
   particleProps = new Float32Array(particlePropsLength);
@@ -53,9 +53,9 @@ function initParticles() {
   for (i = 0; i < particlePropsLength; i += particlePropCount) {
     initParticle(i);
   }
-}
+};
 
-function initParticle(i) {
+const initParticle = (i) => {
   let x, y, vx, vy, life, ttl, speed, radius, hue;
 
   x = rand(canvas.a.width);
@@ -69,17 +69,17 @@ function initParticle(i) {
   hue = baseHue + rand(rangeHue);
 
   particleProps.set([x, y, vx, vy, life, ttl, speed, radius, hue], i);
-}
+};
 
-function drawParticles() {
+const drawParticles = () => {
   let i;
 
   for (i = 0; i < particlePropsLength; i += particlePropCount) {
     updateParticle(i);
   }
-}
+};
 
-function updateParticle(i) {
+const updateParticle = (i) => {
   let i2 = 1 + i,
     i3 = 2 + i,
     i4 = 3 + i,
@@ -114,9 +114,9 @@ function updateParticle(i) {
   particleProps[i5] = life;
 
   (checkBounds(x, y) || life > ttl) && initParticle(i);
-}
+};
 
-function drawParticle(x, y, x2, y2, life, ttl, radius, hue) {
+const drawParticle = (x, y, x2, y2, life, ttl, radius, hue) => {
   ctx.a.save();
   ctx.a.lineCap = "round";
   ctx.a.lineWidth = radius;
@@ -127,13 +127,13 @@ function drawParticle(x, y, x2, y2, life, ttl, radius, hue) {
   ctx.a.stroke();
   ctx.a.closePath();
   ctx.a.restore();
-}
+};
 
-function checkBounds(x, y) {
+const checkBounds = (x, y) => {
   return x > canvas.a.width || x < 0 || y > canvas.a.height || y < 0;
-}
+};
 
-function createCanvas() {
+const createCanvas = () => {
   container = document.querySelector(".content--canvas");
   canvas = {
     a: document.createElement("canvas"),
@@ -152,9 +152,9 @@ function createCanvas() {
     b: canvas.b.getContext("2d"),
   };
   center = [];
-}
+};
 
-export function resize() {
+export const resize = () => {
   const { innerWidth, innerHeight } = window;
 
   canvas.a.width = innerWidth;
@@ -169,9 +169,9 @@ export function resize() {
 
   center[0] = 0.5 * canvas.a.width;
   center[1] = 0.5 * canvas.a.height;
-}
+};
 
-function renderGlow() {
+const renderGlow = () => {
   ctx.b.save();
   ctx.b.filter = "blur(8px) brightness(200%)";
   ctx.b.globalCompositeOperation = "lighter";
@@ -183,21 +183,21 @@ function renderGlow() {
   ctx.b.globalCompositeOperation = "lighter";
   ctx.b.drawImage(canvas.a, 0, 0);
   ctx.b.restore();
-}
+};
 
-function renderToScreen() {
+const renderToScreen = () => {
   ctx.b.save();
   ctx.b.globalCompositeOperation = "lighter";
   ctx.b.drawImage(canvas.a, 0, 0);
   ctx.b.restore();
-}
+};
 
-function draw() {
+const draw = () => {
   tick++;
 
   ctx.a.clearRect(0, 0, canvas.a.width, canvas.a.height);
 
-  // ctx.b.fillStyle = backgroundColor;
+  ctx.b.fillStyle = backgroundColor;
   ctx.b.fillRect(0, 0, canvas.a.width, canvas.a.height);
 
   drawParticles();
@@ -205,4 +205,4 @@ function draw() {
   renderToScreen();
 
   window.requestAnimationFrame(draw);
-}
+};
