@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, forwardRef } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
@@ -14,7 +15,6 @@ import {
 } from "helpers/exportImages";
 import { NAVLINKS as navLinks } from "library/navlinks";
 import { zoomIn, popUp } from "library/animations";
-import Image from "next/image";
 
 const ArrowDiagonal = (props) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -129,7 +129,7 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
               <Container.Link
                 href={navLink.href}
                 className={{
-                  text: clsx(
+                  parent: clsx(
                     index === isIndex
                       ? "bg-zinc-50 text-orange-tertiary"
                       : "text-zinc-400 ",
@@ -208,14 +208,12 @@ const NavbarIslandItem = () => {
     <Container as="li" key={name}>
       <Container.Link
         href={href}
-        className={{
-          text: clsx(
-            "relative block px-3 py-1 transition text-xs font-light",
-            isActive(name)
-              ? "text-orange-secondary dark:text-orange-testiary"
-              : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
-          ),
-        }}
+        className={clsx(
+          "relative block px-3 py-1 transition text-xs font-light",
+          isActive(name)
+            ? "text-orange-secondary dark:text-orange-testiary"
+            : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
+        )}
       >
         {name}
       </Container.Link>
@@ -226,18 +224,25 @@ const NavbarIslandItem = () => {
 const NavbarIsland = () => (
   <Container
     as="nav"
-    className="absolute left-0 right-0 max-w-sm mx-auto top-5 z-10"
+    className={{
+      position: "absolute left-0 right-0 top-5 z-10",
+      dimension: "max-w-sm mx-auto",
+    }}
   >
     <Container.Flex
       as="ul"
-      justify="justify-center"
-      items="items-center"
-      className="list-none rounded-full bg-gray-50 px-3 py-1 text-sm font-medium text-zinc-800  dark:bg-transparent dark:text-zinc-200"
+      className={{
+        flex: "justify-center items-center gap-x-10",
+        dimension: "px-3 py-1 w-full",
+        typography: "text-sm font-medium text-zinc-800 dark:text-zinc-200",
+        background: "bg-gray-50 dark:bg-transparent",
+        otherStyles: "list-none rounded-full",
+      }}
     >
       <Container.Link
         href="/"
         className={{
-          text: "mr-5",
+          dimension: "mr-5",
         }}
         Component={Container.Logo}
         componentProps={{
