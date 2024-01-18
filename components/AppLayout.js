@@ -61,6 +61,7 @@ export const AppLayout = ({ children }) => {
         >
           {resolvedTheme === "dark" && <WaterMark />}
           {hasBlendedNavbar && <Navbar type="blended" />}
+
           <Header />
           <Container.Flex
             className={{
