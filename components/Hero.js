@@ -47,8 +47,6 @@ const Hero = () => {
   const [isReady, setIsReady] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
   const [isLoading, setIsLoading] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
 
-  console.log(router.isReady, isLoading);
-
   useEffect(() => {
     setIsReady(router.isReady);
     if (router.isReady && isLoading) {
