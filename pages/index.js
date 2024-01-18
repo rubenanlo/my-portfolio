@@ -293,14 +293,15 @@ const Resume = () => (
       AdditionalComponent={Role}
       variant="array"
     />
-    <Button
-      href="#"
-      variant="secondary"
-      className={{ dimension: "mt-6 w-full", otherStyles: "group" }}
-    >
-      Download CV
-      <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-    </Button>
+    <Container.Link href="docs/resume.pdf" target="_blank">
+      <Button
+        variant="secondary"
+        className={{ dimension: "mt-6 w-full", otherStyles: "group" }}
+      >
+        Download CV
+        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+      </Button>
+    </Container.Link>
   </Container>
 );
 

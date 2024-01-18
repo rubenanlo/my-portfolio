@@ -23,28 +23,43 @@ const Admin = () => {
   ];
 
   return (
-    <Container className="absolute top-0 left-0 h-full w-full flex justify-center ">
-      <Container className="flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <Container className="mx-auto w-full max-w-sm lg:w-96">
-          <Container.Flex className="gap-x-7 items-center justify-center">
-            <Container.Link
-              href={"/"}
-              Component={Container.Logo}
-              componentProps={{
-                src: rawDevLogo,
-                alt: "my-logo",
-              }}
-              className={{
-                component: "h-[3rem] w-auto rounded-full",
-              }}
-            />
+    <Container
+      className={{
+        position: "absolute top-0 left-0",
+        flex: "flex justify-center",
+        dimension: "h-full w-full",
+      }}
+    >
+      <Container
+        className={{
+          flex: "flex flex-col justify-center lg:flex-none",
+          dimension: "px-4 py-12 sm:px-6 lg:px-20 xl:px-24",
+        }}
+      >
+        <Container
+          className={{
+            position: "mx-auto",
+            dimension: "w-full max-w-sm lg:w-96",
+          }}
+        >
+          <Container.Flex
+            className={{ flex: "gap-x-7 items-center justify-center" }}
+          >
+            <Container.Link href={"/"}>
+              <Container.Logo
+                src={rawDevLogo}
+                alt="my-logo"
+                className="h-14 w-auto rounded-full"
+              />
+            </Container.Link>
             <TextLayout.Title
               as="h4"
-              className="tracking-tight text-zinc-800 dark:text-zinc-100"
+              className={{
+                typography: "tracking-tight text-zinc-800 dark:text-zinc-100",
+              }}
               title="Sign in to your account"
             />
           </Container.Flex>
-
           <Container className="mt-5">
             <Container>
               <Form
@@ -73,9 +88,9 @@ const Admin = () => {
                 ))}
 
                 <Container.Flex
-                  items="items-center"
-                  justify="justify-between"
-                  className="gap-x-5"
+                  className={{
+                    flex: "items-center justify-between gap-x-5",
+                  }}
                 >
                   <Form.Checkbox
                     field="rememberMe"
@@ -86,7 +101,8 @@ const Admin = () => {
                     <Container.Link
                       href="mailto:admin@rawdev.io"
                       className={{
-                        text: "dark:font-semibold cursor-pointer text-zinc-500 hover:text-zinc-400 dark:text-orange-tertiary dark:hover:text-orange-quaternary",
+                        typography:
+                          "dark:font-semibold cursor-pointer text-zinc-500 hover:text-zinc-400 dark:text-orange-tertiary dark:hover:text-orange-quaternary",
                       }}
                       text="Contact for access"
                     />
