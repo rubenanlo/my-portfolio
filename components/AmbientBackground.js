@@ -16,8 +16,8 @@ const AmbientCanvasBackground = () => {
   }, []);
 
   return (
-    <Container className="content--canvas">
-      <canvas ref={canvasRef}></canvas>
+    <Container className="content--canvas fixed">
+      <canvas ref={canvasRef} />
     </Container>
   );
 };

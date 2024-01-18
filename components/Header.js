@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "components/Button";
+import { Container } from "components/Container";
 
 const SunIcon = (props) => (
   <svg
@@ -53,7 +54,7 @@ const ThemeToggle = () => {
 };
 
 export const Header = () => (
-  <div className="w-full flex justify-center z-20">
+  <Container className="w-full flex justify-center z-20">
     <ThemeToggle />
-  </div>
+  </Container>
 );

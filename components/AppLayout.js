@@ -35,7 +35,7 @@ export const AppLayout = ({ children }) => {
 
   const noFooterPaths = ["/admin"];
   const noBlendedNavbarPaths = ["/", "/#", "/admin"];
-  const twirlPaths = ["/"];
+  const twirlPaths = ["/", "/#"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
   const hasTwirlPaths = twirlPaths.includes(asPath);
@@ -45,13 +45,11 @@ export const AppLayout = ({ children }) => {
       {hasTwirlPaths && resolvedTheme === "dark" && <AmbientCanvasBackground />}
       <Container
         className={{
-          position: hasTwirlPaths
-            ? "absolute top-0 left-0 w-full h-full"
-            : "relative",
+          position: "relative",
           dimension: "min-h-screen",
           background: "bg-slate-200 dark:bg-black/50",
           overflow: "overflow-x-hidden",
-          otherStyles: "antialiased lg:scrollbar",
+          otherStyles: "antialiased",
         }}
       >
         <Container
