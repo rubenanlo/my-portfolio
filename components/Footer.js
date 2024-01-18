@@ -6,11 +6,11 @@ const Footer = () => (
   <Container.Section
     as="footer"
     bottomDiv
-    className={{ dimension: "w-full px-6 pt-10 lg:px-20 pb-32 lg:pb-0" }}
+    className={{ dimension: "w-full px-6 pt-10 lg:px-20 pb-32 lg:pb-20" }}
   >
     <Container
       className={{
-        dimenstion: "pt-10",
+        dimension: "pt-10",
         border: "border-t border-zinc-900/20 dark:border-zinc-100/20",
       }}
     >

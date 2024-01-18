@@ -60,7 +60,7 @@ const NavbarGridItem = ({ navLink }) => {
           />
           <Card.Header
             as="h3"
-            className="mt-8 text-base text-zinc-100  group-hover:text-semibold"
+            className="mt-8 text-base text-zinc-600 dark:text-zinc-100  group-hover:text-semibold"
             title={navLink.name}
           />
         </Container>
@@ -171,7 +171,7 @@ const NavbarMobile = () => {
   }, [setIsVisible]);
 
   return (
-    <Container className="absolute w-full">
+    <Container className="absolute w-full z-10">
       <motion.div
         whileHover={!isSmallerScreen && { scale: 2 }}
         transition={{ duration: 1 }}

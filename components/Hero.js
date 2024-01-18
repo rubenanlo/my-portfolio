@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
@@ -40,7 +42,21 @@ const text = {
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);
-  const navbarType = isSmallerScreen ? "list" : "grid";
+
+  const router = useRouter();
+  const [isReady, setIsReady] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
+  const [isLoading, setIsLoading] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
+
+  useEffect(() => {
+    setIsReady(router.isReady);
+    if (router.isReady && isLoading) {
+      setIsLoading(false);
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
+  const navbarType =
+    !isReady || isLoading ? undefined : isSmallerScreen ? "list" : "grid";
 
   return (
     <Container.Section className="lg:py-40 w-full z-10">
