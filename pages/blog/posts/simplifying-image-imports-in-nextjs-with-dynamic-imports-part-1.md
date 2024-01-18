@@ -1,3 +1,9 @@
+---
+title: "Simplifying Image Imports in Next.js with Dynamic Imports (Part 1)"
+description: "A way to automate the creation of imports and exports to handle your newly added images into a repo"
+date: 2023/12/24
+---
+
 # Simplifying Image Imports in Next.js with Dynamic Imports (Part 1)
 
 One of the essential aspects of web development is efficiently managing assets like images. In a Next.js project, proper image handling can make a significant difference in the development workflow. In this blog post, we will explore a solution to simplify image imports by dynamically generating import statements. This approach not only makes your code cleaner but also helps you avoid the tedious task of importing images from relative paths.

@@ -1,48 +1,41 @@
 import { serialize } from "next-mdx-remote/serialize";
-import { createGetStaticPaths } from "helpers/createGetStaticPaths";
-import { getText } from "../../helpers/getTextForSlug";
+import { getText, getUniqueSlugs } from "helpers/getTextForSlug";
 
-const Posts = ({ mdxSource }) => {
-  console.log("🚀 ~ Posts ~ mdxSource :", mdxSource);
+const Posts = (props) => {
+  console.log("🚀 ~ Posts ~ mdxSource :", props.content);
   return <div>[slug]</div>;
 };
 
 export default Posts;
 
-const component = Posts.name;
+export const getStaticPaths = async () => {
+  const slugs = getUniqueSlugs();
 
-export const getStaticPaths = createGetStaticPaths(component);
-
-export const getStaticProps = async ({ params }) => {
-  //The function below yields an array of objects. Each object include text
-  //(data and non-serlized content) for a intermediary site
-  const text = getText(params.slug, component);
-
-  // Since the content we obtain from the function above is not serialized, we
-  // loop through the text array and serialize all the content. Note that some
-  // elements of the array does not have content. Even though mdx can still
-  // serialize md files with no content, we applied this condition, so that we
-  // do not render an empty serialized object.
-
-  // Also, note that the serialization below yields an array of serliazed
-  // content for those cases where there is content only. For those section
-  // where there is no content, we are not returning any property with empty
-  // content. That's why we added the filter method to carve out any undefined
-  // from the resulting array.
-  const mdxSource = (
-    await Promise.all(
-      text.map(
-        async ({ content, id }) =>
-          content && {
-            id,
-            paragraphs: await serialize(content),
-          }
-      )
-    )
-  ).filter((mdxSource) => mdxSource);
+  //   We further map the slugs to create the paths object that will be passed to
+  //   the component as props. Note that depending on the component, the returned
+  //   slug could be an object or a string. Thus, we use a ternary operator to get
+  //   the right slug. For the intermediary sites, we use the slug as is. For the
+  //   rest of the components, we use the slug property of the object.
+  const paths = slugs.map((item) => {
+    const slug = typeof item === "object" && item !== null ? item.slug : item;
+    return { params: { slug } };
+  });
 
   return {
-    mdxSource,
-    slug: params.slug,
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const [{ data: post, content }] = getText(params.slug);
+
+  const mdxSource = await serialize(content);
+  return {
+    props: {
+      slug: params.slug,
+      post,
+      content: mdxSource,
+    },
   };
 };
