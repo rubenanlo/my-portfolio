@@ -9,11 +9,16 @@ const AmbientCanvasBackground = () => {
   const canvasRef = useRef(null); // for canvas reference
 
   useEffect(() => {
-    setupTwirl();
+    const canvasRefCurrent = canvasRef.current;
+    if (canvasRef.current) {
+      setupTwirl(canvasRef.current);
+      window.addEventListener("resize", () => resize(canvasRef.current));
+    }
+
     return () => {
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", () => resize(canvasRefCurrent));
     };
-  }, []);
+  }, [canvasRef]);
 
   return (
     <Container className="content--canvas fixed">

@@ -36,9 +36,9 @@ const fadeInOut = (t, m) => {
 };
 const lerp = (n1, n2, speed) => (1 - speed) * n1 + speed * n2;
 
-export const setupTwirl = () => {
-  createCanvas();
-  resize();
+export const setupTwirl = (canvasElement) => {
+  createCanvas(canvasElement);
+  resize(canvasElement);
   initParticles();
   draw();
 };
@@ -133,18 +133,18 @@ const checkBounds = (x, y) => {
   return x > canvas.a.width || x < 0 || y > canvas.a.height || y < 0;
 };
 
-const createCanvas = () => {
+const createCanvas = (canvasElement) => {
   container = document.querySelector(".content--canvas");
   canvas = {
-    a: document.createElement("canvas"),
+    a: canvasElement,
     b: document.createElement("canvas"),
   };
   canvas.b.style = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   `;
   container.appendChild(canvas.b);
   ctx = {
@@ -154,11 +154,11 @@ const createCanvas = () => {
   center = [];
 };
 
-export const resize = () => {
+export const resize = (canvasElement) => {
   const { innerWidth, innerHeight } = window;
 
-  canvas.a.width = innerWidth;
-  canvas.a.height = innerHeight;
+  canvasElement.width = innerWidth;
+  canvasElement.height = innerHeight;
 
   ctx.a.drawImage(canvas.b, 0, 0);
 
