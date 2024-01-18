@@ -1,21 +1,19 @@
 import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
+import { Container } from "components/Container";
 import { getText, getUniqueSlugs } from "helpers/getTextForSlug";
 
-const Posts = (props) => {
-  console.log("🚀 ~ Posts ~ mdxSource :", props.content);
-  return <div>[slug]</div>;
-};
+const Posts = ({ content }) => (
+  <Container className="prose prose-md prose-slate dark:prose-invert mx-auto my-24 px-5 max-w-xs lg:max-w-3xl xl:max-w-4xl">
+    <MDXRemote {...content} />
+  </Container>
+);
 
 export default Posts;
 
 export const getStaticPaths = async () => {
   const slugs = getUniqueSlugs();
 
-  //   We further map the slugs to create the paths object that will be passed to
-  //   the component as props. Note that depending on the component, the returned
-  //   slug could be an object or a string. Thus, we use a ternary operator to get
-  //   the right slug. For the intermediary sites, we use the slug as is. For the
-  //   rest of the components, we use the slug property of the object.
   const paths = slugs.map((item) => {
     const slug = typeof item === "object" && item !== null ? item.slug : item;
     return { params: { slug } };

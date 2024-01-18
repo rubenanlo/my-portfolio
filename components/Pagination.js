@@ -35,7 +35,7 @@ const Pagination = ({
       <Container>
         <Container
           as="nav"
-          className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+          className="isolate inline-flex -space-x-px rounded-md"
           aria-label="Pagination"
         >
           <Button

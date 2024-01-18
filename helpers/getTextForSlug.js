@@ -18,7 +18,7 @@ export const getAllText = (withSummarizedContent) =>
     const { data } = matter(fileContents);
 
     // the code below yields the summary of the content for all posts whenever
-    // we pass the withSummary argument as true. This is the case for the media
+    // we pass the withSummary argument as true. This is the case for the blog post
     // site. We limit the content that we return, since the file size would be
     // too big otherwise.
     let summary;
