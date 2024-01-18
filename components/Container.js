@@ -78,9 +78,11 @@ Container.Flex = function ContainerFlex({ children, className, ...props }) {
 };
 
 Container.Logo = function ContainerLogo({ className, ...props }) {
+  const classNameProp = turnObjectIntoString(className);
+
   return (
     <Image
-      className={clsx(className, "rounded-full")}
+      className={clsx(classNameProp, "rounded-full")}
       src={props.src}
       alt={props.alt}
     />
@@ -95,6 +97,7 @@ Container.Link = function ContainerLink({
   onClick,
   Component,
   componentProps,
+  ...props
 }) {
   const classNameParent = turnObjectIntoString(className?.parent);
   const classNameChild = turnObjectIntoString(className?.child);
@@ -104,10 +107,11 @@ Container.Link = function ContainerLink({
       href={href}
       className={clsx(classNameParent, "cursor-pointer")}
       onClick={onClick}
+      {...props}
     >
       {Component && (
         <Component
-          className={clsx(classNameChild, "w-auto h-7 fill-zinc-500")}
+          className={clsx(classNameChild, "w-auto h-6 fill-zinc-500")}
           {...componentProps}
         />
       )}
@@ -134,8 +138,8 @@ Container.List = function ContainerList({
       className={clsx(classNamePropParent, "leading-6")}
     >
       {list.map((item) => (
-        <ChildComponent key={item} className={clsx(classNamePropChild)}>
-          {AdditionalComponent ? <AdditionalComponent item={item} /> : { item }}
+        <ChildComponent key={item.id} className={clsx(classNamePropChild)}>
+          {AdditionalComponent ? <AdditionalComponent item={item} /> : item}
         </ChildComponent>
       ))}
     </ParentComponent>

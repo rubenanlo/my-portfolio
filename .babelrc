@@ -9,6 +9,7 @@
           "components": "./components",
           "pages": "./pages",
           "assets": "./public/assets",
+          "docs": "./public/docs",
           "content": "./public/content",
           "styles": "./styles",
           "layouts": "./layouts",

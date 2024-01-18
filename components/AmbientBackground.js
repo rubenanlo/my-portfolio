@@ -6,7 +6,7 @@ import { Container } from "components/Container";
 import { setupTwirl, resize } from "helpers/setTwirlAmbient";
 
 const AmbientCanvasBackground = () => {
-  const canvasRef = useRef(null); // for canvas reference
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvasRefCurrent = canvasRef.current;

@@ -4,13 +4,13 @@ import { turnObjectIntoString } from "helpers/manipulateText";
 
 export const Card = ({ children, className, variant, style, ...props }) => {
   const commonStyle = {
-    background: "bg-gradient-to-br from-slate-50 dark:from-slate-700",
+    background: "bg-gradient-to-br from-slate-50/50 dark:from-slate-700/50",
     dimension: "mb-5 w-full",
     otherStyles: "rounded-xl shadow-xl mb-5",
   };
   const variants = {
     fixedHeight: {
-      dimension: "h-52 w-52",
+      dimension: "h-full w-auto",
     },
   };
 

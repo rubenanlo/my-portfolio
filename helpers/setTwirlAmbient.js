@@ -157,6 +157,8 @@ const createCanvas = (canvasElement) => {
 export const resize = (canvasElement) => {
   const { innerWidth, innerHeight } = window;
 
+  if (!canvasElement) return;
+
   canvasElement.width = innerWidth;
   canvasElement.height = innerHeight;
 

@@ -107,30 +107,38 @@ const Dashboard = () => {
   return (
     <Container.Section className="w-auto">
       <ResponsiveComponent
-        column
-        className="w-full lg:mt-24 lg:h-auto gap-x-10 gap-y-5"
-        columns="grid-cols-1 lg:grid-cols-3"
-        content="content-start"
-        justify="justify-items-center"
+        className={clsx(
+          isSmallScreen ? "flex-col" : "grid-cols-3 content-start",
+          "w-full lg:mt-24 lg:h-auto gap-2 justify-items-center"
+        )}
       >
         {cards.map(({ name, href, description, tag }, index) => (
           <>
             <Card
               key={name}
               animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
-              className={clsx(index % 2 ? "row-span-2" : "", "cursor-pointer")}
-              classNameText="p-6"
-              dimensions="h-auto w-full"
-              rounded="rounded-md"
+              className={{
+                dimension: clsx(
+                  index % 3 === 0 ? "row-span-2" : "",
+                  "p-5 h-full w-full"
+                ),
+                rounded: "rounded-sm",
+              }}
             >
               <Container.Link href={href}>
                 <Container.Flex
-                  items="items-start"
-                  gapX="gap-x-5"
-                  className="h-full"
+                  className={{
+                    dimension: "h-full",
+                    flex: "items-start gap-x-5",
+                  }}
                 >
                   <Circle name={name} className="shrink-0" />
-                  <Container.Flex column justify="justify-between h-40">
+                  <Container.Flex
+                    className={{
+                      dimension: "h-40",
+                      flex: "flex-col justify-between",
+                    }}
+                  >
                     <TextLayout.Subtitle
                       subtitle={name}
                       className="text-zinc-500 text-xl"

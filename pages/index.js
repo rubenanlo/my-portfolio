@@ -9,14 +9,7 @@ import Pagination from "components/Pagination";
 import { TextLayout } from "components/TextLayout";
 import { useResponsive } from "helpers/useResponsive";
 import { usePagination } from "helpers/usePagination";
-import {
-  EY_LOGO as eyLogo,
-  DELOITTE_LOGO as deloitteLogo,
-  LOGO_LINKEDIN_1 as rawDevLogo,
-  PWC_LOGO as pwcLogo,
-  UNSDSN_LOGO as sdsnLogo,
-  BAKER_MCKENZIE_LOGO as bakerLogo,
-} from "helpers/exportImages";
+import resume from "library/resume";
 
 const articles = [
   {
@@ -77,51 +70,6 @@ const articles = [
   },
 ];
 
-let resume = [
-  {
-    company: "UNSDSN",
-    title: "Fullstack Web Developer",
-    logo: sdsnLogo,
-    start: "2022",
-    end: "Present",
-  },
-  {
-    company: "rawDev",
-    title: "Fullstack Web Developer",
-    logo: rawDevLogo,
-    start: "2022",
-    end: "Present",
-  },
-  {
-    company: "Baker McKenzie",
-    title: "Economist, Data visualizations",
-    logo: bakerLogo,
-    start: "2021",
-    end: "2022",
-  },
-  {
-    company: "PWC",
-    title: "Economist, Data visualizations",
-    logo: pwcLogo,
-    start: "2019",
-    end: "2021",
-  },
-  {
-    company: "EY",
-    title: "Economist, Data visualizations",
-    logo: eyLogo,
-    start: "2011",
-    end: "2019",
-  },
-  {
-    company: "Deloitte",
-    title: "Economist, Data visualizations",
-    logo: deloitteLogo,
-    start: "2008",
-    end: "2010",
-  },
-];
-
 const Article = ({ article }) => (
   <Post
     as="article"
@@ -178,7 +126,7 @@ const Carousel = ({ articles }) => (
     className={{
       flex: "gap-x-5",
       dimension: "max-w-sm",
-      otherStyles: "snap-mandatory snap-x overflow-x-auto scrollbar pb-2",
+      otherStyles: "snap-mandatory snap-x overflow-x-auto scrollbar-hide pb-2",
     }}
   >
     {articles.map((article) => (
@@ -305,12 +253,12 @@ const Role = ({ item: role }) => {
           {role.company}
         </dd>
         <dt className="sr-only">Role</dt>
-        <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+        <dd className="text-xs text-zinc-500 dark:text-zinc-400 w-[9.3rem]">
           {role.title}
         </dd>
         <dt className="sr-only">Date</dt>
         <dd
-          className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+          className="ml-auto text-xs text-zinc-400 dark:text-zinc-500 self-start"
           aria-label={`${role.start} until ${role.end}`}
         >
           {`${role.start} - ${role.end}`}
@@ -321,7 +269,7 @@ const Role = ({ item: role }) => {
 };
 
 const Resume = () => (
-  <Container className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+  <Container className="p-6 rounded-2xl border border-zinc-100 dark:border-zinc-700/40">
     <TextLayout.Title
       as="h4"
       className="flex"
@@ -345,14 +293,15 @@ const Resume = () => (
       AdditionalComponent={Role}
       variant="array"
     />
-    <Button
-      href="#"
-      variant="secondary"
-      className={{ dimension: "mt-6 w-full", otherStyles: "group" }}
-    >
-      Download CV
-      <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-    </Button>
+    <Container.Link href="docs/resume.pdf" target="_blank">
+      <Button
+        variant="secondary"
+        className={{ dimension: "mt-6 w-full", otherStyles: "group" }}
+      >
+        Download CV
+        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+      </Button>
+    </Container.Link>
   </Container>
 );
 
