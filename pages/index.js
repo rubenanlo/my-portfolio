@@ -178,7 +178,7 @@ const Carousel = ({ articles }) => (
     className={{
       flex: "gap-x-5",
       dimension: "max-w-sm",
-      otherStyles: "snap-mandatory snap-x overflow-x-auto scrollbar pb-2",
+      otherStyles: "snap-mandatory snap-x overflow-x-auto scrollbar-hide pb-2",
     }}
   >
     {articles.map((article) => (

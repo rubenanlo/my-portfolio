@@ -6,6 +6,7 @@
   /* This targets the scrollbar track */
   .scrollbar::-webkit-scrollbar {
     width: 5px; /* Adjust width of the vertical scrollbar */
+    height: 5px; /* Adjust height of the horizontal scrollbar */
   }
 
   /* This targets the scrollbar handle/thumb */
