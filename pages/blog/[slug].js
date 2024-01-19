@@ -12,13 +12,16 @@ const Posts = ({ content }) => (
 export default Posts;
 
 export const getStaticPaths = async () => {
-  const slugs = getUniqueSlugs();
-
-  const paths = slugs.map((item) => {
-    const slug = typeof item === "object" && item !== null ? item.slug : item;
-    return { params: { slug } };
-  });
-
+  let paths = [];
+  try {
+    const slugs = getUniqueSlugs();
+    paths = slugs.map((item) => {
+      const slug = typeof item === "object" && item !== null ? item.slug : item;
+      return { params: { slug } };
+    });
+  } catch (error) {
+    console.error("Error generating static paths:", error);
+  }
   return {
     paths,
     fallback: false,
@@ -26,8 +29,13 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const [{ data: post, content }] = getText(params.slug);
-
+  const textResult = getText(params.slug);
+  if (!textResult.length) {
+    return {
+      notFound: true,
+    };
+  }
+  const [{ data: post, content }] = textResult;
   const mdxSource = await serialize(content);
   return {
     props: {
