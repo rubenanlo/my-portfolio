@@ -46,8 +46,8 @@ const useMediaQuery = (initialWidth = 768) => {
 };
 ```
 
-- useState for Width and Target Reached: We use useState to keep track of the current width (width) and a flag indicating whether the target width has been reached (targetReached).
-- Callback for Media Query Change: The updateTarget callback is wrapped with useCallback for performance optimization. It updates targetReached based on whether the media query condition (max-width: ${width}px) matches.
+- useState for Width and Target Reached: We use useState to keep track of the current width and a flag indicating whether the target width has been reached (targetReached).
+- Callback for Media Query Change: The updateTarget callback is wrapped with useCallback for performance optimization. It updates targetReached based on whether the media query condition (`max-width: ${width}px`) matches.
 - Effect for Media Query Listener: The useEffect hook sets up a media query listener using window.matchMedia. It cleans up by removing the event listener to avoid memory leaks.
 
 ## The useResponsive Hook
