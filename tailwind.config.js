@@ -1,5 +1,6 @@
 const typographyPlugin = require("@tailwindcss/typography");
 const typographyStyles = require("./typography");
+const scrollbarHidePlugin = require("tailwind-scrollbar-hide");
 
 /** @type {import('tailwindcss').Config} */
 
@@ -56,6 +57,6 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide"), typographyPlugin],
+  plugins: [scrollbarHidePlugin, typographyPlugin],
   typography: typographyStyles,
 };
