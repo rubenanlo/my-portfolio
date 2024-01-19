@@ -52,30 +52,35 @@ export const getAllText = (withSummarizedContent) =>
 export const getUniqueSlugs = () =>
   _.uniq([...getAllText().map(({ slug }) => slug)]);
 
-export const getText = (slug, withFormattedSlug) =>
-  // We first return a list of files applicable to the slug component
-  // We then filter the files based on the slug. We use filter method and not
-  // find method, because for certain slug components (e.g., intermediary sites)
-  // we have multiple md files which requires us to return an array of files for
-  // each specific slug.
-  // We then return the metadata and content of the md files. We use map method,
-  // since the filter method returns an array of files.
-  getFiles()
-    .filter((fileName) => createFileNameSlug(fileName) === slug)
-    .map((file) => {
-      const { data, content } = matter(
-        readFileSync(`${DIRECTORY}/${file}`, "utf8")
-      );
-      const id = file.match(/\d-(.*)\.md$/)?.[1] || null;
-      const formattedSlug = withFormattedSlug && file.replace(".md", "");
-      return {
-        ...(id && { id }),
-        data,
-        ...(content && { content }),
-        ...(formattedSlug && { formattedSlug }),
-      };
-      // we return the id, formattedSlug and content only if it exists. We
-      // applied this approach to these properties, since we initally included
-      // the id property for the intermediary sites, the formattedSlug to yield
-      // rankings, and the content for any slug.
-    });
+export const getText = (slug, withFormattedSlug) => {
+  try {
+    // We first return a list of files applicable to the slug component
+    // We then filter the files based on the slug. We use filter method and not
+    // find method, because for certain slug components (e.g., intermediary sites)
+    // we have multiple md files which requires us to return an array of files for
+    // each specific slug.
+    // We then return the metadata and content of the md files. We use map method,
+    // since the filter method returns an array of files.
+    return getFiles()
+      .filter((fileName) => createFileNameSlug(fileName) === slug)
+      .map((file) => {
+        const { data, content } = matter(
+          readFileSync(`${DIRECTORY}/${file}`, "utf8")
+        );
+        const id = file.match(/\d-(.*)\.md$/)?.[1] || null;
+        const formattedSlug = withFormattedSlug && file.replace(".md", "");
+        return {
+          ...(id && { id }),
+          data,
+          ...(content && { content }),
+          ...(formattedSlug && { formattedSlug }),
+        };
+        // we return the id, formattedSlug and content only if it exists. We
+        // applied this approach to these properties, since we initally included
+        // the id property for the intermediary sites, the formattedSlug to yield
+        // rankings, and the content for any slug.
+      });
+  } catch (error) {
+    console.error("Error getting text:", error);
+  }
+};
