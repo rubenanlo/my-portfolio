@@ -14,24 +14,26 @@ import resume from "library/resume";
 import { BriefcaseIcon, ArrowDownIcon, MailIcon } from "components/AppIcons";
 
 const Article = ({ article: { slug, title, date, description } }) => (
-  <Post
-    as="article"
-    className={{
-      dimension:
-        "w-3/4 lg:w-full shrink-0 p-5 lg:p-0 overflow-x-visible lg:overflow-x-hidden",
-      otherStyles: "snap-center",
-    }}
-  >
-    <Post.Title href={`/blog/${slug}`} title={title} />
-    <Post.Eyebrow
-      as="time"
-      dateTime={date}
-      decorate
-      date={dayjs(date).format("MMMM D, YYYY")}
-    />
-    <Post.Description text={description} />
-    <Post.Cta text="Read article" />
-  </Post>
+  <Container.Link href={`/blog/${slug}`}>
+    <Post
+      as="article"
+      className={{
+        dimension:
+          "w-3/4 lg:w-full shrink-0 p-5 lg:p-0 overflow-x-visible lg:overflow-x-hidden",
+        otherStyles: "snap-center",
+      }}
+    >
+      <Post.Title title={title} />
+      <Post.Eyebrow
+        as="time"
+        dateTime={date}
+        decorate
+        date={dayjs(date).format("MMMM D, YYYY")}
+      />
+      <Post.Description text={description} />
+      <Post.Cta text="Read article" />
+    </Post>
+  </Container.Link>
 );
 
 const ArticleList = ({ articles }) => {

@@ -78,7 +78,7 @@ Post.Cta = function PostCta({ text }) {
   return (
     <div
       aria-hidden="true"
-      className="relative mt-4 flex items-center text-sm font-medium text-teal-500"
+      className="relative mt-4 flex items-center text-sm font-medium text-orange-tertiary"
     >
       {text}
       <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
