@@ -115,6 +115,7 @@ const Dashboard = () => {
         {cards.map(({ name, href, description, tag }, index) => (
           <>
             <Card
+              variant="primary"
               key={name}
               animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
               className={{
