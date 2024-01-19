@@ -9,68 +9,11 @@ import Pagination from "components/Pagination";
 import { TextLayout } from "components/TextLayout";
 import { useResponsive } from "helpers/useResponsive";
 import { usePagination } from "helpers/usePagination";
+import { getAllText } from "helpers/getTextForSlug";
 import resume from "library/resume";
+import { BriefcaseIcon, ArrowDownIcon, MailIcon } from "components/AppIcons";
 
-const articles = [
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-  {
-    title: "How to use Tailwind CSS with Next.js",
-    description: "A step-by-step guide to setting up Tailwind CSS with Next.js",
-    slug: "how-to-use-tailwind-css-with-next-js",
-    date: "2021/03/16",
-    readingTime: 5,
-  },
-];
-
-const Article = ({ article }) => (
+const Article = ({ article: { slug, title, date, description } }) => (
   <Post
     as="article"
     className={{
@@ -79,24 +22,28 @@ const Article = ({ article }) => (
       otherStyles: "snap-center",
     }}
   >
-    <Post.Title href={`/articles/${article.slug}`} title={article.title} />
+    <Post.Title href={`/blog/${slug}`} title={title} />
     <Post.Eyebrow
       as="time"
-      dateTime={article.date}
+      dateTime={date}
       decorate
-      date={dayjs(article.date).format("MMMM D, YYYY")}
+      date={dayjs(date).format("MMMM D, YYYY")}
     />
-    <Post.Description text={article.description} />
+    <Post.Description text={description} />
     <Post.Cta text="Read article" />
   </Post>
 );
 
 const ArticleList = ({ articles }) => {
+  const itemsPerPage = 3;
+
   const { currentPosts, ...pagination } = usePagination({
     initialNumberOfPages: 1,
-    itemsPerPage: 4,
+    itemsPerPage: itemsPerPage,
     items: articles,
   });
+
+  const showPagination = articles.length > itemsPerPage;
 
   return (
     <Container.Flex
@@ -116,7 +63,7 @@ const ArticleList = ({ articles }) => {
           <Article key={article.slug} article={article} />
         ))}
       </Container.Flex>
-      <Pagination pagination={pagination} />
+      {showPagination && <Pagination pagination={pagination} />}
     </Container.Flex>
   );
 };
@@ -133,27 +80,6 @@ const Carousel = ({ articles }) => (
       <Article key={article.slug} article={article} />
     ))}
   </Container.Flex>
-);
-
-const MailIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    {...props}
-  >
-    <path
-      d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-      className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-    />
-    <path
-      d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-      className="stroke-zinc-400 dark:stroke-zinc-500"
-    />
-  </svg>
 );
 
 // !Create backend for this section (modal confirming email and sending email)
@@ -192,38 +118,6 @@ const Contact = () => (
       />
     </Container.Flex>
   </Form>
-);
-
-const BriefcaseIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    {...props}
-  >
-    <path
-      d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-      className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-    />
-    <path
-      d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-      className="stroke-zinc-400 dark:stroke-zinc-500"
-    />
-  </svg>
-);
-
-const ArrowDownIcon = (props) => (
-  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-    <path
-      d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
 );
 
 const Role = ({ item: role }) => {
@@ -305,7 +199,7 @@ const Resume = () => (
   </Container>
 );
 
-const Index = () => {
+const Index = ({ articles }) => {
   const isSmallScreen = useResponsive(1024);
   const ResponsiveComponent = isSmallScreen ? Carousel : ArticleList;
 
@@ -332,3 +226,17 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getStaticProps = async () => {
+  const text = await getAllText();
+  const articles = text.map(({ data }) => data);
+  if (!articles.length) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { articles },
+  };
+};
