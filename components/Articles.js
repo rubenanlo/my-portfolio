@@ -1,16 +1,18 @@
 import dayjs from "dayjs";
+import clsx from "clsx";
 import { Container } from "components/Container";
 import { Post } from "components/Post";
 import Pagination from "components/Pagination";
 import { usePagination } from "helpers/usePagination";
 import { useResponsive } from "helpers/useResponsive";
 
-const Article = ({ article: { slug, title, date, description } }) => (
+const Article = ({ article: { slug, title, date, description }, blogPath }) => (
   <Post
+    blogPath={blogPath}
     as="article"
     className={{
       dimension:
-        "w-3/4 lg:w-full shrink-0 p-5 lg:p-0 overflow-x-visible lg:overflow-x-hidden",
+        "w-3/4 lg:w-full shrink-0 overflow-x-visible lg:overflow-x-hidden",
       otherStyles: "snap-center",
     }}
   >
@@ -62,16 +64,19 @@ const ArticleList = ({ articles }) => {
   );
 };
 
-export const Carousel = ({ articles }) => (
+export const Carousel = ({ articles, blogPath }) => (
   <Container.Flex
     className={{
-      flex: "gap-x-5",
+      flex: clsx(blogPath ? "gap-x-20" : "gap-x-5"),
       dimension: "max-w-sm",
-      otherStyles: "snap-mandatory snap-x overflow-x-auto scrollbar-hide pb-2",
+      otherStyles: clsx(
+        blogPath ? "" : "snap-mandatory snap-x overflow-x-auto scrollbar-hide",
+        "pb-2"
+      ),
     }}
   >
     {articles.map((article) => (
-      <Article key={article.slug} article={article} />
+      <Article key={article.slug} article={article} blogPath />
     ))}
   </Container.Flex>
 );

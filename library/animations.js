@@ -5,7 +5,7 @@ export const showUpAnimation = {
 };
 
 export const zoomIn = (bgColor) => ({
-  whileHover: { scale: 1.3, zIndex: 1, backgroundColor: bgColor },
+  whileHover: { scale: 1.1, zIndex: 1, backgroundColor: bgColor },
   transition: { duration: 0.2 },
 });
 

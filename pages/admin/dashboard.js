@@ -11,6 +11,10 @@ import { zoomIn, popUp } from "library/animations";
 
 const cards = [
   {
+    title: "Dashboard",
+    subtitle: "Select which feature you want to use",
+  },
+  {
     name: "Blog post",
     href: "/admin/blog",
     description: "Create, edit and delete blog posts",
@@ -112,65 +116,74 @@ const Dashboard = () => {
           "w-full lg:mt-24 lg:h-auto gap-2 justify-items-center"
         )}
       >
-        {cards.map(({ name, href, description, tag }, index) => (
-          <>
-            <Card
-              variant="primary"
-              key={name}
-              animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
-              className={{
-                dimension: clsx(
-                  index % 3 === 0 ? "row-span-2" : "",
-                  "p-5 h-full w-full"
-                ),
-                rounded: "rounded-sm",
-              }}
-            >
-              <Container.Link href={href}>
-                <Container.Flex
-                  className={{
-                    dimension: "h-full",
-                    flex: "items-start gap-x-5",
-                  }}
-                >
-                  <Circle name={name} className="shrink-0" />
+        {cards.map(({ name, href, description, tag, title }, index) =>
+          title ? (
+            <Container key={title} className={{ dimension: "mb-14 lg:mb-0" }}>
+              <TextLayout.Title as="h1" title={title} />
+              <TextLayout.Subtitle key={title} subtitle={title} />
+            </Container>
+          ) : (
+            <>
+              <Card
+                variant="primary"
+                key={name}
+                animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
+                className={{
+                  dimension: clsx(
+                    index % 3 === 0 ? "row-span-2" : "",
+                    "p-5 h-full w-full"
+                  ),
+                  rounded: "rounded-sm",
+                }}
+              >
+                <Container.Link href={href}>
                   <Container.Flex
                     className={{
-                      dimension: "h-40",
-                      flex: "flex-col justify-between",
+                      dimension: "h-full",
+                      flex: "items-start gap-x-5",
                     }}
                   >
-                    <TextLayout.Subtitle
-                      subtitle={name}
-                      className="text-zinc-500 text-xl"
-                    />
-                    <TextLayout.Paragraph
-                      paragraph={
-                        index % 2 ? description : setTruncatedText(description)
-                      }
-                      className=" text-sm mt-3"
-                      onMouseEnter={(e) => {
-                        handleMouseEnter(
-                          description,
-                          setTruncatedText(description),
-                          e
-                        );
+                    <Circle name={name} className="shrink-0" />
+                    <Container.Flex
+                      className={{
+                        dimension: "h-40",
+                        flex: "flex-col justify-between",
                       }}
-                      onMouseMove={handleMouseMove}
-                      onMouseLeave={handleMouseLeave}
-                    />
-                    <TextLayout.Tag tag={tag} />
+                    >
+                      <TextLayout.Subtitle
+                        subtitle={name}
+                        className="text-zinc-500 text-xl"
+                      />
+                      <TextLayout.Paragraph
+                        paragraph={
+                          index % 2
+                            ? description
+                            : setTruncatedText(description)
+                        }
+                        className=" text-sm mt-3"
+                        onMouseEnter={(e) => {
+                          handleMouseEnter(
+                            description,
+                            setTruncatedText(description),
+                            e
+                          );
+                        }}
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                      />
+                      <TextLayout.Tag tag={tag} />
+                    </Container.Flex>
                   </Container.Flex>
-                </Container.Flex>
-              </Container.Link>
-            </Card>
-            <ShowTruncated
-              value={fullText}
-              isVisible={modalVisibility}
-              mousePosition={mousePosition}
-            />
-          </>
-        ))}
+                </Container.Link>
+              </Card>
+              <ShowTruncated
+                value={fullText}
+                isVisible={modalVisibility}
+                mousePosition={mousePosition}
+              />
+            </>
+          )
+        )}
       </ResponsiveComponent>
     </Container.Section>
   );

@@ -36,16 +36,21 @@ TextLayout.Title = function TextLayoutTitle({
 };
 
 TextLayout.Subtitle = function TextLayoutSubtitle({
+  as,
   subtitle,
   className,
   ...props
 }) {
+  const Component = as ?? "h2";
   const classNameProp = turnObjectIntoString(className);
 
   return (
-    <h2 className={clsx(classNameProp, "text-2xl leading-8 ")} {...props}>
+    <Component
+      className={clsx(classNameProp, "text-2xl leading-8 ")}
+      {...props}
+    >
       {subtitle}
-    </h2>
+    </Component>
   );
 };
 
