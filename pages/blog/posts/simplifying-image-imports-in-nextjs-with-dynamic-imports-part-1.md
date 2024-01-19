@@ -2,6 +2,7 @@
 title: "Simplifying Image Imports in Next.js with Dynamic Imports (Part 1)"
 description: "A way to automate the creation of imports and exports to handle your newly added images into a repo"
 date: 2023/12/24
+category: code
 ---
 
 # Simplifying Image Imports in Next.js with Dynamic Imports (Part 1)
