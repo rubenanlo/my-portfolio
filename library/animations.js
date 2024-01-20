@@ -18,3 +18,9 @@ export const popUp = {
   whileTap: { scale: 1.4 },
   transition: { duration: 0.3 },
 };
+
+export const blurAnimation = {
+  initial: { filter: "blur(0.2rem)" },
+  animate: { filter: "blur(0)" },
+  transition: { duration: 0.5 },
+};
