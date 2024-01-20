@@ -4,8 +4,24 @@ import { Container } from "components/Container";
 import { getAllText } from "helpers/getTextForSlug";
 import { Carousel } from "components/Articles";
 import { TextLayout } from "components/TextLayout";
+import { ArrowRightIcon } from "components/AppIcons";
+import { TowardsDevIcon } from "components/SocialIcons";
+import { MediumIcon } from "components/SocialIcons";
 import { useAnimatedValue } from "helpers/useAnimatedValue";
 import { blurAnimation } from "library/animations";
+
+const blogIcons = [
+  {
+    title: "Towards Dev",
+    Component: TowardsDevIcon,
+    href: "https://towardsdev.com/",
+  },
+  {
+    title: "Medium",
+    Component: MediumIcon,
+    href: "https://medium.com/@rubenanlo",
+  },
+];
 
 const Blog = ({ articles }) => {
   const groupArticles = articles.reduce((acc, article) => {
@@ -43,23 +59,52 @@ const Blog = ({ articles }) => {
         otherStyles: "overflow-x-hidden",
       }}
     >
-      <Container className="mt-10 lg:mt-20 px-16">
+      <Container
+        className={{
+          dimension: "mt-10 lg:mt-20 px-16",
+        }}
+      >
         <TextLayout.Title as="h1" title="My blog" />
         <TextLayout.Paragraph
           as="h3"
           paragraph="A place where I share my thoughts related to web development, programming, and other topics."
-          className="mt-5"
         />
-        <Container.Flex className={{ flex: "justify-start items-end gap-x-2" }}>
-          <TextLayout.Number
-            animations={blurAnimation}
-            className="mt-6 text-7xl"
-          >
+        <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
+        <Container.Flex
+          className={{
+            flex: "items-center justify-start gap-x-5",
+          }}
+        >
+          <TextLayout.Paragraph paragraph="I am a writer at" />
+          {blogIcons.map(({ title, Component, href }) => (
+            <Container.Link
+              key={title}
+              href={href}
+              target="_blank"
+              Component={Component}
+              className={{
+                parent: "w-9 h-9 inline-flex items-center rounded-md",
+              }}
+            />
+          ))}
+        </Container.Flex>
+        <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
+        <Container.Flex
+          className={{
+            flex: "justify-start items-end gap-x-2",
+          }}
+        >
+          <TextLayout.Number animations={blurAnimation} className="text-7xl">
             {animatedTotalPosts}
           </TextLayout.Number>
           <TextLayout.Paragraph paragraph="published blog posts" className="" />
         </Container.Flex>
-        <Container.Columns className="gird-cols-1 grid-cols-[1fr,2fr] items-center mt-10">
+        <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
+        <Container.Columns
+          className={{
+            grid: "grid-cols-1 lg:grid-cols-[1fr,2fr] items-center",
+          }}
+        >
           <TextLayout.Paragraph paragraph="I talk about:" />
           <Container.Flex className={{ flex: "justify-start gap-5 flex-wrap" }}>
             {tags.map((tag) => (
@@ -79,15 +124,26 @@ const Blog = ({ articles }) => {
             key={category}
             className={clsx(index === 0 ? "mt-3 mb-10" : "mt-5 mb-5")}
           >
-            <TextLayout.Title
-              as="h3"
-              title={capitalize(category)}
-              className="mb-5"
-            />
+            <Container.Flex
+              className={{
+                flex: "justify-between items-center",
+                dimension: "pr-5",
+              }}
+            >
+              <TextLayout.Title
+                as="h3"
+                title={capitalize(category)}
+                className="mb-5"
+              />
+              {posts.length > 1 && (
+                <ArrowRightIcon className="w-4 text-gray-400 -mt-4 ml-4" />
+              )}
+            </Container.Flex>
+
             <Container
               className={{
                 scrolling:
-                  "snap-mandatory snap-x overflow-x-auto scrollbar-hide",
+                  "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
               }}
             >
               <Carousel articles={posts} blogPath />
@@ -95,7 +151,7 @@ const Blog = ({ articles }) => {
           </Container>
         ))}
       </Container>
-      <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r to-gray-100 dark:from-gray-900/30 dark:to-gray-900/60 via-gray-900/50" />
+      <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/30 dark:to-gray-900/60 dark:via-gray-900/50" />
     </Container.Columns>
   );
 };
