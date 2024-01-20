@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { TOWARDS_DEV as towardsDev } from "helpers/exportImages";
+
 export function TwitterIcon(props) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
@@ -42,3 +45,7 @@ export function MediumIcon(props) {
     </svg>
   );
 }
+
+export const TowardsDevIcon = () => (
+  <Image src={towardsDev} alt="towards-dev-icon" className="rounded-md" />
+);

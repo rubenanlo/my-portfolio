@@ -8,6 +8,7 @@ import HTML from "assets/html.svg";
 import LOGO_LINKEDIN_1 from "assets/logo-linkedin-1.png";
 import PWC_LOGO from "assets/pwc_logo.jpeg";
 import RUBEN_HEADSHOT from "assets/ruben_headshot.jpeg";
+import TOWARDS_DEV from "assets/towards_dev.png";
 import UNSDSN_LOGO from "assets/unsdsn_logo.jpeg";
 
 export { ARROW_CURVE_DARK };
@@ -20,4 +21,5 @@ export { HTML };
 export { LOGO_LINKEDIN_1 };
 export { PWC_LOGO };
 export { RUBEN_HEADSHOT };
+export { TOWARDS_DEV };
 export { UNSDSN_LOGO };
