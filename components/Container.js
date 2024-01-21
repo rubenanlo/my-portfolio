@@ -15,10 +15,11 @@ export const Container = ({ children, as, className, ...props }) => {
   );
 };
 
-export function AnimatedContainer({ children, className, ...props }) {
+export function AnimatedContainer({ children, className, animate, ...props }) {
   const classNameProps = turnObjectIntoString(className);
+
   return (
-    <motion.div {...props} className={clsx(classNameProps)}>
+    <motion.div {...props} {...animate} className={clsx(classNameProps)}>
       {children}
     </motion.div>
   );

@@ -16,6 +16,7 @@ export const getAllText = (withSummarizedContent) =>
     const fileContents = readFileSync(`${DIRECTORY}/${slug}.md`, "utf8");
     // the code below only yields the metadata from all the md files
     const { data } = matter(fileContents);
+    data["slug"] = createFileNameSlug(slug);
 
     // the code below yields the summary of the content for all posts whenever
     // we pass the withSummary argument as true. This is the case for the blog post
@@ -34,7 +35,6 @@ export const getAllText = (withSummarizedContent) =>
     }
     return {
       // Create slug to use in dynamic routes
-      slug: createFileNameSlug(slug),
       data,
       ...(summary && { summary }),
       // the expression above means that  when summary is truthy (it has a
@@ -50,7 +50,7 @@ export const getAllText = (withSummarizedContent) =>
 // thanks to the use of the uniq lodash method. This is further applied to the
 // slug for the intermediary sites
 export const getUniqueSlugs = () =>
-  _.uniq([...getAllText().map(({ slug }) => slug)]);
+  _.uniq([...getAllText().map(({ data: { slug } }) => slug)]);
 
 export const getText = (slug, withFormattedSlug) => {
   try {

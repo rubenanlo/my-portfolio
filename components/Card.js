@@ -6,11 +6,16 @@ export const Card = ({ children, className, variant, style, ...props }) => {
   const commonStyle = {
     background: "bg-gradient-to-br from-slate-50/50 dark:from-slate-700/50",
     dimension: "mb-5 w-full",
-    otherStyles: "rounded-xl shadow-xl mb-5",
+    otherStyles: "shadow-xl mb-5",
   };
   const variants = {
-    fixedHeight: {
+    primary: {
       dimension: "h-full w-auto",
+      otherStyles: "rounded-sm",
+    },
+    secondary: {
+      dimension: "mb-5 w-full",
+      otherStyles: "rounded-xl",
     },
   };
 

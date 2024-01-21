@@ -27,6 +27,7 @@ const NavbarGridItem = ({ navLink }) => {
   const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
   return (
     <Card
+      variant="secondary"
       animate={{ ...zoomIn(bgColor), ...popUp }}
       className={{
         dimension: "h-auto w-full",
@@ -69,26 +70,28 @@ const NavbarGridItem = ({ navLink }) => {
   );
 };
 
-const NavbarGrid = () => (
-  <Container
-    as="nav"
-    className={{ position: "relative", dimension: "w-full scale-90" }}
-  >
-    <Container.Columns
-      className={{ dimension: "w-full", grid: "grid-cols-2 gap-x-10" }}
+const NavbarGrid = () => {
+  const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
+  return (
+    <Container
+      as="nav"
+      className={{ position: "relative", dimension: "w-full scale-90" }}
     >
-      {navLinks.map((navLink) => (
-        <NavbarGridItem key={navLink.name} navLink={navLink} />
-      ))}
-    </Container.Columns>
-  </Container>
-);
+      <Container.Columns
+        className={{ dimension: "w-full", grid: "grid-cols-2 gap-x-10" }}
+      >
+        {updatedNavLinks.map((navLink) => (
+          <NavbarGridItem key={navLink.name} navLink={navLink} />
+        ))}
+      </Container.Columns>
+    </Container>
+  );
+};
 
 NavbarGrid.displayName = "NavbarGrid";
 
 const NavbarListModal = forwardRef(({ isVisible }, ref) => {
   const [isIndex, setIndex] = useState(null);
-
   if (!isVisible) return null;
 
   return (
@@ -203,8 +206,9 @@ const NavbarMobile = () => {
 const NavbarIslandItem = () => {
   const router = useRouter();
   const isActive = (name) => router.pathname.includes(name.toLowerCase());
+  const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
 
-  return navLinks.map(({ name, href }) => (
+  return updatedNavLinks.map(({ name, href }) => (
     <Container as="li" key={name}>
       <Container.Link
         href={href}

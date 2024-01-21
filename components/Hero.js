@@ -8,7 +8,7 @@ import {
   GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  TwitterIcon,
+  MediumIcon,
 } from "components/SocialIcons";
 import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
 import { useResponsive } from "helpers/useResponsive";
@@ -26,8 +26,8 @@ const text = {
       href: "https://www.linkedin.com/in/ruben-andino/",
     },
     {
-      Social: TwitterIcon,
-      href: "https://twitter.com/rubenanlo",
+      Social: MediumIcon,
+      href: "https://medium.com/@rubenanlo",
     },
     {
       Social: InstagramIcon,

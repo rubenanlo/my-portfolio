@@ -50,7 +50,9 @@ const AdminIcon = (props) => (
   </svg>
 );
 
+// !Change icon for home
 export const NAVLINKS = [
+  { name: "Home", href: "/", onlyMobile: true, icon: AdminIcon },
   { name: "About", href: "/about", icon: AboutIcon },
   { name: "Projects", href: "/projects", icon: ProjectIcon },
   { name: "Blog", href: "/blog", icon: BlogIcon },
