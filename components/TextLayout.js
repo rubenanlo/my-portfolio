@@ -57,6 +57,7 @@ TextLayout.Subtitle = function TextLayoutSubtitle({
 
 TextLayout.Paragraph = function TextLayoutParagraph({
   paragraph,
+  children,
   className,
   ...props
 }) {
@@ -67,7 +68,7 @@ TextLayout.Paragraph = function TextLayoutParagraph({
       className={clsx(classNameProp, "text-zinc-600 dark:text-zinc-400")}
       {...props}
     >
-      {paragraph}
+      {paragraph || children}
     </p>
   );
 };
