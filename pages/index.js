@@ -1,6 +1,6 @@
 import { Container } from "components/Container";
 import Hero from "components/Hero";
-import Articles from "components/Articles";
+import Articles from "components/Posts";
 import Contact from "components/Contact";
 import Resume from "components/Resume";
 import { getAllText } from "helpers/getTextForSlug";

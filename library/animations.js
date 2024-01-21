@@ -24,3 +24,12 @@ export const blurAnimation = {
   animate: { filter: "blur(0)" },
   transition: { duration: 0.5 },
 };
+
+export const loadingMotion = {
+  animate: { scale: [0, 1], filter: ["blur(10px)", "blur(0px)"] },
+  transition: {
+    duration: 1,
+    repeat: Infinity,
+    repeatType: "reverse",
+  },
+};
