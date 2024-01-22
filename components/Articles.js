@@ -6,24 +6,30 @@ import Pagination from "components/Pagination";
 import { usePagination } from "helpers/usePagination";
 import { useResponsive } from "helpers/useResponsive";
 
-const Article = ({ article: { slug, title, date, description }, blogPath }) => (
+export const Article = ({
+  article: { slug, href, title, name, date, description },
+  narrowWidth,
+}) => (
   <Post
-    blogPath={blogPath}
+    narrowWidth={narrowWidth}
     as="article"
     className={{
+      grid: "row-span-2 border mb-32",
       dimension:
         "w-3/4 lg:w-full shrink-0 overflow-x-visible lg:overflow-x-hidden",
       otherStyles: "snap-center",
     }}
   >
-    <Container.Link href={`/blog/${slug}`} className="w-full">
-      <Post.Title title={title} />
-      <Post.Eyebrow
-        as="time"
-        dateTime={date}
-        decorate
-        date={dayjs(date).format("MMMM D, YYYY")}
-      />
+    <Container.Link href={slug ? `/blog/${slug}` : href} className="w-full">
+      <Post.Title title={title || name} />
+      {date && (
+        <Post.Eyebrow
+          as="time"
+          dateTime={date}
+          decorate
+          date={dayjs(date).format("MMMM D, YYYY")}
+        />
+      )}
       <Post.Description text={description} />
       <Post.Cta text="Read article" />
     </Container.Link>
@@ -64,24 +70,26 @@ const ArticleList = ({ articles }) => {
   );
 };
 
-export const Carousel = ({ articles, blogPath }) => (
+export const Carousel = ({ articles, narrowWidth }) => (
   <Container.Flex
     className={{
-      flex: clsx(blogPath ? "gap-x-20" : "gap-x-5"),
+      flex: clsx(narrowWidth ? "gap-x-20" : "gap-x-5"),
       dimension: "max-w-sm",
       otherStyles: clsx(
-        blogPath ? "" : "snap-mandatory snap-x overflow-x-auto scrollbar-hide",
+        narrowWidth
+          ? ""
+          : "snap-mandatory snap-x overflow-x-auto scrollbar-hide",
         "pb-2"
       ),
     }}
   >
     {articles.map((article) => (
-      <Article key={article.slug} article={article} blogPath />
+      <Article key={article.slug} article={article} narrowWidth />
     ))}
   </Container.Flex>
 );
 
-const Posts = ({ articles }) => {
+const Articles = ({ articles }) => {
   const isSmallScreen = useResponsive(1024);
   return isSmallScreen ? (
     <Carousel articles={articles} />
@@ -90,4 +98,4 @@ const Posts = ({ articles }) => {
   );
 };
 
-export default Posts;
+export default Articles;

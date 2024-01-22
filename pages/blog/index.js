@@ -2,7 +2,7 @@ import { capitalize } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
 import { getAllText } from "helpers/getTextForSlug";
-import { Carousel } from "components/Posts";
+import { Carousel } from "components/Articles";
 import { TextLayout } from "components/TextLayout";
 import { ArrowRightIcon } from "components/AppIcons";
 import { TowardsDevIcon } from "components/SocialIcons";
@@ -115,7 +115,7 @@ const Posts = ({ groupArticles, isLgScreen }) => (
             scrolling: "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
           }}
         >
-          <Carousel articles={posts} blogPath={isLgScreen ? false : true} />
+          <Carousel articles={posts} narrowWidth={isLgScreen ? false : true} />
         </Container>
       </Container>
     ))}

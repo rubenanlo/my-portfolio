@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { turnObjectIntoString } from "helpers/manipulateText";
 
-export function Post({ as, className, children, blogPath, ...props }) {
+export function Post({ as, className, children, narrowWidth, ...props }) {
   let Component = as ?? "div";
   const classNameProp = turnObjectIntoString(className);
 
@@ -11,7 +11,7 @@ export function Post({ as, className, children, blogPath, ...props }) {
     <Component
       className={clsx(
         classNameProp,
-        blogPath ? "p-5" : "lg:border-none lg:rounded-none p-5 lg:p-0",
+        narrowWidth ? "p-5" : "lg:border-none lg:rounded-none p-5 lg:p-0",
         "group relative flex flex-col items-start rounded-2xl border border-zinc-100 dark:border-zinc-700/40 cursor-pointer"
       )}
       {...props}
