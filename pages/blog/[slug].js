@@ -24,7 +24,6 @@ const Posts = ({ content }) => {
       <Button
         variant="primary"
         onClick={handleBack}
-        scroll={false}
         className="mb-10 mx-5 cursor-pointer w-fit"
       >
         Back

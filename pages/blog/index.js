@@ -82,48 +82,45 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
   </Container>
 );
 
-const Posts = ({ groupArticles, isLgScreen }) => {
-  return (
-    <Container
-      className={{
-        dimension: "mt-24 lg:mt-20 mr-2 px-10",
-        otherStyles: "",
-      }}
-    >
-      {groupArticles.map(({ category, posts }, index) => (
-        <Container
-          key={category}
-          className={clsx(index === 0 ? "mt-3 mb-10" : "mt-5 mb-5")}
+const Posts = ({ groupArticles, isLgScreen }) => (
+  <Container
+    className={{
+      dimension: "mt-24 lg:mt-20 mr-2 pl-10",
+      otherStyles: "",
+    }}
+  >
+    {groupArticles.map(({ category, posts }, index) => (
+      <Container
+        key={category}
+        className={clsx(index === 0 ? "mt-3 mb-10" : "mt-5 mb-5")}
+      >
+        <Container.Flex
+          className={{
+            flex: "justify-between items-center",
+            dimension: "pr-10",
+          }}
         >
-          <Container.Flex
-            className={{
-              flex: "justify-between items-center",
-              dimension: "pr-5",
-            }}
-          >
-            <TextLayout.Title
-              as="h3"
-              title={capitalize(category)}
-              className="mb-5"
-            />
-            {posts.length > 1 && !isLgScreen && (
-              <ArrowRightIcon className="w-4 text-gray-400 -mt-4 ml-4" />
-            )}
-          </Container.Flex>
+          <TextLayout.Title
+            as="h3"
+            title={capitalize(category)}
+            className="mb-5"
+          />
+          {posts.length > 1 && !isLgScreen && (
+            <ArrowRightIcon className="w-4 text-gray-400 -mt-4 ml-4" />
+          )}
+        </Container.Flex>
 
-          <Container
-            className={{
-              scrolling:
-                "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
-            }}
-          >
-            <Carousel articles={posts} blogPath={isLgScreen ? false : true} />
-          </Container>
+        <Container
+          className={{
+            scrolling: "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
+          }}
+        >
+          <Carousel articles={posts} blogPath={isLgScreen ? false : true} />
         </Container>
-      ))}
-    </Container>
-  );
-};
+      </Container>
+    ))}
+  </Container>
+);
 
 const Blog = ({ articles }) => {
   const isLgScreen = useResponsive(1027);
@@ -166,7 +163,7 @@ const Blog = ({ articles }) => {
       <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
       <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
       {!isLgScreen && (
-        <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/30 dark:to-gray-900/60 dark:via-gray-900/50" />
+        <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl" />
       )}
     </Container.Columns>
   );

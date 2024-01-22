@@ -81,7 +81,7 @@ export const Carousel = ({ articles, blogPath }) => (
   </Container.Flex>
 );
 
-const Articles = ({ articles }) => {
+const Posts = ({ articles }) => {
   const isSmallScreen = useResponsive(1024);
   return isSmallScreen ? (
     <Carousel articles={articles} />
@@ -90,4 +90,4 @@ const Articles = ({ articles }) => {
   );
 };
 
-export default Articles;
+export default Posts;
