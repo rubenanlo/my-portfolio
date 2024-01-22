@@ -8,6 +8,13 @@ const excludedImagesPath = path.join("optimization", "excludedImages.json");
 const dimensionsMapping = {
   "ruben_headshot.jpeg": { width: 50, height: 50 },
   "mitigation_toolkit.png": { width: 224, height: 130 },
+  "rawdev.png": { width: 224, height: 130 },
+  "my_portfolio.png": { width: 224, height: 130 },
+  "sdg_tc.png": { width: 224, height: 130 },
+  "sdr.png": { width: 224, height: 130 },
+  "eu_sdr.png": { width: 224, height: 130 },
+  "tick_tock.png": { width: 224, height: 130 },
+  "benin.png": { width: 224, height: 130 },
   // ... add more mappings as needed
 };
 
