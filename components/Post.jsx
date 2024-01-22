@@ -9,6 +9,7 @@ export function Post({
   children,
   narrowWidth,
   sameHeight,
+  fullWidth,
   ...props
 }) {
   let Component = as ?? "div";
@@ -20,6 +21,7 @@ export function Post({
         classNameProp,
         narrowWidth ? "p-5" : "lg:border-none lg:rounded-none p-5 lg:p-0",
         sameHeight && "h-full",
+        fullWidth ? "w-full" : "w-3/4 lg:w-full",
         "group relative flex flex-col items-start rounded-2xl border border-zinc-100 dark:border-zinc-700/60"
       )}
       {...props}

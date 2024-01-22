@@ -9,14 +9,15 @@ import { useResponsive } from "helpers/useResponsive";
 export const Article = ({
   article: { slug, href, title, name, date, image, description },
   narrowWidth,
+  fullWidth,
 }) => (
   <Post
     narrowWidth={narrowWidth}
+    fullWidth={fullWidth}
     as="article"
     className={{
       grid: clsx(image ? "row-span-2" : ""),
-      dimension:
-        "w-3/4 lg:w-full shrink-0 overflow-x-visible lg:overflow-x-hidden",
+      dimension: "shrink-0 overflow-x-visible lg:overflow-x-hidden",
       otherStyles: "snap-center",
     }}
   >

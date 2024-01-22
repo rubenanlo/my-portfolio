@@ -1,6 +1,7 @@
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { Article } from "components/Articles";
+import { useResponsive } from "helpers/useResponsive";
 import { socialInfo } from "library/socialInfo";
 import { work } from "library/projects";
 
@@ -69,6 +70,7 @@ const ProjectHeader = () => {
 
 const ProjectList = () => {
   const projects = work.filter(({ name }) => name);
+  const isLgScreen = useResponsive(1027);
 
   return (
     <Container
@@ -81,12 +83,17 @@ const ProjectList = () => {
       <Container.Columns
         className={{
           grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10",
-          dimension: "pl-10 pr-20 mt-20",
+          dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20 mt-20",
           otherStyles: "overflow-x-hidden",
         }}
       >
         {projects.map((project) => (
-          <Article key={project.name} narrowWidth article={project} />
+          <Article
+            key={project.name}
+            narrowWidth
+            fullWidth={isLgScreen}
+            article={project}
+          />
         ))}
       </Container.Columns>
     </Container>
