@@ -3,7 +3,15 @@ import clsx from "clsx";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { turnObjectIntoString } from "helpers/manipulateText";
 
-export function Post({ as, className, children, blogPath, ...props }) {
+export function Post({
+  as,
+  className,
+  children,
+  narrowWidth,
+  sameHeight,
+  fullWidth,
+  ...props
+}) {
   let Component = as ?? "div";
   const classNameProp = turnObjectIntoString(className);
 
@@ -11,8 +19,10 @@ export function Post({ as, className, children, blogPath, ...props }) {
     <Component
       className={clsx(
         classNameProp,
-        blogPath ? "p-5" : "lg:border-none lg:rounded-none p-5 lg:p-0",
-        "group relative flex flex-col items-start rounded-2xl border border-zinc-100 dark:border-zinc-700/40 cursor-pointer"
+        narrowWidth ? "p-5" : "lg:border-none lg:rounded-none p-5 lg:p-0",
+        sameHeight && "h-full",
+        fullWidth ? "w-full" : "w-3/4 lg:w-full",
+        "group relative flex flex-col items-start rounded-2xl border border-zinc-100 dark:border-zinc-700/60"
       )}
       {...props}
     >
@@ -75,14 +85,16 @@ Post.Description = function PostDescription({ className, text, ...props }) {
   );
 };
 
-Post.Cta = function PostCta({ text }) {
+Post.Cta = function PostCta({ text, noChevron }) {
   return (
     <div
       aria-hidden="true"
       className="relative mt-4 flex items-center text-sm font-medium text-orange-tertiary"
     >
       {text}
-      <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
+      {noChevron ? null : (
+        <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
+      )}
     </div>
   );
 };

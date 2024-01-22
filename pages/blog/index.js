@@ -2,7 +2,7 @@ import { capitalize } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
 import { getAllText } from "helpers/getTextForSlug";
-import { Carousel } from "components/Posts";
+import { Carousel } from "components/Articles";
 import { TextLayout } from "components/TextLayout";
 import { ArrowRightIcon } from "components/AppIcons";
 import { TowardsDevIcon } from "components/SocialIcons";
@@ -27,7 +27,7 @@ const blogIcons = [
 const BlogHeader = ({ animatedTotalPosts, tags }) => (
   <Container
     className={{
-      dimension: "mt-10 lg:mt-20 px-10 lg:px-16",
+      dimension: "mt-10 lg:mt-18 px-10 lg:px-16",
     }}
   >
     <TextLayout.Title as="h1" title="My blog" />
@@ -67,10 +67,10 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
     </Container.Flex>
     <Container.Columns
       className={{
-        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-center mt-5",
+        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-start mt-5",
       }}
     >
-      <TextLayout.Paragraph paragraph="and I talk about:" />
+      <TextLayout.Paragraph paragraph="and I talk about:" className="mt-2" />
       <Container.Flex
         className={{ flex: "justify-start gap-5 flex-wrap mt-2" }}
       >
@@ -82,48 +82,45 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
   </Container>
 );
 
-const Posts = ({ groupArticles, isLgScreen }) => {
-  return (
-    <Container
-      className={{
-        dimension: "mt-24 lg:mt-20 mr-2 px-10",
-        otherStyles: "",
-      }}
-    >
-      {groupArticles.map(({ category, posts }, index) => (
-        <Container
-          key={category}
-          className={clsx(index === 0 ? "mt-3 mb-10" : "mt-5 mb-5")}
+const Posts = ({ groupArticles, isLgScreen }) => (
+  <Container
+    className={{
+      dimension:
+        "mt-24 lg:mt-10 pl-10 max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
+      overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
+    }}
+  >
+    {groupArticles.map(({ category, posts }, index) => (
+      <Container
+        key={category}
+        className={clsx(index === 0 ? "mt-3 mb-10" : "mt-5 mb-5")}
+      >
+        <Container.Flex
+          className={{
+            flex: "justify-start items-center",
+            dimension: "pr-10",
+          }}
         >
-          <Container.Flex
-            className={{
-              flex: "justify-between items-center",
-              dimension: "pr-5",
-            }}
-          >
-            <TextLayout.Title
-              as="h3"
-              title={capitalize(category)}
-              className="mb-5"
-            />
-            {posts.length > 1 && !isLgScreen && (
-              <ArrowRightIcon className="w-4 text-gray-400 -mt-4 ml-4" />
-            )}
-          </Container.Flex>
-
-          <Container
-            className={{
-              scrolling:
-                "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
-            }}
-          >
-            <Carousel articles={posts} blogPath={isLgScreen ? false : true} />
-          </Container>
+          <TextLayout.Title
+            as="h3"
+            title={capitalize(category)}
+            className="mb-5"
+          />
+          {posts.length > 1 && !isLgScreen && (
+            <ArrowRightIcon className="w-4 text-gray-400 -mt-3 ml-4" />
+          )}
+        </Container.Flex>
+        <Container
+          className={{
+            scrolling: "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
+          }}
+        >
+          <Carousel articles={posts} narrowWidth={isLgScreen ? false : true} />
         </Container>
-      ))}
-    </Container>
-  );
-};
+      </Container>
+    ))}
+  </Container>
+);
 
 const Blog = ({ articles }) => {
   const isLgScreen = useResponsive(1027);
@@ -158,15 +155,14 @@ const Blog = ({ articles }) => {
     <Container.Columns
       className={{
         position: "relative",
-        grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr]",
-        dimension: "h-full",
-        otherStyles: "overflow-x-hidden",
+        grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr] overflow-y-hidden",
+        otherStyles: "overflow-x-hidden scrollbar",
       }}
     >
       <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
       <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
       {!isLgScreen && (
-        <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/30 dark:to-gray-900/60 dark:via-gray-900/50" />
+        <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl overflow-y-hidden" />
       )}
     </Container.Columns>
   );

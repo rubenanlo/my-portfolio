@@ -6,26 +6,46 @@ import Pagination from "components/Pagination";
 import { usePagination } from "helpers/usePagination";
 import { useResponsive } from "helpers/useResponsive";
 
-const Article = ({ article: { slug, title, date, description }, blogPath }) => (
+export const Article = ({
+  article: { slug, href, title, name, date, image, description },
+  narrowWidth,
+  fullWidth,
+}) => (
   <Post
-    blogPath={blogPath}
+    narrowWidth={narrowWidth}
+    fullWidth={fullWidth}
     as="article"
     className={{
-      dimension:
-        "w-3/4 lg:w-full shrink-0 overflow-x-visible lg:overflow-x-hidden",
+      grid: clsx(image ? "row-span-2" : ""),
+      dimension: "shrink-0 overflow-x-visible lg:overflow-x-hidden",
       otherStyles: "snap-center",
     }}
   >
-    <Container.Link href={`/blog/${slug}`} className="w-full">
-      <Post.Title title={title} />
-      <Post.Eyebrow
-        as="time"
-        dateTime={date}
-        decorate
-        date={dayjs(date).format("MMMM D, YYYY")}
-      />
+    <Container.Link
+      href={slug ? `/blog/${slug}` : href}
+      className={{ parent: "h-full flex flex-col justify-between" }}
+    >
+      <Post.Title title={title || name} />
+      {date && (
+        <Post.Eyebrow
+          as="time"
+          dateTime={date}
+          decorate
+          date={dayjs(date).format("MMMM D, YYYY")}
+        />
+      )}
       <Post.Description text={description} />
-      <Post.Cta text="Read article" />
+      <Post.Cta noChevron text={href ?? "Read article"} />
+      {image && (
+        <Container.Image
+          src={image}
+          alt={title || name}
+          className={{
+            dimension: "mt-5",
+            otherStyles: "object-cover object-left-top opacity-30 rounded-lg ",
+          }}
+        />
+      )}
     </Container.Link>
   </Post>
 );
@@ -64,19 +84,21 @@ const ArticleList = ({ articles }) => {
   );
 };
 
-export const Carousel = ({ articles, blogPath }) => (
+export const Carousel = ({ articles, narrowWidth }) => (
   <Container.Flex
     className={{
-      flex: clsx(blogPath ? "gap-x-20" : "gap-x-5"),
+      flex: clsx(narrowWidth ? "gap-x-20" : "gap-x-5"),
       dimension: "max-w-sm",
       otherStyles: clsx(
-        blogPath ? "" : "snap-mandatory snap-x overflow-x-auto scrollbar-hide",
+        narrowWidth
+          ? ""
+          : "snap-mandatory snap-x overflow-x-auto scrollbar-hide",
         "pb-2"
       ),
     }}
   >
     {articles.map((article) => (
-      <Article key={article.slug} article={article} blogPath />
+      <Article key={article.slug} article={article} narrowWidth />
     ))}
   </Container.Flex>
 );

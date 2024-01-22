@@ -4,41 +4,9 @@ import Image from "next/image";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import Navbar from "components/Navbar";
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  MediumIcon,
-} from "components/SocialIcons";
+import { socialInfo } from "library/socialInfo";
 import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
 import { useResponsive } from "helpers/useResponsive";
-
-const text = {
-  name: "Ruben Andino",
-  title: "Fullstack Web Developer, Economist",
-  social: [
-    {
-      Social: GitHubIcon,
-      href: "https://github.com/rubenanlo",
-    },
-    {
-      Social: LinkedInIcon,
-      href: "https://www.linkedin.com/in/ruben-andino/",
-    },
-    {
-      Social: MediumIcon,
-      href: "https://medium.com/@rubenanlo",
-    },
-    {
-      Social: InstagramIcon,
-      href: "https://www.instagram.com/benjiebao/",
-    },
-    {
-      text: "Check my other site →",
-      href: "https://www.rawdev.io/",
-    },
-  ],
-};
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);
@@ -68,11 +36,11 @@ const Hero = () => {
         />
         <Container.Flex>
           <TextLayout className="mt-5 w-full">
-            <TextLayout.Title title={text.name} />
-            <TextLayout.Subtitle subtitle={text.title} />
+            <TextLayout.Title title={socialInfo.name} />
+            <TextLayout.Subtitle subtitle={socialInfo.title} />
             <TextLayout.Paragraph
               className="mt-6"
-              paragraph="I am a Full Stack Web Developer with a background in economics. My primarily focus is to build simple web applications based on complex data, by understanding and addressing business needs, automating processes to minimize human error, and allowing code reusability, and seamless code maintenance."
+              paragraph="I am a Full Stack Web Developer with a background in economics. My primary focus is to build simple web applications based on complex data, by understanding and addressing business needs, automating processes to minimize human error, allowing code reusability and seamless code maintenance."
             />
             <Container.Flex
               className={{
@@ -80,7 +48,7 @@ const Hero = () => {
                 dimension: "mt-10",
               }}
             >
-              {text.social.map(({ Social, text, href }) => (
+              {socialInfo.social.map(({ Social, text, href }) => (
                 <Container.Link
                   key={Social || text}
                   href={href}
