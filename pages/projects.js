@@ -40,7 +40,7 @@ const ProjectHeader = () => {
           <TextLayout.Paragraph
             paragraph={header.techStack[tech]}
             className={{
-              parent: "w-full ",
+              dimension: "w-full",
             }}
           />
         </Container.Columns>
@@ -63,7 +63,8 @@ const ProjectHeader = () => {
           }}
         />
       </Container.Flex>
-      <TextLayout.Paragraph paragraph="you can filter this list by" />
+      {/* !TODO: create a filter */}
+      {/* <TextLayout.Paragraph paragraph="you can filter this list by" /> */}
     </Container>
   );
 };
