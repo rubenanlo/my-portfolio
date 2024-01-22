@@ -70,8 +70,8 @@ export const AppLayout = ({ children }) => {
             className={{
               flex: "flex-col justify-between ",
               dimension: clsx(
-                hasMaxHeight ? "desktop-sm:max-h-[90vh]" : "min-h-[90vh]",
-                "mt-[10vh] rounded-t-2xl"
+                hasMaxHeight ? "desktop-sm:max-h-[90vh]" : "",
+                "min-h-[90vh] mt-[10vh] rounded-t-2xl"
               ),
               background: "bg-gray-100 dark:bg-gray-900/80",
             }}

@@ -67,10 +67,10 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
     </Container.Flex>
     <Container.Columns
       className={{
-        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-center mt-5",
+        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-start mt-5",
       }}
     >
-      <TextLayout.Paragraph paragraph="and I talk about:" />
+      <TextLayout.Paragraph paragraph="and I talk about:" className="mt-2" />
       <Container.Flex
         className={{ flex: "justify-start gap-5 flex-wrap mt-2" }}
       >
@@ -97,7 +97,7 @@ const Posts = ({ groupArticles, isLgScreen }) => (
       >
         <Container.Flex
           className={{
-            flex: "justify-between items-center",
+            flex: "justify-start items-center",
             dimension: "pr-10",
           }}
         >
@@ -107,10 +107,9 @@ const Posts = ({ groupArticles, isLgScreen }) => (
             className="mb-5"
           />
           {posts.length > 1 && !isLgScreen && (
-            <ArrowRightIcon className="w-4 text-gray-400 -mt-4 ml-4" />
+            <ArrowRightIcon className="w-4 text-gray-400 -mt-3 ml-4" />
           )}
         </Container.Flex>
-
         <Container
           className={{
             scrolling: "snap-mandatory snap-x overflow-x-scroll scrollbar-hide",
@@ -153,27 +152,19 @@ const Blog = ({ articles }) => {
   });
 
   return (
-    <Container
+    <Container.Columns
       className={{
-        dimension:
-          "max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
-        overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
+        position: "relative",
+        grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr] overflow-y-hidden",
+        otherStyles: "overflow-x-hidden scrollbar",
       }}
     >
-      <Container.Columns
-        className={{
-          position: "relative",
-          grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr]",
-          otherStyles: "overflow-x-hidden",
-        }}
-      >
-        <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
-        <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
-        {!isLgScreen && (
-          <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl" />
-        )}
-      </Container.Columns>
-    </Container>
+      <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
+      <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
+      {!isLgScreen && (
+        <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl overflow-y-hidden" />
+      )}
+    </Container.Columns>
   );
 };
 
