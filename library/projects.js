@@ -134,9 +134,34 @@ export const work = [
     category: "project",
   },
   {
-    name: "",
-    description: "Javascript game to change as many diapers as you can!",
-    href: "https://rubenanlo.github.io/tick-tock-diaper/",
+    name: "Supply chain analysis",
+    description:
+      "Generating a supply chain analysis with automation capabilities",
+    href: "TODO",
+    image: "",
+    category: "project",
+  },
+  {
+    name: "Return on investment analysis and data visualization",
+    description:
+      "Generating a return on R&D investment analysis, along with a self-generated report as an output",
+    href: "TODO",
+    image: "",
+    category: "project",
+  },
+  {
+    name: "Best practices for data analyses and data visualizations",
+    description:
+      "Development of best practices for data analyses and data visualizations in the US Northeast region",
+    href: "TODO",
+    image: "",
+    category: "project",
+  },
+  {
+    name: "Data tables",
+    description:
+      "Development of an automated tool to self-generate tables for reports",
+    href: "TODO",
     image: "",
     category: "project",
   },
