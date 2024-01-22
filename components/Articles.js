@@ -7,20 +7,23 @@ import { usePagination } from "helpers/usePagination";
 import { useResponsive } from "helpers/useResponsive";
 
 export const Article = ({
-  article: { slug, href, title, name, date, description },
+  article: { slug, href, title, name, date, image, description },
   narrowWidth,
 }) => (
   <Post
     narrowWidth={narrowWidth}
     as="article"
     className={{
-      grid: "row-span-2 border mb-32",
+      grid: clsx(image ? "row-span-2" : ""),
       dimension:
         "w-3/4 lg:w-full shrink-0 overflow-x-visible lg:overflow-x-hidden",
       otherStyles: "snap-center",
     }}
   >
-    <Container.Link href={slug ? `/blog/${slug}` : href} className="w-full">
+    <Container.Link
+      href={slug ? `/blog/${slug}` : href}
+      className={{ parent: "h-full flex flex-col justify-between" }}
+    >
       <Post.Title title={title || name} />
       {date && (
         <Post.Eyebrow
@@ -31,7 +34,17 @@ export const Article = ({
         />
       )}
       <Post.Description text={description} />
-      <Post.Cta text="Read article" />
+      <Post.Cta noChevron text={href ?? "Read article"} />
+      {image && (
+        <Container.Image
+          src={image}
+          alt={title || name}
+          className={{
+            dimension: "mt-5",
+            otherStyles: "object-cover object-left-top opacity-30 rounded-lg ",
+          }}
+        />
+      )}
     </Container.Link>
   </Post>
 );

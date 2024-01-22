@@ -16,13 +16,18 @@ const ProjectHeader = () => {
   return (
     <Container
       className={{
-        dimension: "mt-10 lg:mt-20 px-10 lg:px-16",
+        dimension: "mt-10 lg:mt-18 px-10 lg:px-16",
       }}
     >
       <TextLayout.Title as="h1" title={header.title} />
       <TextLayout.Paragraph as="h3" paragraph={header.subtitle} />
 
-      <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
+      <Container
+        className={{
+          dimension: "w-1/5 my-7",
+          border: "border-b border-zinc-600/50",
+        }}
+      />
       {techStackHeader.map((tech) => (
         <Container.Columns
           key={tech}
@@ -39,9 +44,14 @@ const ProjectHeader = () => {
           />
         </Container.Columns>
       ))}
-      <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
+      <Container
+        className={{
+          dimension: "w-1/5 my-7",
+          boder: "border-b border-zinc-600/50",
+        }}
+      />
       <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
-        <TextLayout.Paragraph paragraph="Where all my work is" />
+        <TextLayout.Paragraph paragraph="Where all my contributions are" />
         <Container.Link
           href={github.href}
           target="_blank"
@@ -52,6 +62,7 @@ const ProjectHeader = () => {
           }}
         />
       </Container.Flex>
+      <TextLayout.Paragraph paragraph="you can filter this list by" />
     </Container>
   );
 };
@@ -60,33 +71,39 @@ const ProjectList = () => {
   const projects = work.filter(({ name }) => name);
 
   return (
-    <Container.Columns
-      className={{ grid: "grid-cols-2 gap-10 pr-20 mt-20 overflow-y-auto" }}
+    <Container
+      className={{
+        dimension:
+          "max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
+        overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
+      }}
     >
-      {projects.map((project) => (
-        <div key={project.name} className="border">
-          <div />
-          <Article article={project} />
-        </div>
-      ))}
-    </Container.Columns>
+      <Container.Columns
+        className={{
+          grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10",
+          dimension: "pl-10 pr-20 mt-20",
+          otherStyles: "overflow-x-hidden",
+        }}
+      >
+        {projects.map((project) => (
+          <Article key={project.name} narrowWidth article={project} />
+        ))}
+      </Container.Columns>
+    </Container>
   );
 };
 
-const Projects = () => {
-  return (
-    <Container.Columns
-      className={{
-        position: "relative",
-        grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr]",
-        dimension: "h-full",
-        otherStyles: "overflow-x-hidden",
-      }}
-    >
-      <ProjectHeader />
-      <ProjectList />
-    </Container.Columns>
-  );
-};
+const Projects = () => (
+  <Container.Columns
+    className={{
+      position: "relative",
+      grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr]",
+      otherStyles: "overflow-x-hidden scrollbar",
+    }}
+  >
+    <ProjectHeader />
+    <ProjectList />
+  </Container.Columns>
+);
 
 export default Projects;

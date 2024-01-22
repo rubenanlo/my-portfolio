@@ -27,7 +27,7 @@ const blogIcons = [
 const BlogHeader = ({ animatedTotalPosts, tags }) => (
   <Container
     className={{
-      dimension: "mt-10 lg:mt-20 px-10 lg:px-16",
+      dimension: "mt-10 lg:mt-18 px-10 lg:px-16",
     }}
   >
     <TextLayout.Title as="h1" title="My blog" />
@@ -85,8 +85,9 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
 const Posts = ({ groupArticles, isLgScreen }) => (
   <Container
     className={{
-      dimension: "mt-24 lg:mt-20 mr-2 pl-10",
-      otherStyles: "",
+      dimension:
+        "mt-24 lg:mt-10 pl-10 max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
+      overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
     }}
   >
     {groupArticles.map(({ category, posts }, index) => (
@@ -152,20 +153,27 @@ const Blog = ({ articles }) => {
   });
 
   return (
-    <Container.Columns
+    <Container
       className={{
-        position: "relative",
-        grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr]",
-        dimension: "h-full",
-        otherStyles: "overflow-x-hidden",
+        dimension:
+          "max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
+        overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
       }}
     >
-      <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
-      <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
-      {!isLgScreen && (
-        <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl" />
-      )}
-    </Container.Columns>
+      <Container.Columns
+        className={{
+          position: "relative",
+          grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr]",
+          otherStyles: "overflow-x-hidden",
+        }}
+      >
+        <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
+        <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
+        {!isLgScreen && (
+          <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl" />
+        )}
+      </Container.Columns>
+    </Container>
   );
 };
 

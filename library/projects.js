@@ -1,3 +1,5 @@
+import { MITIGATION_TOOLKIT as mitigationToolkit } from "helpers/exportImages";
+
 export const work = [
   {
     title: "My projects",
@@ -16,7 +18,7 @@ export const work = [
     description:
       "A data visualization on greenhouse gas (GHG) mitigation options for agriculture and land use in different countries. Tip: Select China for all functionalities",
     href: "https://deploy-preview-8--mitigation-toolkit.netlify.app/",
-    image: "",
+    image: mitigationToolkit,
   },
   {
     name: "My portfolio",
@@ -30,7 +32,7 @@ export const work = [
     description:
       "This is a data visualization to showcase the performance of European countries towards the UN sustainable development goals.",
     href: "https://eu-dashboards.sdgindex.org/",
-    image: "",
+    image: mitigationToolkit,
   },
   {
     name: "rawDev",

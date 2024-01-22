@@ -187,3 +187,11 @@ Container.Table = function ContainerTable({ table, className }) {
     </table>
   );
 };
+
+Container.Image = function ContainerImage({ src, alt, className, ...props }) {
+  const classNameProp = turnObjectIntoString(className);
+
+  return (
+    <Image className={clsx(classNameProp)} src={src} alt={alt} {...props} />
+  );
+};
