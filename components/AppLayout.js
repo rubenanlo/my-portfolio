@@ -1,5 +1,6 @@
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
+import clsx from "clsx";
 import { Header } from "components/Header";
 import Footer from "components/Footer";
 import { Container } from "components/Container";
@@ -36,9 +37,11 @@ export const AppLayout = ({ children }) => {
   const noFooterPaths = ["/admin"];
   const noBlendedNavbarPaths = ["/", "/#", "/admin"];
   const twirlPaths = ["/", "/#"];
+  const maxHeightPaths = ["/projects", "/blog"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
   const hasTwirlPaths = twirlPaths.includes(asPath);
+  const hasMaxHeight = maxHeightPaths.includes(asPath);
 
   return (
     <>
@@ -65,8 +68,11 @@ export const AppLayout = ({ children }) => {
           <Header />
           <Container.Flex
             className={{
-              flex: "flex-col justify-between",
-              dimension: "mt-[10vh] rounded-t-2xl  min-h-[90vh]",
+              flex: "flex-col justify-between ",
+              dimension: clsx(
+                hasMaxHeight ? "desktop-sm:max-h-[90vh]" : "min-h-[90vh]",
+                "mt-[10vh] rounded-t-2xl"
+              ),
               background: "bg-gray-100 dark:bg-gray-900/80",
             }}
           >
