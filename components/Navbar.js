@@ -238,17 +238,13 @@ const NavbarIsland = () => (
         otherStyles: "list-none rounded-full",
       }}
     >
-      <Container.Link
-        href="/"
-        className={{
-          dimension: "mr-5",
-        }}
-        Component={Container.Logo}
-        componentProps={{
-          src: rawDevLogo,
-          alt: "my-logo",
-        }}
-      />
+      <Container.Link href="/">
+        <Container.Logo
+          src={rawDevLogo}
+          alt="my-logo"
+          className="h-10 w-10 rounded-full"
+        />
+      </Container.Link>
       <NavbarIslandItem />
     </Container.Flex>
   </Container>

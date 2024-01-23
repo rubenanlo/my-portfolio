@@ -77,14 +77,14 @@ const ProjectList = () => {
     <Container
       className={{
         dimension:
-          "max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
+          "max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0 mt-10 pt-10",
         overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
       }}
     >
       <Container.Columns
         className={{
           grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10",
-          dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20 mt-20",
+          dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20",
           otherStyles: "overflow-x-hidden",
         }}
       >
