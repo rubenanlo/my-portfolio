@@ -17,8 +17,7 @@ export const work = [
       Frameworks: "React, Next.js",
       Languages: "JavaScript, Python, Bash, Node.js, HTML, CSS",
       Databases: "MongoDB",
-      Libraries:
-        "D3.js, Nivo, Framer Motion, Redux, Recoil, MobX, among others",
+      Libraries: "D3.js, Framer Motion, Redux, Recoil, MobX, ...",
       "CSS Libraries": "TailwindCSS, styled-components",
     },
   },
@@ -31,10 +30,10 @@ export const work = [
     category: "project",
   },
   {
-    name: "JEST full data testing",
+    name: "JEST testing units",
     description:
       "A way to test full datasets with JEST (e.g., 3 seconds for 3,500 tests)",
-    href: "TODO",
+    href: "https://github.com/rubenanlo/JEST-testing-utils",
     category: "code snippets",
   },
   {
@@ -48,21 +47,21 @@ export const work = [
   {
     name: "usePagination",
     description: "Custom hook to create pagination for any list of items",
-    href: "TODO",
+    href: "https://github.com/rubenanlo/custom-react-hooks",
     category: "code snippets",
   },
   {
     name: "useResponsive",
     description:
       "Custom hook to detect the current breakpoint allowing to render different components based on the screen size",
-    href: "TODO",
+    href: "https://github.com/rubenanlo/custom-react-hooks",
     category: "code snippets",
   },
   {
     name: "usAnimatedValue",
     description:
       "Custom hook to animate values with Framer Motion, allowing to animate numbers",
-    href: "TODO",
+    href: "https://github.com/rubenanlo/custom-react-hooks",
     category: "code snippets",
   },
   {
@@ -85,7 +84,7 @@ export const work = [
     name: "Image optimization",
     description:
       "Automation of image optimization with AVIF, png and WebP formats, so that images are optimized for the web",
-    href: "TODO",
+    href: "https://github.com/rubenanlo/image-optimization",
     category: "code snippets",
   },
   {

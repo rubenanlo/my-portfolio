@@ -22,6 +22,10 @@ const variantStyles = (currentPage) => ({
     typography:
       "font-medium text-zinc-900 active:text-zinc-900/60 dark:text-zinc-300 dark:hover:text-zinc-50 dark:active:text-zinc-50/70",
   },
+  selected: {
+    background: "bg-orange-tertiary dark:bg-orange-quaternary",
+  },
+
   arrow: {
     position: "relative focus:z-20",
     dimension: "px-1",

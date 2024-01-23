@@ -1,11 +1,14 @@
+import { useState } from "react";
+import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { Article } from "components/Articles";
+import { Button } from "components/Button";
 import { useResponsive } from "helpers/useResponsive";
 import { socialInfo } from "library/socialInfo";
 import { work } from "library/projects";
 
-const ProjectHeader = () => {
+const ProjectHeader = ({ filter, setFilter }) => {
   const [header] = work.filter(({ title }) => title);
 
   const techStackHeader = Object.keys(header.techStack);
@@ -14,10 +17,19 @@ const ProjectHeader = () => {
     href.includes("github")
   );
 
+  const filters = [
+    "All",
+    ...Array.from(
+      new Set(
+        work.map(({ category }) => category).filter((category) => category)
+      )
+    ),
+  ];
+
   return (
     <Container
       className={{
-        dimension: "mt-10 lg:mt-18 px-10 lg:px-16",
+        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10",
       }}
     >
       <TextLayout.Title as="h1" title={header.title} />
@@ -25,7 +37,7 @@ const ProjectHeader = () => {
 
       <Container
         className={{
-          dimension: "w-1/5 my-7",
+          dimension: "w-1/5 my-6",
           border: "border-b border-zinc-600/50",
         }}
       />
@@ -33,7 +45,7 @@ const ProjectHeader = () => {
         <Container.Columns
           key={tech}
           className={{
-            grid: "grid-cols-[1.5fr,2fr] items-start mb-2",
+            grid: "grid-cols-[1fr,2fr] items-start mb-2 ",
           }}
         >
           <TextLayout.Paragraph paragraph={tech} />
@@ -47,8 +59,8 @@ const ProjectHeader = () => {
       ))}
       <Container
         className={{
-          dimension: "w-1/5 my-7",
-          boder: "border-b border-zinc-600/50",
+          dimension: "w-1/5 my-6",
+          border: "border-b border-zinc-600/50",
         }}
       />
       <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
@@ -64,13 +76,29 @@ const ProjectHeader = () => {
         />
       </Container.Flex>
       {/* !TODO: create a filter */}
-      {/* <TextLayout.Paragraph paragraph="you can filter this list by" /> */}
+      <TextLayout.Paragraph paragraph="you can filter this list by:" />
+      <Container.Flex
+        className={{ dimension: "mt-[.6rem]", flex: "justify-start gap-x-3" }}
+      >
+        {filters.map((filterItem) => (
+          <Button
+            key={filterItem}
+            variant={filterItem === filter ? "selected" : "secondary"}
+            onClick={() => setFilter(filterItem)}
+          >
+            <TextLayout.Paragraph paragraph={capitalize(filterItem)} />
+          </Button>
+        ))}
+      </Container.Flex>
     </Container>
   );
 };
 
-const ProjectList = () => {
-  const projects = work.filter(({ name }) => name);
+const ProjectList = ({ filter }) => {
+  const projects = work.filter(({ name, category }) =>
+    filter === "All" ? name : name && category === filter
+  );
+
   const isLgScreen = useResponsive(1027);
 
   return (
@@ -101,17 +129,21 @@ const ProjectList = () => {
   );
 };
 
-const Projects = () => (
-  <Container.Columns
-    className={{
-      position: "relative",
-      grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr]",
-      otherStyles: "overflow-x-hidden scrollbar",
-    }}
-  >
-    <ProjectHeader />
-    <ProjectList />
-  </Container.Columns>
-);
+const Projects = () => {
+  const [filter, setFilter] = useState("All");
+
+  return (
+    <Container.Columns
+      className={{
+        position: "relative",
+        grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr]",
+        otherStyles: "overflow-x-hidden scrollbar",
+      }}
+    >
+      <ProjectHeader filter={filter} setFilter={setFilter} />
+      <ProjectList filter={filter} />
+    </Container.Columns>
+  );
+};
 
 export default Projects;
