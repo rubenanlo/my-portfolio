@@ -105,7 +105,7 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
         className={{
           position: "absolute left-0 right-0 bottom-0",
           dimension: "mx-auto max-w-xl pt-5 px-5 pb-36",
-          background: "bg-zinc-800",
+          background: "bg-slate-600",
           otherStyles: "rounded-t-xl",
         }}
         aria-label="Sidebar"
@@ -171,7 +171,7 @@ const NavbarMobile = () => {
   }, [setIsVisible]);
 
   return (
-    <Container className="absolute w-full z-10">
+    <Container className="absolute w-full z-20">
       <motion.div
         whileHover={!isSmallerScreen && { scale: 2 }}
         transition={{ duration: 1 }}
