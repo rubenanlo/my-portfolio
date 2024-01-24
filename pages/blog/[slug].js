@@ -40,7 +40,7 @@ export default Posts;
 export const getStaticPaths = async () => {
   let paths = [];
   try {
-    const slugs = getUniqueSlugs();
+    const slugs = getUniqueSlugs({ page: "blog" });
     paths = slugs.map((item) => {
       const slug = typeof item === "object" && item !== null ? item.slug : item;
       return { params: { slug } };
@@ -55,7 +55,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const textResult = getText(params.slug);
+  const textResult = getText({ slug: params.slug, page: "blog" });
   const [{ data: post, content }] = textResult;
   const mdxSource = await serialize(content);
   return {

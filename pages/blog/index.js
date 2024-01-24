@@ -67,7 +67,8 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
     </Container.Flex>
     <Container.Columns
       className={{
-        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-start mt-5",
+        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-start",
+        dimension: "mt-5 lg:w-1/2 desktop-sm:w-full",
       }}
     >
       <TextLayout.Paragraph paragraph="and I talk about:" className="mt-2" />
@@ -86,7 +87,7 @@ const Posts = ({ groupArticles, isLgScreen }) => (
   <Container
     className={{
       dimension:
-        "mt-24 lg:mt-10 pl-10 max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
+        "mt-24 lg:mt-14 desktop-sm:mt-10 pl-16 desktop-sm:pl-10 max-h-none desktop-sm:max-h-[100vh] mr-[5px] desktop-sm:hover:mr-0",
       overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
     }}
   >
@@ -155,7 +156,7 @@ const Blog = ({ articles }) => {
     <Container.Columns
       className={{
         position: "relative",
-        grid: "grid-cols-1 lg:grid-cols-[1fr,1.5fr] overflow-y-hidden",
+        grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr] overflow-y-hidden",
         otherStyles: "overflow-x-hidden scrollbar",
       }}
     >
@@ -171,7 +172,7 @@ const Blog = ({ articles }) => {
 export default Blog;
 
 export const getStaticProps = async () => {
-  const text = await getAllText();
+  const text = await getAllText({ page: "blog" });
   const articles = text.map(({ data }) => data);
   if (!articles.length) {
     return {

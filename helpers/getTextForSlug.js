@@ -3,17 +3,17 @@ import path from "path";
 import matter from "gray-matter";
 import _ from "lodash";
 
-const DIRECTORY = path.join("pages", "blog", "posts");
+const DIRECTORY = { blog: path.join("pages", "blog", "posts") };
 
 // function to get all the files from the folder depending on the slug
-const getFiles = () => readdirSync(DIRECTORY);
+const getFiles = (page) => readdirSync(DIRECTORY[page]);
 
 export const createFileNameSlug = (input) => input.replace(".md", "");
 
-export const getAllText = (withSummarizedContent) =>
-  getFiles().map((fileName) => {
+export const getAllText = ({ withSummarizedContent, page }) =>
+  getFiles(page).map((fileName) => {
     const slug = fileName.replace(".md", "");
-    const fileContents = readFileSync(`${DIRECTORY}/${slug}.md`, "utf8");
+    const fileContents = readFileSync(`${DIRECTORY[page]}/${slug}.md`, "utf8");
     // the code below only yields the metadata from all the md files
     const { data } = matter(fileContents);
     data["slug"] = createFileNameSlug(slug);
@@ -49,10 +49,10 @@ export const getAllText = (withSummarizedContent) =>
 // slugs, the getUniqueSlugs function DOES provide a unique list of slugs,
 // thanks to the use of the uniq lodash method. This is further applied to the
 // slug for the intermediary sites
-export const getUniqueSlugs = () =>
-  _.uniq([...getAllText().map(({ data: { slug } }) => slug)]);
+export const getUniqueSlugs = ({ page }) =>
+  _.uniq([...getAllText({ page }).map(({ data: { slug } }) => slug)]);
 
-export const getText = (slug, withFormattedSlug) => {
+export const getText = ({ slug, withFormattedSlug, page }) => {
   try {
     // We first return a list of files applicable to the slug component
     // We then filter the files based on the slug. We use filter method and not
@@ -61,11 +61,11 @@ export const getText = (slug, withFormattedSlug) => {
     // each specific slug.
     // We then return the metadata and content of the md files. We use map method,
     // since the filter method returns an array of files.
-    return getFiles()
+    return getFiles(page)
       .filter((fileName) => createFileNameSlug(fileName) === slug)
       .map((file) => {
         const { data, content } = matter(
-          readFileSync(`${DIRECTORY}/${file}`, "utf8")
+          readFileSync(`${DIRECTORY[page]}/${file}`, "utf8")
         );
         const id = file.match(/\d-(.*)\.md$/)?.[1] || null;
         const formattedSlug = withFormattedSlug && file.replace(".md", "");

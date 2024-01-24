@@ -45,7 +45,8 @@ const ProjectHeader = ({ filter, setFilter }) => {
         <Container.Columns
           key={tech}
           className={{
-            grid: "grid-cols-[1fr,2fr] items-start mb-2 ",
+            grid: "grid-cols-[1fr,2fr] items-start",
+            dimension: "mb-2 lg:w-1/2 desktop-sm:w-full",
           }}
         >
           <TextLayout.Paragraph paragraph={tech} />
@@ -75,7 +76,6 @@ const ProjectHeader = ({ filter, setFilter }) => {
           }}
         />
       </Container.Flex>
-      {/* !TODO: create a filter */}
       <TextLayout.Paragraph paragraph="you can filter this list by:" />
       <Container.Flex
         className={{ dimension: "mt-[.6rem]", flex: "justify-start gap-x-3" }}
