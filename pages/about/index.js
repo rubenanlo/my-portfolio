@@ -5,9 +5,18 @@ import { Container, AnimatedContainer } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { getAllText } from "helpers/getText";
 import { RUBEN_HEADSHOT as rubenHeadshot } from "helpers/exportImages";
+import { socialInfo } from "library/socialInfo";
 
 const AboutHeader = ({ spotlight }) => {
   const titles = Object.keys(spotlight).filter((value) => value !== "slug");
+
+  const icons = ["linkedin", "instagram"];
+
+  const personalInfo = [
+    ...socialInfo.social.filter(({ href }) =>
+      icons.some((icon) => href.includes(icon))
+    ),
+  ];
 
   return (
     <Container
@@ -54,17 +63,37 @@ const AboutHeader = ({ spotlight }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2, delay: 0.2 }}
-        className="flex justify-center lg:justify-start"
+        className="flex justify-center lg:justify-start gap-x-5 pt-5 mr-5"
       >
         <Container.Image
           src={rubenHeadshot}
           alt="about"
           className={{
             dimension: "w-52",
-            otherStyles: "rounded-xl shadow-2xl shadow-black/60 m-5",
+            otherStyles: "rounded-xl shadow-2xl shadow-black/60",
             opacity: "opacity-50",
           }}
         />
+        <Container.Flex className={{ flex: "flex-col gap-y-5" }}>
+          <TextLayout.Paragraph paragraph="Follow me on" />
+          <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
+            {personalInfo.map(({ Social, text, href }) => (
+              <Container key={Social}>
+                <Container.Link
+                  href={href}
+                  target="_blank"
+                  Component={Social}
+                  text={text}
+                  className={{
+                    child: "fill-orange-primary dark:fill-orange-tertiary",
+                    parent:
+                      "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary lg:z-10",
+                  }}
+                />
+              </Container>
+            ))}
+          </Container.Flex>
+        </Container.Flex>
       </AnimatedContainer>
     </Container>
   );

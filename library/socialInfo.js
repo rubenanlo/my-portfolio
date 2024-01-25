@@ -3,7 +3,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   MediumIcon,
-} from "components/SocialIcons";
+} from "library/socialIcons";
 
 export const socialInfo = {
   name: "Ruben Andino",
@@ -15,7 +15,7 @@ export const socialInfo = {
     },
     {
       Social: LinkedInIcon,
-      href: "https://www.linkedin.com/in/ruben-andino/",
+      href: "https://linkedin.com/in/ruben-andino/",
     },
     {
       Social: MediumIcon,
@@ -23,11 +23,11 @@ export const socialInfo = {
     },
     {
       Social: InstagramIcon,
-      href: "https://www.instagram.com/benjiebao/",
+      href: "https://instagram.com/benjiebao/",
     },
     {
       text: "Check my other site →",
-      href: "https://www.rawdev.io/",
+      href: "https://rawdev.io/",
     },
   ],
 };

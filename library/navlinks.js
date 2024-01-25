@@ -1,3 +1,6 @@
+import { Container } from "components/Container";
+import { Email } from "library/socialIcons";
+
 const ProjectIcon = (props) => (
   <svg
     fill="currentColor"
@@ -66,3 +69,14 @@ export const NAVLINKS = [
   { name: "Blog", href: "/blog", icon: BlogIcon },
   { name: "Admin", href: "/admin/dashboard", icon: AdminIcon },
 ];
+
+export const EmailLink = () => (
+  <Container.Link
+    Component={Email}
+    href="mailto:randinocv@gmail.com"
+    className={{
+      child:
+        "text-gray-400 hover:text-orange-primary dark:hover:text-orange-tertiary",
+    }}
+  />
+);

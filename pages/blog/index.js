@@ -4,11 +4,10 @@ import { Container } from "components/Container";
 import { Carousel } from "components/Articles";
 import { TextLayout } from "components/TextLayout";
 import { ArrowRightIcon } from "components/AppIcons";
-import { TowardsDevIcon } from "components/SocialIcons";
-import { MediumIcon } from "components/SocialIcons";
 import { useAnimatedValue } from "helpers/useAnimatedValue";
 import { useResponsive } from "helpers/useResponsive";
 import { getAllText } from "helpers/getText";
+import { MediumIcon, TowardsDevIcon } from "library/socialIcons";
 import { blurAnimation } from "library/animations";
 
 const blogIcons = [

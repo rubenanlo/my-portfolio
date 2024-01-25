@@ -4,9 +4,9 @@ import Image from "next/image";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import Navbar from "components/Navbar";
-import { socialInfo } from "library/socialInfo";
 import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
 import { useResponsive } from "helpers/useResponsive";
+import { socialInfo } from "library/socialInfo";
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);

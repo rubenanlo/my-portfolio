@@ -1,7 +1,7 @@
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { NAVLINKS as navLinks } from "library/navlinks";
-import { Email } from "library/socialIcons";
+import { EmailLink } from "library/navlinks";
 
 const Footer = () => {
   const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
@@ -43,14 +43,7 @@ const Footer = () => {
                 {name}
               </Container.Link>
             ))}
-            <Container.Link
-              Component={Email}
-              href="mailto:randinocv@gmail.com"
-              className={{
-                child:
-                  "text-gray-400 hover:text-orange-primary dark:hover:text-orange-tertiary",
-              }}
-            />
+            <EmailLink />
           </Container.Flex>
           <TextLayout.Paragraph
             className={{
