@@ -127,6 +127,41 @@ const processPng = async (file) => {
   }
 };
 
+const processJpeg = async (file) => {
+  const fileName = path.basename(file);
+
+  if (excludedImages[fileName]) {
+    console.log(`Skipping excluded image: ${fileName}`);
+    return;
+  }
+
+  try {
+    const input = await fs.readFile(file);
+    const metadata = await sharp(input).metadata();
+
+    // Check if the file has a mapping and if it has a dimensions property
+    let dimensions = { width: metadata.width, height: metadata.height };
+    let quality = 80; // default quality
+
+    if (dimensionsMapping[fileName] && dimensionsMapping[fileName].dimensions) {
+      dimensions = dimensionsMapping[fileName].dimensions;
+      quality = dimensionsMapping[fileName].quality || 80; // Use provided quality or default
+    }
+
+    await sharp(input)
+      .resize(dimensions.width, dimensions.height)
+      .jpeg({ quality: quality, mozjpeg: true })
+      .toFile(file);
+
+    console.log(`Processed ${fileName}`);
+
+    // Update the excludedImages list
+    excludedImages[fileName] = true;
+  } catch (error) {
+    console.error(`Error processing file ${file}:`, error);
+  }
+};
+
 const processGif = async (file) => {
   const fileName = path.basename(file);
 
@@ -170,6 +205,8 @@ const processFiles = async () => {
         await processWebp(path.join(dirPath, file));
       } else if (path.extname(file).toLowerCase() === ".gif") {
         await processGif(path.join(dirPath, file));
+      } else if (path.extname(file).toLowerCase() === ".jpeg") {
+        await processJpeg(path.join(dirPath, file));
       } else if (path.extname(file).toLowerCase() === ".png") {
         await processPng(path.join(dirPath, file));
       }

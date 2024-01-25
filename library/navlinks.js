@@ -59,7 +59,6 @@ const HomeIcon = (props) => (
   </svg>
 );
 
-// !Change icon for home
 export const NAVLINKS = [
   { name: "Home", href: "/", onlyMobile: true, icon: HomeIcon },
   { name: "About", href: "/about", icon: AboutIcon },
