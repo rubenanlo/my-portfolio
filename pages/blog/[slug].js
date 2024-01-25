@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote";
 import { Container } from "components/Container";
 import { Button } from "components/Button";
 import Loading from "components/modals/Loading";
-import { getText, getUniqueSlugs } from "helpers/getTextForSlug";
+import { getText, getUniqueSlugs } from "helpers/getText";
 import { useRouter } from "next/router";
 import { useState } from "react";
 

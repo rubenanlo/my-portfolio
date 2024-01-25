@@ -1,19 +1,33 @@
 import { readdirSync, readFileSync } from "fs";
+import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import _ from "lodash";
 
-const DIRECTORY = { blog: path.join("pages", "blog", "posts") };
+const DIRECTORY = {
+  blog: path.join("pages", "blog", "posts"),
+  about: path.join("pages", "about", "text"),
+};
 
 // function to get all the files from the folder depending on the slug
 const getFiles = (page) => readdirSync(DIRECTORY[page]);
 
-export const createFileNameSlug = (input) => input.replace(".md", "");
+export const createFileNameSlug = (input) => input.replace(/\.mdx?$/, "");
 
-export const getAllText = ({ withSummarizedContent, page }) =>
+export const getAllText = ({ withSummarizedContent, page, mdxContent }) =>
   getFiles(page).map((fileName) => {
-    const slug = fileName.replace(".md", "");
-    const fileContents = readFileSync(`${DIRECTORY[page]}/${slug}.md`, "utf8");
+    const slug = fileName.replace(/\.mdx?$/, "");
+    const mdPath = path.join(DIRECTORY[page], `${slug}.md`);
+    const mdxPath = path.join(DIRECTORY[page], `${slug}.mdx`);
+
+    let fileContents;
+    if (fs.existsSync(mdPath)) {
+      fileContents = fs.readFileSync(mdPath, "utf8");
+    } else if (fs.existsSync(mdxPath)) {
+      fileContents = fs.readFileSync(mdxPath, "utf8");
+    } else {
+      throw new Error(`No .md or .mdx file found for slug ${slug}`);
+    }
     // the code below only yields the metadata from all the md files
     const { data } = matter(fileContents);
     data["slug"] = createFileNameSlug(slug);
@@ -33,10 +47,17 @@ export const getAllText = ({ withSummarizedContent, page }) =>
         separator: " ",
       });
     }
+
+    let content;
+    if (mdxContent) {
+      const { content: mdxContent } = matter(fileContents);
+      content = mdxContent;
+    }
     return {
       // Create slug to use in dynamic routes
       data,
       ...(summary && { summary }),
+      ...(content && { content }),
       // the expression above means that  when summary is truthy (it has a
       // value), the ...(summary && { summary }) expression will include the
       // summary property in the returned object. When summary is falsy, it will
@@ -68,7 +89,7 @@ export const getText = ({ slug, withFormattedSlug, page }) => {
           readFileSync(`${DIRECTORY[page]}/${file}`, "utf8")
         );
         const id = file.match(/\d-(.*)\.md$/)?.[1] || null;
-        const formattedSlug = withFormattedSlug && file.replace(".md", "");
+        const formattedSlug = withFormattedSlug && file.replace(/\.mdx?$/, "");
         return {
           ...(id && { id }),
           data,

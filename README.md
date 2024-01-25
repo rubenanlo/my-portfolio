@@ -37,4 +37,19 @@ If a specific component has the same type of classNames, then use a string inste
 
 ## Some specifics for certain components
 
-The button component allows you to have either children or text as props. Use children if you expect to have children components (e.g., span, iamges, etc). And use the text props when there are no children components.
+The button component allows you to have either children or text as props. Use children if you expect to have children components (e.g., span, images, etc). And use the text props when there are no children components.
+
+## Helpers:
+
+### getText:
+
+Helps retreiving text from files. a couple of aspects:
+
+- When calling `getAllText` it allows an object with specific properties as parameters: withSummarizedContent, and page. Example:
+  ```javascript
+  const text = getAllText({ withSummarizedText, page: "blog" });
+  ```
+- The same goes for getText function:
+  ```javascript
+  const text = getText({ slug: "slug", withSummarizedText, page: "about" });
+  ```

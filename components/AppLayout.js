@@ -37,7 +37,7 @@ export const AppLayout = ({ children }) => {
   const noFooterPaths = ["/admin"];
   const noBlendedNavbarPaths = ["/", "/#", "/admin"];
   const twirlPaths = ["/", "/#"];
-  const maxHeightPaths = ["/projects", "/blog"];
+  const maxHeightPaths = ["/projects", "/blog", "/about"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
   const hasTwirlPaths = twirlPaths.includes(asPath);

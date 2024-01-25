@@ -1,7 +1,6 @@
 import { capitalize } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
-import { getAllText } from "helpers/getTextForSlug";
 import { Carousel } from "components/Articles";
 import { TextLayout } from "components/TextLayout";
 import { ArrowRightIcon } from "components/AppIcons";
@@ -9,6 +8,7 @@ import { TowardsDevIcon } from "components/SocialIcons";
 import { MediumIcon } from "components/SocialIcons";
 import { useAnimatedValue } from "helpers/useAnimatedValue";
 import { useResponsive } from "helpers/useResponsive";
+import { getAllText } from "helpers/getText";
 import { blurAnimation } from "library/animations";
 
 const blogIcons = [
@@ -34,6 +34,7 @@ const BlogHeader = ({ animatedTotalPosts, tags }) => (
     <TextLayout.Paragraph
       as="h3"
       paragraph="A place where I share my thoughts related to web development, programming, and other topics."
+      className="mt-5"
     />
     <Container.Flex
       className={{
@@ -157,7 +158,7 @@ const Blog = ({ articles }) => {
       className={{
         position: "relative",
         grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr] overflow-y-hidden",
-        otherStyles: "overflow-x-hidden scrollbar",
+        otherStyles: "overflow-x-hidden",
       }}
     >
       <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />

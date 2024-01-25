@@ -3,7 +3,7 @@ import Hero from "components/Hero";
 import Articles from "components/Articles";
 import Contact from "components/Contact";
 import Resume from "components/Resume";
-import { getAllText } from "helpers/getTextForSlug";
+import { getAllText } from "helpers/getText";
 
 const Index = ({ articles }) => (
   <Container className={{ dimension: "max-w-xl lg:max-w-4xl w-full mx-auto" }}>
@@ -27,7 +27,7 @@ const Index = ({ articles }) => (
 export default Index;
 
 export const getStaticProps = async () => {
-  const text = await getAllText();
+  const text = await getAllText({ page: "blog" });
   const articles = text.map(({ data }) => data);
   if (!articles.length) {
     return {

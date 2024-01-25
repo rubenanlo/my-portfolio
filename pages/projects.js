@@ -33,7 +33,11 @@ const ProjectHeader = ({ filter, setFilter }) => {
       }}
     >
       <TextLayout.Title as="h1" title={header.title} />
-      <TextLayout.Paragraph as="h3" paragraph={header.subtitle} />
+      <TextLayout.Paragraph
+        as="h3"
+        paragraph={header.subtitle}
+        className="mt-5"
+      />
 
       <Container
         className={{
@@ -137,7 +141,7 @@ const Projects = () => {
       className={{
         position: "relative",
         grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr]",
-        otherStyles: "overflow-x-hidden scrollbar",
+        otherStyles: "overflow-x-hidden",
       }}
     >
       <ProjectHeader filter={filter} setFilter={setFilter} />
