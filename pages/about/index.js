@@ -1,7 +1,7 @@
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { capitalize } from "lodash";
-import { Container, AnimatedContainer } from "components/Container";
+import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { getAllText } from "helpers/getText";
 import { RUBEN_HEADSHOT as rubenHeadshot } from "helpers/exportImages";
@@ -59,12 +59,7 @@ const AboutHeader = ({ spotlight }) => {
           border: "border-b border-zinc-600/50",
         }}
       />
-      <AnimatedContainer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.2, delay: 0.2 }}
-        className="flex justify-center lg:justify-start gap-x-5 pt-5 mr-5"
-      >
+      <Container className="flex justify-center lg:justify-start gap-x-5 pt-5 mr-5">
         <Container.Image
           src={rubenHeadshot}
           alt="about"
@@ -94,7 +89,7 @@ const AboutHeader = ({ spotlight }) => {
             ))}
           </Container.Flex>
         </Container.Flex>
-      </AnimatedContainer>
+      </Container>
     </Container>
   );
 };
