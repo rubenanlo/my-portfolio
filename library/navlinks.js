@@ -1,3 +1,6 @@
+import { Container } from "components/Container";
+import { Email } from "library/socialIcons";
+
 const ProjectIcon = (props) => (
   <svg
     fill="currentColor"
@@ -59,7 +62,6 @@ const HomeIcon = (props) => (
   </svg>
 );
 
-// !Change icon for home
 export const NAVLINKS = [
   { name: "Home", href: "/", onlyMobile: true, icon: HomeIcon },
   { name: "About", href: "/about", icon: AboutIcon },
@@ -67,3 +69,14 @@ export const NAVLINKS = [
   { name: "Blog", href: "/blog", icon: BlogIcon },
   { name: "Admin", href: "/admin/dashboard", icon: AdminIcon },
 ];
+
+export const EmailLink = () => (
+  <Container.Link
+    Component={Email}
+    href="mailto:randinocv@gmail.com"
+    className={{
+      child:
+        "text-gray-400 hover:text-orange-primary dark:hover:text-orange-tertiary",
+    }}
+  />
+);

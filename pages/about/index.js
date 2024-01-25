@@ -4,14 +4,24 @@ import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { getAllText } from "helpers/getText";
+import { RUBEN_HEADSHOT as rubenHeadshot } from "helpers/exportImages";
+import { socialInfo } from "library/socialInfo";
 
 const AboutHeader = ({ spotlight }) => {
   const titles = Object.keys(spotlight).filter((value) => value !== "slug");
 
+  const icons = ["linkedin", "instagram"];
+
+  const personalInfo = [
+    ...socialInfo.social.filter(({ href }) =>
+      icons.some((icon) => href.includes(icon))
+    ),
+  ];
+
   return (
     <Container
       className={{
-        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10",
+        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10 overflow-hidden",
       }}
     >
       <TextLayout.Title as="h1" title="About me" />
@@ -49,9 +59,42 @@ const AboutHeader = ({ spotlight }) => {
           border: "border-b border-zinc-600/50",
         }}
       />
+      <Container className="flex justify-center lg:justify-start gap-x-5 pt-5 mr-5">
+        <Container.Image
+          src={rubenHeadshot}
+          alt="about"
+          className={{
+            dimension: "w-52",
+            otherStyles: "rounded-xl shadow-2xl shadow-black/60",
+            opacity: "opacity-80 dark:opacity-50",
+          }}
+        />
+        <Container.Flex className={{ flex: "flex-col gap-y-5" }}>
+          <TextLayout.Paragraph paragraph="Follow me on" />
+          <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
+            {personalInfo.map(({ Social, text, href }) => (
+              <Container key={Social}>
+                <Container.Link
+                  href={href}
+                  target="_blank"
+                  Component={Social}
+                  text={text}
+                  className={{
+                    child: "fill-orange-primary dark:fill-orange-tertiary",
+                    parent:
+                      "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary lg:z-10",
+                  }}
+                />
+              </Container>
+            ))}
+          </Container.Flex>
+        </Container.Flex>
+      </Container>
     </Container>
   );
 };
+
+// easy to understand and access as possible. to add what is the mitigation option catalogue in the homepage. To provide a bit more background, why? and what? wherever possible, it's always good to lead with verbs (Browse through the data to find this). Jake to send to a media library. Link to afolu sector and particularly in China. Pexels.
 
 const AboutText = ({ text }) => (
   <Container
@@ -65,7 +108,7 @@ const AboutText = ({ text }) => (
       className={{
         grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10",
         dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20",
-        mdx: "prose prose-lg prose-slate text-zinc-400 dark:prose-invert",
+        mdx: "prose prose-lg prose-slate dark:text-zinc-400 dark:prose-invert",
       }}
     >
       <MDXRemote {...text} />

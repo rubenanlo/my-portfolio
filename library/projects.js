@@ -19,6 +19,7 @@ export const work = [
       Databases: "MongoDB",
       Libraries: "D3.js, Framer Motion, Redux, Recoil, MobX, ...",
       "CSS Libraries": "TailwindCSS, styled-components",
+      Other: "JEST, Cypress, Tableau, Alteryx",
     },
   },
   {

@@ -69,7 +69,7 @@ const ProjectHeader = ({ filter, setFilter }) => {
         }}
       />
       <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
-        <TextLayout.Paragraph paragraph="Where all my contributions are" />
+        <TextLayout.Paragraph paragraph="Browse all my contributions here" />
         <Container.Link
           href={github.href}
           target="_blank"
@@ -80,9 +80,8 @@ const ProjectHeader = ({ filter, setFilter }) => {
           }}
         />
       </Container.Flex>
-      <TextLayout.Paragraph paragraph="you can filter this list by:" />
       <Container.Flex
-        className={{ dimension: "mt-[.6rem]", flex: "justify-start gap-x-3" }}
+        className={{ dimension: "mt-10", flex: "justify-start gap-x-3" }}
       >
         {filters.map((filterItem) => (
           <Button

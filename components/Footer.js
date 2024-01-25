@@ -1,6 +1,7 @@
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { NAVLINKS as navLinks } from "library/navlinks";
+import { EmailLink } from "library/navlinks";
 
 const Footer = () => {
   const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
@@ -19,7 +20,7 @@ const Footer = () => {
         <Container.Flex
           className={{
             flex: "gap-6 flex-col sm:flex-row items-center justify-between",
-            dimension: " sm:px-5",
+            dimension: "sm:px-5",
           }}
         >
           <Container.Flex
@@ -34,7 +35,7 @@ const Footer = () => {
                 key={name}
                 href={href}
                 className={{
-                  typography:
+                  parent:
                     "hover:text-orange-primary dark:hover:text-orange-tertiary",
                   otherStyles: "transition",
                 }}
@@ -42,6 +43,7 @@ const Footer = () => {
                 {name}
               </Container.Link>
             ))}
+            <EmailLink />
           </Container.Flex>
           <TextLayout.Paragraph
             className={{
