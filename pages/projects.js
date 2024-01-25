@@ -82,7 +82,7 @@ const ProjectHeader = ({ filter, setFilter }) => {
       </Container.Flex>
       <TextLayout.Paragraph paragraph="you can filter this list by:" />
       <Container.Flex
-        className={{ dimension: "mt-[.6rem]", flex: "justify-start gap-x-3" }}
+        className={{ dimension: "mt-10", flex: "justify-start gap-x-3" }}
       >
         {filters.map((filterItem) => (
           <Button

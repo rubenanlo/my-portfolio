@@ -1,9 +1,10 @@
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { capitalize } from "lodash";
-import { Container } from "components/Container";
+import { Container, AnimatedContainer } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { getAllText } from "helpers/getText";
+import { RUBEN_HEADSHOT as rubenHeadshot } from "helpers/exportImages";
 
 const AboutHeader = ({ spotlight }) => {
   const titles = Object.keys(spotlight).filter((value) => value !== "slug");
@@ -11,7 +12,7 @@ const AboutHeader = ({ spotlight }) => {
   return (
     <Container
       className={{
-        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10",
+        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10 overflow-hidden",
       }}
     >
       <TextLayout.Title as="h1" title="About me" />
@@ -49,9 +50,27 @@ const AboutHeader = ({ spotlight }) => {
           border: "border-b border-zinc-600/50",
         }}
       />
+      <AnimatedContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2, delay: 0.2 }}
+        className="flex justify-center lg:justify-start"
+      >
+        <Container.Image
+          src={rubenHeadshot}
+          alt="about"
+          className={{
+            dimension: "w-52",
+            otherStyles: "rounded-xl shadow-2xl shadow-black/60 m-5",
+            opacity: "opacity-50",
+          }}
+        />
+      </AnimatedContainer>
     </Container>
   );
 };
+
+// easy to understand and access as possible. to add what is the mitigation option catalogue in the homepage. To provide a bit more background, why? and what? wherever possible, it's always good to lead with verbs (Browse through the data to find this). Jake to send to a media library. Link to afolu sector and particularly in China. Pexels.
 
 const AboutText = ({ text }) => (
   <Container
