@@ -71,7 +71,7 @@ const AboutHeader = ({ spotlight }) => {
           className={{
             dimension: "w-52",
             otherStyles: "rounded-xl shadow-2xl shadow-black/60",
-            opacity: "opacity-50",
+            opacity: "opacity-80 dark:opacity-50",
           }}
         />
         <Container.Flex className={{ flex: "flex-col gap-y-5" }}>
@@ -113,7 +113,7 @@ const AboutText = ({ text }) => (
       className={{
         grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10",
         dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20",
-        mdx: "prose prose-lg prose-slate text-zinc-400 dark:prose-invert",
+        mdx: "prose prose-lg prose-slate dark:text-zinc-400 dark:prose-invert",
       }}
     >
       <MDXRemote {...text} />

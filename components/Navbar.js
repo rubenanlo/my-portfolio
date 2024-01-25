@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { Post } from "components/Post";
 import { Card } from "components/Card";
 import { Button } from "components/Button";
-import { Burger } from "components/AppIcons";
+import { Burger } from "library/appIcons";
 import { Container, AnimatedContainer } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
