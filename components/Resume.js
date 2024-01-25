@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Container } from "components/Container";
 import { Button } from "components/Button";
-import { BriefcaseIcon, ArrowDownIcon } from "components/AppIcons";
 import { TextLayout } from "components/TextLayout";
+import { BriefcaseIcon, ArrowDownIcon } from "library/appIcons";
 import resume from "library/resume";
 
 const Role = ({ item: role }) => {
