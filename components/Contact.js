@@ -2,6 +2,7 @@ import { Container } from "components/Container";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { TextLayout } from "components/TextLayout";
+import { MailIcon } from "library/appIcons";
 
 // !Create backend for this section (modal confirming email and sending email)
 const Contact = () => (
@@ -12,7 +13,12 @@ const Contact = () => (
       otherStyles: "rounded-2xl",
     }}
   >
-    <TextLayout.Title as="h4" className="flex" title={"Let's connect"} />
+    <TextLayout.Title
+      as="h4"
+      className="flex"
+      AdditionalComponent={<MailIcon className="h-6 w-6 flex-none mr-3" />}
+      title={"Let's connect"}
+    />
     <TextLayout.Paragraph
       className={{ dimension: "mt-2", typography: "text-sm" }}
       paragraph="Get notified when I publish something new, and unsubscribe at any time."
