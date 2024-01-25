@@ -4,6 +4,7 @@ import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import { getAllText } from "helpers/getText";
+import { useResponsive } from "helpers/useResponsive";
 import { RUBEN_HEADSHOT as rubenHeadshot } from "helpers/exportImages";
 import { socialInfo } from "library/socialInfo";
 
@@ -116,18 +117,29 @@ const AboutText = ({ text }) => (
   </Container>
 );
 
-const About = ({ spotlight, text }) => (
-  <Container.Columns
-    className={{
-      position: "relative",
-      grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr]",
-      otherStyles: "overflow-x-hidden",
-    }}
-  >
-    <AboutHeader spotlight={spotlight} />
-    <AboutText text={text} />
-  </Container.Columns>
-);
+const About = ({ spotlight, text }) => {
+  const isSmallScreen = useResponsive(1251);
+  return (
+    <Container.Columns
+      className={{
+        position: "relative",
+        grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr]",
+        otherStyles: "overflow-x-hidden",
+      }}
+    >
+      <AboutHeader spotlight={spotlight} />
+      {isSmallScreen && (
+        <Container
+          className={{
+            dimension: "w-full mt-14",
+            border: "border-b border-zinc-600/50",
+          }}
+        />
+      )}
+      <AboutText text={text} />
+    </Container.Columns>
+  );
+};
 
 export default About;
 

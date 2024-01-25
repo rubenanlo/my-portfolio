@@ -133,6 +133,7 @@ const ProjectList = ({ filter }) => {
 };
 
 const Projects = () => {
+  const isSmallScreen = useResponsive(1251);
   const [filter, setFilter] = useState("All");
 
   return (
@@ -144,6 +145,14 @@ const Projects = () => {
       }}
     >
       <ProjectHeader filter={filter} setFilter={setFilter} />
+      {isSmallScreen && (
+        <Container
+          className={{
+            dimension: "w-full mt-14",
+            border: "border-b border-zinc-600/50",
+          }}
+        />
+      )}
       <ProjectList filter={filter} />
     </Container.Columns>
   );

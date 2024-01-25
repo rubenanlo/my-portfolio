@@ -125,6 +125,7 @@ const Posts = ({ groupArticles, isLgScreen }) => (
 
 const Blog = ({ articles }) => {
   const isLgScreen = useResponsive(1027);
+  const isSmallScreen = useResponsive(1251);
 
   const groupArticles = articles.reduce((acc, article) => {
     // Check if the category is already present in the accumulator array
@@ -161,6 +162,14 @@ const Blog = ({ articles }) => {
       }}
     >
       <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
+      {isSmallScreen && (
+        <Container
+          className={{
+            dimension: "w-full mt-14",
+            border: "border-b border-zinc-600/50",
+          }}
+        />
+      )}
       <Posts groupArticles={groupArticles} isLgScreen={isLgScreen} />
       {!isLgScreen && (
         <Container className=" absolute right-0 w-20 h-full bg-gradient-to-r from-gray-100/60 to-gray-100 dark:from-gray-900/10 dark:to-gray-900/90 dark:via-gray-900/70 rounded-tr-xl overflow-y-hidden" />
