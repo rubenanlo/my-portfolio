@@ -73,7 +73,7 @@ export const NAVLINKS = [
 export const EmailLink = () => (
   <Container.Link
     Component={Email}
-    href="mailto:randinocv@gmail.com"
+    href="mailto:info@rawdev.io"
     className={{
       child:
         "text-gray-400 hover:text-orange-primary dark:hover:text-orange-tertiary",
