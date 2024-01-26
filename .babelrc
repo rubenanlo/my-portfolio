@@ -16,6 +16,7 @@
           "helpers": "./helpers",
           "public": "./public",
           "library": "./library",
+          "api": "./api",
           "providers": "./providers"
         }
       }

@@ -159,7 +159,7 @@ const Blog = ({ articles }) => {
       className={{
         position: "relative",
         grid: "grid-cols-1 desktop-sm:grid-cols-[1fr,1.5fr] overflow-y-hidden",
-        otherStyles: "overflow-x-hidden",
+        otherStyles: "overflow-x-hidden scrollbar",
       }}
     >
       <BlogHeader animatedTotalPosts={animatedTotalPosts} tags={tags} />
@@ -184,11 +184,6 @@ export default Blog;
 export const getStaticProps = async () => {
   const text = await getAllText({ page: "blog" });
   const articles = text.map(({ data }) => data);
-  if (!articles.length) {
-    return {
-      notFound: true,
-    };
-  }
 
   return {
     props: { articles },

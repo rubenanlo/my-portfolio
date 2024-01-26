@@ -59,7 +59,7 @@ const Hero = () => {
                     child:
                       "hover:fill-orange-primary dark:hover:fill-orange-tertiary",
                     parent:
-                      "text-sm shrink-0 text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary lg:z-10",
+                      "text-sm text-gray-400 transition hover:text-orange-primary dark:hover:text-orange-tertiary lg:z-10",
                   }}
                 />
               ))}

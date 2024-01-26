@@ -18,6 +18,7 @@ Form.Field = function FormField({
   variant = "primary",
   placeholder = field,
   required = false,
+  onChange,
 }) {
   const variantComponents = {
     primary: (
@@ -39,6 +40,7 @@ Form.Field = function FormField({
           otherStyles:
             "appearance-none rounded-md shadow-md shadow-zinc-800/5 focus:outline-none",
         })}
+        onChange={onChange}
       />
     ),
     secondary: (
@@ -94,6 +96,7 @@ Form.Field = function FormField({
                 "placeholder:text-gray-400 sm:text-sm sm:leading-6 text-gray-50",
               otherStyles: "shadow-sm focus:ring-0 focus:outline-none",
             })}
+            onChange={onChange}
           />
         </div>
       </div>
