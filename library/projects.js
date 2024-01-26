@@ -92,7 +92,7 @@ export const work = [
     name: "SDG Transformation Center",
     description:
       "Static website which includes an online library for the SDG Transformation Center, so that people can get access to publications and other resources",
-    href: "https://dashboards.sdgindex.org/",
+    href: "https://sdgtransformationcenter.org/",
     image: sdgTc,
     category: "project",
   },
