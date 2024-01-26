@@ -1,7 +1,7 @@
 ---
 title: "Rounding with Python and Javascript"
 description: "Explore the different rounding methods and how to tackle them in both python and javascript"
-date: 2024/01/19
+date: 2024/01/26
 category: code
 ---
 
@@ -26,7 +26,7 @@ Below we present each of the available rounding methodologies, along with a clea
 src="/assets/rounding-1.png"
 alt="warp"
 style={{
-    width: "70%",
+    width: "100%",
     height: "auto",
     borderRadius: "5px",
     opacity: "0.6"
@@ -229,7 +229,7 @@ To facilitate a clearer understanding and to aid in the selection of appropriate
 src="/assets/rounding.png"
 alt="warp"
 style={{
-    width: "70%",
+    width: "100%",
     height: "auto",
     borderRadius: "5px",
     opacity: "0.6"

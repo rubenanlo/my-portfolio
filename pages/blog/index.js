@@ -6,6 +6,7 @@ import { TextLayout } from "components/TextLayout";
 import { useAnimatedValue } from "helpers/useAnimatedValue";
 import { useResponsive } from "helpers/useResponsive";
 import { getAllText } from "helpers/getText";
+import { setOrder } from "helpers/manipulateText";
 import { ArrowRightIcon } from "library/appIcons";
 import { MediumIcon, TowardsDevIcon } from "library/socialIcons";
 import { blurAnimation } from "library/animations";
@@ -134,7 +135,7 @@ const Blog = ({ articles }) => {
       const group = articles.filter(
         (item) => item.category === article.category
       );
-      acc.push({ category: article.category, posts: group });
+      acc.push({ category: article.category, posts: setOrder(group) });
     }
     return acc;
   }, []);
