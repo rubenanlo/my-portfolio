@@ -35,8 +35,8 @@ Form.Field = function FormField({
           typography:
             "sm:text-sm placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-500",
           border:
-            "border border-zinc-900/10 focus:border-teal-500 dark:border-zinc-700 dark:focus:border-teal-400",
-          ring: "dark:focus:ring-teal-400/10 focus:ring-4 focus:ring-teal-500/10",
+            "border border-zinc-900/10 focus:border-orange-secondary dark:border-zinc-700 dark:focus:border-orange-tertiary",
+          ring: "dark:focus:ring-orange-primary/10 focus:ring-4 focus:ring-orange-primary/10",
           otherStyles:
             "appearance-none rounded-md shadow-md shadow-zinc-800/5 focus:outline-none",
         })}
