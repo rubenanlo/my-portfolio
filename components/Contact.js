@@ -9,7 +9,7 @@ import { MailIcon } from "library/appIcons";
 
 // !Create backend for this section (modal confirming email and sending email)
 const Contact = () => {
-  const [formResponse, setFormResponse] = useState({ email: "" });
+  const [formResponse, setFormResponse] = useState("");
   const [openModal, toggleModal] = useState(false);
   const [message, setMessage] = useState("");
   // const router = useRouter();
@@ -19,7 +19,7 @@ const Contact = () => {
 
     const response = await fetch("/api/contact/submit-response", {
       method: "POST",
-      body: JSON.stringify(formResponse),
+      body: JSON.stringify({ email: formResponse }),
       headers: { "Content-Type": "application/json" },
     });
 
@@ -27,23 +27,23 @@ const Contact = () => {
 
     if (data.success) {
       toggleModal(true);
-      setMessage("Thanks for subscribing! Check your email for confirmation.");
+      setMessage(
+        "Thanks for subscribing! Check your email for confirmation (also the spam folder)."
+      );
     }
+    setFormResponse("");
     if (data.message === "Email already exists") {
       toggleModal(true);
       setMessage("This email is already in the database.");
+      setFormResponse("");
     } else {
       console.log("Error:", data);
     }
-
-    setFormResponse({
-      email: "",
-    });
   };
+
   return (
     <Container>
       <Form
-        action="/thank-you"
         className={{
           border: "border border-zinc-100 p-6 dark:border-zinc-700/40",
           otherStyles: "rounded-2xl",
@@ -65,8 +65,8 @@ const Contact = () => {
             variant="primary"
             field="email"
             type="email"
-            value={formResponse.email}
-            onChange={(e) => setFormResponse({ email: e.target.value })}
+            value={formResponse}
+            onChange={(e) => setFormResponse(e.target.value)}
             placeholder="Email address"
             aria-label="Email address"
             required
@@ -78,9 +78,13 @@ const Contact = () => {
             variant="primary"
             type="submit"
             className="ml-4 flex-none"
-            text="Join"
+            text="Connect"
           />
         </Container.Flex>
+        <TextLayout.Paragraph
+          paragraph="By clicking on the 'Connect' button, you let me keep your email. I will never share your email address with anyone else. Unsubscribe at any time."
+          className="text-xs italic"
+        />
       </Form>
     </Container>
   );

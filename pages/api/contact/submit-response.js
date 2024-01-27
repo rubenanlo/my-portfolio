@@ -1,7 +1,9 @@
+const sendEmail = require("../../../helpers/sendEmail");
+
 import { v4 as uuidv4 } from "uuid";
-import { connectToDatabase } from "helpers/connectDb";
-// import { sendEmail } from "helpers/sendEmail";
 import dayjs from "dayjs";
+import { connectToDatabase } from "helpers/connectDb";
+import { emailConfirmation } from "library/emailText";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -28,14 +30,7 @@ export default async function handler(req, res) {
       // Email doesn't exist, insert the data into the collection
       const newUser = collection.insertOne(body);
 
-      // Send the verification emails in parallel
-      // const emailPromises = [
-      //   sendEmail({ ...body, admin: false }),
-      //   sendEmail({ ...body, admin: true }),
-      // ];
-
-      // Wait for both the insertion and email sending to complete
-      // await Promise.all([...emailPromises, newUser]);
+      sendEmail({ to: body.email, ...emailConfirmation });
 
       // Get the result of the insertion operation
       const result = await newUser;

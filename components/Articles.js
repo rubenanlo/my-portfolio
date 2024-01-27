@@ -51,7 +51,7 @@ export const Article = ({
 );
 
 const ArticleList = ({ articles }) => {
-  const itemsPerPage = 3;
+  const itemsPerPage = 4;
 
   const { currentPosts, ...pagination } = usePagination({
     initialNumberOfPages: 1,

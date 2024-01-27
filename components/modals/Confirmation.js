@@ -9,7 +9,7 @@ const Confirmation = ({ toggleModal, message }) => (
     className={{
       position: "absolute right-5",
       dimension: "mb-36 w-52 pl-8 pr-9 py-5",
-      background: "bg-zinc-600/90",
+      background: "bg-white",
       border: "rounded-lg shadow-lg shadow-black/90",
     }}
   >
@@ -17,7 +17,7 @@ const Confirmation = ({ toggleModal, message }) => (
       onClick={() => toggleModal(false)}
       className="absolute right-2 top-2"
     >
-      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+      <XMarkIcon className="h-6 w-6 text-orange-primary" aria-hidden="true" />
     </button>
     <TextLayout.Paragraph paragraph={message} />
   </AnimatedContainer>
