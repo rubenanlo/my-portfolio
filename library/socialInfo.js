@@ -4,6 +4,7 @@ import {
   LinkedInIcon,
   MediumIcon,
 } from "library/socialIcons";
+import { Email } from "./socialIcons";
 
 export const socialInfo = {
   name: "Ruben Andino",
@@ -24,6 +25,10 @@ export const socialInfo = {
     {
       Social: InstagramIcon,
       href: "https://instagram.com/benjiebao/",
+    },
+    {
+      Social: Email,
+      href: "mailto:info@rawdev.io",
     },
     {
       text: "Check my other site →",

@@ -18,6 +18,8 @@ Form.Field = function FormField({
   variant = "primary",
   placeholder = field,
   required = false,
+  onChange,
+  value,
 }) {
   const variantComponents = {
     primary: (
@@ -27,18 +29,20 @@ Form.Field = function FormField({
         aria-label={field}
         autoComplete={field}
         required={required}
+        value={value}
         className={turnObjectIntoString({
           flex: "flex-auto",
-          dimension: "min-w-0 py-[calc(theme(spacing.2)-1px)] px-3",
+          dimension: "min-w-0 py-[calc(theme(spacing.2)-1px)] px-3 ",
           background: "bg-white dark:bg-zinc-700/[0.15]",
           typography:
             "sm:text-sm placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-500",
           border:
-            "border border-zinc-900/10 focus:border-teal-500 dark:border-zinc-700 dark:focus:border-teal-400",
-          ring: "dark:focus:ring-teal-400/10 focus:ring-4 focus:ring-teal-500/10",
+            "border border-zinc-900/10 focus:border-orange-secondary dark:border-zinc-700 dark:focus:border-orange-tertiary",
+          ring: "dark:focus:ring-orange-primary/10 focus:ring-4 focus:ring-orange-primary/10",
           otherStyles:
             "appearance-none rounded-md shadow-md shadow-zinc-800/5 focus:outline-none",
         })}
+        onChange={onChange}
       />
     ),
     secondary: (
@@ -84,6 +88,8 @@ Form.Field = function FormField({
             id={field}
             name={field}
             type={field}
+            placeholder={placeholder}
+            value={value}
             autoComplete={field}
             className={turnObjectIntoString({
               position: "block",
@@ -94,6 +100,7 @@ Form.Field = function FormField({
                 "placeholder:text-gray-400 sm:text-sm sm:leading-6 text-gray-50",
               otherStyles: "shadow-sm focus:ring-0 focus:outline-none",
             })}
+            onChange={onChange}
           />
         </div>
       </div>
