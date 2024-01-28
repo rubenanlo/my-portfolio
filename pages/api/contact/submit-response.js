@@ -3,7 +3,6 @@ const sendEmail = require("../../../helpers/sendEmail");
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import { connectToDatabase } from "helpers/connectDb";
-import { emailConfirmation } from "library/emailText";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -28,11 +27,22 @@ export default async function handler(req, res) {
       }
 
       // Email doesn't exist, insert the data into the collection
+
+      const emailSent = await sendEmail({
+        to: body.email,
+        templateId: process.env.EMAIL_TEMPLATE_ID,
+      });
+
+      if (!emailSent) {
+        body.status = "failed";
+      }
+
+      if (emailSent) {
+        body.status = "success";
+      }
+      // Get the result of the insertion operation
       const newUser = collection.insertOne(body);
 
-      sendEmail({ to: body.email, ...emailConfirmation });
-
-      // Get the result of the insertion operation
       const result = await newUser;
 
       // Send a success response with the result data
