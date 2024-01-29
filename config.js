@@ -27,4 +27,4 @@ export const META_IMAGE =
   "https://ruben-andino.rawdev.io/public/assets/my_portfolio.png";
 
 // The Google Analytics tracking ID
-export const GA_TRACKING_ID = "TODO";
+export const GA_TRACKING_ID = "G-KB1FLYNW58";
