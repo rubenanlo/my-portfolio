@@ -101,17 +101,19 @@ const AboutText = ({ text }) => (
   <Container
     className={{
       dimension: "max-h-none desktop-sm:max-h-[100vh] mt-10 pt-10",
-      overflow: "overflow-y-auto scrollbar",
+      overflow: "overflow-hidden hover:overflow-y-auto scrollbar",
     }}
   >
-    <Container
-      className={{
-        grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10 mx-auto",
-        dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20",
-        mdx: "prose prose-lg prose-slate dark:text-zinc-400 dark:prose-invert text-justify",
-      }}
-    >
-      <MDXRemote {...text} />
+    <Container className="desktop-sm:w-[689px]">
+      <Container
+        className={{
+          grid: "grid-cols-1 desktop-sm:grid-cols-2 gap-10 mx-auto",
+          dimension: "px-10 desktop-sm:pl-10 desktop-sm:pr-20",
+          mdx: "prose prose-lg prose-slate dark:text-zinc-400 dark:prose-invert text-justify",
+        }}
+      >
+        <MDXRemote {...text} />
+      </Container>
     </Container>
   </Container>
 );
