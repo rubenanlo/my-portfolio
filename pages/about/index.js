@@ -33,7 +33,7 @@ const AboutHeader = ({ spotlight }) => {
       />
       <Container
         className={{
-          dimension: "w-1/5 my-6",
+          dimension: "w-1/5 my-5",
           border: "border-b border-zinc-600/50",
         }}
       />
@@ -60,12 +60,12 @@ const AboutHeader = ({ spotlight }) => {
           border: "border-b border-zinc-600/50",
         }}
       />
-      <Container className="flex justify-center lg:justify-start gap-x-5 pt-5 mr-5">
+      <Container className="flex justify-center lg:justify-start gap-x-5 mr-5">
         <Container.Image
           src={rubenHeadshot}
           alt="about"
           className={{
-            dimension: "w-52",
+            dimension: "w-48",
             otherStyles: "rounded-xl shadow-2xl shadow-black/60",
             opacity: "opacity-80 dark:opacity-50",
           }}
