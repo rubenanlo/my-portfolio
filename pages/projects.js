@@ -64,12 +64,12 @@ const ProjectHeader = ({ filter, setFilter }) => {
       ))}
       <Container
         className={{
-          dimension: "w-1/5 my-6",
+          dimension: "w-1/5 my-5",
           border: "border-b border-zinc-600/50",
         }}
       />
       <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
-        <TextLayout.Paragraph paragraph="Browse all my contributions here" />
+        <TextLayout.Paragraph paragraph="Browse all my contributions" />
         <Container.Link
           href={github.href}
           target="_blank"
@@ -81,7 +81,7 @@ const ProjectHeader = ({ filter, setFilter }) => {
         />
       </Container.Flex>
       <Container.Flex
-        className={{ dimension: "mt-10", flex: "justify-start gap-x-3" }}
+        className={{ dimension: "mt-3", flex: "justify-start gap-x-3" }}
       >
         {filters.map((filterItem) => (
           <Button
@@ -107,7 +107,8 @@ const ProjectList = ({ filter }) => {
   return (
     <Container
       className={{
-        dimension: "max-h-none desktop-sm:max-h-[100vh] mr-[5px] mt-10 pt-10",
+        dimension:
+          "max-h-none desktop-sm:max-h-[100vh] mr-[5px] hover:mr-0 mt-10 pt-10",
         overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
       }}
     >
