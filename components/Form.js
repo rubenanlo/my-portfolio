@@ -88,7 +88,6 @@ Form.Field = function FormField({
             id={field}
             name={field}
             type={field}
-            placeholder={placeholder}
             value={value}
             autoComplete={field}
             className={turnObjectIntoString({
