@@ -100,9 +100,8 @@ const AboutHeader = ({ spotlight }) => {
 const AboutText = ({ text }) => (
   <Container
     className={{
-      dimension:
-        "max-h-none desktop-sm:max-h-[100vh] mr-[5px] hover:mr-0 mt-10 pt-10",
-      overflow: "overflow-y-hidden hover:overflow-y-auto scrollbar",
+      dimension: "max-h-none desktop-sm:max-h-[100vh] mt-10 pt-10",
+      overflow: "overflow-y-auto scrollbar",
     }}
   >
     <Container
