@@ -8,6 +8,7 @@ import { AppLayout } from "components/AppLayout";
 import * as gtag from "helpers/gtag";
 import { Providers } from "providers/providers";
 import { TITLE, META_DESCRIPTION, META_IMAGE, URL } from "root/config";
+import { appWithTranslation } from "next-i18next";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   // Track pages with google analytics
@@ -44,4 +45,4 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   );
 };
 
-export default App;
+export default appWithTranslation(App);

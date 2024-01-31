@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Container } from "components/Container";
 import Hero from "components/Hero";
 import Articles from "components/Articles";
@@ -32,7 +33,7 @@ const Index = ({ articles }) => {
 
 export default Index;
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ locale }) => {
   const text = await getAllText({ page: "blog" });
   const articles = text.map(({ data }) => data);
   if (!articles.length) {
@@ -42,6 +43,9 @@ export const getStaticProps = async () => {
   }
 
   return {
-    props: { articles },
+    props: {
+      articles,
+      ...(await serverSideTranslations(locale, ["common", "hero"])),
+    },
   };
 };

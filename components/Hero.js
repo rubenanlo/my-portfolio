@@ -7,6 +7,7 @@ import Navbar from "components/Navbar";
 import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
 import { useResponsive } from "helpers/useResponsive";
 import { socialInfo } from "library/socialInfo";
+import { useTranslation } from "next-i18next";
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);
@@ -14,6 +15,7 @@ const Hero = () => {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
   const [isLoading, setIsLoading] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
+  const { t } = useTranslation("hero");
 
   useEffect(() => {
     setIsReady(router.isReady);
@@ -37,11 +39,8 @@ const Hero = () => {
         <Container.Flex>
           <TextLayout className="mt-5 w-full">
             <TextLayout.Title title={socialInfo.name} />
-            <TextLayout.Subtitle subtitle={socialInfo.title} />
-            <TextLayout.Paragraph
-              className="mt-6"
-              paragraph="I am a Full Stack Web Developer with a background in economics. My primary focus is to build simple web applications based on complex data, by understanding and addressing business needs, automating processes to minimize human error, allowing code reusability and seamless code maintenance."
-            />
+            <TextLayout.Subtitle subtitle={t("title")} />
+            <TextLayout.Paragraph className="mt-6" paragraph={t("intro")} />
             <Container.Flex
               className={{
                 flex: "gap-x-6 items-center justify-start",
