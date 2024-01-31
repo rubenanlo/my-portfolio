@@ -8,7 +8,7 @@ import { Email } from "./socialIcons";
 
 export const socialInfo = {
   name: "Ruben Andino",
-  title: "Fullstack Web Developer, Economist",
+  title: "Fullstack Web Developer",
   social: [
     {
       Social: GitHubIcon,
