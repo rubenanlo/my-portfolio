@@ -24,6 +24,7 @@
     "@mdx-js/react": "^3.0.0",
     "@sendgrid/mail": "^8.1.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@vercel/speed-insights": "^1.0.9",
     "alea": "^1.0.1",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",

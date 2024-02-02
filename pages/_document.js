@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GA_TRACKING_ID } from "root/config";
 import { ICON } from "root/config";
 
@@ -13,6 +14,7 @@ const Document = () => (
         href="https://fonts.gstatic.com"
         crossOrigin="true"
       />
+      {/* eslint-disable-next-line */}
       <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@400"
         rel="stylesheet"
@@ -49,6 +51,7 @@ const Document = () => (
     <body>
       <Main />
       <NextScript />
+      <SpeedInsights />
     </body>
   </Html>
 );

@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
-import "styles/globals.css";
-import { useEffect } from "react";
 import { Router } from "next/router";
+import "styles/globals.css";
 import { AppLayout } from "components/AppLayout";
 import * as gtag from "helpers/gtag";
 import { Providers } from "providers/providers";
