@@ -52,7 +52,7 @@ const Pagination = ({
               key={page}
               variant="pagination"
               aria-current="page"
-              currentPage={currentPage == page}
+              condition={currentPage == page}
               onClick={() => setCurrentPage(page)}
               text={page}
             />

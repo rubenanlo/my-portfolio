@@ -98,7 +98,7 @@ Container.Link = function ContainerLink({
   onClick,
   Component,
   componentProps,
-  locale = "en-US",
+  locale = "en",
   ...props
 }) {
   const classNameParent = turnObjectIntoString(className?.parent);

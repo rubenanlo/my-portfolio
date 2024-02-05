@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "components/Button";
 import { Container } from "components/Container";
+import { useRouter } from "next/router";
 
 const SunIcon = (props) => (
   <svg
@@ -53,8 +54,41 @@ const ThemeToggle = () => {
   );
 };
 
+const Language = () => {
+  const languages = ["en", "fr"];
+  const router = useRouter();
+
+  const changeLanguage = (language) => {
+    router.push(router.asPath, router.asPath, { locale: language });
+  };
+
+  return (
+    <Container.Flex
+      className={{
+        background: "bg-white/60 shadow ",
+        flex: "justify-center",
+        dimensions: "mt-5",
+        otherStyles: "overflow-hidden rounded-lg divide-x divide-gray-200/40",
+      }}
+    >
+      {languages.map((language) => (
+        <Button
+          type="button"
+          variant="language"
+          key={language}
+          condition={router.locale === language}
+          onClick={() => changeLanguage(language)}
+        >
+          {language}
+        </Button>
+      ))}
+    </Container.Flex>
+  );
+};
+
 export const Header = () => (
   <Container className="w-full flex justify-center z-20">
     <ThemeToggle />
+    <Language />
   </Container>
 );

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import Navbar from "components/Navbar";
 import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
 import { useResponsive } from "helpers/useResponsive";
 import { socialInfo } from "library/socialInfo";
-import { useTranslation } from "next-i18next";
 
 const Hero = () => {
   const isSmallerScreen = useResponsive(1024);
