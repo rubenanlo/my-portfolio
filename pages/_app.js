@@ -3,7 +3,7 @@ import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
 import { Router } from "next/router";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 import { appWithTranslation } from "next-i18next";
 import "styles/globals.css";
 import { AppLayout } from "components/AppLayout";
@@ -39,7 +39,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         <Providers>
           <AppLayout>
             <Component {...pageProps} />
-            <SpeedInsights />
+            {/* <SpeedInsights /> */}
           </AppLayout>
         </Providers>
       </SessionProvider>
