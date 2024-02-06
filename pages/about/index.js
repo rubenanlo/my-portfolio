@@ -1,5 +1,6 @@
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
@@ -14,7 +15,7 @@ const AboutHeader = ({ spotlight }) => {
   const icons = ["linkedin", "instagram"];
 
   const personalInfo = [
-    ...socialInfo.social.filter(({ href }) =>
+    ...socialInfo().social.filter(({ href }) =>
       icons.some((icon) => href.includes(icon))
     ),
   ];
@@ -144,7 +145,7 @@ const About = ({ spotlight, text }) => {
 
 export default About;
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ locale }) => {
   const text = await getAllText({ page: "about", mdxContent: true });
   const [{ data: spotlight, content }] = text;
   const mdxSource = await serialize(content);
@@ -152,6 +153,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       spotlight,
+      ...(await serverSideTranslations(locale, ["navLinks"])),
       text: mdxSource,
     },
   };

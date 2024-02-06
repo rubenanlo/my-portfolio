@@ -25,7 +25,7 @@ const variantStyles = (condition) => ({
     otherStyles: "rounded-md ",
   },
   selected: {
-    background: "bg-orange-tertiary dark:bg-orange-quaternary",
+    background: "bg-orange-tertiary dark:bg-orange-quaternary rounded-md",
   },
   arrow: {
     position: "relative focus:z-20",

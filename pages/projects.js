@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
@@ -13,7 +14,7 @@ const ProjectHeader = ({ filter, setFilter }) => {
 
   const techStackHeader = Object.keys(header.techStack);
 
-  const [github] = socialInfo.social.filter(({ href }) =>
+  const [github] = socialInfo().social.filter(({ href }) =>
     href.includes("github")
   );
 
@@ -159,3 +160,11 @@ const Projects = () => {
 };
 
 export default Projects;
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "navLinks"])),
+    },
+  };
+};

@@ -223,13 +223,13 @@ const NavbarIsland = ({ navLinks }) => (
     as="nav"
     className={{
       position: "absolute left-0 right-0 top-5 z-10",
-      dimension: "max-w-sm mx-auto",
+      dimension: "max-w-md mx-auto",
     }}
   >
     <Container.Flex
       as="ul"
       className={{
-        flex: "justify-center items-center gap-x-10",
+        flex: "justify-between items-center gap-x-10",
         dimension: "px-3 py-1 w-full",
         typography: "text-sm font-medium text-zinc-800 dark:text-zinc-200",
         background: "bg-gray-50 dark:bg-transparent",

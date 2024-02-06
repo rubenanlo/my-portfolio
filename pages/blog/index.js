@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { capitalize } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
@@ -181,11 +182,14 @@ const Blog = ({ articles }) => {
 
 export default Blog;
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ locale }) => {
   const text = await getAllText({ page: "blog" });
   const articles = text.map(({ data }) => data);
 
   return {
-    props: { articles },
+    props: {
+      articles,
+      ...(await serverSideTranslations(locale, ["navLinks"])),
+    },
   };
 };

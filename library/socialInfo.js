@@ -7,8 +7,8 @@ import {
 import { Email } from "library/socialIcons";
 
 export const socialInfo = (t) => ({
-  name: t("name"),
-  title: t("title"),
+  name: t && t("name"),
+  title: t && t("title"),
   social: [
     {
       Social: GitHubIcon,
@@ -31,7 +31,7 @@ export const socialInfo = (t) => ({
       href: "mailto:info@rawdev.io",
     },
     {
-      text: t("checkSite"),
+      text: t && t("checkSite"),
       href: "https://rawdev.io/",
     },
   ],
