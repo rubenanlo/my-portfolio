@@ -32,7 +32,7 @@ const Hero = () => {
     !isReady || isLoading ? undefined : isSmallerScreen ? "list" : "grid";
 
   return (
-    <Container.Section className="lg:py-40 w-full z-10">
+    <Container.Section className="lg:py-40 w-full">
       <Container className="mt-10 lg:pt-8 w-full">
         <Image
           className="h-16 w-16 rounded-full dark:sepia"

@@ -50,6 +50,7 @@ export const getStaticProps = async ({ locale }) => {
         "hero",
         "navLinks",
         "contact",
+        "resume",
       ])),
     },
   };

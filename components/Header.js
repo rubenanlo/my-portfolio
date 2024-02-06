@@ -68,7 +68,7 @@ const Language = () => {
         className={{
           position: "lg:absolute lg:right-20 lg:top-3",
           dimensions: "w-fit lg:mx-auto",
-          background: "bg-orange-quaternary/90 shadow z-10",
+          background: "shadow z-10",
           otherStyles:
             "overflow-hidden rounded-b-lg lg:rounded-lg divide-x divide-gray-200/40",
         }}

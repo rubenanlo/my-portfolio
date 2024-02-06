@@ -1,8 +1,8 @@
 {
   "success": "Bienvenue! vérifiez que vous avez reçu l'e-mail de confirmation.",
   "error": "Cet email est déjà dans la base de données",
-  "title": "Rejoignez ma newsletter",
-  "description": "Soyez informé des nouvelles publications ou projets et désabonnez-vous à tout moment.",
+  "title": "Inscrivez-vous!",
+  "description": "Soyez informé des nouvelles publications ou projets et désinscrivez-vous à tout moment.",
   "legal": "En cliquant sur le bouton 'Connecter', vous m'autorisez à conserver votre email. Je ne partagerai jamais votre adresse e-mail avec qui que ce soit. Désabonnez-vous à tout moment.",
   "button": "Connecter"
 }
