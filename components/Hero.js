@@ -17,6 +17,9 @@ const Hero = () => {
   const [isLoading, setIsLoading] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
   const { t } = useTranslation("hero");
 
+  //  Translating the text in social info:
+  const socialLinksTranslated = socialInfo(t);
+
   useEffect(() => {
     setIsReady(router.isReady);
     if (router.isReady && isLoading) {
@@ -38,8 +41,8 @@ const Hero = () => {
         />
         <Container.Flex>
           <TextLayout className="mt-5 w-full">
-            <TextLayout.Title title={socialInfo.name} />
-            <TextLayout.Subtitle subtitle={t("title")} />
+            <TextLayout.Title title={socialLinksTranslated.name} />
+            <TextLayout.Subtitle subtitle={socialLinksTranslated.title} />
             <TextLayout.Paragraph className="mt-6" paragraph={t("intro")} />
             <Container.Flex
               className={{
@@ -47,7 +50,7 @@ const Hero = () => {
                 dimension: "mt-10",
               }}
             >
-              {socialInfo.social.map(({ Social, text, href }) => (
+              {socialLinksTranslated.social.map(({ Social, text, href }) => (
                 <Container.Link
                   key={Social || text}
                   href={href}

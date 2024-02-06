@@ -1,10 +1,16 @@
+import { useTranslation } from "next-i18next";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
-import { NAVLINKS as navLinks } from "library/navlinks";
+import { navLinks } from "library/navlinks";
 import { EmailLink } from "library/navlinks";
 
 const Footer = () => {
-  const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
+  const { t } = useTranslation("navLinks");
+  const navLinksTranslated = navLinks(t);
+  const updatedNavLinks = navLinksTranslated.filter(
+    (navLink) => !navLink.onlyMobile
+  );
+
   return (
     <Container.Section
       as="footer"

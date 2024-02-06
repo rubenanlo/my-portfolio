@@ -46,7 +46,7 @@ const variantStyles = (condition) => ({
         position: "hidden focus:z-20",
         dimension: "w-8",
         flex: "items-center md:inline-flex",
-        typography: "text-neutral-darkest",
+        typography: "text-zinc-400",
         background: "hover:bg-zinc-700/20",
         outline: "focus:outline-offset-0 rounded-md",
       },
@@ -62,7 +62,7 @@ const variantStyles = (condition) => ({
     otherStyles: "rounded-md shadow-sm",
   },
   theme: {
-    position: "fixed bottom-0 right-0 lg:top-0 lg:bottom-auto",
+    position: "fixed lg:absolute bottom-0 right-0 lg:top-0 lg:bottom-auto",
     dimension: "mr-5 mt-3 px-3 py-3 lg:px-2 lg:py-2 mb-5 lg:mb-0",
     background: "bg-white/90 dark:bg-zinc-800/90 ",
     ring: "ring-1 ring-zinc-900/5 dark:ring-white/10 dark:hover:ring-white/20",
