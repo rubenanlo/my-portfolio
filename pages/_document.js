@@ -1,6 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GA_TRACKING_ID } from "root/config";
 import { ICON } from "root/config";
 
@@ -51,7 +50,6 @@ const Document = () => (
     <body>
       <Main />
       <NextScript />
-      <SpeedInsights />
     </body>
   </Html>
 );
