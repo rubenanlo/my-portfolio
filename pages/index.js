@@ -51,6 +51,7 @@ export const getStaticProps = async ({ locale }) => {
         "navLinks",
         "contact",
         "resume",
+        "pagination",
       ])),
     },
   };
