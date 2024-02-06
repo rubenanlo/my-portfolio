@@ -34,6 +34,7 @@ export const AppLayout = ({ children }) => {
   const { resolvedTheme } = useTheme();
   const { asPath } = useRouter();
 
+  // Paths that don't have a footer, blended navbar or twirl
   const noFooterPaths = ["/admin"];
   const noBlendedNavbarPaths = ["/", "/#", "/admin"];
   const twirlPaths = ["/", "/#"];
