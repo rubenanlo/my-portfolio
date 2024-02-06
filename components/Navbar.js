@@ -171,17 +171,23 @@ const NavbarMobile = () => {
 
   return (
     <Container className="absolute w-full z-20">
-      <div
+      <Container
         onClick={() => {
           isSmallerScreen && setIsVisible(!isVisible);
         }}
-        className="fixed bottom-5 left-5 sm:left-auto sm:fixed sm:-top-10 sm:right-[15%] lg:top-0 lg:right-0 lg:relative w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] self-center lg:self-start mr-10 desktop-sm:mr-0 desktop-sm:self-center flex-shrink-0 cursor-pointer mx-auto"
+        className={{
+          position:
+            "fixed bottom-5 left-5 sm:left-auto sm:fixed sm:-top-10 sm:right-[15%] lg:top-0 lg:right-0 lg:relative self-center lg:self-start desktop-sm:self-center mx-auto",
+          dimensions:
+            "w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] mr-10 desktop-sm:mr-0",
+          otherStyles: "flex-shrink-0 cursor-pointer ",
+        }}
       >
         <Button variant="navbarMobile">
           <Burger className="h-6 w-6 text-zinc-600" />
         </Button>
         <Component isVisible={isVisible} ref={modalRef} />
-      </div>
+      </Container>
     </Container>
   );
 };

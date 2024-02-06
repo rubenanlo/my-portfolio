@@ -63,26 +63,29 @@ const Language = () => {
   };
 
   return (
-    <Container.Flex
-      className={{
-        background: "bg-white/60 shadow ",
-        flex: "justify-center",
-        dimensions: "mt-5",
-        otherStyles: "overflow-hidden rounded-lg divide-x divide-gray-200/40",
-      }}
-    >
-      {languages.map((language) => (
-        <Button
-          type="button"
-          variant="language"
-          key={language}
-          condition={router.locale === language}
-          onClick={() => changeLanguage(language)}
-        >
-          {language}
-        </Button>
-      ))}
-    </Container.Flex>
+    <Container className="w-full">
+      <Container
+        className={{
+          position: "lg:absolute lg:right-20 lg:top-3",
+          dimensions: "w-fit lg:mx-auto",
+          background: "bg-orange-quaternary/90 shadow z-10",
+          otherStyles:
+            "overflow-hidden rounded-b-lg lg:rounded-lg divide-x divide-gray-200/40",
+        }}
+      >
+        {languages.map((language) => (
+          <Button
+            type="button"
+            variant="language"
+            key={language}
+            condition={router.locale === language}
+            onClick={() => changeLanguage(language)}
+          >
+            {language}
+          </Button>
+        ))}
+      </Container>
+    </Container>
   );
 };
 

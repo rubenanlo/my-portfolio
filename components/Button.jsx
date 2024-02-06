@@ -27,7 +27,6 @@ const variantStyles = (condition) => ({
   selected: {
     background: "bg-orange-tertiary dark:bg-orange-quaternary",
   },
-
   arrow: {
     position: "relative focus:z-20",
     dimension: "px-1",
@@ -72,9 +71,11 @@ const variantStyles = (condition) => ({
   },
   language: {
     flex: "flex justify-center items-center shrink-0",
-    dimensions: "w-10 h-10",
+    dimensions: "w-10 h-10 lg:h-10",
     typography: "text-xs font-normal text-gray-800",
-    background: condition ? "bg-zinc-800/70" : "hover:bg-zinc-800/70",
+    background: condition
+      ? "bg-orange-tertiary"
+      : "hover:bg-zinc-800/70 bg-white/90 dark:bg-zinc-800/90 dark:text-zinc-100",
   },
   navbarMobile: {
     position: "fixed bottom-0 left-0",
