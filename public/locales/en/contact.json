@@ -1,0 +1,8 @@
+{
+  "success": "Thanks for subscribing! Check your email for confirmation (also the spam folder).",
+  "error": "This email is already in the database.",
+  "title": "Let's connect",
+  "description": "Get notified with new publications, or projects, and unsubscribe at any time.",
+  "legal": "By clicking on the 'Connect' button, you let me keep your email. I will never share your email address with anyone else. Unsubscribe at any time.",
+  "button": "Connect"
+}
