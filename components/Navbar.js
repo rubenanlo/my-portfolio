@@ -197,20 +197,21 @@ const NavbarMobile = ({ navLinks }) => {
 };
 
 const NavbarIslandItem = ({ navLinks }) => {
-  const router = useRouter();
-  const isActive = (name) => router.pathname.includes(name.toLowerCase());
+  const { pathname } = useRouter();
   const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
 
   return updatedNavLinks.map(({ name, href }) => (
     <Container as="li" key={name}>
       <Container.Link
         href={href}
-        className={clsx(
-          "relative block px-3 py-1 transition text-xs font-light",
-          isActive(name)
-            ? "text-orange-secondary dark:text-orange-testiary"
-            : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
-        )}
+        className={{
+          parent: clsx(
+            "relative block px-3 py-1 transition text-xs font-light",
+            pathname === href
+              ? "text-orange-secondary dark:text-orange-testiary"
+              : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
+          ),
+        }}
       >
         {name}
       </Container.Link>
@@ -223,7 +224,7 @@ const NavbarIsland = ({ navLinks }) => (
     as="nav"
     className={{
       position: "absolute left-0 right-0 top-5 z-10",
-      dimension: "max-w-md mx-auto",
+      dimension: "max-w-lg mx-auto",
     }}
   >
     <Container.Flex
@@ -236,7 +237,7 @@ const NavbarIsland = ({ navLinks }) => (
         otherStyles: "list-none rounded-full",
       }}
     >
-      <Container.Link href="/">
+      <Container.Link href="/" className={{ parent: "shrink-0" }}>
         <Container.Logo
           src={rawDevLogo}
           alt="my-logo"
@@ -249,7 +250,7 @@ const NavbarIsland = ({ navLinks }) => (
 );
 
 const Navbar = ({ type }) => {
-  const isSmallerScreen = useResponsive(640);
+  const isSmallerScreen = useResponsive(1024);
 
   const { t } = useTranslation("navLinks");
 

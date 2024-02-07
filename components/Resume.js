@@ -78,7 +78,11 @@ const Resume = () => {
         AdditionalComponent={Role}
         variant="array"
       />
-      <Container.Link href={`docs/resume-${locale}.pdf`} target="_blank">
+      <Container.Link
+        href={`docs/resume-${locale}.pdf`}
+        locale=""
+        target="_blank"
+      >
         <Button
           variant="secondary"
           className={{ dimension: "mt-6 w-full", otherStyles: "group" }}

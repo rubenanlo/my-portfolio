@@ -98,7 +98,6 @@ Container.Link = function ContainerLink({
   onClick,
   Component,
   componentProps,
-  locale = "en",
   ...props
 }) {
   const classNameParent = turnObjectIntoString(className?.parent);
@@ -109,7 +108,6 @@ Container.Link = function ContainerLink({
       href={href}
       className={clsx(classNameParent, "cursor-pointer")}
       onClick={onClick}
-      locale={locale}
       {...props}
     >
       {Component && (

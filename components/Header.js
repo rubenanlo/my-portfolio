@@ -89,9 +89,13 @@ const Language = () => {
   );
 };
 
-export const Header = () => (
-  <Container className="w-full flex justify-center z-20">
-    <ThemeToggle />
-    <Language />
-  </Container>
-);
+export const Header = () => {
+  const { pathname } = useRouter();
+
+  return (
+    <Container className="w-full flex justify-center z-20">
+      <ThemeToggle />
+      {pathname !== "/admin" && <Language />}
+    </Container>
+  );
+};

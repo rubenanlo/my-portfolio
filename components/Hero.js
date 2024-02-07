@@ -43,11 +43,15 @@ const Hero = () => {
           <TextLayout className="mt-5 w-full">
             <TextLayout.Title title={socialLinksTranslated.name} />
             <TextLayout.Subtitle subtitle={socialLinksTranslated.title} />
-            <TextLayout.Paragraph className="mt-6" paragraph={t("intro")} />
+            <TextLayout.Paragraph
+              className="mt-6 h-52 pr-10"
+              paragraph={t("intro")}
+            />
+            <Container className="border-b border-zinc-200/40 w-1/3" />
             <Container.Flex
               className={{
                 flex: "gap-x-6 items-center justify-start",
-                dimension: "mt-10",
+                dimension: "mt-5",
               }}
             >
               {socialLinksTranslated.social.map(({ Social, text, href }) => (

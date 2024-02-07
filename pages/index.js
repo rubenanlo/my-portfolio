@@ -11,7 +11,9 @@ const Index = ({ articles }) => {
   const orderedArticles = setOrder(articles);
   return (
     <Container
-      className={{ dimension: "max-w-xl lg:max-w-4xl w-full mx-auto" }}
+      className={{
+        dimension: "max-w-xl lg:max-w-4xl w-full mx-auto",
+      }}
     >
       <Hero />
       <Container.Section>
