@@ -1,0 +1,39 @@
+{
+  "title": "My projects",
+  "subtitle": "A selection of all my projects",
+  "techStack": {
+    "frameworks": "Frameworks",
+    "languages": "Languages",
+    "databases": "Databases",
+    "libraries": "Libraries",
+    "cssLibraries": "CSS Libraries",
+    "other": "Other"
+  },
+  "toGithub": "Browse all my contributions",
+  "filters": {
+    "all": "All",
+    "project": "project",
+    "code snippets": "code snippets"
+  },
+  "projectDescriptions": {
+    "mitigation": "A data visualization on greenhouse gas (GHG) mitigation options for agriculture and land use in different countries. Tip: Select China for all functionalities",
+    "jestTesting": "A way to test full datasets with JEST (e.g., 3 seconds for 3,500 tests)",
+    "portfolio": "A portal to showcase my work, host my own blog posts, including translation and CMS capabilities",
+    "pagination": "Custom hook to create pagination for any list of items",
+    "useResponsive": "Custom hook to detect the current breakpoint allowing to render different components based on the screen size",
+    "useAnimatedValue": "Custom hook to animate values with Framer Motion, allowing to animate numbers",
+    "esdr": "This is a data visualization to showcase the performance of European countries towards the UN sustainable development goals.",
+    "rawDev": "Website dedicated to web development services, so that potential clients can get in contact with rawDev",
+    "imageOptimization": "Automation of image optimization with AVIF, png and WebP formats, so that images are optimized for the web",
+    "sdgTC": "Static website which includes an online library for the SDG Transformation Center, so that people can get access to publications and other resources",
+    "sdr": "This is a data visualization to showcase the performance of UN members towards the UN sustainable development goals.",
+    "heatmap": "A heatmap to visualize specific data points in a matrix",
+    "benin": "A data visualization tracking performance of Benin towards the Leave-No-One-Behind indicators.",
+    "guithub": "A community of guitar enthusiasts to share their passion for music.",
+    "tickTock": "Javascript game to change as many diapers as you can!",
+    "supplyChain": "Generating a supply chain analysis with automation capabilities",
+    "roi": "Generating a return on R&D investment analysis, along with a self-generated report as an output",
+    "bestPractices": "Development of best practices for data analyses and data visualizations in the US Northeast region",
+    "dataTables": "Development of an automated tool to self-generate tables for reports"
+  }
+}
