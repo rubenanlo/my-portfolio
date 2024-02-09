@@ -6,6 +6,7 @@ import Footer from "components/Footer";
 import { Container } from "components/Container";
 import Navbar from "components/Navbar";
 import AmbientCanvasBackground from "components/AmbientBackground";
+import { useResponsive } from "helpers/useResponsive";
 
 const WaterMark = () => (
   <Container
@@ -33,6 +34,7 @@ const WaterMark = () => (
 export const AppLayout = ({ children }) => {
   const { resolvedTheme } = useTheme();
   const { asPath } = useRouter();
+  const isSmallerScreen = useResponsive(1024);
 
   // Paths that don't have a footer, blended navbar or twirl
   const noFooterPaths = ["/admin"];
@@ -67,6 +69,7 @@ export const AppLayout = ({ children }) => {
           {hasBlendedNavbar && <Navbar type="blended" />}
 
           <Header />
+          {isSmallerScreen && <Navbar type="list" />}
           <Container.Flex
             className={{
               flex: "flex-col justify-between",

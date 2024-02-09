@@ -95,7 +95,7 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
   return (
     <Container
       className={{
-        position: "fixed top-0 left-0",
+        position: "fixed top-0 left-0 z-20",
         dimension: "h-screen w-screen",
         background: "bg-zinc-800/70",
       }}
@@ -114,7 +114,7 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
       >
         <ul
           role="list"
-          className="space-y-1 w-full -my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
+          className="space-y-1 -my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
         >
           {navLinks.map((navLink, index) => (
             <li
@@ -160,7 +160,6 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
 NavbarListModal.displayName = "NavbarListModal";
 
 const NavbarMobile = ({ navLinks }) => {
-  const isSmallerScreen = useResponsive(1024);
   const [isVisible, setIsVisible] = useState(false);
   const modalRef = useRef(null);
   const buttonRef = useRef(null);
@@ -173,7 +172,7 @@ const NavbarMobile = ({ navLinks }) => {
     <Container className="absolute w-full z-20">
       <Container
         onClick={() => {
-          isSmallerScreen && setIsVisible(!isVisible);
+          setIsVisible(!isVisible);
         }}
         className={{
           position:

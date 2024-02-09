@@ -78,9 +78,9 @@ const variantStyles = (condition) => ({
       : "hover:bg-zinc-800/70 bg-white/90 dark:bg-zinc-800/90 dark:text-zinc-100",
   },
   navbarMobile: {
-    position: "fixed bottom-0 left-0",
-    dimension: "ml-5 mt-3 px-3 py-3 mb-5",
-    background: "bg-white/90 dark:bg-zinc-800/90 ",
+    position: "fixed bottom-0 left-4 lg:hidden z-10",
+    dimension: "px-3 py-3 mb-5",
+    background: "bg-white/90 dark:bg-zinc-800 ",
     ring: "ring-1 ring-zinc-900/5 dark:ring-white/10 dark:hover:ring-white/20",
     otherStyles:
       "group rounded-md shadow-lg shadow-zinc-800/5 backdrop-blur transition",

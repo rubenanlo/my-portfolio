@@ -93,7 +93,7 @@ export const Header = () => {
   const { pathname } = useRouter();
 
   return (
-    <Container className="w-full flex justify-center z-20">
+    <Container className="w-full flex justify-center lg:z-20">
       <ThemeToggle />
       {pathname !== "/admin" && <Language />}
     </Container>

@@ -28,8 +28,7 @@ const Hero = () => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
-  const navbarType =
-    !isReady || isLoading ? undefined : isSmallerScreen ? "list" : "grid";
+  const navbarType = !isReady || isLoading ? undefined : "grid";
 
   return (
     <Container.Section className="lg:py-40 w-full">
@@ -71,7 +70,7 @@ const Hero = () => {
               ))}
             </Container.Flex>
           </TextLayout>
-          <Navbar type={navbarType} />
+          {!isSmallerScreen && <Navbar type={navbarType} />}
         </Container.Flex>
       </Container>
     </Container.Section>
