@@ -21,7 +21,7 @@ const ProjectHeader = ({ filter, setFilter, filters, summary, t }) => {
   return (
     <Container
       className={{
-        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10",
+        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-0",
       }}
     >
       <TextLayout.Title as="h1" title={summary.title} />
@@ -41,7 +41,7 @@ const ProjectHeader = ({ filter, setFilter, filters, summary, t }) => {
         <Container.Columns
           key={tech}
           className={{
-            grid: "grid-cols-[1fr,2fr] items-start",
+            grid: "grid-cols-[1fr,2fr] items-start gap-x-2",
             dimension: "mb-2 lg:w-1/2 desktop-sm:w-full",
           }}
         >

@@ -15,7 +15,7 @@ const Footer = () => {
     <Container.Section
       as="footer"
       bottomDiv
-      className={{ dimension: "w-full px-6 pt-8 lg:px-20 pb-32 lg:pb-10" }}
+      className={{ dimension: "w-full px-6 pt-4 lg:px-20 pb-32 lg:pb-10" }}
     >
       <Container
         className={{
