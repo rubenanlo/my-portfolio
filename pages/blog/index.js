@@ -1,4 +1,5 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { capitalize } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
@@ -25,65 +26,68 @@ const blogIcons = [
   },
 ];
 
-const BlogHeader = ({ animatedTotalPosts, tags }) => (
-  <Container
-    className={{
-      dimension: "mt-10 lg:mt-18 px-10 lg:px-16",
-    }}
-  >
-    <TextLayout.Title as="h1" title="My blog" />
-    <TextLayout.Paragraph
-      as="h3"
-      paragraph="A place where I share my thoughts related to web development, programming, and other topics."
-      className="mt-5"
-    />
-    <Container.Flex
+const BlogHeader = ({ animatedTotalPosts, tags }) => {
+  const { t } = useTranslation("blog");
+  return (
+    <Container
       className={{
-        flex: "justify-start items-end gap-x-2 mt-5",
+        dimension: "mt-10 lg:mt-18 px-10 lg:px-16",
       }}
     >
-      <TextLayout.Number animations={blurAnimation} className="text-7xl">
-        {animatedTotalPosts}
-      </TextLayout.Number>
-      <TextLayout.Paragraph paragraph="published blog posts" className="" />
-    </Container.Flex>
-
-    <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
-    <Container.Flex
-      className={{
-        flex: "items-center justify-start gap-x-5",
-      }}
-    >
-      <TextLayout.Paragraph paragraph="I am a writer at" />
-      {blogIcons.map(({ title, Component, href }) => (
-        <Container.Link
-          key={title}
-          href={href}
-          target="_blank"
-          Component={Component}
-          className={{
-            parent: "w-9 h-9 inline-flex items-center rounded-md",
-          }}
-        />
-      ))}
-    </Container.Flex>
-    <Container.Columns
-      className={{
-        grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-start",
-        dimension: "mt-5 lg:w-1/2 desktop-sm:w-full",
-      }}
-    >
-      <TextLayout.Paragraph paragraph="and I talk about:" className="mt-2" />
+      <TextLayout.Title as="h1" title={t("title")} />
+      <TextLayout.Paragraph
+        as="h3"
+        paragraph={t("subtitle")}
+        className="mt-5"
+      />
       <Container.Flex
-        className={{ flex: "justify-start gap-5 flex-wrap mt-2" }}
+        className={{
+          flex: "justify-start items-end gap-x-2 mt-5",
+        }}
       >
-        {tags.map((tag) => (
-          <TextLayout.Tag key={tag} tag={tag} className="" />
+        <TextLayout.Number animations={blurAnimation} className="text-7xl">
+          {animatedTotalPosts}
+        </TextLayout.Number>
+        <TextLayout.Paragraph paragraph={t("published")} className="" />
+      </Container.Flex>
+
+      <Container className="border-b border-zinc-600/50 w-1/5 my-7" />
+      <Container.Flex
+        className={{
+          flex: "items-center justify-start gap-x-5",
+        }}
+      >
+        <TextLayout.Paragraph paragraph={t("writer")} />
+        {blogIcons.map(({ title, Component, href }) => (
+          <Container.Link
+            key={title}
+            href={href}
+            target="_blank"
+            Component={Component}
+            className={{
+              parent: "w-9 h-9 inline-flex items-center rounded-md",
+            }}
+          />
         ))}
       </Container.Flex>
-    </Container.Columns>
-  </Container>
-);
+      <Container.Columns
+        className={{
+          grid: "grid-cols-1 lg:grid-cols-[1.5fr,2fr] items-start",
+          dimension: "mt-5 lg:w-1/2 desktop-sm:w-full",
+        }}
+      >
+        <TextLayout.Paragraph paragraph={t("talk")} className="mt-2" />
+        <Container.Flex
+          className={{ flex: "justify-start gap-5 flex-wrap mt-2" }}
+        >
+          {tags.map((tag) => (
+            <TextLayout.Tag key={tag} tag={tag} className="" />
+          ))}
+        </Container.Flex>
+      </Container.Columns>
+    </Container>
+  );
+};
 
 const Posts = ({ groupArticles, isLgScreen }) => (
   <Container
@@ -189,7 +193,7 @@ export const getStaticProps = async ({ locale }) => {
   return {
     props: {
       articles,
-      ...(await serverSideTranslations(locale, ["navLinks"])),
+      ...(await serverSideTranslations(locale, ["navLinks", "blog"])),
     },
   };
 };

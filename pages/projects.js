@@ -182,11 +182,7 @@ export default Projects;
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "navLinks",
-        "projects",
-      ])),
+      ...(await serverSideTranslations(locale, ["navLinks", "projects"])),
     },
   };
 };
