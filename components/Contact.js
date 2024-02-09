@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { Container } from "components/Container";
+import { useTranslation } from "next-i18next";
+import { Container, AnimatedContainer } from "components/Container";
 import { Button } from "components/Button";
 import { Form } from "components/Form";
 import { TextLayout } from "components/TextLayout";
 import Confirmation from "components/modals/Confirmation";
 import { MailIcon } from "library/appIcons";
-// import { useRouter } from "next/router";
+import { showUpAnimation } from "library/animations";
 
-// !Create backend for this section (modal confirming email and sending email)
 const Contact = () => {
   const [formResponse, setFormResponse] = useState("");
   const [openModal, toggleModal] = useState(false);
   const [message, setMessage] = useState("");
-  // const router = useRouter();
+  const [darkBg, setDarkBg] = useState(false);
+
+  const { t } = useTranslation("contact");
 
   const handleSubmit = async (e) => {
+    setDarkBg(true);
     e.preventDefault();
 
     const response = await fetch("/api/contact/submit-response", {
@@ -27,22 +30,29 @@ const Contact = () => {
 
     if (data.success) {
       toggleModal(true);
-      setMessage(
-        "Thanks for subscribing! Check your email for confirmation (also the spam folder)."
-      );
+      setMessage(t("success"));
+      setDarkBg(false);
     }
     setFormResponse("");
     if (data.message === "Email already exists") {
       toggleModal(true);
-      setMessage("This email is already in the database.");
+      setMessage(t("error"));
       setFormResponse("");
+      setDarkBg(false);
     } else {
       console.log("Error:", data);
+      setDarkBg(false);
     }
   };
 
   return (
     <Container>
+      {darkBg && (
+        <AnimatedContainer
+          {...showUpAnimation}
+          className="fixed inset-0 bg-zinc-900/90 z-50"
+        />
+      )}
       <Form
         className={{
           border: "border border-zinc-100 p-6 dark:border-zinc-700/40",
@@ -54,11 +64,11 @@ const Contact = () => {
           as="h4"
           className="flex"
           AdditionalComponent={<MailIcon className="h-6 w-6 flex-none mr-3" />}
-          title={"Let's connect"}
+          title={t("title")}
         />
         <TextLayout.Paragraph
           className={{ dimension: "mt-2", typography: "text-sm" }}
-          paragraph="Get notified with new publications, or projects, and unsubscribe at any time."
+          paragraph={t("description")}
         />
         <Container.Flex className="mt-6">
           <Form.Field
@@ -78,11 +88,11 @@ const Contact = () => {
             variant="primary"
             type="submit"
             className="ml-4 flex-none"
-            text="Connect"
+            text={t("button")}
           />
         </Container.Flex>
         <TextLayout.Paragraph
-          paragraph="By clicking on the 'Connect' button, you let me keep your email. I will never share your email address with anyone else. Unsubscribe at any time."
+          paragraph={t("legal")}
           className="text-xs italic"
         />
       </Form>

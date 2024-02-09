@@ -14,11 +14,24 @@ const getFiles = (page) => readdirSync(DIRECTORY[page]);
 
 export const createFileNameSlug = (input) => input.replace(/\.mdx?$/, "");
 
-export const getAllText = ({ withSummarizedContent, page, mdxContent }) =>
+export const getAllText = ({
+  withSummarizedContent,
+  page,
+  mdxContent,
+  locale,
+}) =>
   getFiles(page).map((fileName) => {
-    const slug = fileName.replace(/\.mdx?$/, "");
-    const mdPath = path.join(DIRECTORY[page], `${slug}.md`);
-    const mdxPath = path.join(DIRECTORY[page], `${slug}.mdx`);
+    const pattern = locale ? /(_[a-zA-Z0-9]+)\.mdx?$/ : /\.mdx?$/;
+    const slug = fileName.replace(pattern, "");
+
+    const mdPath = path.join(
+      DIRECTORY[page],
+      locale ? `${slug}_${locale}.md` : `${slug}.md`
+    );
+    const mdxPath = path.join(
+      DIRECTORY[page],
+      locale ? `${slug}_${locale}.mdx` : `${slug}.mdx`
+    );
 
     let fileContents;
     if (fs.existsSync(mdPath)) {

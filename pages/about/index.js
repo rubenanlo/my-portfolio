@@ -1,5 +1,7 @@
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
@@ -14,10 +16,12 @@ const AboutHeader = ({ spotlight }) => {
   const icons = ["linkedin", "instagram"];
 
   const personalInfo = [
-    ...socialInfo.social.filter(({ href }) =>
+    ...socialInfo().social.filter(({ href }) =>
       icons.some((icon) => href.includes(icon))
     ),
   ];
+
+  const { t } = useTranslation("about");
 
   return (
     <Container
@@ -25,10 +29,10 @@ const AboutHeader = ({ spotlight }) => {
         dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10 overflow-hidden",
       }}
     >
-      <TextLayout.Title as="h1" title="About me" />
+      <TextLayout.Title as="h1" title={t("title")} />
       <TextLayout.Paragraph
         as="h3"
-        paragraph="A brief description of me and my professional journey"
+        paragraph={t("subtitle")}
         className="mt-5"
       />
       <Container
@@ -42,7 +46,7 @@ const AboutHeader = ({ spotlight }) => {
           key={title}
           className={{
             grid: "grid-cols-[1fr,2fr] items-start",
-            dimension: "mb-2 lg:w-1/2 desktop-sm:w-full",
+            dimension: "mb-2 lg:w-1/2 desktop-sm:w-full pr-1",
           }}
         >
           <TextLayout.Paragraph paragraph={title} />
@@ -71,7 +75,7 @@ const AboutHeader = ({ spotlight }) => {
           }}
         />
         <Container.Flex className={{ flex: "flex-col gap-y-5" }}>
-          <TextLayout.Paragraph paragraph="Follow me on" />
+          <TextLayout.Paragraph paragraph={t("social")} />
           <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
             {personalInfo.map(({ Social, text, href }) => (
               <Container key={Social}>
@@ -144,14 +148,15 @@ const About = ({ spotlight, text }) => {
 
 export default About;
 
-export const getStaticProps = async () => {
-  const text = await getAllText({ page: "about", mdxContent: true });
+export const getStaticProps = async ({ locale }) => {
+  const text = await getAllText({ page: "about", mdxContent: true, locale });
   const [{ data: spotlight, content }] = text;
   const mdxSource = await serialize(content);
 
   return {
     props: {
       spotlight,
+      ...(await serverSideTranslations(locale, ["navLinks", "about"])),
       text: mdxSource,
     },
   };

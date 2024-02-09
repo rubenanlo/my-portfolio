@@ -4,11 +4,11 @@ import {
   LinkedInIcon,
   MediumIcon,
 } from "library/socialIcons";
-import { Email } from "./socialIcons";
+import { Email } from "library/socialIcons";
 
-export const socialInfo = {
-  name: "Ruben Andino",
-  title: "Fullstack Web Developer",
+export const socialInfo = (t) => ({
+  name: t && t("name"),
+  title: t && t("title"),
   social: [
     {
       Social: GitHubIcon,
@@ -31,8 +31,8 @@ export const socialInfo = {
       href: "mailto:info@rawdev.io",
     },
     {
-      text: "Check my other site →",
+      text: t && t("checkSite"),
       href: "https://rawdev.io/",
     },
   ],
-};
+});

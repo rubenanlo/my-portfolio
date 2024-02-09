@@ -12,7 +12,7 @@ export const URL = "https://ruben-andino.rawdev.io";
 
 // The URL of the CV (Excel)
 // Example: /static/downloads/files/SDR2021-database.xlsx
-export const CV_DOWNLOAD_URL = "/public/docs/resume.pdf";
+export const CV_DOWNLOAD_URL = "/public/docs/resume-en.pdf";
 
 // The description shown in Google Search results and on social media networks
 // Should be max ~150 characters.

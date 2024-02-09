@@ -99,7 +99,7 @@ const Admin = () => {
                   />
                   <Container className="text-sm leading-6">
                     <Container.Link
-                      href="mailto:admin@rawdev.io"
+                      href="mailto:info@rawdev.io"
                       className={{
                         typography:
                           "dark:font-semibold cursor-pointer text-zinc-500 hover:text-zinc-400 dark:text-orange-tertiary dark:hover:text-orange-quaternary",

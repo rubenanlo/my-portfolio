@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import { capitalize } from "lodash";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
@@ -8,34 +11,23 @@ import { useResponsive } from "helpers/useResponsive";
 import { socialInfo } from "library/socialInfo";
 import { work } from "library/projects";
 
-const ProjectHeader = ({ filter, setFilter }) => {
-  const [header] = work.filter(({ title }) => title);
+const ProjectHeader = ({ filter, setFilter, filters, summary, t }) => {
+  const techStackHeader = Object.keys(summary.techStack);
 
-  const techStackHeader = Object.keys(header.techStack);
-
-  const [github] = socialInfo.social.filter(({ href }) =>
+  const [github] = socialInfo().social.filter(({ href }) =>
     href.includes("github")
   );
-
-  const filters = [
-    "All",
-    ...Array.from(
-      new Set(
-        work.map(({ category }) => category).filter((category) => category)
-      )
-    ),
-  ];
 
   return (
     <Container
       className={{
-        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-10",
+        dimension: "mt-10 lg:mt-18 px-10 lg:pl-16 lg:pr-0",
       }}
     >
-      <TextLayout.Title as="h1" title={header.title} />
+      <TextLayout.Title as="h1" title={summary.title} />
       <TextLayout.Paragraph
         as="h3"
-        paragraph={header.subtitle}
+        paragraph={summary.subtitle}
         className="mt-5"
       />
 
@@ -49,13 +41,13 @@ const ProjectHeader = ({ filter, setFilter }) => {
         <Container.Columns
           key={tech}
           className={{
-            grid: "grid-cols-[1fr,2fr] items-start",
+            grid: "grid-cols-[1fr,2fr] items-start gap-x-2",
             dimension: "mb-2 lg:w-1/2 desktop-sm:w-full",
           }}
         >
-          <TextLayout.Paragraph paragraph={tech} />
+          <TextLayout.Paragraph paragraph={t(`techStack.${tech}`)} />
           <TextLayout.Paragraph
-            paragraph={header.techStack[tech]}
+            paragraph={summary.techStack[tech]}
             className={{
               dimension: "w-full",
             }}
@@ -69,7 +61,7 @@ const ProjectHeader = ({ filter, setFilter }) => {
         }}
       />
       <Container.Flex className={{ flex: "justify-start gap-x-2" }}>
-        <TextLayout.Paragraph paragraph="Browse all my contributions" />
+        <TextLayout.Paragraph paragraph={t("toGithub")} />
         <Container.Link
           href={github.href}
           target="_blank"
@@ -86,8 +78,8 @@ const ProjectHeader = ({ filter, setFilter }) => {
         {filters.map((filterItem) => (
           <Button
             key={filterItem}
-            variant={filterItem === filter ? "selected" : "secondary"}
-            onClick={() => setFilter(filterItem)}
+            variant={t(filterItem) === t(filter) ? "selected" : "secondary"}
+            onClick={() => setFilter(t(filterItem))}
           >
             <TextLayout.Paragraph paragraph={capitalize(filterItem)} />
           </Button>
@@ -97,11 +89,7 @@ const ProjectHeader = ({ filter, setFilter }) => {
   );
 };
 
-const ProjectList = ({ filter }) => {
-  const projects = work.filter(({ name, category }) =>
-    filter === "All" ? name : name && category === filter
-  );
-
+const ProjectList = ({ projects }) => {
   const isLgScreen = useResponsive(1027);
 
   return (
@@ -134,7 +122,32 @@ const ProjectList = ({ filter }) => {
 
 const Projects = () => {
   const isSmallScreen = useResponsive(1251);
+  const { locale } = useRouter();
   const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    setFilter(t("filters.all"));
+    //eslint-disable-next-line
+  }, [locale]);
+
+  const { t } = useTranslation("projects");
+  const workArr = work(t);
+  const summary = workArr[0];
+  const projects = workArr.filter(({ name, category }) =>
+    filter === t("filters.all")
+      ? name
+      : name && t(`filters.${category}`) === filter
+  );
+  const filters = [
+    t("filters.all"),
+    ...Array.from(
+      new Set(
+        workArr
+          .filter(({ category }) => category)
+          .map(({ category }) => t(`filters.${category}`))
+      )
+    ),
+  ];
 
   return (
     <Container.Columns
@@ -144,7 +157,13 @@ const Projects = () => {
         otherStyles: "overflow-x-hidden",
       }}
     >
-      <ProjectHeader filter={filter} setFilter={setFilter} />
+      <ProjectHeader
+        filter={filter}
+        setFilter={setFilter}
+        summary={summary}
+        t={t}
+        filters={filters}
+      />
       {isSmallScreen && (
         <Container
           className={{
@@ -153,9 +172,17 @@ const Projects = () => {
           }}
         />
       )}
-      <ProjectList filter={filter} />
+      <ProjectList projects={projects} />
     </Container.Columns>
   );
 };
 
 export default Projects;
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["navLinks", "projects"])),
+    },
+  };
+};

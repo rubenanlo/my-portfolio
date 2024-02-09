@@ -62,12 +62,12 @@ const HomeIcon = (props) => (
   </svg>
 );
 
-export const NAVLINKS = [
-  { name: "Home", href: "/", onlyMobile: true, icon: HomeIcon },
-  { name: "About", href: "/about", icon: AboutIcon },
-  { name: "Projects", href: "/projects", icon: ProjectIcon },
-  { name: "Blog", href: "/blog", icon: BlogIcon },
-  { name: "Admin", href: "/admin/dashboard", icon: AdminIcon },
+export const navLinks = (t) => [
+  { name: t("home"), href: "/", onlyMobile: true, icon: HomeIcon },
+  { name: t("about"), href: "/about", icon: AboutIcon },
+  { name: t("projects"), href: "/projects", icon: ProjectIcon },
+  { name: t("blog"), href: "/blog", icon: BlogIcon },
+  { name: t("admin"), href: "/admin/dashboard", icon: AdminIcon },
 ];
 
 export const EmailLink = () => (

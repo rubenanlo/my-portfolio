@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
 import Navbar from "components/Navbar";
@@ -14,6 +15,10 @@ const Hero = () => {
   const router = useRouter();
   const [isReady, setIsReady] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
   const [isLoading, setIsLoading] = useState(false); // Using state to track if router is ready to use. Applicable when sharing urls with filters
+  const { t } = useTranslation("hero");
+
+  //  Translating the text in social info:
+  const socialLinksTranslated = socialInfo(t);
 
   useEffect(() => {
     setIsReady(router.isReady);
@@ -27,7 +32,7 @@ const Hero = () => {
     !isReady || isLoading ? undefined : isSmallerScreen ? "list" : "grid";
 
   return (
-    <Container.Section className="lg:py-40 w-full z-10">
+    <Container.Section className="lg:py-40 w-full">
       <Container className="mt-10 lg:pt-8 w-full">
         <Image
           className="h-16 w-16 rounded-full dark:sepia"
@@ -36,19 +41,20 @@ const Hero = () => {
         />
         <Container.Flex>
           <TextLayout className="mt-5 w-full">
-            <TextLayout.Title title={socialInfo.name} />
-            <TextLayout.Subtitle subtitle={socialInfo.title} />
+            <TextLayout.Title title={socialLinksTranslated.name} />
+            <TextLayout.Subtitle subtitle={socialLinksTranslated.title} />
             <TextLayout.Paragraph
-              className="mt-6"
-              paragraph="I am a Full Stack Web Developer with a background in economics. My primary focus is to build simple web applications based on complex data, by understanding and addressing business needs, automating processes to minimize human error, allowing code reusability and seamless code maintenance."
+              className="mt-6 h-52 pr-10"
+              paragraph={t("intro")}
             />
+            <Container className="border-b border-zinc-200/40 w-1/3" />
             <Container.Flex
               className={{
                 flex: "gap-x-6 items-center justify-start",
-                dimension: "mt-10",
+                dimension: "mt-5",
               }}
             >
-              {socialInfo.social.map(({ Social, text, href }) => (
+              {socialLinksTranslated.social.map(({ Social, text, href }) => (
                 <Container.Link
                   key={Social || text}
                   href={href}

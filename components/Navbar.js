@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, forwardRef } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
+import { useTranslation } from "next-i18next";
 import clsx from "clsx";
 import { Post } from "components/Post";
 import { Card } from "components/Card";
@@ -10,7 +11,7 @@ import { Container, AnimatedContainer } from "components/Container";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
-import { NAVLINKS as navLinks } from "library/navlinks";
+import { navLinks } from "library/navlinks";
 import { zoomIn, popUp } from "library/animations";
 
 const ArrowDiagonal = (props) => (
@@ -67,7 +68,7 @@ const NavbarGridItem = ({ navLink }) => {
   );
 };
 
-const NavbarGrid = () => {
+const NavbarGrid = ({ navLinks }) => {
   const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
   return (
     <Container
@@ -87,7 +88,7 @@ const NavbarGrid = () => {
 
 NavbarGrid.displayName = "NavbarGrid";
 
-const NavbarListModal = forwardRef(({ isVisible }, ref) => {
+const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
   const [isIndex, setIndex] = useState(null);
   if (!isVisible) return null;
 
@@ -158,10 +159,9 @@ const NavbarListModal = forwardRef(({ isVisible }, ref) => {
 
 NavbarListModal.displayName = "NavbarListModal";
 
-const NavbarMobile = () => {
+const NavbarMobile = ({ navLinks }) => {
   const isSmallerScreen = useResponsive(1024);
   const [isVisible, setIsVisible] = useState(false);
-  const Component = NavbarListModal;
   const modalRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -171,36 +171,47 @@ const NavbarMobile = () => {
 
   return (
     <Container className="absolute w-full z-20">
-      <div
+      <Container
         onClick={() => {
           isSmallerScreen && setIsVisible(!isVisible);
         }}
-        className="fixed bottom-5 left-5 sm:left-auto sm:fixed sm:-top-10 sm:right-[15%] lg:top-0 lg:right-0 lg:relative w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] self-center lg:self-start mr-10 desktop-sm:mr-0 desktop-sm:self-center flex-shrink-0 cursor-pointer mx-auto"
+        className={{
+          position:
+            "fixed bottom-5 left-5 sm:left-auto sm:fixed sm:-top-10 sm:right-[15%] lg:top-0 lg:right-0 lg:relative self-center lg:self-start desktop-sm:self-center mx-auto",
+          dimensions:
+            "w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] lg:w-[18rem] lg:h-[18rem] desktop-sm:w-[29rem] desktop-sm:h-[29rem] mr-10 desktop-sm:mr-0",
+          otherStyles: "flex-shrink-0 cursor-pointer ",
+        }}
       >
         <Button variant="navbarMobile">
           <Burger className="h-6 w-6 text-zinc-600" />
         </Button>
-        <Component isVisible={isVisible} ref={modalRef} />
-      </div>
+        <NavbarListModal
+          navLinks={navLinks}
+          isVisible={isVisible}
+          ref={modalRef}
+        />
+      </Container>
     </Container>
   );
 };
 
-const NavbarIslandItem = () => {
-  const router = useRouter();
-  const isActive = (name) => router.pathname.includes(name.toLowerCase());
+const NavbarIslandItem = ({ navLinks }) => {
+  const { pathname } = useRouter();
   const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
 
   return updatedNavLinks.map(({ name, href }) => (
     <Container as="li" key={name}>
       <Container.Link
         href={href}
-        className={clsx(
-          "relative block px-3 py-1 transition text-xs font-light",
-          isActive(name)
-            ? "text-orange-secondary dark:text-orange-testiary"
-            : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
-        )}
+        className={{
+          parent: clsx(
+            "relative block px-3 py-1 transition text-xs font-light",
+            pathname === href
+              ? "text-orange-secondary dark:text-orange-testiary"
+              : "hover:text-orange-secondary dark:hover:text-orange-tertiary"
+          ),
+        }}
       >
         {name}
       </Container.Link>
@@ -208,43 +219,49 @@ const NavbarIslandItem = () => {
   ));
 };
 
-const NavbarIsland = () => (
+const NavbarIsland = ({ navLinks }) => (
   <Container
     as="nav"
     className={{
       position: "absolute left-0 right-0 top-5 z-10",
-      dimension: "max-w-sm mx-auto",
+      dimension: "max-w-lg mx-auto",
     }}
   >
     <Container.Flex
       as="ul"
       className={{
-        flex: "justify-center items-center gap-x-10",
+        flex: "justify-between items-center gap-x-10",
         dimension: "px-3 py-1 w-full",
         typography: "text-sm font-medium text-zinc-800 dark:text-zinc-200",
         background: "bg-gray-50 dark:bg-transparent",
         otherStyles: "list-none rounded-full",
       }}
     >
-      <Container.Link href="/">
+      <Container.Link href="/" className={{ parent: "shrink-0" }}>
         <Container.Logo
           src={rawDevLogo}
           alt="my-logo"
           className="h-10 w-10 rounded-full"
         />
       </Container.Link>
-      <NavbarIslandItem />
+      <NavbarIslandItem navLinks={navLinks} />
     </Container.Flex>
   </Container>
 );
 
 const Navbar = ({ type }) => {
-  const isSmallerScreen = useResponsive(640);
+  const isSmallerScreen = useResponsive(1024);
 
-  if (type === "grid") return <NavbarGrid />;
-  if (type === "list") return <NavbarMobile />;
-  if (type === "blended" && isSmallerScreen) return <NavbarMobile />;
-  if (type === "blended" && !isSmallerScreen) return <NavbarIsland />;
+  const { t } = useTranslation("navLinks");
+
+  const navLinksTranslated = navLinks(t);
+
+  if (type === "grid") return <NavbarGrid navLinks={navLinksTranslated} />;
+  if (type === "list") return <NavbarMobile navLinks={navLinksTranslated} />;
+  if (type === "blended" && isSmallerScreen)
+    return <NavbarMobile navLinks={navLinksTranslated} />;
+  if (type === "blended" && !isSmallerScreen)
+    return <NavbarIsland navLinks={navLinksTranslated} />;
 };
 
 export default Navbar;

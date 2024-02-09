@@ -1,0 +1,39 @@
+{
+  "title": "Mes projects",
+  "subtitle": "Une sélection de mes projets",
+  "techStack": {
+    "frameworks": "Frameworks",
+    "languages": "Langages",
+    "databases": "Bases de données",
+    "libraries": "Librairies",
+    "cssLibraries": "CSS Librairies",
+    "other": "Autres"
+  },
+  "toGithub": "Trouvez mes contributions ici",
+  "filters": {
+    "all": "Tous",
+    "project": "Projet",
+    "code snippets": "Extrait de code"
+  },
+  "projectDescriptions": {
+    "mitigation": "Une visualisation de données sur les options de la réduction des émissions de gaz à effet de serre (GES) pour l'agriculture et l'utilisation des terres dans différents pays. (Sélectionnez la Chine pour voir toutes les fonctionnalités)",
+    "jestTesting": "Une manière de tester 100% de données avec JEST (par exemple, 3 secondes pour 3 500 tests)",
+    "portfolio": "Un portail pour présenter mon travail, héberger mes propres articles de blog, y compris des fonctionnalités de traduction et de CMS",
+    "pagination": "Creation de React Hook pour créer une pagination pour toute liste d'éléments",
+    "useResponsive": "Creation de React Hook pour détecter la taille de la fenêtre de navegation et renvoyer un booléen permettant l'utilisation conditionnelle des 'components' en fonction de la taille de l'écran",
+    "useAnimatedValue": "Creation de React Hook d'animer des valeurs avec Framer Motion, permettant d'animer des nombres",
+    "esdr": "Une visualisation de données pour présenter les performances des pays européens par rapport aux objectifs de développement durable de l'ONU",
+    "rawDev": "Site dédié aux services de développement web, afin que les clients potentiels puissent entrer en contact avec rawDev",
+    "imageOptimization": "Automatisation de l'optimisation des images avec les formats AVIF, png et WebP, afin que les images soient optimisées pour le web",
+    "sdgTC": "Site Web statique qui comprend une bibliothèque en ligne pour le SDG Transformation Center, afin que les gens puissent accéder aux publications et autres ressources",
+    "sdr": "Une visualisation de données pour présenter les performances des membres de l'ONU par rapport aux objectifs de développement durable de l'ONU",
+    "heatmap": "Une carte thermique pour visualiser des points de données spécifiques dans une matrice",
+    "benin": "Une visualisation de données suivant les performances du Bénin par rapport aux indicateurs Leave-No-One-Behind",
+    "guithub": "Une communauté de passionnés de guitare pour partager leur passion de la musique",
+    "tickTock": "Jeu créé avec javascript pour changer de couches !",
+    "supplyChain": "Générer une analyse de la chaîne d'approvisionnement avec des capacités d'automatisation de données",
+    "roi": "Générer une analyse du retour sur investissement en R&D, ainsi qu'un rapport auto-généré avec les résultats",
+    "bestPractices": "Développement de meilleures pratiques pour les analyses et visualisations de données dans la région du Nord-Est des États-Unis",
+    "dataTables": "Développement d'un outil automatisé pour auto-générer des tableaux pour les rapports"
+  }
+}

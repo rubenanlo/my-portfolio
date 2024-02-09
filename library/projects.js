@@ -9,158 +9,143 @@ import {
   TICK_TOCK as tickTock,
 } from "helpers/exportImages";
 
-export const work = [
+// For the information stored below, check that you ad the translations in the locales json files
+export const work = (t) => [
   {
-    title: "My projects",
-    subtitle: "A selection of all my projects",
+    title: t("title"),
+    subtitle: t("subtitle"),
     techStack: {
-      Frameworks: "React, Next.js",
-      Languages: "JavaScript, Python, Bash, Node.js, HTML, CSS",
-      Databases: "MongoDB",
-      Libraries: "D3.js, Framer Motion, Redux, Recoil, MobX, ...",
-      "CSS Libraries": "TailwindCSS, styled-components",
-      Other: "JEST, Cypress, Tableau, Alteryx",
+      frameworks: "React, Next.js",
+      languages: "JavaScript, Python, Bash, Node.js, HTML, CSS",
+      databases: "MongoDB",
+      libraries: "D3.js, Framer Motion, Redux, Recoil, MobX, ...",
+      cssLibraries: "TailwindCSS, styled-components",
+      other: "JEST, Cypress, Tableau, Alteryx",
     },
   },
   {
     name: "Mitigation Toolkit",
-    description:
-      "A data visualization on greenhouse gas (GHG) mitigation options for agriculture and land use in different countries. Tip: Select China for all functionalities",
+    description: t("projectDescriptions.mitigation"),
     href: "https://deploy-preview-8--mitigation-toolkit.netlify.app/",
     image: mitigationToolkit,
     category: "project",
   },
   {
     name: "JEST testing units",
-    description:
-      "A way to test full datasets with JEST (e.g., 3 seconds for 3,500 tests)",
+    description: t("projectDescriptions.jestTesting"),
     href: "https://github.com/rubenanlo/JEST-testing-utils",
     category: "code snippets",
   },
   {
     name: "My portfolio",
-    description:
-      "A portal to showcase my work, host my own blog posts, including translation and CMS capabilities",
+    description: t("projectDescriptions.portfolio"),
     href: "https://ruben-andino.rawdev.io/",
     image: myPortfolio,
     category: "project",
   },
   {
     name: "usePagination",
-    description: "Custom hook to create pagination for any list of items",
+    description: t("projectDescriptions.pagination"),
     href: "https://github.com/rubenanlo/custom-react-hooks",
     category: "code snippets",
   },
   {
     name: "useResponsive",
-    description:
-      "Custom hook to detect the current breakpoint allowing to render different components based on the screen size",
+    description: t("projectDescriptions.useResponsive"),
     href: "https://github.com/rubenanlo/custom-react-hooks",
     category: "code snippets",
   },
   {
     name: "usAnimatedValue",
-    description:
-      "Custom hook to animate values with Framer Motion, allowing to animate numbers",
+    description: t("projectDescriptions.useAnimatedValue"),
     href: "https://github.com/rubenanlo/custom-react-hooks",
     category: "code snippets",
   },
   {
     name: "Europe Sustainable Development Report",
-    description:
-      "This is a data visualization to showcase the performance of European countries towards the UN sustainable development goals.",
+    description: t("projectDescriptions.esdr"),
     href: "https://eu-dashboards.sdgindex.org/",
     image: euSdr,
     category: "project",
   },
   {
     name: "rawDev",
-    description:
-      "Website dedicated to web development services, so that potential clients can get in contact with rawDev",
+    description: t("projectDescriptions.rawDev"),
     href: "https://www.rawdev.io/",
     image: rawdev,
     category: "project",
   },
   {
     name: "Image optimization",
-    description:
-      "Automation of image optimization with AVIF, png and WebP formats, so that images are optimized for the web",
+    description: t("projectDescriptions.imageOptimization"),
     href: "https://github.com/rubenanlo/image-optimization",
     category: "code snippets",
   },
   {
     name: "SDG Transformation Center",
-    description:
-      "Static website which includes an online library for the SDG Transformation Center, so that people can get access to publications and other resources",
+    description: t("projectDescriptions.sdgTC"),
     href: "https://sdgtransformationcenter.org/",
     image: sdgTc,
     category: "project",
   },
   {
     name: "Sustainable Development Report",
-    description:
-      "This is a data visualization to showcase the performance of UN members towards the UN sustainable development goals.",
+    description: t("projectDescriptions.sdr"),
     href: "https://dashboards.sdgindex.org/",
     image: sdr,
     category: "project",
   },
   {
     name: "Heatmap",
-    description: "A heatmap to visualize specific data points in a matrix",
+    description: t("projectDescriptions.heatmap"),
     href: "TODO",
     category: "code snippets",
   },
   {
     name: "Benin Sustainable Development Report",
-    description:
-      "A data visualization tracking performance of Benin towards the Leave-No-One-Behind indicators.",
+    description: t("projectDescriptions.benin"),
     href: "https://dashboards.sdgindex.org/",
     image: benin,
     category: "project",
   },
   {
     name: "Guithub ",
-    description:
-      "A community of guitar enthusiasts to share their passion for music.",
+    description: t("projectDescriptions.guithub"),
     href: "https://github.com/rubenanlo/guithub",
     image: "",
     category: "project",
   },
   {
     name: "Tick-tock Diaper",
-    description: "Javascript game to change as many diapers as you can!",
+    description: t("projectDescriptions.tickTock"),
     href: "https://rubenanlo.github.io/tick-tock-diaper/",
     image: tickTock,
     category: "project",
   },
   {
     name: "Supply chain analysis",
-    description:
-      "Generating a supply chain analysis with automation capabilities",
+    description: t("projectDescriptions.supplyChain"),
     href: "TODO",
     image: "",
     category: "project",
   },
   {
     name: "Return on investment analysis and data visualization",
-    description:
-      "Generating a return on R&D investment analysis, along with a self-generated report as an output",
+    description: t("projectDescriptions.roi"),
     href: "TODO",
     image: "",
     category: "project",
   },
   {
     name: "Best practices for data analyses and data visualizations",
-    description:
-      "Development of best practices for data analyses and data visualizations in the US Northeast region",
+    description: t("projectDescriptions.bestPractices"),
     href: "TODO",
     image: "",
     category: "project",
   },
   {
     name: "Data tables",
-    description:
-      "Development of an automated tool to self-generate tables for reports",
+    description: t("projectDescriptions.dataTables"),
     href: "TODO",
     image: "",
     category: "project",

@@ -1,15 +1,21 @@
+import { useTranslation } from "next-i18next";
 import { Container } from "components/Container";
 import { TextLayout } from "components/TextLayout";
-import { NAVLINKS as navLinks } from "library/navlinks";
+import { navLinks } from "library/navlinks";
 import { EmailLink } from "library/navlinks";
 
 const Footer = () => {
-  const updatedNavLinks = navLinks.filter((navLink) => !navLink.onlyMobile);
+  const { t } = useTranslation("navLinks");
+  const navLinksTranslated = navLinks(t);
+  const updatedNavLinks = navLinksTranslated.filter(
+    (navLink) => !navLink.onlyMobile
+  );
+
   return (
     <Container.Section
       as="footer"
       bottomDiv
-      className={{ dimension: "w-full px-6 pt-8 lg:px-20 pb-32 lg:pb-10" }}
+      className={{ dimension: "w-full px-6 pt-4 lg:px-20 pb-32 lg:pb-10" }}
     >
       <Container
         className={{
