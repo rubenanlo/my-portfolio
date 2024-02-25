@@ -8,6 +8,7 @@ import ShowTruncated from "components/modals/ShowTruncated";
 import { useModalTooltip } from "helpers/useModalTooltip";
 import { useResponsive } from "helpers/useResponsive";
 import { zoomIn, popUp } from "library/animations";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const cards = [
   {
@@ -16,7 +17,7 @@ const cards = [
   },
   {
     name: "Blog post",
-    href: "/admin/blog",
+    href: "/admin/cms",
     description: "Create, edit and delete blog posts",
     color: "bg-green-700 dark:bg-orange-tertiary",
     tag: "Reading",
@@ -190,3 +191,11 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["navLinks"])),
+    },
+  };
+};
