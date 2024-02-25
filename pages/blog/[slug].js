@@ -5,18 +5,11 @@ import { Container } from "components/Container";
 import { Button } from "components/Button";
 import Loading from "components/modals/Loading";
 import { getText, getUniqueSlugs } from "helpers/getText";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useGoBack } from "helpers/useGoBack";
 
 const Posts = ({ content }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
+  const { isLoading, handleBack } = useGoBack();
   // ? router.back failed because of scroll issues before navigating to the previous page. Thus, the following approach was taken.
-  const handleBack = () => {
-    setIsLoading(true);
-    router.back();
-  };
 
   return isLoading ? (
     <Loading />
