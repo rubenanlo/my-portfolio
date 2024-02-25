@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Container } from "components/Container";
 import { Form } from "components/Form";
 import { Button } from "components/Button";
@@ -119,3 +120,11 @@ const Admin = () => {
 };
 
 export default Admin;
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["navLinks"])),
+    },
+  };
+};
