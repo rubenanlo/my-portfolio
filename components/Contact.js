@@ -55,7 +55,7 @@ const Contact = () => {
       )}
       <Form
         className={{
-          border: "border border-zinc-100 p-6 dark:border-zinc-700/40",
+          border: "border border-zinc-700/40 p-6",
           otherStyles: "rounded-2xl",
         }}
         onSubmit={handleSubmit}

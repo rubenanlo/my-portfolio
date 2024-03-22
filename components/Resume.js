@@ -52,7 +52,7 @@ const Resume = () => {
   const { locale } = useRouter();
 
   return (
-    <Container className="p-6 rounded-2xl border border-zinc-100 dark:border-zinc-700/40">
+    <Container className="p-6 rounded-2xl border border-zinc-700/40 ">
       <TextLayout.Title
         as="h4"
         className="flex"
