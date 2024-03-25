@@ -5,6 +5,7 @@ import { Post } from "components/Post";
 import Pagination from "components/Pagination";
 import { usePagination } from "helpers/usePagination";
 import { useResponsive } from "helpers/useResponsive";
+import { Show } from "./Show";
 
 export const Article = ({
   article: { slug, href, title, name, date, image, description },
@@ -26,14 +27,16 @@ export const Article = ({
       className={{ parent: "h-full flex flex-col justify-between" }}
     >
       <Post.Title title={title || name} />
-      {date && (
-        <Post.Eyebrow
-          as="time"
-          dateTime={date}
-          decorate
-          date={dayjs(date).format("MMMM D, YYYY")}
-        />
-      )}
+      <Show>
+        <Show.When isTrue={date !== false}>
+          <Post.Eyebrow
+            as="time"
+            dateTime={date}
+            decorate
+            date={dayjs(date).format("MMMM D, YYYY")}
+          />
+        </Show.When>
+      </Show>
       <Post.Description text={description} />
       <Post.Cta noChevron text={href ?? "Read article"} />
       {image && (

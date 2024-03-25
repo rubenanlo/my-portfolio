@@ -8,7 +8,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const initialValue = [
   {
     type: "paragraph",
-    children: [{ text: "A line of text in a paragraph." }],
+    children: [{ text: "Start typing here..." }],
   },
 ];
 
@@ -21,7 +21,8 @@ const Cms = () => {
         <Toolbar />
         <Container
           className={{
-            dimensions: "mt-10 mx-10 p-5 h-[60vh] bg-zinc-300",
+            dimensions:
+              "mt-10 mx-10 p-5 h-[60vh] bg-zinc-300 overflow-y-auto scrollbar",
             typograhpy: "text-gray-800",
             border: "border rounded-md",
           }}
