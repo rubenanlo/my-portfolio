@@ -8,6 +8,7 @@ import { Card } from "components/Card";
 import { Button } from "components/Button";
 import { Burger } from "library/appIcons";
 import { Container, AnimatedContainer } from "components/Container";
+import { TextLayout } from "components/TextLayout";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
@@ -147,7 +148,7 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
                   )}
                   aria-hidden="true"
                 />
-                <p>{navLink.name}</p>
+                <TextLayout.Paragraph paragraph={navLink.name} />
               </Container.Link>
             </li>
           ))}

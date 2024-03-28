@@ -36,7 +36,12 @@ const Toolbar = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <Container.Flex className={{ dimensions: "px-10" }}>
+    <Container.Flex
+      className={{
+        dimensions: "px-10",
+        flex: "flex-col lg:flex-row items-start lg:justify-between",
+      }}
+    >
       <Container.Flex
         className={{ flex: "justify-center gap-x-2", dimensions: "mt-5" }}
       >
@@ -50,14 +55,20 @@ const Toolbar = () => {
         ))}
       </Container.Flex>
       <Container.Flex
-        className={{ flex: "justify-center gap-x-2", dimensions: "mt-5" }}
+        className={{
+          flex: "justify-center gap-x-2 order-last lg:order-none",
+          dimensions: "mt-5",
+        }}
       >
         {toolbarFeatures.center.map(({ name, icon }) => (
           <Button key={name} variant="secondary" text={icon} />
         ))}
       </Container.Flex>
       <Container.Flex
-        className={{ flex: "justify-center gap-x-2", dimensions: "mt-5" }}
+        className={{
+          flex: "justify-center gap-x-2",
+          dimensions: "mt-5",
+        }}
       >
         {toolbarFeatures.right.map(({ name, icon }) => (
           <Button key={name} variant="secondary" text={icon} />

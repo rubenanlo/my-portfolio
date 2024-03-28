@@ -15,6 +15,7 @@ const dimensionsMapping = {
   "eu_sdr.png": { width: 224, height: 130 },
   "tick_tock.png": { width: 224, height: 130 },
   "benin.png": { width: 224, height: 130 },
+  "spotify.webp": { width: 275, height: 226 },
   // ... add more mappings as needed
 };
 
