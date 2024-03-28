@@ -1,4 +1,5 @@
 import { useTheme } from "next-themes";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { truncate } from "lodash";
 import clsx from "clsx";
 import { Container } from "components/Container";
@@ -9,7 +10,6 @@ import { useModalTooltip } from "helpers/useModalTooltip";
 import { useResponsive } from "helpers/useResponsive";
 import { SPOTIFY as spotify } from "helpers/exportImages";
 import { zoomIn, popUp } from "library/animations";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const cards = [
   {
