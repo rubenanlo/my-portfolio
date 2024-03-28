@@ -7,6 +7,7 @@ import { TextLayout } from "components/TextLayout";
 import ShowTruncated from "components/modals/ShowTruncated";
 import { useModalTooltip } from "helpers/useModalTooltip";
 import { useResponsive } from "helpers/useResponsive";
+import { SPOTIFY as spotify } from "helpers/exportImages";
 import { zoomIn, popUp } from "library/animations";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -16,11 +17,20 @@ const cards = [
     subtitle: "Select which feature you want to use",
   },
   {
+    name: "My music",
+    href: "/admin/music",
+    description: "Access your music player",
+    color: "bg-green-700 dark:bg-green-700",
+    tag: "Music",
+    image: spotify,
+  },
+  {
     name: "Blog post",
     href: "/admin/cms",
     description: "Create, edit and delete blog posts",
     color: "bg-green-700 dark:bg-orange-tertiary",
     tag: "Reading",
+    image: spotify,
   },
   {
     name: "My CV",
@@ -28,6 +38,7 @@ const cards = [
     description: "Create, edit, and delete CV entries",
     color: "bg-green-600 dark:bg-orange-quaternary",
     tag: "JobHunt",
+    image: spotify,
   },
   {
     name: "Future feature",
@@ -35,6 +46,7 @@ const cards = [
     description: "Stay tuned, Stay tuned, Stay tuned, Stay tuned",
     color: "bg-green-600 dark:bg-green-primary",
     tag: "StayTuned",
+    image: spotify,
   },
   {
     name: "Future feature",
@@ -42,6 +54,7 @@ const cards = [
     description: "Stay tuned",
     color: "bg-green-600 dark:bg-green-primary",
     tag: "StayTuned",
+    image: spotify,
   },
   {
     name: "Future feature",
@@ -49,6 +62,7 @@ const cards = [
     description: "Stay tuned",
     color: "bg-green-600 dark:bg-green-primary",
     tag: "StayTuned",
+    image: spotify,
   },
   {
     name: "Future feature",
@@ -56,6 +70,7 @@ const cards = [
     description: "Stay tuned",
     color: "bg-green-600 dark:bg-green-primary",
     tag: "StayTuned",
+    image: spotify,
   },
   {
     name: "Future feature",
@@ -63,6 +78,7 @@ const cards = [
     description: "Stay tuned",
     color: "bg-green-600 dark:bg-green-primary",
     tag: "StayTuned",
+    image: spotify,
   },
   {
     name: "Future feature",
@@ -70,6 +86,7 @@ const cards = [
     description: "Stay tuned",
     color: "bg-green-600 dark:bg-green-primary",
     tag: "StayTuned",
+    image: spotify,
   },
 ];
 
@@ -117,7 +134,7 @@ const Dashboard = () => {
           "w-full lg:mt-24 lg:h-auto gap-2 justify-items-center"
         )}
       >
-        {cards.map(({ name, href, description, tag, title }, index) =>
+        {cards.map(({ name, href, description, tag, title, image }, index) =>
           title ? (
             <Container key={title} className={{ dimension: "mb-14 lg:mb-0" }}>
               <TextLayout.Title as="h1" title={title} />
@@ -126,10 +143,12 @@ const Dashboard = () => {
           ) : (
             <>
               <Card
-                variant="primary"
                 key={name}
+                variant="primary"
+                image={image}
                 animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
                 className={{
+                  position: "relative",
                   dimension: clsx(
                     index % 3 === 0 ? "row-span-2" : "",
                     "p-5 h-full w-full"
@@ -138,6 +157,10 @@ const Dashboard = () => {
                 }}
               >
                 <Container.Link href={href}>
+                  <Container.Image
+                    src={image}
+                    className="top-0 left-0 absolute h-full object-cover opacity-20"
+                  />
                   <Container.Flex
                     className={{
                       dimension: "h-full",
