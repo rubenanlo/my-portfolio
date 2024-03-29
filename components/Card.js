@@ -30,6 +30,7 @@ export const Card = ({ children, className, variant, style, ...props }) => {
       className={clsx(classNameProp)}
       style={style}
       {...props.animate}
+      {...props}
     >
       <div className="p-6 h-full">{children}</div>
     </motion.div>

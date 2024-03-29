@@ -1,3 +1,5 @@
+import { truncate } from "lodash";
+
 // helper function used mainly to turn an object into a string. Useful for
 // combining tailwind object classes
 export const turnObjectIntoString = (className) => {
@@ -16,3 +18,9 @@ export const setOrder = (items) => {
   });
   return orderedItems;
 };
+
+export const setTruncatedText = (text, maxCharacters) =>
+  truncate(text, {
+    length: maxCharacters,
+    separator: " ",
+  });
