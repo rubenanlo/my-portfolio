@@ -16,6 +16,7 @@ const dimensionsMapping = {
   "tick_tock.png": { width: 224, height: 130 },
   "benin.png": { width: 224, height: 130 },
   "spotify.webp": { width: 275, height: 226 },
+  "email.webp": { width: 275, height: 226, quality: 60 },
   // ... add more mappings as needed
 };
 
