@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
 import clsx from "clsx";
-import { Container } from "components/Container";
-import { Post } from "components/Post";
+import { Container } from "components/ui/Container";
+import { Post } from "components/ui/Post";
 import Pagination from "components/Pagination";
 import { usePagination } from "helpers/usePagination";
 import { useResponsive } from "helpers/useResponsive";
-import { Show } from "./Show";
+import { Show } from "components/ui/Show";
 
 export const Article = ({
   article: { slug, href, title, name, date, image, description },

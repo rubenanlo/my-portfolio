@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
-import { Container } from "components/Container";
-import { TextLayout } from "components/TextLayout";
+import { Container } from "components/ui/Container";
+import { TextLayout } from "components/ui/TextLayout";
 import { navLinks } from "library/navlinks";
 import { EmailLink } from "library/navlinks";
 

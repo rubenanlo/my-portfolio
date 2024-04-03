@@ -52,7 +52,7 @@ Container.Columns = function ContainerColumns({
 usage:
 
 ```javascript
-import { Container } from "components/Container";
+import { Container } from "components/ui/Container";
 
 const Layout = () => (
   <Container>
@@ -126,7 +126,7 @@ Container.Columns = function ContainerColumns({
 Usage:
 
 ```javascript
-import { Container } from "components/Container";
+import { Container } from "components/ui/Container";
 
 const Layout = () => (
   <Container

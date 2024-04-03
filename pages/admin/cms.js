@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { Editor, Element, Transforms, createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Container } from "components/Container";
+import { Container } from "components/ui/Container";
 import Toolbar from "components/Toolbar";
 
 const initialValue = [

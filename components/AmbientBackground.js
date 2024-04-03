@@ -2,7 +2,7 @@
 // https://github.com/crnacura/AmbientCanvasBackgrounds
 
 import { useEffect, useRef } from "react";
-import { Container } from "components/Container";
+import { Container } from "components/ui/Container";
 import { setupTwirl, resize } from "helpers/setTwirlAmbient";
 
 const AmbientCanvasBackground = () => {

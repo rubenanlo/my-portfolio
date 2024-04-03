@@ -1,8 +1,8 @@
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Container } from "components/Container";
-import { Button } from "components/Button";
+import { Container } from "components/ui/Container";
+import { Button } from "components/ui/Button";
 import Loading from "components/modals/Loading";
 import { getText, getUniqueSlugs } from "helpers/getText";
 import { useGoBack } from "helpers/useGoBack";

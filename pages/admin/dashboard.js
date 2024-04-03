@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import clsx from "clsx";
-import { Container } from "components/Container";
-import { Show } from "components/Show";
-import { Card } from "components/Card";
-import { TextLayout } from "components/TextLayout";
+import { Container } from "components/ui/Container";
+import { Show } from "components/ui/Show";
+import { Card } from "components/ui/Card";
+import { TextLayout } from "components/ui/TextLayout";
 import ShowTruncated from "components/modals/ShowTruncated";
 import { setTruncatedText } from "helpers/manipulateText";
 import { useModalTooltip } from "helpers/useModalTooltip";
 import { useResponsive } from "helpers/useResponsive";
 import { zoomIn, popUp } from "library/animations";
 import { cards } from "library/dashboard";
-import { useRouter } from "next/router";
 
 const Circle = ({
   image,
@@ -158,7 +158,6 @@ const Dashboard = () => {
                         flex: "items-start gap-x-5",
                       }}
                     >
-                      {/* <Circle name={name} className="shrink-0" /> */}
                       <Container.Flex
                         className={{
                           dimension: "h-40",

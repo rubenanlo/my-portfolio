@@ -1,5 +1,5 @@
-import { Container } from "components/Container";
-import { Button } from "components/Button";
+import { Container } from "components/ui/Container";
+import { Button } from "components/ui/Button";
 import { useGoBack } from "../helpers/useGoBack";
 import Loading from "components/modals/Loading";
 
