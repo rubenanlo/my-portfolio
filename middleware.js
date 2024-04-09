@@ -16,7 +16,7 @@ export const middleware = async (req) => {
 
   // Redirect to login page if no token. Remember that
   // nextjs requires absolute urls
-  return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/admin`);
+  return NextResponse.redirect(`${process.env.NEXTAUTH_URL}`);
 };
 
 export const config = {
