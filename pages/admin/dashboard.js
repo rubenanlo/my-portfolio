@@ -139,18 +139,17 @@ const Dashboard = () => {
                     other: "cursor-pointer overflow-hidden",
                   }}
                 >
-                  {isLoaded && (
-                    <Circle
-                      image={image}
-                      isHovered={isHovered}
-                      isIndex={isIndex}
-                      index={index}
-                      isSmallScreen={isSmallScreen}
-                      isCardBigger={isCardBigger}
-                    />
-                  )}
-
                   <Container.Link href={href}>
+                    {isLoaded && (
+                      <Circle
+                        image={image}
+                        isHovered={isHovered}
+                        isIndex={isIndex}
+                        index={index}
+                        isSmallScreen={isSmallScreen}
+                        isCardBigger={isCardBigger}
+                      />
+                    )}
                     <Container.Flex
                       className={{
                         dimension: "h-full",
