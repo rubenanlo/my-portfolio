@@ -5,7 +5,7 @@ import { Header } from "components/Header";
 import Footer from "components/Footer";
 import { Container } from "components/ui/Container";
 import Navbar from "components/Navbar";
-import AmbientCanvasBackground from "components/AmbientBackground";
+// import AmbientCanvasBackground from "components/AmbientBackground";
 import { useResponsive } from "helpers/useResponsive";
 
 const WaterMark = () => (
@@ -39,16 +39,16 @@ export const AppLayout = ({ children }) => {
   // Paths that don't have a footer, blended navbar or twirl
   const noFooterPaths = ["/admin"];
   const noBlendedNavbarPaths = ["/", "/#", "/admin"];
-  const twirlPaths = ["/", "/#"];
+  // const twirlPaths = ["/", "/#"];
   const maxHeightPaths = ["/projects", "/blog", "/about"];
   const hasFooter = noFooterPaths.some((path) => asPath !== path);
   const hasBlendedNavbar = !noBlendedNavbarPaths.includes(asPath);
-  const hasTwirlPaths = twirlPaths.includes(asPath);
+  // const hasTwirlPaths = twirlPaths.includes(asPath);
   const hasMaxHeight = maxHeightPaths.includes(asPath);
 
   return (
     <>
-      {hasTwirlPaths && resolvedTheme === "dark" && <AmbientCanvasBackground />}
+      {/* {hasTwirlPaths && resolvedTheme === "dark" && <AmbientCanvasBackground />} */}
       <Container
         className={{
           position: "relative",
