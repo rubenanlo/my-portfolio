@@ -57,12 +57,15 @@ const ThemeToggle = () => {
 const Language = () => {
   const languages = ["en", "fr"];
   const router = useRouter();
+  // I am excluding the routes for the blog posts slug and the admin page
+  const excludedRoute = (route) =>
+    ["blog/", "admin"].some((path) => route.includes(path));
 
   const changeLanguage = (language) => {
     router.push(router.asPath, router.asPath, { locale: language });
   };
 
-  return (
+  return excludedRoute(router.asPath) ? null : (
     <Container className="w-full">
       <Container
         className={{

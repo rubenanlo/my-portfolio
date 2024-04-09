@@ -1,5 +1,6 @@
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Container } from "components/Container";
 import { Button } from "components/Button";
 import Loading from "components/modals/Loading";
@@ -54,7 +55,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params, locale }) => {
   const textResult = getText({ slug: params.slug, page: "blog" });
   const [{ data: post, content }] = textResult;
   const mdxSource = await serialize(content);
@@ -63,6 +64,7 @@ export const getStaticProps = async ({ params }) => {
       slug: params.slug,
       post,
       content: mdxSource,
+      ...(await serverSideTranslations(locale, ["navLinks"])),
     },
   };
 };

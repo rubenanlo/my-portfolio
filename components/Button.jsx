@@ -62,7 +62,7 @@ const variantStyles = (condition) => ({
     otherStyles: "rounded-md shadow-sm",
   },
   theme: {
-    position: "fixed lg:absolute bottom-0 right-0 lg:top-0 lg:bottom-auto z-10",
+    position: "fixed lg:absolute bottom-0 right-0 lg:top-0 lg:bottom-auto z-20",
     dimension: "mr-5 mt-3 px-3 py-3 lg:px-2 lg:py-2 mb-5 lg:mb-0",
     background: "bg-white/90 dark:bg-zinc-800/90 ",
     ring: "ring-1 ring-zinc-900/5 dark:ring-white/10 dark:hover:ring-white/20",
