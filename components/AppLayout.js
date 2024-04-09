@@ -12,7 +12,7 @@ const WaterMark = () => (
   <Container
     className={{
       position:
-        "fixed left-[calc(50%-4rem)] sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)] top-10",
+        "fixed left-[calc(50%-4rem)] sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)] top-10 -z-10 sm:z-0",
       otherStyles: "overflow-x-hidden transform-gpu blur-3xl",
     }}
     aria-hidden="true"
@@ -52,8 +52,7 @@ export const AppLayout = ({ children }) => {
       <Container
         className={{
           position: "relative",
-          dimension: "min-h-screen",
-          background: "bg-slate-200 dark:bg-black/50",
+          dimension: "h-screen sm:min-h-screen scrollbar-hide sm:scrollbar",
           overflow: "overflow-x-hidden",
           otherStyles: "antialiased",
         }}
@@ -62,7 +61,7 @@ export const AppLayout = ({ children }) => {
           className={{
             position: "mx-auto",
             dimension: "max-w-sm lg:max-w-4xl desktop-sm:max-w-6xl",
-            typography: "font-lato text-gray-200",
+            typography: "font-lato text-gray-200 ",
           }}
         >
           {resolvedTheme === "dark" && <WaterMark />}
@@ -78,7 +77,7 @@ export const AppLayout = ({ children }) => {
                 "min-h-[90vh] mt-[10vh] rounded-t-2xl"
               ),
               background:
-                "bg-gray-100 dark:bg-gray-900/80 border-t border-r border-l border-zinc-100/20",
+                "bg-gray-100 dark:bg-gray-900/50 sm:dark:bg-gray-900/80 border-t border-r border-l border-zinc-100/20",
             }}
           >
             {children}
