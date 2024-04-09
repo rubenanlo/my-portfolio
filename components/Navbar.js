@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { useTranslation } from "next-i18next";
 import clsx from "clsx";
-import { Post } from "components/Post";
-import { Card } from "components/Card";
-import { Button } from "components/Button";
+import { Post } from "components/ui/Post";
+import { Card } from "components/ui/Card";
+import { Button } from "components/ui/Button";
 import { Burger } from "library/appIcons";
-import { Container, AnimatedContainer } from "components/Container";
+import { Container, AnimatedContainer } from "components/ui/Container";
+import { TextLayout } from "components/ui/TextLayout";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
@@ -147,7 +148,7 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
                   )}
                   aria-hidden="true"
                 />
-                <p>{navLink.name}</p>
+                <TextLayout.Paragraph paragraph={navLink.name} />
               </Container.Link>
             </li>
           ))}

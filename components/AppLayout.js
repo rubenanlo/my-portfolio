@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import clsx from "clsx";
 import { Header } from "components/Header";
 import Footer from "components/Footer";
-import { Container } from "components/Container";
+import { Container } from "components/ui/Container";
 import Navbar from "components/Navbar";
 import AmbientCanvasBackground from "components/AmbientBackground";
 import { useResponsive } from "helpers/useResponsive";

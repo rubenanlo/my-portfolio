@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Container, AnimatedContainer } from "components/Container";
+import { Container, AnimatedContainer } from "components/ui/Container";
 import { LOGO_LINKEDIN_1 as rawDev } from "helpers/exportImages";
 import { loadingMotion } from "library/animations";
 

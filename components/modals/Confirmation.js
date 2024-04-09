@@ -1,5 +1,5 @@
-import { AnimatedContainer } from "components/Container";
-import { TextLayout } from "components/TextLayout";
+import { AnimatedContainer } from "components/ui/Container";
+import { TextLayout } from "components/ui/TextLayout";
 import { showUpAnimation } from "library/animations";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 

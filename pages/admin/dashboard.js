@@ -1,90 +1,64 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { truncate } from "lodash";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import clsx from "clsx";
-import { Container } from "components/Container";
-import { Card } from "components/Card";
-import { TextLayout } from "components/TextLayout";
+import { Container } from "components/ui/Container";
+import { Show } from "components/ui/Show";
+import { Card } from "components/ui/Card";
+import { TextLayout } from "components/ui/TextLayout";
 import ShowTruncated from "components/modals/ShowTruncated";
+import { setTruncatedText } from "helpers/manipulateText";
 import { useModalTooltip } from "helpers/useModalTooltip";
 import { useResponsive } from "helpers/useResponsive";
 import { zoomIn, popUp } from "library/animations";
+import { cards } from "library/dashboard";
 
-const cards = [
-  {
-    title: "Dashboard",
-    subtitle: "Select which feature you want to use",
-  },
-  {
-    name: "Blog post",
-    href: "/admin/blog",
-    description: "Create, edit and delete blog posts",
-    color: "bg-green-700 dark:bg-orange-tertiary",
-    tag: "Reading",
-  },
-  {
-    name: "My CV",
-    href: "/admin/cv",
-    description: "Create, edit, and delete CV entries",
-    color: "bg-green-600 dark:bg-orange-quaternary",
-    tag: "JobHunt",
-  },
-  {
-    name: "Future feature",
-    href: "#",
-    description: "Stay tuned, Stay tuned, Stay tuned, Stay tuned",
-    color: "bg-green-600 dark:bg-green-primary",
-    tag: "StayTuned",
-  },
-  {
-    name: "Future feature",
-    href: "#",
-    description: "Stay tuned",
-    color: "bg-green-600 dark:bg-green-primary",
-    tag: "StayTuned",
-  },
-  {
-    name: "Future feature",
-    href: "#",
-    description: "Stay tuned",
-    color: "bg-green-600 dark:bg-green-primary",
-    tag: "StayTuned",
-  },
-  {
-    name: "Future feature",
-    href: "#",
-    description: "Stay tuned",
-    color: "bg-green-600 dark:bg-green-primary",
-    tag: "StayTuned",
-  },
-  {
-    name: "Future feature",
-    href: "#",
-    description: "Stay tuned",
-    color: "bg-green-600 dark:bg-green-primary",
-    tag: "StayTuned",
-  },
-  {
-    name: "Future feature",
-    href: "#",
-    description: "Stay tuned",
-    color: "bg-green-600 dark:bg-green-primary",
-    tag: "StayTuned",
-  },
-];
-
-const Circle = ({ name, className }) => {
-  // Find the card with the matching name
-  const card = cards.find((card) => card.name === name);
-  // If a card is found, use its color; otherwise, provide a default color
-  const color = card ? card.color : "bg-gray-200";
+const Circle = ({
+  image,
+  isHovered,
+  isIndex,
+  index,
+  isSmallScreen,
+  isCardBigger,
+}) => {
+  const trigger = isHovered && isIndex === index;
 
   return (
-    <div className={clsx(className, color, "rounded-full h-4 w-4 mt-2")} />
+    <motion.div
+      animate={{
+        width: trigger ? "100%" : "12.5%",
+        height: trigger
+          ? "100%"
+          : isCardBigger(index, isSmallScreen)
+          ? "7.5%"
+          : "15%",
+        borderRadius: trigger ? "0%" : "100%",
+        scale: trigger && isCardBigger(index) ? 2.4 : 1,
+        opacity: trigger ? 0.2 : 1,
+        top: trigger ? "0rem" : "2.5rem",
+        left: trigger ? "0rem" : "1.3rem",
+        transition: {
+          duration: 0.3,
+        },
+      }}
+      className="absolute shrink-0 overflow-hidden"
+    >
+      <Container.Image
+        src={image}
+        alt="dashboard-item"
+        className="shrink-0 opacity-80"
+      />
+    </motion.div>
   );
 };
 
 const Dashboard = () => {
   const isSmallScreen = useResponsive(1024);
+
+  //TODO: fix the modal tooltip
+  // For the modal tooltip to show full text
   const {
     fullText,
     modalVisibility,
@@ -94,19 +68,32 @@ const Dashboard = () => {
     handleMouseLeave,
   } = useModalTooltip();
 
-  const maxCharacters = isSmallScreen ? 50 : 30;
-  const setTruncatedText = (text) =>
-    truncate(text, {
-      length: maxCharacters,
-      separator: " ",
-    });
+  // To control the behavior of the images when hovering over a card
+  const [isHovered, setIsHovered] = useState(false);
+  const [isIndex, setIndex] = useState("");
 
+  // Function to determine if a card should be bigger in the bento box layout
+  const isCardBigger = (index, isSmallScreen) => {
+    if (isSmallScreen) return false;
+    return index % 2 === 0;
+  };
+
+  // For the layout of the cards depending on screen size
   const ResponsiveComponent = isSmallScreen
     ? Container.Flex
     : Container.Columns;
 
+  // For the bg color of the card depending on theme
   const { resolvedTheme } = useTheme();
   const bgColor = resolvedTheme === "dark" ? "#010101" : "#E2E8F0";
+
+  const { isReady } = useRouter();
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (isReady) setIsLoaded(true);
+  }, [isReady]);
 
   return (
     <Container.Section className="w-auto">
@@ -116,72 +103,102 @@ const Dashboard = () => {
           "w-full lg:mt-24 lg:h-auto gap-2 justify-items-center"
         )}
       >
-        {cards.map(({ name, href, description, tag, title }, index) =>
-          title ? (
-            <Container key={title} className={{ dimension: "mb-14 lg:mb-0" }}>
-              <TextLayout.Title as="h1" title={title} />
-              <TextLayout.Subtitle key={title} subtitle={title} />
-            </Container>
-          ) : (
-            <>
-              <Card
-                variant="primary"
-                key={name}
-                animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
-                className={{
-                  dimension: clsx(
-                    index % 3 === 0 ? "row-span-2" : "",
-                    "p-5 h-full w-full"
-                  ),
-                  rounded: "rounded-sm",
-                }}
-              >
-                <Container.Link href={href}>
-                  <Container.Flex
-                    className={{
-                      dimension: "h-full",
-                      flex: "items-start gap-x-5",
-                    }}
-                  >
-                    <Circle name={name} className="shrink-0" />
+        {cards.map(
+          ({ name, isHeader, href, description, tag, title, image }, index) => (
+            <Show key={name}>
+              <Show.When isTrue={isHeader}>
+                <Container
+                  className={{
+                    position: clsx(
+                      isSmallScreen ? "" : "ml-2",
+                      "mb-14 lg:mb-0"
+                    ),
+                    dimension: clsx(isSmallScreen ? "text-center" : "w-full"),
+                  }}
+                >
+                  <TextLayout.Title as="h1" title={title} />
+                  <TextLayout.Subtitle key={title} subtitle={title} />
+                </Container>
+              </Show.When>
+              <Show.Else>
+                <Card
+                  onMouseEnter={() => {
+                    setIsHovered(true);
+                    setIndex(index);
+                  }}
+                  onMouseLeave={() => setIsHovered(false)}
+                  variant="primary"
+                  animate={!isSmallScreen && { ...zoomIn(bgColor), ...popUp }}
+                  className={{
+                    position: "relative",
+                    dimension: clsx(
+                      isCardBigger(index) ? "row-span-2" : "",
+                      "p-5 h-full w-full"
+                    ),
+                    rounded: "rounded-sm",
+                    other: "cursor-pointer overflow-hidden",
+                  }}
+                >
+                  <Container.Link href={href}>
+                    {isLoaded && (
+                      <Circle
+                        image={image}
+                        isHovered={isHovered}
+                        isIndex={isIndex}
+                        index={index}
+                        isSmallScreen={isSmallScreen}
+                        isCardBigger={isCardBigger}
+                      />
+                    )}
                     <Container.Flex
                       className={{
-                        dimension: "h-40",
-                        flex: "flex-col justify-between",
+                        dimension: "h-full",
+                        position: "ml-8",
+                        flex: "items-start gap-x-5",
                       }}
                     >
-                      <TextLayout.Subtitle
-                        subtitle={name}
-                        className="text-zinc-500 text-xl"
-                      />
-                      <TextLayout.Paragraph
-                        paragraph={
-                          index % 2
-                            ? description
-                            : setTruncatedText(description)
-                        }
-                        className=" text-sm mt-3"
-                        onMouseEnter={(e) => {
-                          handleMouseEnter(
-                            description,
-                            setTruncatedText(description),
-                            e
-                          );
+                      <Container.Flex
+                        className={{
+                          dimension: "h-40",
+                          flex: "flex-col justify-between",
                         }}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                      />
-                      <TextLayout.Tag tag={tag} />
+                      >
+                        <TextLayout.Subtitle
+                          subtitle={name}
+                          className="text-zinc-500 text-xl"
+                        />
+                        <TextLayout.Paragraph
+                          paragraph={
+                            index % 2
+                              ? description
+                              : setTruncatedText(
+                                  description,
+                                  isSmallScreen ? 50 : 30
+                                )
+                          }
+                          className=" text-sm mt-3"
+                          onMouseEnter={(e) => {
+                            handleMouseEnter(
+                              description,
+                              setTruncatedText(description),
+                              e
+                            );
+                          }}
+                          onMouseMove={handleMouseMove}
+                          onMouseLeave={handleMouseLeave}
+                        />
+                        <TextLayout.Tag tag={tag} />
+                      </Container.Flex>
                     </Container.Flex>
-                  </Container.Flex>
-                </Container.Link>
-              </Card>
-              <ShowTruncated
-                value={fullText}
-                isVisible={modalVisibility}
-                mousePosition={mousePosition}
-              />
-            </>
+                  </Container.Link>
+                </Card>
+                <ShowTruncated
+                  value={fullText}
+                  isVisible={modalVisibility}
+                  mousePosition={mousePosition}
+                />
+              </Show.Else>
+            </Show>
           )
         )}
       </ResponsiveComponent>
@@ -190,3 +207,11 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["navLinks"])),
+    },
+  };
+};

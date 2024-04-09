@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "next-i18next";
-import { Container } from "components/Container";
-import { Button } from "components/Button";
+import { Container } from "components/ui/Container";
+import { Button } from "components/ui/Button";
 import { movePage } from "helpers/usePagination";
 
 const Pagination = ({

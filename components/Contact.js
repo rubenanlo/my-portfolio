@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
-import { Container, AnimatedContainer } from "components/Container";
-import { Button } from "components/Button";
-import { Form } from "components/Form";
-import { TextLayout } from "components/TextLayout";
+import { Container, AnimatedContainer } from "components/ui/Container";
+import { Button } from "components/ui/Button";
+import { Form } from "components/ui/Form";
+import { TextLayout } from "components/ui/TextLayout";
 import Confirmation from "components/modals/Confirmation";
 import { MailIcon } from "library/appIcons";
 import { showUpAnimation } from "library/animations";

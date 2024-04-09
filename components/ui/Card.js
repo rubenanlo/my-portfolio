@@ -2,7 +2,14 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 import { turnObjectIntoString } from "helpers/manipulateText";
 
-export const Card = ({ children, className, variant, style, ...props }) => {
+export const Card = ({
+  children,
+  className,
+  variant,
+  style,
+  animate,
+  ...props
+}) => {
   const commonStyle = {
     background: "bg-gradient-to-br from-slate-50/50 dark:from-slate-700/50",
     dimension: "mb-5 w-full",
@@ -29,7 +36,8 @@ export const Card = ({ children, className, variant, style, ...props }) => {
     <motion.div
       className={clsx(classNameProp)}
       style={style}
-      {...props.animate}
+      {...animate}
+      {...props}
     >
       <div className="p-6 h-full">{children}</div>
     </motion.div>

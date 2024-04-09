@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { Container } from "components/Container";
-import { Form } from "components/Form";
-import { Button } from "components/Button";
-import { TextLayout } from "components/TextLayout";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { Container } from "components/ui/Container";
+import { Form } from "components/ui/Form";
+import { Button } from "components/ui/Button";
+import { TextLayout } from "components/ui/TextLayout";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 
 const Admin = () => {
@@ -119,3 +120,11 @@ const Admin = () => {
 };
 
 export default Admin;
+
+export const getStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["navLinks"])),
+    },
+  };
+};
