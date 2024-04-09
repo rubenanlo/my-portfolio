@@ -11,7 +11,7 @@ const AmbientCanvasBackground = () => {
   useEffect(() => {
     const canvasRefCurrent = canvasRef.current;
     if (canvasRef.current) {
-      setupTwirl(canvasRef.current);
+      requestIdleCallback(() => setupTwirl(canvasRef.current));
       window.addEventListener("resize", () => resize(canvasRef.current));
     }
 

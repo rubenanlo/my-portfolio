@@ -1,6 +1,6 @@
 import { createNoise3D } from "simplex-noise";
 
-const particleCount = 700;
+const particleCount = 100;
 const particlePropCount = 9;
 const particlePropsLength = particleCount * particlePropCount;
 const rangeY = 100;
