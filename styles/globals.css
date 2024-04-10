@@ -29,6 +29,7 @@
   .scrollbar {
     scrollbar-width: thin; /* This sets the width of the scrollbar on Firefox */
     scrollbar-color: #f3b177 transparent; /* This sets the thumb and track color */
+    z-index: 1;
   }
 
   .scrollbar:hover {
