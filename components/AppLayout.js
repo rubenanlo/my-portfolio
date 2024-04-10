@@ -12,7 +12,7 @@ const WaterMark = () => (
   <Container
     className={{
       position:
-        "fixed left-[calc(50%-4rem)] sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)] top-10 -z-10",
+        "fixed left-[calc(50%-4rem)] sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)] top-10",
       otherStyles: "overflow-x-hidden transform-gpu blur-3xl",
     }}
     aria-hidden="true"
@@ -52,7 +52,7 @@ export const AppLayout = ({ children }) => {
       <Container
         className={{
           position: "relative",
-          dimension: "h-screen sm:min-h-screen scrollbar-hide sm:scrollbar",
+          dimension: "min-h-screen",
           overflow: "overflow-x-hidden",
           otherStyles: "antialiased",
         }}
