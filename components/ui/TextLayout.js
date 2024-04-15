@@ -59,13 +59,20 @@ TextLayout.Paragraph = function TextLayoutParagraph({
   paragraph,
   children,
   className,
+  variant,
   ...props
 }) {
   const classNameProp = turnObjectIntoString(className);
+  const variants = {
+    default: "text-zinc-600 dark:text-zinc-400",
+  };
 
   return (
     <p
-      className={clsx(classNameProp, "text-zinc-600 dark:text-zinc-400")}
+      className={clsx(
+        classNameProp,
+        !variant ? variants.default : variants[variant]
+      )}
       {...props}
     >
       {paragraph || children}

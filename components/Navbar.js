@@ -115,7 +115,7 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
       >
         <ul
           role="list"
-          className="space-y-1 -my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
+          className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
         >
           {navLinks.map((navLink, index) => (
             <li
@@ -132,9 +132,7 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
                 href={navLink.href}
                 className={{
                   parent: clsx(
-                    index === isIndex
-                      ? "bg-zinc-50 text-orange-tertiary"
-                      : "text-zinc-400 ",
+                    index === isIndex ? "bg-zinc-50 " : "",
                     "group flex w-full gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                   ),
                 }}
@@ -148,7 +146,16 @@ const NavbarListModal = forwardRef(({ isVisible, navLinks }, ref) => {
                   )}
                   aria-hidden="true"
                 />
-                <TextLayout.Paragraph paragraph={navLink.name} />
+                <TextLayout.Paragraph
+                  variant="custom"
+                  paragraph={navLink.name}
+                  className={{
+                    typography:
+                      index === isIndex
+                        ? "text-orange-tertiary"
+                        : "text-zinc-300",
+                  }}
+                />
               </Container.Link>
             </li>
           ))}
