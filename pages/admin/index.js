@@ -6,6 +6,7 @@ import { Form } from "components/ui/Form";
 import { Button } from "components/ui/Button";
 import { TextLayout } from "components/ui/TextLayout";
 import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
+import { MAILTO as mailTo } from "root/config";
 
 const Admin = () => {
   const [email, setEmail] = useState("");
@@ -100,7 +101,7 @@ const Admin = () => {
                   />
                   <Container className="text-sm leading-6">
                     <Container.Link
-                      href="mailto:info@rawdev.io"
+                      href={mailTo}
                       className={{
                         typography:
                           "dark:font-semibold cursor-pointer text-zinc-500 hover:text-zinc-400 dark:text-orange-tertiary dark:hover:text-orange-quaternary",

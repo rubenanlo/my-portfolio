@@ -5,6 +5,7 @@ import {
   MediumIcon,
 } from "library/socialIcons";
 import { Email } from "library/socialIcons";
+import { MAILTO as mailTo } from "root/config";
 
 export const socialInfo = (t) => ({
   name: t && t("name"),
@@ -28,7 +29,7 @@ export const socialInfo = (t) => ({
     },
     {
       Social: Email,
-      href: "mailto:info@rawdev.io",
+      href: mailTo,
     },
     {
       text: t && t("checkSite"),

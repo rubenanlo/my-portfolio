@@ -28,3 +28,5 @@ export const META_IMAGE =
 
 // The Google Analytics tracking ID
 export const GA_TRACKING_ID = "G-KB1FLYNW58";
+
+export const MAILTO = "mailto:ruben.raw.dev@gmail.com";

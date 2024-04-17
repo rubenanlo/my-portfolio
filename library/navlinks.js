@@ -1,5 +1,6 @@
 import { Container } from "components/ui/Container";
 import { Email } from "library/socialIcons";
+import { MAILTO as mailTo } from "root/config";
 
 const ProjectIcon = (props) => (
   <svg
@@ -73,7 +74,7 @@ export const navLinks = (t) => [
 export const EmailLink = () => (
   <Container.Link
     Component={Email}
-    href="mailto:info@rawdev.io"
+    href={mailTo}
     className={{
       child:
         "text-gray-400 hover:text-orange-primary dark:hover:text-orange-tertiary",
