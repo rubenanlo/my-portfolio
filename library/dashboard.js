@@ -6,6 +6,8 @@ import {
   CALENDAR as calendar,
 } from "helpers/exportImages";
 
+import { LOGIN_URL as loginUrl } from "/library/spotify";
+
 export const cards = [
   {
     title: "Dashboard",
@@ -14,7 +16,7 @@ export const cards = [
   },
   {
     name: "My music",
-    href: "/admin/music",
+    href: loginUrl,
     description: "Access your music player",
     tag: "Music",
     image: spotify,
