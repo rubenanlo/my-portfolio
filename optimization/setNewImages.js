@@ -19,6 +19,23 @@ const isImageFile = (fileName) => {
   return imageExtensions.includes(ext);
 };
 
+// Function to get the latest file version by filtering out older formats
+const getLatestFileVersions = (imageFiles) => {
+  const latestFiles = {};
+
+  imageFiles.forEach((file) => {
+    const ext = path.extname(file).toLowerCase();
+    const baseName = file.replace(ext, "");
+
+    // If a new format of the same base name is found, it will replace the old format
+    if (!latestFiles[baseName] || ext === ".webp" || ext === ".avif") {
+      latestFiles[baseName] = file;
+    }
+  });
+
+  return Object.values(latestFiles);
+};
+
 // Function to generate import statements for each image
 const setImports = (imageNames) =>
   imageNames
@@ -52,11 +69,14 @@ const setFullImageExport = async () => {
     // Filter out non-image files
     const imageFiles = allFiles.filter(isImageFile);
 
+    // Get the latest versions of the files
+    const latestImageFiles = getLatestFileVersions(imageFiles);
+
     // Generate the import statements for the images
-    const imageImports = setImports(imageFiles);
+    const imageImports = setImports(latestImageFiles);
 
     // Generate the export statements for the images
-    const imageExports = setExports(imageFiles);
+    const imageExports = setExports(latestImageFiles);
 
     // Define the target file where the exportImages.js is located
     const targetFile = path.join("helpers", "exportImages.js");
