@@ -1,5 +1,7 @@
 const readline = require("readline");
-const processFiles = require("./optimizeImages");
+const { processFiles, data } = require("./optimizeImages");
+const updateMarkdownFiles = require("./updateMd");
+const path = require("path");
 const setFullImageExport = require("./setNewImages");
 
 const askQuestion = (query) => {
@@ -25,12 +27,21 @@ const startProcessing = async () => {
     if (answer.toLowerCase() === "y") {
       await processFiles();
       await setFullImageExport();
-      console.log("New images successfully processed!");
+      const imageMappings = data.map((entry) => ({
+        "Original Path": entry["Original Path"],
+        "New Path": entry["New Path"],
+      }));
+      await updateMarkdownFiles(
+        path.join("pages", "blog", "posts"),
+        imageMappings
+      );
+      console.log(
+        "New images successfully processed and markdown files updated!"
+      );
     } else {
       console.log(
         "Exiting without processing files. Please update the JSON file."
       );
-      return;
     }
   } catch (error) {
     console.error("Error:", error);

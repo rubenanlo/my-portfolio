@@ -2,31 +2,11 @@ const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
 const formatNumber = require("../helpers/formatData");
+const dimensionsMapping = require("./config.js");
 
 const dirPath = path.join("public", "assets");
 const excludedImagesPath = path.join("optimization", "excludedImages.json");
-const data = []; // Change to an array of objects for better console.table compatibility
-const { small, medium, custom } = {
-  small: (quality = 80) => ({ width: 50, height: 50, quality: quality }),
-  medium: (quality = 80) => ({ width: 224, height: 130, quality: quality }),
-  large: (quality = 80) => ({ width: 800, height: 600, quality: quality }),
-  custom: ({ width, height, quality = 80 }) => ({ width, height, quality }),
-};
-
-const dimensionsMapping = {
-  "ruben_headshot.jpeg": small(),
-  "mitigation_toolkit.png": { width: 224, height: 130 },
-  "rawdev.png": medium(),
-  "my_portfolio.png": medium(),
-  "sdg_tc.png": medium(),
-  "sdr.png": medium(),
-  "eu_sdr.png": medium(),
-  "tick_tock.png": medium(),
-  "benin.png": medium(),
-  "spotify.webp": custom({ width: 275, height: 226 }),
-  "email.webp": custom({ width: 275, height: 226, quality: 60 }),
-  // ... add more mappings as needed
-};
+const data = [];
 
 let excludedImages = {};
 try {
@@ -50,6 +30,7 @@ const getDimensionsAndQuality = (fileName, metadata) => {
 
 const processImage = async (file) => {
   const fileName = path.basename(file);
+  const relativePath = path.relative(process.cwd(), file); // Get relative path
 
   if (excludedImages[fileName]) {
     return;
@@ -120,6 +101,10 @@ const processImage = async (file) => {
 
     const delta = (currentSize - smallestFile.size) / currentSize;
 
+    // Remove the part before the first slash for relative and new paths
+    const cleanRelativePath = relativePath.replace(/^[^/]+\//, "/");
+    const cleanNewPath = smallestFile.path.replace(/^[^/]+\//, "/");
+
     data.push({
       "File Name": fileName,
       "Smallest Size": formatNumber(smallestFile.size, { decimals: 0 }),
@@ -128,6 +113,8 @@ const processImage = async (file) => {
         percentage: true,
       })}%`,
       Quality: smallestFile.quality || "-",
+      "Original Path": cleanRelativePath,
+      "New Path": cleanNewPath,
     });
 
     excludedImages[fileName] = true;
@@ -152,4 +139,4 @@ const processFiles = async () => {
   }
 };
 
-module.exports = processFiles;
+module.exports = { processFiles, data };
