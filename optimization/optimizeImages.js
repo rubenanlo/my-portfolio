@@ -121,7 +121,6 @@ const processImage = async (file) => {
         decimals: 2,
         percentage: true,
       })}%`,
-      // "Previous Quality": quality || "-",
       Quality: smallestFile.quality || "-",
     });
 
