@@ -1,10 +1,11 @@
 const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
-const roundNumber = require("../helpers/formatNumber");
+const formatNumber = require("../helpers/formatData");
 
 const dirPath = path.join("public", "assets");
 const excludedImagesPath = path.join("optimization", "excludedImages.json");
+const data = []; // Change to an array of objects for better console.table compatibility
 
 const dimensionsMapping = {
   "ruben_headshot.jpeg": { width: 50, height: 50 },
@@ -45,54 +46,84 @@ const processImage = async (file) => {
   const fileName = path.basename(file);
 
   if (excludedImages[fileName]) {
-    console.log(`Skipping excluded image: ${fileName}`);
     return;
   }
 
   try {
     const input = await fs.readFile(file);
-    const metadata = await sharp(input).metadata();
-    const { dimensions, quality } = getDimensionsAndQuality(fileName, metadata);
+    const ext = path.extname(file).toLowerCase();
 
     // Get the current file size
     const currentStats = await fs.stat(file);
     const currentSize = currentStats.size;
 
     const formats = [
-      // { format: "avif", options: { quality: quality } }, We exclude AVIF format since it doesn't work with Edge
-      { format: "webp", options: { quality: quality } },
-      { format: "jpeg", options: { quality: quality, mozjpeg: true } },
-      { format: "png", options: { quality: quality } },
-      // { format: "svg", options: { quality: quality } },
+      { format: "webp", options: {} },
+      { format: "jpeg", options: { mozjpeg: true } },
+      { format: "png", options: {} },
     ];
 
-    let smallestFile = { size: Infinity, format: null };
+    let smallestFile = { size: currentSize, format: ext, path: file };
 
-    for (const { format, options } of formats) {
-      const outputPath = file.replace(path.extname(file), `.${format}`);
-      await sharp(input)
-        .resize(dimensions.width, dimensions.height)
-        [format](options)
-        .toFile(outputPath);
+    const metadata = await sharp(input).metadata();
+    const { dimensions, quality } = getDimensionsAndQuality(fileName, metadata);
 
-      const stats = await fs.stat(outputPath);
-      if (stats.size < smallestFile.size) {
-        if (smallestFile.format) {
-          await fs.unlink(
-            file.replace(path.extname(file), `.${smallestFile.format}`)
-          );
+    if (ext === ".svg") {
+      // Convert SVG to other formats and compare sizes
+      for (const { format, options } of formats) {
+        const outputPath = file.replace(ext, `.${format}`);
+        await sharp(input)
+          .resize(dimensions.width, dimensions.height) // Apply resizing to SVG
+          .toFormat(format, { ...options, quality }) // Apply quality where supported
+          .toFile(outputPath);
+
+        const stats = await fs.stat(outputPath);
+        if (stats.size < smallestFile.size) {
+          if (smallestFile.path !== file) {
+            await fs.unlink(smallestFile.path);
+          }
+          smallestFile = { size: stats.size, format, path: outputPath };
+        } else {
+          await fs.unlink(outputPath);
         }
-        smallestFile = { size: stats.size, format: format };
-      } else {
-        await fs.unlink(outputPath);
+      }
+    } else {
+      for (const { format, options } of formats) {
+        const outputPath = file.replace(ext, `.${format}`);
+        await sharp(input)
+          .resize(dimensions.width, dimensions.height)
+          .toFormat(format, { ...options, quality }) // Apply quality where supported
+          .toFile(outputPath);
+
+        const stats = await fs.stat(outputPath);
+        if (stats.size < smallestFile.size) {
+          if (smallestFile.path !== file) {
+            await fs.unlink(smallestFile.path);
+          }
+          smallestFile = {
+            size: stats.size,
+            format,
+            path: outputPath,
+            quality,
+          };
+        } else {
+          await fs.unlink(outputPath);
+        }
       }
     }
 
-    const delta = ((smallestFile.size - currentSize) / currentSize) * 100;
+    const delta = (currentSize - smallestFile.size) / currentSize;
 
-    console.log(
-      `Processed ${fileName} and reduced size by ${roundNumber(delta)}%`
-    );
+    data.push({
+      "File Name": fileName,
+      "Smallest Size": formatNumber(smallestFile.size, { decimals: 0 }),
+      "Reduction (%)": `${formatNumber(delta, {
+        decimals: 2,
+        percentage: true,
+      })}%`,
+      // "Previous Quality": quality || "-",
+      Quality: smallestFile.quality || "-",
+    });
 
     excludedImages[fileName] = true;
   } catch (error) {
@@ -110,6 +141,7 @@ const processFiles = async () => {
 
     await fs.writeJson(excludedImagesPath, excludedImages);
     console.log("Updated the excluded images list.");
+    console.table(data);
   } catch (error) {
     console.error("Error:", error);
   }
