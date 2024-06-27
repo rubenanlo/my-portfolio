@@ -133,7 +133,22 @@ const processFiles = async () => {
 
     await fs.writeJson(excludedImagesPath, excludedImages);
     console.log("Updated the excluded images list.");
-    console.table(data);
+
+    const displayData = data.map(
+      ({
+        "File Name": fileName,
+        "Smallest Size": smallestSize,
+        "Reduction (%)": reduction,
+        Quality: quality,
+      }) => ({
+        "File Name": fileName,
+        "Smallest Size": smallestSize,
+        "Reduction (%)": reduction,
+        Quality: quality,
+      })
+    );
+
+    console.table(displayData);
   } catch (error) {
     console.error("Error:", error);
   }
