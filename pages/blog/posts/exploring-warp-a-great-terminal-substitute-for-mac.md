@@ -1,6 +1,8 @@
 ---
 title: "Exploring Warp: A Great Terminal Substitute for Mac"
-description: "A new terminal for macbook that reshapes the way we interact with command lines."
+description: >-
+  A new terminal for macbook that reshapes the way we interact with command
+  lines.
 date: 2024/01/25
 category: applications
 ---
@@ -9,7 +11,7 @@ category: applications
 
 <span style={{ display: "flex", justifyContent: "center" }}>
 <img
-src="/assets/warp.png"
+src="/assets/warp.webp"
 alt="warp"
 style={{
       width: "70%",
