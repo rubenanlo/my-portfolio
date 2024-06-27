@@ -1,6 +1,7 @@
 const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
+const roundNumber = require("../helpers/formatNumber");
 
 const dirPath = path.join("public", "assets");
 const excludedImagesPath = path.join("optimization", "excludedImages.json");
@@ -53,11 +54,16 @@ const processImage = async (file) => {
     const metadata = await sharp(input).metadata();
     const { dimensions, quality } = getDimensionsAndQuality(fileName, metadata);
 
+    // Get the current file size
+    const currentStats = await fs.stat(file);
+    const currentSize = currentStats.size;
+
     const formats = [
-      { format: "avif", options: { quality: quality } },
+      // { format: "avif", options: { quality: quality } }, We exclude AVIF format since it doesn't work with Edge
       { format: "webp", options: { quality: quality } },
       { format: "jpeg", options: { quality: quality, mozjpeg: true } },
       { format: "png", options: { quality: quality } },
+      // { format: "svg", options: { quality: quality } },
     ];
 
     let smallestFile = { size: Infinity, format: null };
@@ -82,8 +88,10 @@ const processImage = async (file) => {
       }
     }
 
+    const delta = ((smallestFile.size - currentSize) / currentSize) * 100;
+
     console.log(
-      `Processed ${fileName} to ${smallestFile.format} format with size ${smallestFile.size}`
+      `Processed ${fileName} and reduced size by ${roundNumber(delta)}%`
     );
 
     excludedImages[fileName] = true;
