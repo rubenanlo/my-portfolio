@@ -6,19 +6,25 @@ const formatNumber = require("../helpers/formatData");
 const dirPath = path.join("public", "assets");
 const excludedImagesPath = path.join("optimization", "excludedImages.json");
 const data = []; // Change to an array of objects for better console.table compatibility
+const { small, medium, custom } = {
+  small: (quality = 80) => ({ width: 50, height: 50, quality: quality }),
+  medium: (quality = 80) => ({ width: 224, height: 130, quality: quality }),
+  large: (quality = 80) => ({ width: 800, height: 600, quality: quality }),
+  custom: ({ width, height, quality = 80 }) => ({ width, height, quality }),
+};
 
 const dimensionsMapping = {
-  "ruben_headshot.jpeg": { width: 50, height: 50 },
+  "ruben_headshot.jpeg": small(),
   "mitigation_toolkit.png": { width: 224, height: 130 },
-  "rawdev.png": { width: 224, height: 130 },
-  "my_portfolio.png": { width: 224, height: 130 },
-  "sdg_tc.png": { width: 224, height: 130 },
-  "sdr.png": { width: 224, height: 130 },
-  "eu_sdr.png": { width: 224, height: 130 },
-  "tick_tock.png": { width: 224, height: 130 },
-  "benin.png": { width: 224, height: 130 },
-  "spotify.webp": { width: 275, height: 226 },
-  "email.webp": { width: 275, height: 226, quality: 60 },
+  "rawdev.png": medium(),
+  "my_portfolio.png": medium(),
+  "sdg_tc.png": medium(),
+  "sdr.png": medium(),
+  "eu_sdr.png": medium(),
+  "tick_tock.png": medium(),
+  "benin.png": medium(),
+  "spotify.webp": custom({ width: 275, height: 226 }),
+  "email.webp": custom({ width: 275, height: 226, quality: 60 }),
   // ... add more mappings as needed
 };
 
