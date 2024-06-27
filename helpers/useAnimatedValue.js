@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { animate, useMotionValue, useTransform } from "framer-motion";
-import { formatNumber } from "helpers/formatData";
+const formatNumber = require("helpers/formatData");
 
 export const useAnimatedValue = ({
   from = 0,
