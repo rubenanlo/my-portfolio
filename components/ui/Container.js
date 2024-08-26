@@ -81,14 +81,44 @@ Container.Flex = function ContainerFlex({ children, className, ...props }) {
   );
 };
 
-Container.Logo = function ContainerLogo({ className, ...props }) {
+const dynamicImageImport = async ({ format, original }) => {
+  const result = await import(`../../public/assets/${original}.${format}`);
+  return result.default;
+};
+
+Container.Image = function ContainerImage({ className, original }) {
+  const classNameProp = turnObjectIntoString(className);
+
+  const { format, ...originalImage } = images.find(
+    ({ alt }) => alt === original
+  );
+  const [imageSrc, setImageSrc] = useState(originalImage);
+
+  const handleImageError = useCallback(async () => {
+    const fallbackImage = await dynamicImageImport({ original, format });
+    setImageSrc(fallbackImage);
+  }, [original]);
+
+  // if imageSrc has an id property, it means that the image is in cloudinary
+  let Component = imageSrc.alt ? CldImage : Image;
+
+  return (
+    <Component
+      className={clsx(classNameProp)}
+      {...imageSrc}
+      alt={original}
+      onError={handleImageError}
+    />
+  );
+};
+
+Container.Logo = function ContainerLogo({ className, original }) {
   const classNameProp = turnObjectIntoString(className);
 
   return (
-    <Image
+    <Container.Image
       className={clsx(classNameProp, "rounded-full")}
-      src={props.src}
-      alt={props.alt}
+      original={original}
     />
   );
 };
@@ -188,44 +218,5 @@ Container.Table = function ContainerTable({ table, className }) {
         ))}
       </tbody>
     </table>
-  );
-};
-
-Container.Image = function ContainerImage({ src, alt, className, ...props }) {
-  const classNameProp = turnObjectIntoString(className);
-
-  return (
-    <Image className={clsx(classNameProp)} src={src} alt={alt} {...props} />
-  );
-};
-
-const dynamicImageImport = async ({ format, original }) => {
-  const result = await import(`../../public/assets/${original}.${format}`);
-  return result.default;
-};
-
-Container.ImageTest = function ContainerImageTest({ className, original }) {
-  const classNameProp = turnObjectIntoString(className);
-
-  const { format, ...originalImage } = images.find(
-    ({ alt }) => alt === original
-  );
-  const [imageSrc, setImageSrc] = useState(originalImage);
-
-  const handleImageError = useCallback(async () => {
-    const fallbackImage = await dynamicImageImport({ original, format });
-    setImageSrc(fallbackImage);
-  }, [original]);
-
-  // if imageSrc has an id property, it means that the image is in cloudinary
-  let Component = imageSrc.alt ? CldImage : Image;
-
-  return (
-    <Component
-      className={clsx(classNameProp)}
-      {...imageSrc}
-      alt={original}
-      onError={handleImageError}
-    />
   );
 };

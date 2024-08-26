@@ -31,7 +31,7 @@ const Hero = () => {
   return (
     <Container.Section className="lg:py-40 w-full">
       <Container className="mt-10 lg:pt-8 w-full">
-        <Container.ImageTest
+        <Container.Image
           className="h-16 w-16 rounded-full dark:sepia"
           original="ruben_headshot"
         />

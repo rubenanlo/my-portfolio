@@ -11,7 +11,6 @@ import { Container, AnimatedContainer } from "components/ui/Container";
 import { TextLayout } from "components/ui/TextLayout";
 import { useResponsive } from "helpers/useResponsive";
 import { handleOutsideClick } from "helpers/handleOutsideClick";
-import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 import { navLinks } from "library/navlinks";
 import { zoomIn, popUp } from "library/animations";
 
@@ -246,8 +245,7 @@ const NavbarIsland = ({ navLinks }) => (
     >
       <Container.Link href="/" className={{ parent: "shrink-0" }}>
         <Container.Logo
-          src={rawDevLogo}
-          alt="my-logo"
+          original="logo-linkedin-1"
           className="h-10 w-10 rounded-full"
         />
       </Container.Link>

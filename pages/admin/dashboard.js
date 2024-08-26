@@ -46,7 +46,7 @@ const Circle = ({
       className="absolute shrink-0 overflow-hidden"
     >
       <Container.Image
-        src={image}
+        original={image}
         alt="dashboard-item"
         className="shrink-0 opacity-80"
       />

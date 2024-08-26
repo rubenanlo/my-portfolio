@@ -7,7 +7,6 @@ import { Container } from "components/ui/Container";
 import { TextLayout } from "components/ui/TextLayout";
 import { getAllText } from "helpers/getText";
 import { useResponsive } from "helpers/useResponsive";
-import { RUBEN_HEADSHOT as rubenHeadshot } from "helpers/exportImages";
 import { socialInfo } from "library/socialInfo";
 
 const AboutHeader = ({ spotlight }) => {
@@ -66,8 +65,7 @@ const AboutHeader = ({ spotlight }) => {
       />
       <Container className="flex justify-center lg:justify-start gap-x-5 mr-5">
         <Container.Image
-          src={rubenHeadshot}
-          alt="about"
+          original="ruben_headshot"
           className={{
             dimension: "w-48",
             otherStyles: "rounded-xl shadow-2xl shadow-black/60",

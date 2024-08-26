@@ -1,11 +1,3 @@
-import {
-  EY_LOGO as eyLogo,
-  DELOITTE_LOGO as deloitteLogo,
-  LOGO_LINKEDIN_1 as rawDevLogo,
-  PWC_LOGO as pwcLogo,
-  UNSDSN_LOGO as sdsnLogo,
-  BAKER_MCKENZIE_LOGO as bakerLogo,
-} from "helpers/exportImages";
 import { setUniqueId } from "helpers/setUniqueId";
 
 export const resume = (t) =>
@@ -13,42 +5,42 @@ export const resume = (t) =>
     {
       company: "UNSDSN",
       title: t && t("positionWeb"),
-      logo: sdsnLogo,
+      logo: "unsdsn_logo",
       start: "2022",
       end: t("present"),
     },
     {
       company: "rawDev",
       title: t && t("positionWeb"),
-      logo: rawDevLogo,
+      logo: "logo_linkedin_1",
       start: "2022",
       end: t("present"),
     },
     {
       company: "Baker McKenzie",
       title: t && t("positionData"),
-      logo: bakerLogo,
+      logo: "baker_mckenzie_logo",
       start: "2021",
       end: "2022",
     },
     {
       company: "PWC",
       title: t && t("positionData"),
-      logo: pwcLogo,
+      logo: "pwc_logo",
       start: "2019",
       end: "2021",
     },
     {
       company: "EY",
       title: t && t("positionData"),
-      logo: eyLogo,
+      logo: "ey_logo",
       start: "2011",
       end: "2019",
     },
     {
       company: "Deloitte",
       title: t && t("positionData"),
-      logo: deloitteLogo,
+      logo: "deloitte_logo",
       start: "2008",
       end: "2010",
     },
