@@ -397,5 +397,89 @@
     "src": "arrow-curve-light",
     "width": 2825,
     "height": 2850
+  },
+  {
+    "alt": "deloitte_logo",
+    "format": "webp",
+    "src": "deloitte_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "favicon",
+    "format": "webp",
+    "src": "favicon",
+    "width": 300,
+    "height": 300
+  },
+  {
+    "alt": "html",
+    "format": "webp",
+    "src": "html",
+    "width": 20,
+    "height": 16
+  },
+  {
+    "alt": "logo_linkedin_1",
+    "format": "webp",
+    "src": "logo_linkedin_1",
+    "width": 300,
+    "height": 300
+  },
+  {
+    "alt": "ruben_headshot",
+    "format": "webp",
+    "src": "ruben_headshot",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "alt": "warp",
+    "format": "webp",
+    "src": "warp",
+    "width": 2234,
+    "height": 1578
+  },
+  {
+    "alt": "deloitte_logo",
+    "format": "webp",
+    "src": "deloitte_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "favicon",
+    "format": "webp",
+    "src": "favicon",
+    "width": 300,
+    "height": 300
+  },
+  {
+    "alt": "html",
+    "format": "webp",
+    "src": "html",
+    "width": 20,
+    "height": 16
+  },
+  {
+    "alt": "logo_linkedin_1",
+    "format": "webp",
+    "src": "logo_linkedin_1",
+    "width": 300,
+    "height": 300
+  },
+  {
+    "alt": "ruben_headshot",
+    "format": "webp",
+    "src": "ruben_headshot",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "alt": "warp",
+    "format": "webp",
+    "src": "warp",
+    "width": 2234,
+    "height": 1578
   }
 ]
