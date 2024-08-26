@@ -3,6 +3,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { turnObjectIntoString } from "helpers/manipulateText";
+import images from "public/images.json";
+import { CldImage } from "next-cloudinary";
+import { useCallback, useState } from "react";
 
 export const Container = ({ children, as, className, ...props }) => {
   let Component = as ?? "div";
@@ -193,5 +196,36 @@ Container.Image = function ContainerImage({ src, alt, className, ...props }) {
 
   return (
     <Image className={clsx(classNameProp)} src={src} alt={alt} {...props} />
+  );
+};
+
+const dynamicImageImport = async ({ format, original }) => {
+  const result = await import(`../../public/assets/${original}.${format}`);
+  return result.default;
+};
+
+Container.ImageTest = function ContainerImageTest({ className, original }) {
+  const classNameProp = turnObjectIntoString(className);
+
+  const { format, ...originalImage } = images.find(
+    ({ alt }) => alt === original
+  );
+  const [imageSrc, setImageSrc] = useState(originalImage);
+
+  const handleImageError = useCallback(async () => {
+    const fallbackImage = await dynamicImageImport({ original, format });
+    setImageSrc(fallbackImage);
+  }, [original]);
+
+  // if imageSrc has an id property, it means that the image is in cloudinary
+  let Component = imageSrc.alt ? CldImage : Image;
+
+  return (
+    <Component
+      className={clsx(classNameProp)}
+      {...imageSrc}
+      alt={original}
+      onError={handleImageError}
+    />
   );
 };

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { Container } from "components/ui/Container";
 import { TextLayout } from "components/ui/TextLayout";
 import Navbar from "components/Navbar";
-import { RUBEN_HEADSHOT as profilePic } from "helpers/exportImages";
 import { useResponsive } from "helpers/useResponsive";
 import { socialInfo } from "library/socialInfo";
 
@@ -33,10 +31,9 @@ const Hero = () => {
   return (
     <Container.Section className="lg:py-40 w-full">
       <Container className="mt-10 lg:pt-8 w-full">
-        <Image
+        <Container.ImageTest
           className="h-16 w-16 rounded-full dark:sepia"
-          src={profilePic}
-          alt="My Pic"
+          original="ruben_headshot"
         />
         <Container.Flex>
           <TextLayout className="mt-5 w-full">
