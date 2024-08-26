@@ -2,7 +2,6 @@ const readline = require("readline");
 const { processFiles, data } = require("./optimizeImages");
 const updateMarkdownFiles = require("./updateMd");
 const path = require("path");
-const setFullImageExport = require("./setNewImages");
 
 const askQuestion = (query) => {
   const rl = readline.createInterface({
@@ -26,7 +25,6 @@ const startProcessing = async () => {
 
     if (answer.toLowerCase() === "y") {
       await processFiles();
-      await setFullImageExport();
       const imageMappings = data.map((entry) => ({
         "Original Path": entry["Original Path"],
         "New Path": entry["New Path"],

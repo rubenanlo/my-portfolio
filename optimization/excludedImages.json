@@ -13,7 +13,6 @@
   "rawdev.png": true,
   "rounding-1.png": true,
   "rounding.png": true,
-  "ruben_headshot.jpeg": true,
   "sdg_tc.png": true,
   "sdr.png": true,
   "spotify.webp": true,
@@ -29,5 +28,6 @@
   "deloitte_logo.webp": true,
   "favicon.webp": true,
   "html.webp": true,
-  "warp.webp": true
+  "warp.webp": true,
+  "work.webp": true
 }
