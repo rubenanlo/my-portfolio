@@ -1,11 +1,11 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { turnObjectIntoString } from "helpers/manipulateText";
 import images from "public/images.json";
-import { CldImage } from "next-cloudinary";
-import { useCallback, useState } from "react";
 
 export const Container = ({ children, as, className, ...props }) => {
   let Component = as ?? "div";
@@ -81,33 +81,35 @@ Container.Flex = function ContainerFlex({ children, className, ...props }) {
   );
 };
 
-const dynamicImageImport = async ({ format, original }) => {
-  const result = await import(`../../public/assets/${original}.${format}`);
-  return result.default;
-};
-
 Container.Image = function ContainerImage({ className, original }) {
   const classNameProp = turnObjectIntoString(className);
 
-  const { format, ...originalImage } = images.find(
-    ({ alt }) => alt === original
-  );
+  const { format, ...originalImage } =
+    images.find(({ alt }) => alt === original) || {};
+
   const [imageSrc, setImageSrc] = useState(originalImage);
+  const [isFallback, setIsFallback] = useState(false);
 
-  const handleImageError = useCallback(async () => {
-    const fallbackImage = await dynamicImageImport({ original, format });
-    setImageSrc(fallbackImage);
-  }, [original]);
+  // on error, we only need to change the src from the cloudinary id to a
+  // relative path. Ensure that babel has this alias, and that all images are
+  // saved in one directory
+  const handleError = () => {
+    if (isFallback) return;
+    setIsFallback(true);
+    setImageSrc({
+      ...originalImage,
+      src: `/assets/${original}.${format}`,
+    });
+  };
 
-  // if imageSrc has an id property, it means that the image is in cloudinary
-  let Component = imageSrc.alt ? CldImage : Image;
+  // Switching component based on whether the image is available on cloudinary
+  let Component = isFallback ? Image : CldImage;
 
   return (
     <Component
       className={clsx(classNameProp)}
       {...imageSrc}
-      alt={original}
-      onError={handleImageError}
+      onError={handleError}
     />
   );
 };

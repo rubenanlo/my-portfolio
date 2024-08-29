@@ -1,7 +1,7 @@
 [
   {
     "alt": "ruben_headshot",
-    "format": "jpeg",
+    "format": "webp",
     "src": "ruben_headshot",
     "width": 800,
     "height": 800
@@ -183,7 +183,7 @@
   },
   {
     "alt": "unsdsn_logo",
-    "format": "webp",
+    "format": "jpeg",
     "src": "unsdsn_logo",
     "width": 200,
     "height": 200
