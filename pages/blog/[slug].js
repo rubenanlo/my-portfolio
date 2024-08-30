@@ -9,6 +9,9 @@ import { useGoBack } from "helpers/useGoBack";
 
 const Posts = ({ content }) => {
   const { isLoading, handleBack } = useGoBack();
+  const components = {
+    Container,
+  };
   // ? router.back failed because of scroll issues before navigating to the previous page. Thus, the following approach was taken.
 
   return isLoading ? (
@@ -23,7 +26,7 @@ const Posts = ({ content }) => {
         Back
       </Button>
       <Container className="prose prose-md prose-slate dark:prose-invert mx-auto max-w-xs lg:max-w-3xl xl:max-w-4xl px-5">
-        <MDXRemote {...content} />
+        <MDXRemote {...content} components={components} />
       </Container>
     </Container>
   );
@@ -51,7 +54,10 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params, locale }) => {
   const textResult = getText({ slug: params.slug, page: "blog" });
   const [{ data: post, content }] = textResult;
-  const mdxSource = await serialize(content);
+  const mdxSource = await serialize(content, {
+    // Optional: Add MDX options if needed
+    scope: post, // Pass post data to MDX scope if needed
+  });
   return {
     props: {
       slug: params.slug,
