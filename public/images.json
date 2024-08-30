@@ -164,8 +164,8 @@
     "alt": "email",
     "format": "webp",
     "src": "email",
-    "width": 4000,
-    "height": 4987
+    "width": 900,
+    "height": 1350
   },
   {
     "alt": "tick_tock",
@@ -183,17 +183,17 @@
   },
   {
     "alt": "unsdsn_logo",
-    "format": "jpeg",
+    "format": "webp",
     "src": "unsdsn_logo",
     "width": 200,
     "height": 200
   },
   {
     "alt": "logo_linkedin_1",
-    "format": "png",
+    "format": "webp",
     "src": "logo_linkedin_1",
-    "width": 200,
-    "height": 200
+    "width": 300,
+    "height": 300
   },
   {
     "alt": "warp",
