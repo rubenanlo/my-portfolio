@@ -81,8 +81,20 @@ Container.Flex = function ContainerFlex({ children, className, ...props }) {
   );
 };
 
-Container.Image = function ContainerImage({ className, original }) {
+Container.Image = function ContainerImage({
+  className,
+  original,
+  variant = "default",
+}) {
   const classNameProp = turnObjectIntoString(className);
+  const variants = {
+    post: turnObjectIntoString({
+      position: "w-[80%] mx-auto",
+      border: "rounded-2xl shadow-2xl",
+      other: "opacity-60",
+    }),
+    default: "",
+  };
 
   const { format, ...originalImage } =
     images.find(({ alt }) => alt === original) || {};
@@ -107,7 +119,7 @@ Container.Image = function ContainerImage({ className, original }) {
 
   return (
     <Component
-      className={clsx(classNameProp)}
+      className={clsx(classNameProp, variants[variant])}
       {...imageSrc}
       onError={handleError}
     />
