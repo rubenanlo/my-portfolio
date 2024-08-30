@@ -1,7 +1,5 @@
 const readline = require("readline");
-const { processFiles, data } = require("./optimizeImages");
-const updateMarkdownFiles = require("./updateMd");
-const path = require("path");
+const { processFiles } = require("./optimizeImages");
 
 const askQuestion = (query) => {
   const rl = readline.createInterface({
@@ -25,14 +23,6 @@ const startProcessing = async () => {
 
     if (answer.toLowerCase() === "y") {
       await processFiles();
-      const imageMappings = data.map((entry) => ({
-        "Original Path": entry["Original Path"],
-        "New Path": entry["New Path"],
-      }));
-      await updateMarkdownFiles(
-        path.join("pages", "blog", "posts"),
-        imageMappings
-      );
       console.log(
         "New images successfully processed and markdown files updated!"
       );

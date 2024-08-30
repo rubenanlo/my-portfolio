@@ -54,10 +54,21 @@ const uploadToCloudinary = async (filePath, publicId) => {
 };
 
 const saveImageInfo = async (alt, format, src, width, height) => {
-  imagesData.push({ alt, format, src, width, height });
+  // Find the index of the existing image entry, if any
+  const existingIndex = imagesData.findIndex((img) => img.alt === alt);
+
+  if (existingIndex > -1) {
+    // Update the existing image entry
+    imagesData[existingIndex] = { alt, format, src, width, height };
+    console.log(`Updated entry for ${alt} in images.json`);
+  } else {
+    // Add a new image entry
+    imagesData.push({ alt, format, src, width, height });
+    console.log(`Added new entry for ${alt} to images.json`);
+  }
+
   try {
     await fs.writeJson(imagesJsonPath, imagesData, { spaces: 2 });
-    console.log(`Updated images.json with ${alt}`);
   } catch (error) {
     console.error("Error saving to images.json:", error);
   }
@@ -73,7 +84,7 @@ const processImage = async (file) => {
 
   try {
     const input = await fs.readFile(file);
-    const ext = path.extname(file).toLowerCase();
+    const ext = path.extname(file).toLowerCase().replace(/\./g, "");
 
     const currentStats = await fs.stat(file);
     const currentSize = currentStats.size;
@@ -103,6 +114,9 @@ const processImage = async (file) => {
         }
         smallestFile = { size: stats.size, format, path: outputPath, quality };
       } else {
+        if (format === smallestFile.format) {
+          continue;
+        }
         await fs.unlink(outputPath);
       }
     }
@@ -179,4 +193,4 @@ const processFiles = async () => {
   }
 };
 
-module.exports = { processFiles, data };
+module.exports = { processFiles };
