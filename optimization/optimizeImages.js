@@ -101,7 +101,7 @@ const processImage = async (file) => {
     const { dimensions, quality } = getDimensionsAndQuality(fileName, metadata);
 
     for (const { format, options } of formats) {
-      const outputPath = file.replace(ext, format);
+      const outputPath = file.replace(`.${ext}`, `.${format}`);
       await sharp(input)
         .resize(dimensions.width, dimensions.height)
         .toFormat(format, { ...options, quality })
