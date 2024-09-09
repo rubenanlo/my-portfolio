@@ -245,7 +245,7 @@ const NavbarIsland = ({ navLinks }) => (
     >
       <Container.Link href="/" className={{ parent: "shrink-0" }}>
         <Container.Logo
-          original="logo-linkedin-1"
+          original="logo_linkedin_1"
           className="h-10 w-10 rounded-full"
         />
       </Container.Link>

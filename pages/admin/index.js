@@ -48,7 +48,7 @@ const Admin = () => {
           >
             <Container.Link href={"/"}>
               <Container.Image
-                original="logo-linkedin-1"
+                original="logo_linkedin_1"
                 className="h-14 w-auto rounded-full"
               />
             </Container.Link>

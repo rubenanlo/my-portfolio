@@ -29,7 +29,7 @@ const Loading = ({ noBackground }) => (
           <Container.Image
             priority
             className="h-20 w-auto mr-28"
-            original="logo-linkedin-1"
+            original="logo_linkedin_1"
           />
         </AnimatedContainer>
       </Container.Flex>
