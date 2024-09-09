@@ -5,6 +5,7 @@
   "benin": true,
   "blog": true,
   "calendar": true,
+  "deloitte_logo": true,
   "email": true,
   "eu_sdr": true,
   "ey_logo": true,
@@ -25,6 +26,5 @@
   "towards_dev": true,
   "unsdsn_logo": true,
   "warp": true,
-  "work": true,
-  "deloitte_logo": true
+  "work": true
 }

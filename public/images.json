@@ -1,14 +1,7 @@
 [
   {
-    "alt": "ruben_headshot",
-    "format": "webp",
-    "src": "ruben_headshot",
-    "width": 800,
-    "height": 800
-  },
-  {
     "alt": "arrow-curve-dark",
-    "format": "jpeg",
+    "format": "png",
     "src": "arrow-curve-dark",
     "width": 2825,
     "height": 2850
@@ -49,6 +42,20 @@
     "height": 1350
   },
   {
+    "alt": "deloitte_logo",
+    "format": "webp",
+    "src": "deloitte_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "email",
+    "format": "webp",
+    "src": "email",
+    "width": 900,
+    "height": 1350
+  },
+  {
     "alt": "eu_sdr",
     "format": "png",
     "src": "eu_sdr",
@@ -64,7 +71,7 @@
   },
   {
     "alt": "favicon",
-    "format": "webp",
+    "format": "ico",
     "src": "favicon",
     "width": 300,
     "height": 300
@@ -77,9 +84,9 @@
     "height": 16
   },
   {
-    "alt": "logo-linkedin-1",
+    "alt": "logo_linkedin_1",
     "format": "webp",
-    "src": "logo-linkedin-1",
+    "src": "logo_linkedin_1",
     "width": 300,
     "height": 300
   },
@@ -92,7 +99,7 @@
   },
   {
     "alt": "my_portfolio",
-    "format": "jpeg",
+    "format": "webp",
     "src": "my_portfolio",
     "width": 2800,
     "height": 1578
@@ -154,13 +161,6 @@
     "height": 4987
   },
   {
-    "alt": "email",
-    "format": "webp",
-    "src": "email",
-    "width": 900,
-    "height": 1350
-  },
-  {
     "alt": "tick_tock",
     "format": "png",
     "src": "tick_tock",
@@ -182,13 +182,6 @@
     "height": 200
   },
   {
-    "alt": "logo_linkedin_1",
-    "format": "webp",
-    "src": "logo_linkedin_1",
-    "width": 300,
-    "height": 300
-  },
-  {
     "alt": "warp",
     "format": "webp",
     "src": "warp",
@@ -201,278 +194,5 @@
     "src": "work",
     "width": 726,
     "height": 892
-  },
-  {
-    "alt": "arrow-curve-dark",
-    "format": "jpeg",
-    "src": "arrow-curve-dark",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "arrow-curve-light",
-    "format": "png",
-    "src": "arrow-curve-light",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "baker_mckenzie_logo",
-    "format": "webp",
-    "src": "baker_mckenzie_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "benin",
-    "format": "png",
-    "src": "benin",
-    "width": 2822,
-    "height": 1644
-  },
-  {
-    "alt": "blog",
-    "format": "webp",
-    "src": "blog",
-    "width": 900,
-    "height": 1320
-  },
-  {
-    "alt": "calendar",
-    "format": "webp",
-    "src": "calendar",
-    "width": 900,
-    "height": 1350
-  },
-  {
-    "alt": "deloitte_logo",
-    "format": "webp",
-    "src": "deloitte_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "arrow-curve-dark",
-    "format": "jpeg",
-    "src": "arrow-curve-dark",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "arrow-curve-light",
-    "format": "png",
-    "src": "arrow-curve-light",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "arrow-curve-dark",
-    "format": "jpeg",
-    "src": "arrow-curve-dark",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "arrow-curve-light",
-    "format": "png",
-    "src": "arrow-curve-light",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "baker_mckenzie_logo",
-    "format": "webp",
-    "src": "baker_mckenzie_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "arrow-curve-dark",
-    "format": "jpeg",
-    "src": "arrow-curve-dark",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "arrow-curve-light",
-    "format": "png",
-    "src": "arrow-curve-light",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "baker_mckenzie_logo",
-    "format": "webp",
-    "src": "baker_mckenzie_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "benin",
-    "format": "png",
-    "src": "benin",
-    "width": 2822,
-    "height": 1644
-  },
-  {
-    "alt": "blog",
-    "format": "webp",
-    "src": "blog",
-    "width": 900,
-    "height": 1320
-  },
-  {
-    "alt": "calendar",
-    "format": "webp",
-    "src": "calendar",
-    "width": 900,
-    "height": 1350
-  },
-  {
-    "alt": "deloitte_logo",
-    "format": "webp",
-    "src": "deloitte_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "eu_sdr",
-    "format": "png",
-    "src": "eu_sdr",
-    "width": 2822,
-    "height": 1644
-  },
-  {
-    "alt": "ey_logo",
-    "format": "webp",
-    "src": "ey_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "favicon",
-    "format": "webp",
-    "src": "favicon",
-    "width": 300,
-    "height": 300
-  },
-  {
-    "alt": "html",
-    "format": "webp",
-    "src": "html",
-    "width": 20,
-    "height": 16
-  },
-  {
-    "alt": "logo_linkedin_1",
-    "format": "webp",
-    "src": "logo_linkedin_1",
-    "width": 300,
-    "height": 300
-  },
-  {
-    "alt": "mitigation_toolkit",
-    "format": "webp",
-    "src": "mitigation_toolkit",
-    "width": 2840,
-    "height": 1644
-  },
-  {
-    "alt": "arrow-curve-dark",
-    "format": "jpeg",
-    "src": "arrow-curve-dark",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "arrow-curve-light",
-    "format": "png",
-    "src": "arrow-curve-light",
-    "width": 2825,
-    "height": 2850
-  },
-  {
-    "alt": "deloitte_logo",
-    "format": "webp",
-    "src": "deloitte_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "favicon",
-    "format": "webp",
-    "src": "favicon",
-    "width": 300,
-    "height": 300
-  },
-  {
-    "alt": "html",
-    "format": "webp",
-    "src": "html",
-    "width": 20,
-    "height": 16
-  },
-  {
-    "alt": "logo_linkedin_1",
-    "format": "webp",
-    "src": "logo_linkedin_1",
-    "width": 300,
-    "height": 300
-  },
-  {
-    "alt": "ruben_headshot",
-    "format": "webp",
-    "src": "ruben_headshot",
-    "width": 800,
-    "height": 800
-  },
-  {
-    "alt": "warp",
-    "format": "webp",
-    "src": "warp",
-    "width": 2234,
-    "height": 1578
-  },
-  {
-    "alt": "deloitte_logo",
-    "format": "webp",
-    "src": "deloitte_logo",
-    "width": 200,
-    "height": 200
-  },
-  {
-    "alt": "favicon",
-    "format": "webp",
-    "src": "favicon",
-    "width": 300,
-    "height": 300
-  },
-  {
-    "alt": "html",
-    "format": "webp",
-    "src": "html",
-    "width": 20,
-    "height": 16
-  },
-  {
-    "alt": "logo_linkedin_1",
-    "format": "webp",
-    "src": "logo_linkedin_1",
-    "width": 300,
-    "height": 300
-  },
-  {
-    "alt": "ruben_headshot",
-    "format": "webp",
-    "src": "ruben_headshot",
-    "width": 800,
-    "height": 800
-  },
-  {
-    "alt": "warp",
-    "format": "webp",
-    "src": "warp",
-    "width": 2234,
-    "height": 1578
   }
 ]
