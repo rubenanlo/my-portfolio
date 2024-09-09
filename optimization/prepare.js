@@ -23,13 +23,8 @@ const startProcessing = async () => {
 
     if (answer.toLowerCase() === "y") {
       await processFiles();
-      console.log(
-        "New images successfully processed and markdown files updated!"
-      );
     } else {
-      console.log(
-        "Exiting without processing files. Please update the JSON file."
-      );
+      console.log("Update the excluded images file.");
     }
   } catch (error) {
     console.error("Error:", error);

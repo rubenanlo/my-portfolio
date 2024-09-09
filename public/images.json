@@ -182,17 +182,17 @@
     "height": 200
   },
   {
-    "alt": "warp",
-    "format": "webp",
-    "src": "warp",
-    "width": 2234,
-    "height": 1578
-  },
-  {
     "alt": "work",
     "format": "webp",
     "src": "work",
     "width": 726,
     "height": 892
+  },
+  {
+    "alt": "warp",
+    "format": "webp",
+    "src": "warp",
+    "width": 2234,
+    "height": 1578
   }
 ]
