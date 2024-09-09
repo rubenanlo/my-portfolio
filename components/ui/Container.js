@@ -99,8 +99,6 @@ Container.Image = function ContainerImage({
   const { format, ...originalImage } =
     images.find(({ alt }) => alt === original) || {};
 
-  console.log(originalImage);
-
   const [imageSrc, setImageSrc] = useState(originalImage);
   const [isFallback, setIsFallback] = useState(false);
 
