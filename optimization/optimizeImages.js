@@ -4,7 +4,7 @@ const fs = require("fs-extra");
 const path = require("path");
 const cloudinary = require("../library/cloudinary");
 const formatNumber = require("../helpers/formatData");
-const dimensionsMapping = require("./config.js");
+const { getDimensionsAndQuality } = require("./getDimensions.js");
 const cliProgress = require("cli-progress");
 
 const dirPath = path.join("public", "assets");
@@ -13,8 +13,8 @@ const imagesJsonPath = path.join("public", "images.json");
 const data = [];
 const errorLog = [];
 
-// Load or initialize the images JSON data
 let imagesData = [];
+
 try {
   imagesData = fs.readJsonSync(imagesJsonPath);
 } catch (error) {
@@ -27,19 +27,6 @@ try {
 } catch (error) {
   console.log("No excluded images file found. Starting from scratch.");
 }
-
-const getDimensionsAndQuality = (fileName, metadata) => {
-  const defaultQuality = 80;
-  let dimensions = { width: metadata.width, height: metadata.height };
-  let quality = defaultQuality;
-
-  if (dimensionsMapping[fileName]) {
-    dimensions = dimensionsMapping[fileName];
-    quality = dimensionsMapping[fileName].quality || defaultQuality;
-  }
-
-  return { dimensions, quality };
-};
 
 const uploadToCloudinary = async (filePath, publicId) => {
   try {
@@ -73,8 +60,7 @@ const saveImageInfo = async (alt, format, src, width, height) => {
     console.error("Error saving to images.json:", error);
   }
 };
-
-const processImage = async (file) => {
+const processImage = async (file, dimensionsAndQuality) => {
   const fileName = path.basename(file, path.extname(file)); // Get file name without extension
   const relativePath = path.relative(process.cwd(), file);
 
@@ -97,8 +83,8 @@ const processImage = async (file) => {
 
     let smallestFile = { size: currentSize, format: ext, path: file };
 
-    const metadata = await sharp(input).metadata();
-    const { dimensions, quality } = getDimensionsAndQuality(fileName, metadata);
+    // Use the pre-fetched dimensions and quality passed from the main loop
+    const { dimensions, quality } = dimensionsAndQuality;
 
     for (const { format, options } of formats) {
       const outputPath = file.replace(`.${ext}`, `.${format}`);
@@ -112,7 +98,7 @@ const processImage = async (file) => {
         if (smallestFile.path !== file) {
           await fs.unlink(smallestFile.path);
         }
-        smallestFile = { size: stats.size, format, path: outputPath, quality };
+        smallestFile = { size: stats.size, format, path: outputPath };
       } else {
         if (format === smallestFile.format) {
           continue;
@@ -126,6 +112,7 @@ const processImage = async (file) => {
     const cleanRelativePath = relativePath.replace(/^[^/]+\//, "/");
     const cleanNewPath = smallestFile.path.replace(/^[^/]+\//, "/");
 
+    // Ensure we push to the data array before accessing its index
     data.push({
       "File Name": fileName,
       "Smallest Size": formatNumber(smallestFile.size, { decimals: 0 }),
@@ -133,7 +120,7 @@ const processImage = async (file) => {
         decimals: 2,
         percentage: true,
       })}%`,
-      Quality: smallestFile.quality || "-",
+      Quality: quality || "-", // Use the quality from the dimensionsAndQuality object
       "Original Path": cleanRelativePath,
       "New Path": cleanNewPath,
       "Cloudinary ID": "-",
@@ -163,16 +150,16 @@ const processImage = async (file) => {
 
     excludedImages[fileName] = true;
   } catch (error) {
+    console.error(`Failed to process ${file}:`, error);
     const lastIndexData = data.length - 1;
-
-    data[lastIndexData]["Cloudinary ID"] = "NA";
-    data[lastIndexData]["Status"] = "Error";
+    data[lastIndexData]["Status"] = "error";
     errorLog.push({
       File: file,
-      "Cloudinary Error": error,
+      "Cloudinary Error": error.message || error,
     });
   }
 };
+
 // Initialize the progress bar
 const progressBar = new cliProgress.SingleBar(
   {},
@@ -186,18 +173,49 @@ const processFiles = async () => {
     // Start the progress bar with total number of files
     progressBar.start(files.length, 0);
 
+    // Sequential loop to get user input for dimensions
+    const dimensionsAndQualityList = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      await processImage(path.join(dirPath, file));
+      const fileName = path.basename(file, path.extname(file));
 
-      // Increment progress bar after each file is processed
-      progressBar.update(i + 1);
+      // Skip files already in excludedImages
+      if (excludedImages[fileName]) {
+        continue;
+      }
+
+      try {
+        // This must happen sequentially, because it prompts the user
+        const metadata = await sharp(path.join(dirPath, file)).metadata();
+        const dimensionsAndQuality = await getDimensionsAndQuality(
+          fileName,
+          metadata
+        );
+        dimensionsAndQualityList.push({ file, dimensionsAndQuality });
+      } catch (err) {
+        console.error(`Failed to get dimensions for ${file}:`, err);
+      }
     }
+
+    // Parallel processing of the images
+    const promises = dimensionsAndQualityList.map(
+      ({ file, dimensionsAndQuality }, index) => {
+        return processImage(path.join(dirPath, file), dimensionsAndQuality)
+          .then(() => progressBar.update(index + 1))
+          .catch((err) =>
+            console.error(`Failed to process file ${file}:`, err)
+          );
+      }
+    );
+
+    await Promise.all(promises);
 
     // Stop the progress bar after processing
     progressBar.stop();
 
+    // Save excluded images after processing
     await fs.writeJson(excludedImagesPath, excludedImages);
+
     const displayData = data.map(
       ({
         "File Name": fileName,
