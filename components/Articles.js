@@ -27,7 +27,7 @@ export const Article = ({
       className={{ parent: "h-full flex flex-col justify-between" }}
     >
       <Post.Title title={title || name} />
-      <Show>
+      <Show ternary>
         <Show.When isTrue={date !== false}>
           <Post.Eyebrow
             as="time"

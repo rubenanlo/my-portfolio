@@ -105,7 +105,7 @@ const Dashboard = () => {
       >
         {cards.map(
           ({ name, isHeader, href, description, tag, title, image }, index) => (
-            <Show key={name}>
+            <Show key={name} ternary>
               <Show.When isTrue={isHeader}>
                 <Container
                   className={{
