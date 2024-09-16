@@ -1,4 +1,4 @@
-export const formatNumber = (number, props) => {
+const formatNumber = (number, props) => {
   const {
     decimals = 1,
     thousands = true,
@@ -31,3 +31,5 @@ export const formatNumber = (number, props) => {
   // Return the number formatted with fixed decimals if thousands separator is not required
   return Number(formattedWithDecimals);
 };
+
+module.exports = formatNumber;

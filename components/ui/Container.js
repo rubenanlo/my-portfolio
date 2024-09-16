@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { turnObjectIntoString } from "helpers/manipulateText";
+import images from "public/images.json";
 
 export const Container = ({ children, as, className, ...props }) => {
   let Component = as ?? "div";
@@ -78,14 +81,58 @@ Container.Flex = function ContainerFlex({ children, className, ...props }) {
   );
 };
 
-Container.Logo = function ContainerLogo({ className, ...props }) {
+Container.Image = function ContainerImage({
+  className,
+  original,
+  variant = "default",
+}) {
+  const classNameProp = turnObjectIntoString(className);
+  const variants = {
+    post: turnObjectIntoString({
+      position: "w-[80%] mx-auto",
+      border: "rounded-2xl shadow-2xl",
+      other: "opacity-60",
+    }),
+    default: "",
+  };
+
+  const { format, ...originalImage } =
+    images.find(({ alt }) => alt === original) || {};
+
+  const [imageSrc, setImageSrc] = useState(originalImage);
+  const [isFallback, setIsFallback] = useState(false);
+
+  // on error, we only need to change the src from the cloudinary id to a
+  // relative path. Ensure that babel has this alias, and that all images are
+  // saved in one directory
+  const handleError = () => {
+    if (isFallback) return;
+    setIsFallback(true);
+    setImageSrc({
+      ...originalImage,
+      src: `/assets/${original}.${format}`,
+    });
+  };
+
+  // Switching component based on whether the image is available on cloudinary
+  let Component = isFallback ? Image : CldImage;
+
+  return (
+    <Component
+      className={clsx(classNameProp, variants[variant])}
+      {...imageSrc}
+      onError={handleError}
+    />
+  );
+};
+
+Container.Logo = function ContainerLogo({ className, original }) {
   const classNameProp = turnObjectIntoString(className);
 
   return (
-    <Image
+    <Container.Image
       className={clsx(classNameProp, "rounded-full")}
-      src={props.src}
-      alt={props.alt}
+      original={original}
     />
   );
 };
@@ -185,13 +232,5 @@ Container.Table = function ContainerTable({ table, className }) {
         ))}
       </tbody>
     </table>
-  );
-};
-
-Container.Image = function ContainerImage({ src, alt, className, ...props }) {
-  const classNameProp = turnObjectIntoString(className);
-
-  return (
-    <Image className={clsx(classNameProp)} src={src} alt={alt} {...props} />
   );
 };

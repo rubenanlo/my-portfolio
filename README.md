@@ -53,3 +53,9 @@ Helps retreiving text from files. a couple of aspects:
   ```javascript
   const text = getText({ slug: "slug", withSummarizedText, page: "about" });
   ```
+
+## Images
+
+Watermark
+Icon
+Card

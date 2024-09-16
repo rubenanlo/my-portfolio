@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { Container, AnimatedContainer } from "components/ui/Container";
-import { LOGO_LINKEDIN_1 as rawDev } from "helpers/exportImages";
 import { loadingMotion } from "library/animations";
 
 const Loading = ({ noBackground }) => (
@@ -27,11 +26,10 @@ const Loading = ({ noBackground }) => (
           animate={loadingMotion}
           className="relative overflow-hidden flex justify-center items-center w-full"
         >
-          <Container.Logo
+          <Container.Image
             priority
             className="h-20 w-auto mr-28"
-            src={rawDev}
-            alt="logo"
+            original="logo_linkedin_1"
           />
         </AnimatedContainer>
       </Container.Flex>

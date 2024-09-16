@@ -5,7 +5,6 @@ import { Container } from "components/ui/Container";
 import { Form } from "components/ui/Form";
 import { Button } from "components/ui/Button";
 import { TextLayout } from "components/ui/TextLayout";
-import { LOGO_LINKEDIN_1 as rawDevLogo } from "helpers/exportImages";
 import { MAILTO as mailTo } from "root/config";
 
 const Admin = () => {
@@ -48,9 +47,8 @@ const Admin = () => {
             className={{ flex: "gap-x-7 items-center justify-center" }}
           >
             <Container.Link href={"/"}>
-              <Container.Logo
-                src={rawDevLogo}
-                alt="my-logo"
+              <Container.Image
+                original="logo_linkedin_1"
                 className="h-14 w-auto rounded-full"
               />
             </Container.Link>

@@ -46,7 +46,7 @@ const Circle = ({
       className="absolute shrink-0 overflow-hidden"
     >
       <Container.Image
-        src={image}
+        original={image}
         alt="dashboard-item"
         className="shrink-0 opacity-80"
       />
@@ -105,7 +105,7 @@ const Dashboard = () => {
       >
         {cards.map(
           ({ name, isHeader, href, description, tag, title, image }, index) => (
-            <Show key={name}>
+            <Show key={name} ternary>
               <Show.When isTrue={isHeader}>
                 <Container
                   className={{

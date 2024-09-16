@@ -27,7 +27,7 @@ export const Article = ({
       className={{ parent: "h-full flex flex-col justify-between" }}
     >
       <Post.Title title={title || name} />
-      <Show>
+      <Show ternary>
         <Show.When isTrue={date !== false}>
           <Post.Eyebrow
             as="time"
@@ -41,8 +41,7 @@ export const Article = ({
       <Post.Cta noChevron text={href ?? "Read article"} />
       {image && (
         <Container.Image
-          src={image}
-          alt={title || name}
+          original={image}
           className={{
             dimension: "mt-5",
             otherStyles: "object-cover object-left-top opacity-30 rounded-lg ",

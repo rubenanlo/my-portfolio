@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { TOWARDS_DEV as towardsDev } from "helpers/exportImages";
+import { Container } from "components/ui/Container.js";
 
 export function TwitterIcon(props) {
   return (
@@ -47,7 +46,7 @@ export function MediumIcon(props) {
 }
 
 export const TowardsDevIcon = () => (
-  <Image src={towardsDev} alt="towards-dev-icon" className="rounded-md" />
+  <Container.Image original="towards_dev" className="rounded-md" />
 );
 
 export const Email = (props) => (

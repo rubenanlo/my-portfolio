@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { Container } from "components/ui/Container";
@@ -20,8 +19,8 @@ const Role = ({ item: role }) => (
         otherStyles: "rounded-full shadow-md shadow-zinc-800/5",
       }}
     >
-      <Image
-        src={role.logo}
+      <Container.Image
+        original={role.logo}
         alt=""
         className="h-10 w-10 rounded-full"
         unoptimized
