@@ -8,10 +8,10 @@
   },
   {
     "alt": "arrow-curve-light",
-    "format": "png",
+    "format": "webp",
     "src": "arrow-curve-light",
-    "width": 2825,
-    "height": 2850
+    "width": 100,
+    "height": 101
   },
   {
     "alt": "baker_mckenzie_logo",
@@ -78,7 +78,7 @@
   },
   {
     "alt": "html",
-    "format": "webp",
+    "format": "svg",
     "src": "html",
     "width": 20,
     "height": 16
@@ -187,5 +187,19 @@
     "src": "warp",
     "width": 2234,
     "height": 1578
+  },
+  {
+    "alt": "notion-advanced-badge",
+    "format": "webp",
+    "src": "notion-advanced-badge",
+    "width": 50,
+    "height": 50
+  },
+  {
+    "alt": "work",
+    "format": "webp",
+    "src": "work",
+    "width": 300,
+    "height": 369
   }
 ]
