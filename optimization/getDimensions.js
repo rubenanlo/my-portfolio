@@ -47,8 +47,7 @@ const promptUserForDimensions = async (fileName) => {
     : sizeOptions[answers.sizeType](answers.quality);
 };
 
-const getDimensionsAndQuality = async (fileName, metadata) => {
-  // Check if dimensions for this image are already stored
+const getDimensionsAndQuality = async (fileName, metadata, notSupported) => {
   const storedDimensions = dimensionsStore.find(
     (item) => item.fileName === fileName
   );
@@ -58,22 +57,26 @@ const getDimensionsAndQuality = async (fileName, metadata) => {
     return storedDimensions;
   }
 
-  const aspectRatio = metadata.height / metadata.width;
+  if (notSupported) {
+    return {
+      dimensions: { width: metadata.width, height: metadata.height },
+      quality: 100,
+    };
+  }
 
-  // Ask the user for dimensions and quality
   const selectedDimensions = await promptUserForDimensions(fileName);
 
-  // If the user selects the "original" option, use the original dimensions from the metadata
   const dimensions = selectedDimensions.original
-    ? { width: metadata.width, height: metadata.height } // Use original dimensions from metadata
+    ? { width: metadata.width, height: metadata.height }
     : {
         width: selectedDimensions.width,
-        height: Math.round(selectedDimensions.width * aspectRatio),
+        height: Math.round(
+          selectedDimensions.width * (metadata.height / metadata.width)
+        ),
       };
 
   const result = { dimensions, quality: selectedDimensions.quality };
 
-  // Store the result in the array for future reference
   dimensionsStore.push({ fileName, ...result });
 
   return result;
