@@ -1,15 +1,7 @@
 const { prompt } = require("inquirer").default;
-const { watermarkCard, icon, card, custom, original } = {
-  watermarkCard: (quality = 80) => ({ width: 100, quality: quality }),
-  icon: (quality = 80) => ({ width: 50, quality: quality }),
-  card: (quality = 80) => ({ width: 300, quality: quality }),
-  custom: ({ width, quality = 80 }) => ({ width, quality }),
-  original: (quality = 80) => ({ quality: quality }), // Original option doesn't specify any dimensions
-};
+const { choicesDimensions } = require("./config");
 
 let dimensionsStore = [];
-
-const sizeOptions = { watermarkCard, icon, card, custom, original };
 
 const promptUserForDimensions = async (fileName) => {
   const answers = await prompt([
@@ -17,7 +9,7 @@ const promptUserForDimensions = async (fileName) => {
       type: "list",
       name: "sizeType",
       message: `Select the size for ${fileName}:`,
-      choices: ["watermarkCard", "icon", "card", "custom", "original"],
+      choices: Object.keys(choicesDimensions),
     },
     {
       type: "number",
@@ -36,15 +28,13 @@ const promptUserForDimensions = async (fileName) => {
     },
   ]);
 
-  // Always return the quality, and ensure the original dimensions are kept if selected
   if (answers.sizeType === "original") {
     return { original: true, quality: answers.quality };
   }
 
-  // Return dimensions and quality for other options
   return answers.sizeType === "custom"
     ? { width: answers.customWidth, quality: answers.quality }
-    : sizeOptions[answers.sizeType](answers.quality);
+    : choicesDimensions[answers.sizeType](answers.quality);
 };
 
 const getDimensionsAndQuality = async (fileName, metadata, notSupported) => {

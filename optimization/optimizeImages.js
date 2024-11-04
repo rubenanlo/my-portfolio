@@ -247,7 +247,6 @@ const processFiles = async () => {
       try {
         // This must happen sequentially, because it prompts the user
         const metadata = await sharp(path.join(dirPath, file)).metadata();
-        console.log("🚀 ~ processFiles ~ metadata:", metadata);
         const ext = getExtension(file);
         const notSupported = notFormattedFormats.includes(ext);
         const dimensionsAndQuality = await getDimensionsAndQuality(
