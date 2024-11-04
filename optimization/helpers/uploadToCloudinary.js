@@ -1,4 +1,4 @@
-const cloudinary = require("../library/cloudinary");
+const cloudinary = require("../../library/cloudinary");
 
 const uploadToCloudinary = async (filePath, publicId) => {
   try {

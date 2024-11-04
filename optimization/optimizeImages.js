@@ -11,101 +11,16 @@ const {
 } = require("./config.js");
 const getDimensionsAndQuality = require("./helpers/getDimensions.js");
 const getFileHash = require("./helpers/getFileHash.js");
-const uploadToCloudinary = require("./uploadToCloudinary.js");
 const setConsoleLog = require("./helpers/setConsoleLog.js");
 const getExtension = require("./helpers/getExtension.js");
-const reFormatting = require("./helpers/reFormatting.js");
-const saveImageInfo = require("./helpers/saveImageInfo.js");
-
-let excludedImages = {};
-
-// Load excluded images with hashes
-try {
-  excludedImages = fs.readJsonSync(excludedImagesPath);
-} catch (error) {
-  console.log("No excluded images file found. Starting from scratch.");
-}
-
-const processImage = async (file, dimensionsAndQuality) => {
-  const fileName = path.basename(file, path.extname(file));
-  const relativePath = path.relative(process.cwd(), file);
-
-  try {
-    const input = await fs.readFile(file);
-    const ext = getExtension(file);
-
-    const currentStats = await fs.stat(file);
-    const currentSize = currentStats.size;
-
-    let smallestFile;
-    let quality;
-    let dimensions;
-
-    if (!notFormattedFormats.includes(ext)) {
-      const fileContent = await reFormatting(
-        currentSize,
-        ext,
-        file,
-        dimensionsAndQuality,
-        input
-      );
-      smallestFile = fileContent.smallestFile;
-      quality = fileContent.quality;
-      dimensions = fileContent.dimensions;
-    } else {
-      smallestFile = { size: currentSize, format: ext, path: file };
-      quality = dimensionsAndQuality.quality;
-      dimensions = dimensionsAndQuality.dimensions;
-    }
-
-    setConsoleLog({
-      logType: "initial",
-      currentSize,
-      smallestFile,
-      relativePath,
-      fileName,
-      quality,
-      ext,
-    });
-
-    // Upload the smallest file to Cloudinary
-    const cloudinaryResult = await uploadToCloudinary(
-      smallestFile.path,
-      fileName
-    );
-
-    if (cloudinaryResult) {
-      // Log the Cloudinary result
-      setConsoleLog({ logType: "update", cloudinaryResult });
-
-      // Save image information to images.json
-      await saveImageInfo(
-        fileName, // alt
-        smallestFile.format, // format
-        cloudinaryResult.public_id, // src (Cloudinary ID)
-        dimensions.width, // width
-        dimensions.height // height
-      );
-    }
-
-    // Generate the hash after processing to store the final version
-    const finalHash = await getFileHash(smallestFile.path);
-
-    excludedImages[fileName] = {
-      hash: finalHash,
-      processedAt: new Date().toISOString(),
-    };
-  } catch (errorHash) {
-    console.error(`Failed to process ${file}:`, errorHash);
-
-    setConsoleLog({ logType: "update", errorHash, file });
-  }
-};
+const handleExcludedImages = require("./helpers/handleExcludedImages.js");
+const processImage = require("./helpers/processImage.js");
 
 const processFiles = async () => {
   try {
     const files = await fs.readdir(dirPath);
     const excludedFiles = [".DS_Store"];
+    const excludedImages = handleExcludedImages();
 
     const filteredFiles = files.filter(
       (file) => !excludedFiles.includes(path.extname(file) || file)
