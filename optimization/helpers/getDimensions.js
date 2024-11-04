@@ -72,4 +72,4 @@ const getDimensionsAndQuality = async (fileName, metadata, notSupported) => {
   return result;
 };
 
-module.exports = { getDimensionsAndQuality };
+module.exports = getDimensionsAndQuality;

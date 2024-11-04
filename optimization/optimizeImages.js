@@ -10,10 +10,11 @@ const {
   dirPath,
   notFormattedFormats,
 } = require("./config.js");
-const { getDimensionsAndQuality } = require("./helpers/getDimensions.js");
+const getDimensionsAndQuality = require("./helpers/getDimensions.js");
 const getFileHash = require("./helpers/getFileHash.js");
 const uploadToCloudinary = require("./uploadToCloudinary.js");
 const setConsoleLog = require("./helpers/setConsoleLog.js");
+const getExtension = require("./helpers/getExtension.js");
 
 let imagesData = [];
 let excludedImages = {};
@@ -93,9 +94,6 @@ const reFormatting = async (
   }
   return { smallestFile, quality, dimensions };
 };
-
-const getExtension = (file) =>
-  path.extname(file).toLowerCase().replace(/\./g, "");
 
 const processImage = async (file, dimensionsAndQuality) => {
   const fileName = path.basename(file, path.extname(file));
