@@ -1,15 +1,15 @@
-require("dotenv").config(); // Required for Cloudinary config
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config(); // had to install dotenv, since i'm running the code in the terminal and not in an api endpoint
+}
 const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
-const crypto = require("crypto");
 const cloudinary = require("../library/cloudinary");
 const formatNumber = require("../helpers/formatData");
 const { getDimensionsAndQuality } = require("./getDimensions.js");
+const { getFileHash } = require("./helpers/getFileHash.js");
+const { imagesJsonPath, excludedImagesPath, dirPath } = require("./config.js");
 
-const dirPath = path.join("public", "assets");
-const excludedImagesPath = path.join("optimization", "excludedImages.json");
-const imagesJsonPath = path.join("public", "images.json");
 const data = [];
 const errorLog = [];
 
@@ -31,14 +31,6 @@ try {
 } catch (error) {
   console.log("No excluded images file found. Starting from scratch.");
 }
-
-// Generate a hash for a given file
-const getFileHash = async (filePath) => {
-  const fileBuffer = await fs.readFile(filePath);
-  const hashSum = crypto.createHash("sha256");
-  hashSum.update(fileBuffer);
-  return hashSum.digest("hex");
-};
 
 const uploadToCloudinary = async (filePath, publicId) => {
   try {
@@ -178,6 +170,7 @@ const processImage = async (file, dimensionsAndQuality) => {
       smallestFile.path,
       fileName
     );
+
     if (cloudinaryResult) {
       data[lastIndexData]["Cloudinary ID"] = cloudinaryResult.public_id;
       data[lastIndexData]["Status"] = "uploaded";
