@@ -5,7 +5,6 @@ const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
 const {
-  imagesJsonPath,
   excludedImagesPath,
   dirPath,
   notFormattedFormats,
@@ -16,16 +15,9 @@ const uploadToCloudinary = require("./uploadToCloudinary.js");
 const setConsoleLog = require("./helpers/setConsoleLog.js");
 const getExtension = require("./helpers/getExtension.js");
 const reFormatting = require("./helpers/reFormatting.js");
+const saveImageInfo = require("./helpers/saveImageInfo.js");
 
-let imagesData = [];
 let excludedImages = {};
-
-// Load existing images data
-try {
-  imagesData = fs.readJsonSync(imagesJsonPath);
-} catch (error) {
-  console.log("No images.json file found. Starting with an empty array.");
-}
 
 // Load excluded images with hashes
 try {
@@ -33,27 +25,6 @@ try {
 } catch (error) {
   console.log("No excluded images file found. Starting from scratch.");
 }
-
-const saveImageInfo = async (alt, format, src, width, height) => {
-  // Find the index of the existing image entry, if any
-  const existingIndex = imagesData.findIndex((img) => img.alt === alt);
-
-  if (existingIndex > -1) {
-    // Update the existing image entry
-    imagesData[existingIndex] = { alt, format, src, width, height };
-    console.log(`Updated entry for ${alt} in images.json`);
-  } else {
-    // Add a new image entry
-    imagesData.push({ alt, format, src, width, height });
-    console.log(`Added new entry for ${alt} to images.json`);
-  }
-
-  try {
-    await fs.writeJson(imagesJsonPath, imagesData, { spaces: 2 });
-  } catch (error) {
-    console.error("Error saving to images.json:", error);
-  }
-};
 
 const processImage = async (file, dimensionsAndQuality) => {
   const fileName = path.basename(file, path.extname(file));
