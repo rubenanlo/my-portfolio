@@ -1,14 +1,3 @@
-import {
-  MITIGATION_TOOLKIT as mitigationToolkit,
-  BENIN as benin,
-  EU_SDR as euSdr,
-  SDR as sdr,
-  MY_PORTFOLIO as myPortfolio,
-  RAWDEV as rawdev,
-  SDG_TC as sdgTc,
-  TICK_TOCK as tickTock,
-} from "helpers/exportImages";
-
 // For the information stored below, check that you ad the translations in the locales json files
 export const work = (t) => [
   {
@@ -27,7 +16,7 @@ export const work = (t) => [
     name: "Mitigation Toolkit",
     description: t("projectDescriptions.mitigation"),
     href: "https://deploy-preview-8--mitigation-toolkit.netlify.app/",
-    image: mitigationToolkit,
+    image: "mitigation_toolkit",
     category: "project",
   },
   {
@@ -40,7 +29,7 @@ export const work = (t) => [
     name: "My portfolio",
     description: t("projectDescriptions.portfolio"),
     href: "https://ruben-andino.rawdev.io/",
-    image: myPortfolio,
+    image: "my_portfolio",
     category: "project",
   },
   {
@@ -65,14 +54,14 @@ export const work = (t) => [
     name: "Europe Sustainable Development Report",
     description: t("projectDescriptions.esdr"),
     href: "https://eu-dashboards.sdgindex.org/",
-    image: euSdr,
+    image: "eu_sdr",
     category: "project",
   },
   {
     name: "rawDev",
     description: t("projectDescriptions.rawDev"),
     href: "https://www.rawdev.io/",
-    image: rawdev,
+    image: "rawdev",
     category: "project",
   },
   {
@@ -85,14 +74,14 @@ export const work = (t) => [
     name: "SDG Transformation Center",
     description: t("projectDescriptions.sdgTC"),
     href: "https://sdgtransformationcenter.org/",
-    image: sdgTc,
+    image: "sdg_tc",
     category: "project",
   },
   {
     name: "Sustainable Development Report",
     description: t("projectDescriptions.sdr"),
     href: "https://dashboards.sdgindex.org/",
-    image: sdr,
+    image: "sdr",
     category: "project",
   },
   {
@@ -105,7 +94,7 @@ export const work = (t) => [
     name: "Benin Sustainable Development Report",
     description: t("projectDescriptions.benin"),
     href: "https://dashboards.sdgindex.org/",
-    image: benin,
+    image: "benin",
     category: "project",
   },
   {
@@ -119,7 +108,7 @@ export const work = (t) => [
     name: "Tick-tock Diaper",
     description: t("projectDescriptions.tickTock"),
     href: "https://rubenanlo.github.io/tick-tock-diaper/",
-    image: tickTock,
+    image: "tick_tock",
     category: "project",
   },
   {

@@ -1,0 +1,198 @@
+[
+  {
+    "alt": "arrow-curve-dark",
+    "format": "png",
+    "src": "arrow-curve-dark",
+    "width": 2825,
+    "height": 2850
+  },
+  {
+    "alt": "arrow-curve-light",
+    "format": "webp",
+    "src": "arrow-curve-light",
+    "width": 100,
+    "height": 101
+  },
+  {
+    "alt": "baker_mckenzie_logo",
+    "format": "webp",
+    "src": "baker_mckenzie_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "benin",
+    "format": "png",
+    "src": "benin",
+    "width": 2822,
+    "height": 1644
+  },
+  {
+    "alt": "blog",
+    "format": "webp",
+    "src": "blog",
+    "width": 900,
+    "height": 1320
+  },
+  {
+    "alt": "calendar",
+    "format": "webp",
+    "src": "calendar",
+    "width": 900,
+    "height": 1350
+  },
+  {
+    "alt": "deloitte_logo",
+    "format": "webp",
+    "src": "deloitte_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "email",
+    "format": "webp",
+    "src": "email",
+    "width": 900,
+    "height": 1350
+  },
+  {
+    "alt": "eu_sdr",
+    "format": "png",
+    "src": "eu_sdr",
+    "width": 2822,
+    "height": 1644
+  },
+  {
+    "alt": "ey_logo",
+    "format": "webp",
+    "src": "ey_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "favicon",
+    "format": "ico",
+    "src": "favicon",
+    "width": 300,
+    "height": 300
+  },
+  {
+    "alt": "logo_linkedin_1",
+    "format": "webp",
+    "src": "logo_linkedin_1",
+    "width": 300,
+    "height": 300
+  },
+  {
+    "alt": "mitigation_toolkit",
+    "format": "webp",
+    "src": "mitigation_toolkit",
+    "width": 2840,
+    "height": 1644
+  },
+  {
+    "alt": "my_portfolio",
+    "format": "webp",
+    "src": "my_portfolio",
+    "width": 2800,
+    "height": 1578
+  },
+  {
+    "alt": "pwc_logo",
+    "format": "webp",
+    "src": "pwc_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "rawdev",
+    "format": "webp",
+    "src": "rawdev",
+    "width": 2822,
+    "height": 1644
+  },
+  {
+    "alt": "rounding-1",
+    "format": "png",
+    "src": "rounding-1",
+    "width": 614,
+    "height": 339
+  },
+  {
+    "alt": "rounding",
+    "format": "png",
+    "src": "rounding",
+    "width": 614,
+    "height": 771
+  },
+  {
+    "alt": "ruben_headshot",
+    "format": "webp",
+    "src": "ruben_headshot",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "alt": "sdg_tc",
+    "format": "webp",
+    "src": "sdg_tc",
+    "width": 2822,
+    "height": 1644
+  },
+  {
+    "alt": "sdr",
+    "format": "webp",
+    "src": "sdr",
+    "width": 2822,
+    "height": 1644
+  },
+  {
+    "alt": "spotify",
+    "format": "webp",
+    "src": "spotify",
+    "width": 4000,
+    "height": 4987
+  },
+  {
+    "alt": "tick_tock",
+    "format": "png",
+    "src": "tick_tock",
+    "width": 2822,
+    "height": 1644
+  },
+  {
+    "alt": "towards_dev",
+    "format": "png",
+    "src": "towards_dev",
+    "width": 101,
+    "height": 110
+  },
+  {
+    "alt": "unsdsn_logo",
+    "format": "webp",
+    "src": "unsdsn_logo",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "alt": "warp",
+    "format": "webp",
+    "src": "warp",
+    "width": 2234,
+    "height": 1578
+  },
+  {
+    "alt": "notion-advanced-badge",
+    "format": "webp",
+    "src": "notion-advanced-badge",
+    "width": 50,
+    "height": 50
+  },
+  {
+    "alt": "work",
+    "format": "webp",
+    "src": "work",
+    "width": 300,
+    "height": 369
+  }
+]
