@@ -10,7 +10,7 @@ const {
   dirPath,
   notFormattedFormats,
 } = require("./config.js");
-const { getDimensionsAndQuality } = require("./getDimensions.js");
+const { getDimensionsAndQuality } = require("./helpers/getDimensions.js");
 const getFileHash = require("./helpers/getFileHash.js");
 const uploadToCloudinary = require("./uploadToCloudinary.js");
 const setConsoleLog = require("./helpers/setConsoleLog.js");

@@ -1,5 +1,5 @@
 const { prompt } = require("inquirer").default;
-const { choicesDimensions } = require("./config");
+const { choicesDimensions } = require("../config");
 
 let dimensionsStore = [];
 
