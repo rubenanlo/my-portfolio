@@ -9,4 +9,4 @@ const getFileHash = async (filePath) => {
   return hashSum.digest("hex");
 };
 
-module.exports = { getFileHash };
+module.exports = getFileHash;

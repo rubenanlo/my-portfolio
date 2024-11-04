@@ -4,11 +4,11 @@ if (process.env.NODE_ENV !== "production") {
 const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
-const cloudinary = require("../library/cloudinary");
 const formatNumber = require("../helpers/formatData");
 const { getDimensionsAndQuality } = require("./getDimensions.js");
-const { getFileHash } = require("./helpers/getFileHash.js");
+const getFileHash = require("./helpers/getFileHash.js");
 const { imagesJsonPath, excludedImagesPath, dirPath } = require("./config.js");
+const uploadToCloudinary = require("./uploadToCloudinary.js");
 
 const data = [];
 const errorLog = [];
@@ -31,19 +31,6 @@ try {
 } catch (error) {
   console.log("No excluded images file found. Starting from scratch.");
 }
-
-const uploadToCloudinary = async (filePath, publicId) => {
-  try {
-    const result = await cloudinary.uploader.upload(filePath, {
-      public_id: publicId,
-      overwrite: true,
-    });
-    return result;
-  } catch (error) {
-    console.error(`Error uploading ${filePath} to Cloudinary:`, error);
-    return null;
-  }
-};
 
 const saveImageInfo = async (alt, format, src, width, height) => {
   // Find the index of the existing image entry, if any
