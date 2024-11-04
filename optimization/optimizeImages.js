@@ -4,19 +4,19 @@ if (process.env.NODE_ENV !== "production") {
 const sharp = require("sharp");
 const fs = require("fs-extra");
 const path = require("path");
-const formatNumber = require("../helpers/formatData");
+const {
+  imagesJsonPath,
+  excludedImagesPath,
+  dirPath,
+  notFormattedFormats,
+} = require("./config.js");
 const { getDimensionsAndQuality } = require("./getDimensions.js");
 const getFileHash = require("./helpers/getFileHash.js");
-const { imagesJsonPath, excludedImagesPath, dirPath } = require("./config.js");
 const uploadToCloudinary = require("./uploadToCloudinary.js");
-
-const data = [];
-const errorLog = [];
+const setConsoleLog = require("./helpers/setConsoleLog.js");
 
 let imagesData = [];
 let excludedImages = {};
-
-const notFormattedFormats = ["svg", "ico"];
 
 // Load existing images data
 try {
@@ -129,28 +129,15 @@ const processImage = async (file, dimensionsAndQuality) => {
       dimensions = dimensionsAndQuality.dimensions;
     }
 
-    const delta = (currentSize - smallestFile.size) / currentSize;
-
-    const cleanRelativePath = relativePath.replace(/^[^/]+\//, "/");
-    const cleanNewPath = smallestFile.path.replace(/^[^/]+\//, "/");
-
-    // Ensure we push to the data array before accessing its index
-    data.push({
-      "File Name": fileName,
-      "Smallest Size": formatNumber(smallestFile.size, { decimals: 0 }),
-      "Reduction (%)": `${formatNumber(delta, {
-        decimals: 2,
-        percentage: true,
-      })}%`,
-      Quality: quality || "-", // Use the quality from the dimensionsAndQuality object
-      "Original Path": cleanRelativePath,
-      "New Path": cleanNewPath,
-      "Cloudinary ID": "-",
-      Status: "-",
-      "Not formatted": notFormattedFormats.includes(ext),
+    setConsoleLog({
+      logType: "initial",
+      currentSize,
+      smallestFile,
+      relativePath,
+      fileName,
+      quality,
+      ext,
     });
-
-    const lastIndexData = data.length - 1;
 
     // Upload the smallest file to Cloudinary
     const cloudinaryResult = await uploadToCloudinary(
@@ -159,8 +146,8 @@ const processImage = async (file, dimensionsAndQuality) => {
     );
 
     if (cloudinaryResult) {
-      data[lastIndexData]["Cloudinary ID"] = cloudinaryResult.public_id;
-      data[lastIndexData]["Status"] = "uploaded";
+      // Log the Cloudinary result
+      setConsoleLog({ logType: "update", cloudinaryResult });
 
       // Save image information to images.json
       await saveImageInfo(
@@ -174,26 +161,17 @@ const processImage = async (file, dimensionsAndQuality) => {
 
     // Generate the hash after processing to store the final version
     const finalHash = await getFileHash(smallestFile.path);
+
     excludedImages[fileName] = {
       hash: finalHash,
       processedAt: new Date().toISOString(),
     };
-  } catch (error) {
-    console.error(`Failed to process ${file}:`, error);
-    const lastIndexData = data.length - 1;
-    data[lastIndexData]["Status"] = "error";
-    errorLog.push({
-      File: file,
-      "Cloudinary Error": error.message || error,
-    });
+  } catch (errorHash) {
+    console.error(`Failed to process ${file}:`, errorHash);
+
+    setConsoleLog({ logType: "update", errorHash, file });
   }
 };
-
-// Initialize the progress bar
-// const progressBar = new cliProgress.SingleBar(
-//   {},
-//   cliProgress.Presets.shades_classic
-// );
 
 const processFiles = async () => {
   try {
@@ -203,9 +181,6 @@ const processFiles = async () => {
     const filteredFiles = files.filter(
       (file) => !excludedFiles.includes(path.extname(file) || file)
     );
-
-    // Start the progress bar with total number of files
-    // progressBar.start(files.length, 0);
 
     // Sequential loop to get user input for dimensions
     const dimensionsAndQualityList = [];
@@ -263,44 +238,19 @@ const processFiles = async () => {
     // Save excluded images after processing
     await fs.writeJson(excludedImagesPath, excludedImages);
 
-    const displayData = data.map(
-      ({
-        "File Name": fileName,
-        "Smallest Size": smallestSize,
-        "Reduction (%)": reduction,
-        Quality: quality,
-        "Cloudinary ID": cloudinaryId,
-        Status: status,
-        "Not formatted": notFormatted,
-      }) => ({
-        "File Name": fileName,
-        "Smallest Size": smallestSize,
-        "Reduction (%)": notFormatted ? "-" : reduction,
-        Quality: notFormatted ? "-" : quality,
-        "Cloudinary ID": cloudinaryId,
-        Status: status,
-        "Not formatted": notFormatted ? "Format not supported" : "",
-      })
-    );
+    const { data, errorLog } = setConsoleLog({ logType: "final" });
 
-    const displayError = errorLog.map(
-      ({ File: file, "Cloudinary Error": error }) => ({
-        File: file,
-        "Cloudinary Error": error,
-      })
-    );
-
-    if (displayData.length > 0) {
+    if (data.length > 0) {
       console.log("Summary");
-      console.table(displayData);
+      console.table(data);
     }
     if (errorLog.length > 0) {
       console.log("Errors");
-      console.table(displayError);
+      console.table(errorLog);
     }
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
-module.exports = { processFiles };
+module.exports = processFiles;

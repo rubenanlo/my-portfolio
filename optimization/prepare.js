@@ -1,5 +1,5 @@
 const readline = require("readline");
-const { processFiles } = require("./optimizeImages");
+const processFiles = require("./optimizeImages");
 
 const askQuestion = (query) => {
   const rl = readline.createInterface({

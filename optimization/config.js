@@ -12,9 +12,12 @@ const dirPath = path.join("public", "assets");
 const excludedImagesPath = path.join("optimization", "excludedImages.json");
 const imagesJsonPath = path.join("public", "images.json");
 
+const notFormattedFormats = ["svg", "ico"];
+
 module.exports = {
   choicesDimensions,
   dirPath,
   excludedImagesPath,
   imagesJsonPath,
+  notFormattedFormats,
 };
