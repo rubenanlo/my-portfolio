@@ -1,11 +1,11 @@
 import {
-  MITIGATION_TOOLKIT as mitigationToolkit,
   BENIN as benin,
   EU_SDR as euSdr,
-  SDR as sdr,
+  MITIGATION_TOOLKIT as mitigationToolkit,
   MY_PORTFOLIO as myPortfolio,
   RAWDEV as rawdev,
   SDG_TC as sdgTc,
+  SDR as sdr,
   TICK_TOCK as tickTock,
 } from "helpers/exportImages";
 
@@ -26,7 +26,7 @@ export const work = (t) => [
   {
     name: "Mitigation Toolkit",
     description: t("projectDescriptions.mitigation"),
-    href: "https://deploy-preview-8--mitigation-toolkit.netlify.app/",
+    href: "https://afolumitigationinventory.org/china?GWP=AR4&Source=FAO&Sector=Rice+Cultivation&System=Conventional+rice+farming",
     image: mitigationToolkit,
     category: "project",
   },
